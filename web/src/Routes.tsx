@@ -9,10 +9,6 @@
 
 import { Router, Route, Set } from '@redwoodjs/router'
 import BaseLayout from './layouts/BaseLayout/BaseLayout'
-import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage'
-import LoginPage from './pages/LoginPage/LoginPage'
-import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage'
-import SignupPage from './pages/SignupPage/SignupPage'
 
 const Routes = () => {
   return (
@@ -20,10 +16,6 @@ const Routes = () => {
       <Set wrap={BaseLayout}>
         <Route path="/about" page={AboutPage} name="about" />
         <Route path="/" page={HomePage} name="home" />
-        <Route path="/login" page={LoginPage} name="login" />
-        <Route path="/signup" page={SignupPage} name="signup" />
-        <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
-        <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>
