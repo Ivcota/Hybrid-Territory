@@ -6,15 +6,14 @@ const HomePage = () => {
     <>
       <MetaTags title="Home" description="Home page" />
 
-      <div className="flex  flex-col items-center">
-        <h1 className="md:text-3xl text-2xl">Home</h1>
-        <Link
-          to={routes.login()}
-          className="bg-blue-500 w-20 text-center text-white px-2 py-1 rounded-sm hover:bg-blue-700 mt-2 active:bg-blue-400"
-        >
-          Login
-        </Link>
-      </div>
+      <h1>HomePage</h1>
+      <p>
+        Find me in <code>./web/src/pages/HomePage/HomePage.tsx</code>
+      </p>
+      <p>
+        My default route is named <code>home</code>, link to me with `
+        <Link to={routes.home()}>Home</Link>`
+      </p>
     </>
   )
 }
