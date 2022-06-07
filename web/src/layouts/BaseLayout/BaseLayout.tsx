@@ -1,4 +1,4 @@
-import { NavLink } from '@redwoodjs/router'
+import { Link, NavLink } from '@redwoodjs/router'
 import { FiMenu } from 'react-icons/fi'
 
 type BaseLayoutProps = {
@@ -9,9 +9,11 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
   return (
     <>
       <header className="sticky top-0 z-50 bg-white shadow-md">
-        <nav className="py-4 flex justify-between px-2 md:max-w-4xl mx-auto">
+        <nav className="py-4 px-4 md:px-8 flex justify-between md:max-w-4xl mx-auto">
           <div className="text-2xl">
-            Hybrid<span className="font-bold">Territory</span>
+            <Link to="/">
+              Hybrid<span className="font-bold">Territory</span>
+            </Link>
           </div>
           <ul className="hidden gap-4 md:flex">
             <li>
@@ -29,7 +31,7 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
         </nav>
       </header>
       <main>
-        <div className="max-w-4xl px-2 mx-auto mt-5">{children}</div>
+        <div className="max-w-4xl px-4 md:px-8 mx-auto mt-5">{children}</div>
       </main>
     </>
   )
