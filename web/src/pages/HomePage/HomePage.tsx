@@ -18,7 +18,7 @@ const HomePage = () => {
             <p>Login to the app!</p>
           )}
 
-          {isAuthenticated ? (
+          {isAuthenticated && !loading ? (
             <button
               onClick={() => {
                 logOut()
