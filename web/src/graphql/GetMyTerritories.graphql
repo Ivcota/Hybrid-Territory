@@ -1,0 +1,8 @@
+query MyTerritories {
+  territories {
+    id
+    name
+    spreadsheetURL
+    __typename
+  }
+}

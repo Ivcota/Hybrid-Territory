@@ -108,6 +108,7 @@ export const handler = async (event, context) => {
           email: username,
           hashedPassword: hashedPassword,
           salt: salt,
+          firstName: userAttributes.firstName
           // name: userAttributes.name
         },
       })
