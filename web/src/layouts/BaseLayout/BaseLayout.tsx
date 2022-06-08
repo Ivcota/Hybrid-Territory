@@ -1,4 +1,4 @@
-import { NavLink } from '@redwoodjs/router'
+import { Link, NavLink, routes } from '@redwoodjs/router'
 import { FiMenu, FiX } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
@@ -8,28 +8,52 @@ type BaseLayoutProps = {
   children?: React.ReactNode
 }
 
+interface NavItem {
+  title: string
+  route: any
+}
+
 const BaseLayout = ({ children }: BaseLayoutProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const ref = useClickOutside(() => setIsOpen(false))
+
+  const navLinks: NavItem[] = [
+    {
+      title: 'Home',
+      route: routes.home(),
+    },
+    {
+      title: 'About',
+      route: routes.about(),
+    },
+    {
+      title: 'Login',
+      route: routes.login(),
+    },
+  ]
 
   return (
     <>
       <header className="sticky top-0 z-20 bg-white shadow-md">
         <nav className="flex justify-between px-2 py-4 mx-auto md:max-w-4xl">
           <div className="text-2xl">
-            Hybrid<span className="font-bold">Territory</span>
+            <Link to={routes.home()}>
+              Hybrid<span className="font-bold">Territory</span>
+            </Link>
           </div>
           <ul className="hidden gap-4 md:flex">
-            <li>
-              <NavLink to="/" activeClassName="underline text-orange-500 ">
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/about" activeClassName="underline text-orange-500 ">
-                About
-              </NavLink>
-            </li>
+            {navLinks.map(({ title, route }) => {
+              return (
+                <li>
+                  <NavLink
+                    to={route}
+                    activeClassName="underline text-orange-500 "
+                  >
+                    {title}
+                  </NavLink>
+                </li>
+              )
+            })}
           </ul>
           <FiMenu
             onClick={() => {
@@ -62,6 +86,26 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
             setIsOpen(false)
           }}
         />
+
+        <ul
+          onClick={() => {
+            setIsOpen(false)
+          }}
+          className="flex flex-col items-center min-h-screen gap-4 pt-10"
+        >
+          {navLinks.map(({ title, route }) => {
+            return (
+              <li>
+                <NavLink
+                  to={route}
+                  activeClassName="underline text-orange-500 "
+                >
+                  {title}
+                </NavLink>
+              </li>
+            )
+          })}
+        </ul>
       </motion.div>
 
       <main>
