@@ -9,14 +9,23 @@ generator client {
 }
 
 model User {
-  id                  String    @id @default(uuid())
+  id                  String      @id @default(uuid())
   firstName           String?
   lastName            String?
   phone               Int?
-  email               String    @unique
+  email               String      @unique
   hashedPassword      String
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
-  roles               String    @default("user")
+  roles               String      @default("user")
+  territories         Territory[]
+}
+
+model Territory {
+  id             String  @id @default(uuid())
+  name           String
+  spreadsheetURL String?
+  User           User?   @relation(fields: [userId], references: [id])
+  userId         String?
 }

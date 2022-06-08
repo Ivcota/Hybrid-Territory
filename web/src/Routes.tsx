@@ -8,14 +8,21 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Router, Route, Set } from '@redwoodjs/router'
+import TerritoriesLayout from 'src/layouts/TerritoriesLayout'
 import BaseLayout from './layouts/BaseLayout/BaseLayout'
 
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={TerritoriesLayout}>
+        <Route path="/admin/territories/new" page={TerritoryNewTerritoryPage} name="newTerritory" />
+        <Route path="/admin/territories/{id}/edit" page={TerritoryEditTerritoryPage} name="editTerritory" />
+        <Route path="/admin/territories/{id}" page={TerritoryTerritoryPage} name="territory" />
+        <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
+      </Set>
       <Set wrap={BaseLayout}>
-        <Route path="/about" page={AboutPage} name="about" />
-        <Route path="/" page={HomePage} name="home" />
+        <Route prerender path="/about" page={AboutPage} name="about" />
+        <Route prerender path="/" page={HomePage} name="home" />
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
