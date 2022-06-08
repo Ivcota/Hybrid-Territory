@@ -42,9 +42,9 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
             </Link>
           </div>
           <ul className="hidden gap-4 md:flex">
-            {navLinks.map(({ title, route }) => {
+            {navLinks.map(({ title, route }, i) => {
               return (
-                <li>
+                <li key={i}>
                   <NavLink
                     to={route}
                     activeClassName="underline text-orange-500 "
@@ -93,9 +93,9 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
           }}
           className="flex flex-col items-center min-h-screen gap-4 pt-10"
         >
-          {navLinks.map(({ title, route }) => {
+          {navLinks.map(({ title, route }, i) => {
             return (
-              <li>
+              <li key={i}>
                 <NavLink
                   to={route}
                   activeClassName="underline text-orange-500 "

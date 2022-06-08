@@ -25,6 +25,7 @@ const Routes = () => {
       <Set wrap={BaseLayout}>
         <Route prerender path="/about" page={AboutPage} name="about" />
         <Route prerender path="/" page={HomePage} name="home" />
+        <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
