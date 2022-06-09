@@ -1,8 +1,8 @@
+import { useClickOutside } from '@mantine/hooks'
 import { Link, NavLink, routes } from '@redwoodjs/router'
-import { FiMenu, FiX } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { useClickOutside } from '@mantine/hooks'
+import { FiMenu, FiX } from 'react-icons/fi'
 
 type BaseLayoutProps = {
   children?: React.ReactNode

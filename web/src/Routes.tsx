@@ -7,11 +7,15 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
+import { useAuth } from '@redwoodjs/auth'
 import { Router, Route, Set, routes, Private } from '@redwoodjs/router'
 import TerritoriesLayout from 'src/layouts/TerritoriesLayout'
 import BaseLayout from './layouts/BaseLayout/BaseLayout'
+import UserLayout from './layouts/UserLayout/UserLayout'
 
 const Routes = () => {
+  const { isAuthenticated } = useAuth()
+
   return (
     <Router>
       <Private unauthenticated="home" roles="admin">
@@ -22,7 +26,7 @@ const Routes = () => {
           <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
         </Set>
       </Private>
-      <Set wrap={BaseLayout}>
+      <Set wrap={isAuthenticated ? UserLayout : BaseLayout}>
         <Route prerender path="/about" page={AboutPage} name="about" />
         <Route prerender path="/" page={HomePage} name="home" />
         <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
