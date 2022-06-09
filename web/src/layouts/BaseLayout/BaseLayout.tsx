@@ -67,6 +67,9 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
 
       <motion.div
         ref={ref}
+        initial={{
+          x: 400,
+        }}
         variants={{
           open: {
             x: 0,
