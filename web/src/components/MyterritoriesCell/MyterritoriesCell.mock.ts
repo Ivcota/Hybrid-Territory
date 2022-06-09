@@ -7,12 +7,12 @@ interface Territory {
 }
 
 interface Response {
-  territories: Territory[]
+  userTerritories: Territory[]
 }
 
 export const standard = (/* vars, { ctx, req } */) => {
   return {
-    territories: [
+    userTerritories : [
       {
         id: 'fewfe',
         name: 'T1',

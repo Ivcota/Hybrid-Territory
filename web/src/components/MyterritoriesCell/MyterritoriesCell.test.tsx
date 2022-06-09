@@ -35,7 +35,7 @@ describe('MyterritoriesCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success myterritories={standard().myterritories} />)
+      render(<Success userTerritories={standard().userTerritories} />)
     }).not.toThrow()
   })
 })

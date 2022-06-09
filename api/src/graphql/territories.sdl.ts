@@ -10,6 +10,7 @@ export const schema = gql`
   type Query {
     territories: [Territory!]! @requireAuth
     territory(id: String!): Territory @requireAuth
+    userTerritories(userId: String!): [Territory!]! @requireAuth
   }
 
   input CreateTerritoryInput {

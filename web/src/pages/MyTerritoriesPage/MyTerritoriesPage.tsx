@@ -1,8 +1,11 @@
+import { useAuth } from '@redwoodjs/auth'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import MyTerritoriesCell from '../../components/MyterritoriesCell'
 
 const MyTerritoriesPage = () => {
+  const { currentUser, loading } = useAuth()
+
   return (
     <>
       <MetaTags title="MyTerritories" description="MyTerritories page" />
@@ -16,7 +19,8 @@ const MyTerritoriesPage = () => {
         </button>
       </div>
 
-      <MyTerritoriesCell />
+      {/* @ts-ignore */}
+      {!loading && <MyTerritoriesCell userId={currentUser?.id} />}
     </>
   )
 }

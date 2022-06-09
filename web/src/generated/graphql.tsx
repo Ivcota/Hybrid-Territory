@@ -93,6 +93,7 @@ export type Query = {
   territories: Array<Territory>;
   territory?: Maybe<Territory>;
   user?: Maybe<User>;
+  userTerritories: Array<Territory>;
   users: Array<User>;
 };
 
@@ -104,6 +105,11 @@ export type QueryTerritoryArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryUserTerritoriesArgs = {
+  userId: Scalars['String'];
 };
 
 export type Redwood = {
@@ -154,19 +160,20 @@ export type User = {
   salt: Scalars['String'];
 };
 
-export type MyTerritoriesQueryVariables = Exact<{ [key: string]: never; }>;
+export type MyTerritoriesQueryVariables = Exact<{
+  userId: Scalars['String'];
+}>;
 
 
-export type MyTerritoriesQuery = { __typename?: 'Query', territories: Array<{ __typename: 'Territory', id: string, name: string, spreadsheetURL?: string | null }> };
+export type MyTerritoriesQuery = { __typename?: 'Query', userTerritories: Array<{ __typename?: 'Territory', id: string, name: string, spreadsheetURL?: string | null }> };
 
 
 export const MyTerritoriesDocument = gql`
-    query MyTerritories {
-  territories {
+    query MyTerritories($userId: String!) {
+  userTerritories(userId: $userId) {
     id
     name
     spreadsheetURL
-    __typename
   }
 }
     `;
@@ -183,10 +190,11 @@ export const MyTerritoriesDocument = gql`
  * @example
  * const { data, loading, error } = useMyTerritoriesQuery({
  *   variables: {
+ *      userId: // value for 'userId'
  *   },
  * });
  */
-export function useMyTerritoriesQuery(baseOptions?: Apollo.QueryHookOptions<MyTerritoriesQuery, MyTerritoriesQueryVariables>) {
+export function useMyTerritoriesQuery(baseOptions: Apollo.QueryHookOptions<MyTerritoriesQuery, MyTerritoriesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<MyTerritoriesQuery, MyTerritoriesQueryVariables>(MyTerritoriesDocument, options);
       }

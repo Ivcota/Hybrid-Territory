@@ -1,12 +1,13 @@
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
-import type { FindTerritories } from 'types/graphql'
+import type { MyTerritories } from 'types/graphql'
 
 export const QUERY = gql`
-  query MyTerritoriesQuery {
-    territories {
+  query MyTerritories($userId: String!) {
+    userTerritories(userId: $userId) {
       id
       name
       spreadsheetURL
+      userId
       __typename
     }
   }
@@ -20,10 +21,12 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="text-red-500">Error: {error.message}</div>
 )
 
-export const Success = ({ territories }: CellSuccessProps<FindTerritories>) => {
+export const Success = ({
+  userTerritories,
+}: CellSuccessProps<MyTerritories>) => {
   return (
     <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 ">
-      {territories.map(({ id, name, spreadsheetURL }) => {
+      {userTerritories.map(({ id, name, spreadsheetURL }) => {
         return (
           <div className="w-64 px-3 py-2 rounded-sm bg-slate-50 " id={id}>
             <h2 className="text-xl font-bold text-center"> {name} </h2>

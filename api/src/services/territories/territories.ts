@@ -41,7 +41,14 @@ export const deleteTerritory: MutationResolvers['deleteTerritory'] = ({
   })
 }
 
+
+export const userTerritories: QueryResolvers['userTerritories']  = ({userId}) => {
+  return db.territory.findMany({where: {userId}})
+  }
+
 export const Territory: TerritoryResolvers = {
   User: (_obj, { root }) =>
     db.territory.findUnique({ where: { id: root.id } }).User(),
 }
+
+
