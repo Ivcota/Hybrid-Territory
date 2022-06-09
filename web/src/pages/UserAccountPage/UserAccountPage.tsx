@@ -14,16 +14,15 @@ interface FormProps {
 const UserAccountPage = () => {
   const { currentUser } = useAuth()
   const [updateUser] = useUpdateUserMutation({
-    refetchQueries: 'all',
+    refetchQueries: ['GetCurrentUser'],
     onCompleted: () => {
-      location.reload()
+      // location.reload()
     },
   })
 
   const { register, setValue, handleSubmit } = useForm<FormProps>()
 
   useEffect(() => {
-    console.log(currentUser)
     setValue('firstName', currentUser?.firstName)
     setValue('lastName', currentUser?.lastName)
     setValue('phone', currentUser?.phone)
