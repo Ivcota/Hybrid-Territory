@@ -28,7 +28,9 @@ const ForgotPasswordPage = () => {
       // The function `forgotPassword.handler` in api/src/functions/auth.js has
       // been invoked, let the user know how to get the link to reset their
       // password (sent in email, perhaps?)
-      toast.success('A link to reset your password was sent to ' + response.email)
+      toast.success(
+        'A link to reset your password was sent to ' + response.email
+      )
       navigate(routes.login())
     }
   }
@@ -39,7 +41,7 @@ const ForgotPasswordPage = () => {
 
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
+        <div className="">
           <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">

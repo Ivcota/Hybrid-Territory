@@ -13,7 +13,11 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div className="flex justify-center">
+    <h3 className="text-lg text-center">Loading...</h3>
+  </div>
+)
 
 export const Empty = () => <div>Empty</div>
 

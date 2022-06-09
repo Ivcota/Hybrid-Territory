@@ -18,7 +18,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.home())
+      navigate(routes.myTerritories())
     }
   }, [isAuthenticated])
 
@@ -45,7 +45,7 @@ const LoginPage = () => {
 
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
+        <div className="">
           <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">Login</h2>
@@ -59,7 +59,7 @@ const LoginPage = () => {
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Username
+                    Email
                   </Label>
                   <TextField
                     name="username"
@@ -97,7 +97,10 @@ const LoginPage = () => {
                   />
 
                   <div className="rw-forgot-link">
-                    <Link to={routes.forgotPassword()} className="rw-forgot-link">
+                    <Link
+                      to={routes.forgotPassword()}
+                      className="rw-forgot-link"
+                    >
                       Forgot Password?
                     </Link>
                   </div>
