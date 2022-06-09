@@ -29,7 +29,7 @@ export const Success = ({
   userTerritories,
 }: CellSuccessProps<MyTerritories>) => {
   return (
-    <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 ">
+    <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 gap-y-8 ">
       {userTerritories.map(({ id, name, spreadsheetURL }) => {
         return (
           <div className="w-64 px-3 py-2 rounded-sm bg-slate-50 " id={id}>
