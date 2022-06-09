@@ -15,9 +15,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
   const { isAuthenticated, logOut, loading } = useAuth()
 
   useEffect(() => {
-    if (!loading && isAuthenticated) {
-      navigate(routes.myTerritories())
-    } else if (!loading && !isAuthenticated) {
+    if (!loading && !isAuthenticated) {
       navigate(routes.home())
     }
   }, [isAuthenticated])
@@ -39,6 +37,14 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   activeClassName="underline text-orange-500 "
                 >
                   My Territories
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={routes.userAccount()}
+                  activeClassName="underline text-orange-500 "
+                >
+                  My Account
                 </NavLink>
               </li>
               <li>
@@ -95,6 +101,14 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 activeClassName="underline text-orange-500 "
               >
                 My Territories
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={routes.userAccount()}
+                activeClassName="underline text-orange-500 "
+              >
+                My Account
               </NavLink>
             </li>
             <li>

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/named-operations-object": "^2.2.1",
     "@mantine/hooks": "^4.2.8",
     "@redwoodjs/auth": "1.5.1",
     "@redwoodjs/forms": "1.5.1",

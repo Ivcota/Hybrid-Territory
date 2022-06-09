@@ -38,7 +38,7 @@ export type CreateUserInput = {
   firstName?: InputMaybe<Scalars['String']>;
   hashedPassword: Scalars['String'];
   lastName?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['Int']>;
+  phone?: InputMaybe<Scalars['String']>;
   resetToken?: InputMaybe<Scalars['String']>;
   resetTokenExpiresAt?: InputMaybe<Scalars['DateTime']>;
   roles: Scalars['String'];
@@ -151,7 +151,7 @@ export type UpdateUserInput = {
   firstName?: InputMaybe<Scalars['String']>;
   hashedPassword?: InputMaybe<Scalars['String']>;
   lastName?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['Int']>;
+  phone?: InputMaybe<Scalars['String']>;
   resetToken?: InputMaybe<Scalars['String']>;
   resetTokenExpiresAt?: InputMaybe<Scalars['DateTime']>;
   roles?: InputMaybe<Scalars['String']>;
@@ -165,11 +165,12 @@ export type User = {
   hashedPassword: Scalars['String'];
   id: Scalars['String'];
   lastName?: Maybe<Scalars['String']>;
-  phone?: Maybe<Scalars['Int']>;
+  phone?: Maybe<Scalars['String']>;
   resetToken?: Maybe<Scalars['String']>;
   resetTokenExpiresAt?: Maybe<Scalars['DateTime']>;
   roles: Scalars['String'];
   salt: Scalars['String'];
+  territories: Array<Maybe<Territory>>;
 };
 
 export type SendMessageMutationVariables = Exact<{
@@ -179,6 +180,14 @@ export type SendMessageMutationVariables = Exact<{
 
 
 export type SendMessageMutation = { __typename?: 'Mutation', sendMessage: { __typename?: 'MessageResponse', success: boolean } };
+
+export type UpdateUserMutationVariables = Exact<{
+  id: Scalars['String'];
+  input: UpdateUserInput;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string } };
 
 export type MyTerritoriesQueryVariables = Exact<{
   userId: Scalars['String'];
@@ -222,6 +231,40 @@ export function useSendMessageMutation(baseOptions?: Apollo.MutationHookOptions<
 export type SendMessageMutationHookResult = ReturnType<typeof useSendMessageMutation>;
 export type SendMessageMutationResult = Apollo.MutationResult<SendMessageMutation>;
 export type SendMessageMutationOptions = Apollo.BaseMutationOptions<SendMessageMutation, SendMessageMutationVariables>;
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($id: String!, $input: UpdateUserInput!) {
+  updateUser(id: $id, input: $input) {
+    id
+  }
+}
+    `;
+export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+
+/**
+ * __useUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
+      }
+export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
+export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
 export const MyTerritoriesDocument = gql`
     query MyTerritories($userId: String!) {
   userTerritories(userId: $userId) {
@@ -259,3 +302,12 @@ export function useMyTerritoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type MyTerritoriesQueryHookResult = ReturnType<typeof useMyTerritoriesQuery>;
 export type MyTerritoriesLazyQueryHookResult = ReturnType<typeof useMyTerritoriesLazyQuery>;
 export type MyTerritoriesQueryResult = Apollo.QueryResult<MyTerritoriesQuery, MyTerritoriesQueryVariables>;
+export const namedOperations = {
+  Query: {
+    MyTerritories: 'MyTerritories'
+  },
+  Mutation: {
+    SendMessage: 'SendMessage',
+    UpdateUser: 'UpdateUser'
+  }
+}

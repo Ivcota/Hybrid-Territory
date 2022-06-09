@@ -34,6 +34,7 @@ const Routes = () => {
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
+        <Route path="/user-account" page={UserAccountPage} name="userAccount" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>

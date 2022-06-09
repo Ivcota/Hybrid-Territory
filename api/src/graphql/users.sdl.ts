@@ -3,13 +3,14 @@ export const schema = gql`
     id: String!
     firstName: String
     lastName: String
-    phone: Int
+    phone: String
     email: String!
     hashedPassword: String!
     salt: String!
     resetToken: String
     resetTokenExpiresAt: DateTime
     roles: String!
+    territories: [Territory]!
   }
 
   type Query {
@@ -20,7 +21,7 @@ export const schema = gql`
   input CreateUserInput {
     firstName: String
     lastName: String
-    phone: Int
+    phone: String
     email: String!
     hashedPassword: String!
     salt: String!
@@ -32,7 +33,7 @@ export const schema = gql`
   input UpdateUserInput {
     firstName: String
     lastName: String
-    phone: Int
+    phone: String
     email: String
     hashedPassword: String
     salt: String
