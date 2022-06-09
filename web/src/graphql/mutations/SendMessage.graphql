@@ -1,0 +1,5 @@
+mutation SendMessage($phone:String!, $message: String!){
+  sendMessage(phone: $phone, message: $message){
+    success
+  }
+}

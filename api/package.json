@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@redwoodjs/api": "1.5.1",
-    "@redwoodjs/graphql-server": "1.5.1"
+    "@redwoodjs/graphql-server": "1.5.1",
+    "twilio": "^3.77.2"
   }
 }
