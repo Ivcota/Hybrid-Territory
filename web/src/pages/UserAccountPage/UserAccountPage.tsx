@@ -12,11 +12,11 @@ interface FormProps {
 }
 
 const UserAccountPage = () => {
-  const { currentUser } = useAuth()
+  const { currentUser, reauthenticate } = useAuth()
   const [updateUser] = useUpdateUserMutation({
     refetchQueries: ['GetCurrentUser'],
     onCompleted: () => {
-      // location.reload()
+      reauthenticate()
     },
   })
 
