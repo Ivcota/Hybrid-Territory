@@ -48,7 +48,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 </NavLink>
               </li>
 
-              {currentUser.roles === 'admin' && (
+              {currentUser?.roles === 'admin' && (
                 <li>
                   <NavLink
                     to={routes.territories()}

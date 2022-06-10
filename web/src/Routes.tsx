@@ -29,12 +29,14 @@ const Routes = () => {
       <Set wrap={isAuthenticated ? UserLayout : BaseLayout}>
         <Route prerender path="/about" page={AboutPage} name="about" />
         <Route prerender path="/" page={HomePage} name="home" />
-        <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
+        <Private unauthenticated="home">
+          <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
+          <Route path="/user-account" page={UserAccountPage} name="userAccount" />
+        </Private>
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
-        <Route path="/user-account" page={UserAccountPage} name="userAccount" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>
