@@ -12,7 +12,7 @@ type UserLayoutProps = {
 const UserLayout = ({ children }: UserLayoutProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const ref = useClickOutside(() => setIsOpen(false))
-  const { isAuthenticated, logOut, loading } = useAuth()
+  const { isAuthenticated, logOut, loading, currentUser } = useAuth()
 
   useEffect(() => {
     if (!loading && !isAuthenticated) {
@@ -47,6 +47,18 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   My Account
                 </NavLink>
               </li>
+
+              {currentUser.roles === 'admin' && (
+                <li>
+                  <NavLink
+                    to={routes.territories()}
+                    activeClassName="underline text-orange-500 "
+                  >
+                    Admin Territories
+                  </NavLink>
+                </li>
+              )}
+
               <li>
                 <button
                   onClick={() => {
@@ -114,6 +126,16 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 My Account
               </NavLink>
             </li>
+            {currentUser.roles === 'admin' && (
+              <li>
+                <NavLink
+                  to={routes.territories()}
+                  activeClassName="underline text-orange-500 "
+                >
+                  Admin Territories
+                </NavLink>
+              </li>
+            )}
             <li>
               <button
                 onClick={() => {
