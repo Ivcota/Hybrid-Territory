@@ -8,6 +8,7 @@ export const QUERY = gql`
       name
       spreadsheetURL
       userId
+      isCheckedOut
       __typename
     }
   }
@@ -30,16 +31,24 @@ export const Success = ({
 }: CellSuccessProps<MyTerritories>) => {
   return (
     <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 gap-y-8 ">
-      {userTerritories.map(({ id, name, spreadsheetURL }) => {
+      {userTerritories.map(({ id, name, spreadsheetURL, isCheckedOut }) => {
         return (
           <div
             key={id}
-            className="w-64 px-3 py-2 rounded-sm bg-slate-50 "
+            className={`w-64 px-3 py-2 rounded-sm ${
+              isCheckedOut ? 'bg-slate-50' : 'bg-red-500'
+            }`}
             id={id}
           >
             <h2 className="text-xl font-bold text-center"> {name} </h2>
             <a className="" href={spreadsheetURL} target="_blank">
-              <div className="w-full p-2 mt-3 text-center text-white bg-blue-600 rounded-sm hover:bg-blue-500">
+              <div
+                className={`w-full p-2 mt-3 text-center text-white  rounded-sm ${
+                  isCheckedOut
+                    ? 'bg-blue-600 hover:bg-blue-500'
+                    : 'bg-red-600 hover:bg-red-900'
+                }`}
+              >
                 View Territory
               </div>
             </a>
