@@ -2,6 +2,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { useForm } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
 import { useEffect } from 'react'
+import { navigate, routes } from '@redwoodjs/router'
 import { useUpdateUserMutation } from 'src/generated/graphql'
 
 interface FormProps {
@@ -14,9 +15,9 @@ interface FormProps {
 const UserAccountPage = () => {
   const { currentUser, reauthenticate } = useAuth()
   const [updateUser] = useUpdateUserMutation({
-    refetchQueries: ['GetCurrentUser'],
     onCompleted: () => {
       reauthenticate()
+      navigate(routes.myTerritories())
     },
   })
 
@@ -52,31 +53,32 @@ const UserAccountPage = () => {
             })
           }
         )}
-        className="flex flex-col px-8"
+        className="flex flex-col px-4 pb-4 mx-auto rounded shadow-lg w-80 mt-9 sm:w-96"
       >
-        <label className="mt-1">First Name</label>
+        <h2 className="mt-2 text-2xl font-bold text-center">Account Details</h2>
+        <label className="mt-3">First Name</label>
         <input
           autoComplete="off"
-          className="px-1 py-1 mt-1 border rounded-sm outline-none w-44 focus-within:ring"
+          className="px-1 py-1 mt-1 border rounded-sm outline-none focus-within:ring"
           {...register('firstName')}
         />
-        <label className="mt-1">Last Name</label>
+        <label className="mt-3">Last Name</label>
 
         <input
           autoComplete="off"
-          className="px-1 py-1 mt-1 border rounded-sm outline-none w-44 focus-within:ring"
+          className="px-1 py-1 mt-1 border rounded-sm outline-none focus-within:ring"
           {...register('lastName')}
         />
 
-        <label className="mt-1">Phone</label>
+        <label className="mt-3">Phone</label>
 
         <input
           autoComplete="off"
-          className="px-1 py-1 mt-1 border rounded-sm outline-none w-44 focus-within:ring"
+          className="px-1 py-1 mt-1 border rounded-sm outline-none focus-within:ring"
           {...register('phone')}
         />
         <button
-          className="w-56 py-1 mt-4 text-white bg-blue-500 rounded-sm "
+          className="py-1 mt-4 text-white bg-blue-500 rounded-sm hover:bg-blue-600 active:bg-blue-400"
           type="submit"
         >
           Update

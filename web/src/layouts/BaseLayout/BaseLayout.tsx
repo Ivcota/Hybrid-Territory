@@ -73,9 +73,11 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
         variants={{
           open: {
             x: 0,
+            opacity: 1,
           },
           closed: {
             x: 400,
+            opacity: 0,
           },
         }}
         transition={{ duration: 0.4, ease: 'easeInOut' }}
@@ -112,7 +114,7 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
       </motion.div>
 
       <main>
-        <div className="max-w-4xl px-2 mx-auto mt-5">{children}</div>
+        <div className="max-w-4xl px-4 mx-auto mt-5">{children}</div>
       </main>
     </>
   )

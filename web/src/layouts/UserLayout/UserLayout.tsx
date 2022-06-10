@@ -127,7 +127,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
         </motion.div>
 
         <main>
-          <div className="max-w-4xl px-2 mx-auto mt-5">{children}</div>
+          <div className="max-w-4xl px-4 mx-auto mt-5">{children}</div>
         </main>
       </>
     </>

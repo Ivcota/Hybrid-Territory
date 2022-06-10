@@ -34,7 +34,7 @@ export const Success = ({
         return (
           <div className="w-64 px-3 py-2 rounded-sm bg-slate-50 " id={id}>
             <h2 className="text-xl font-bold text-center"> {name} </h2>
-            <a className="" href={spreadsheetURL}>
+            <a className="" href={spreadsheetURL} target="_blank">
               <div className="w-full p-2 mt-3 text-center text-white bg-blue-600 rounded-sm hover:bg-blue-500">
                 View Territory
               </div>
