@@ -1,7 +1,0 @@
-query MyTerritories ($userId: String!){
-  userTerritories(userId: $userId){
-    id
-    name
-    spreadsheetURL
-  }
-}
