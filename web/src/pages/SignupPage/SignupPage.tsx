@@ -45,7 +45,7 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main className="rw-main">
+      <main className="mx-auto rw-main md:w-96 sm:w-8/12 rw-segment">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="">
           <div className="rw-segment">
@@ -53,7 +53,7 @@ const SignupPage = () => {
               <h2 className="rw-heading rw-heading-secondary">Signup</h2>
             </header>
 
-            <div className="rw-segment-main">
+            <div className="rw-segment-main ">
               <div className="rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
                   <Label

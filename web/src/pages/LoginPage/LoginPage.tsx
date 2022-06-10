@@ -46,7 +46,7 @@ const LoginPage = () => {
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="">
-          <div className="rw-segment">
+          <div className="mx-auto md:w-96 sm:w-8/12 rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">Login</h2>
             </header>

@@ -26,6 +26,7 @@ model Territory {
   id             String  @id @default(uuid())
   name           String
   spreadsheetURL String?
+  isCheckedOut   Boolean @default(false)
   User           User?   @relation(fields: [userId], references: [id])
   userId         String?
 }
