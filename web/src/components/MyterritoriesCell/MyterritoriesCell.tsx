@@ -67,10 +67,7 @@ export const Success = ({
               </Link>
             </div>
             {isCompleted && (
-              <button
-                onClick={() => setIsOpen(true)}
-                className="w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800"
-              >
+              <button className="w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800">
                 Turn in Territory Card
               </button>
             )}
