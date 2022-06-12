@@ -3,7 +3,7 @@ export const schema = gql`
     id: String!
     name: String!
     spreadsheetURL: String
-    isCheckedOut: Boolean!
+    isCompleted: Boolean!
     User: User
     userId: String
   }
@@ -11,20 +11,20 @@ export const schema = gql`
   type Query {
     territories: [Territory!]! @requireAuth
     territory(id: String!): Territory @requireAuth
-    userTerritories(userId: String!): [Territory!]!
+    userTerritories(userId: String!): [Territory!]! @requireAuth
   }
 
   input CreateTerritoryInput {
     name: String!
     spreadsheetURL: String
-    isCheckedOut: Boolean!
+    isCompleted: Boolean!
     userId: String
   }
 
   input UpdateTerritoryInput {
     name: String
     spreadsheetURL: String
-    isCheckedOut: Boolean
+    isCompleted: Boolean
     userId: String
   }
 

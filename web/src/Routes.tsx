@@ -30,6 +30,7 @@ const Routes = () => {
         <Route prerender path="/about" page={AboutPage} name="about" />
         <Route prerender path="/" page={HomePage} name="home" />
         <Private unauthenticated="home">
+          <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
           <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
           <Route path="/user-account" page={UserAccountPage} name="userAccount" />
         </Private>
@@ -38,6 +39,7 @@ const Routes = () => {
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       </Set>
+      s
       <Route notfound page={NotFoundPage} />
     </Router>
   )

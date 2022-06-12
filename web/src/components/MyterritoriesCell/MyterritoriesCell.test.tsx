@@ -1,6 +1,6 @@
 import { render, screen } from '@redwoodjs/testing/web'
-import { Loading, Empty, Failure, Success } from './MyterritoriesCell'
-import { standard } from './MyterritoriesCell.mock'
+import { Loading, Empty, Failure, Success } from './MyTerritoriesCell'
+import { standard } from './MyTerritoriesCell.mock'
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.
@@ -8,7 +8,7 @@ import { standard } from './MyterritoriesCell.mock'
 //        https://redwoodjs.com/docs/testing#testing-cells
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
-describe('MyterritoriesCell', () => {
+describe('MyTerritoriesCell', () => {
   it('renders Loading successfully', () => {
     expect(() => {
       render(<Loading />)
@@ -35,7 +35,7 @@ describe('MyterritoriesCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success userTerritories={standard().userTerritories} />)
+      render(<Success myTerritories={standard().myTerritories} />)
     }).not.toThrow()
   })
 })

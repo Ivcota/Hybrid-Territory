@@ -2,7 +2,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { useSendMessageMutation } from 'src/generated/graphql'
-import MyTerritoriesCell from '../../components/MyterritoriesCell'
+import MyTerritoriesCell from '../../components/MyTerritoriesCell'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 
 const MyTerritoriesPage = () => {
@@ -39,7 +39,6 @@ const MyTerritoriesPage = () => {
         </button>
       </div>
 
-      {/* @ts-ignore */}
       {!loading && <MyTerritoriesCell userId={currentUser?.id} />}
     </>
   )

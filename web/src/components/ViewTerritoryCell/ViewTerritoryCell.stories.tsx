@@ -1,5 +1,5 @@
-import { Loading, Empty, Failure, Success } from './MyTerritoriesCell'
-import { standard } from './MyTerritoriesCell.mock'
+import { Loading, Empty, Failure, Success } from './ViewTerritoryCell'
+import { standard } from './ViewTerritoryCell.mock'
 
 export const loading = () => {
   return Loading ? <Loading /> : null
@@ -17,4 +17,4 @@ export const success = () => {
   return Success ? <Success {...standard()} /> : null
 }
 
-export default { title: 'Cells/MyTerritoriesCell' }
+export default { title: 'Cells/ViewTerritoryCell' }
