@@ -12,7 +12,6 @@ const TerritoryPage = ({ id }: PageProps) => {
       <MetaTags title="Territory" description="Territory page" />
       <Link to={routes.myTerritories()}>
         <button className="px-3 py-1 mb-5 text-white bg-red-500 rounded-sm hover:bg-red-400 ">
-          {' '}
           Back
         </button>
       </Link>

@@ -28,7 +28,7 @@ export type Scalars = {
 };
 
 export type CreateTerritoryInput = {
-  isCheckedOut: Scalars['Boolean'];
+  isCompleted: Scalars['Boolean'];
   name: Scalars['String'];
   spreadsheetURL?: InputMaybe<Scalars['String']>;
   userId?: InputMaybe<Scalars['String']>;
@@ -136,14 +136,14 @@ export type Territory = {
   __typename?: 'Territory';
   User?: Maybe<User>;
   id: Scalars['String'];
-  isCheckedOut: Scalars['Boolean'];
+  isCompleted: Scalars['Boolean'];
   name: Scalars['String'];
   spreadsheetURL?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['String']>;
 };
 
 export type UpdateTerritoryInput = {
-  isCheckedOut?: InputMaybe<Scalars['Boolean']>;
+  isCompleted?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   spreadsheetURL?: InputMaybe<Scalars['String']>;
   userId?: InputMaybe<Scalars['String']>;
@@ -183,6 +183,14 @@ export type SendMessageMutationVariables = Exact<{
 
 
 export type SendMessageMutation = { __typename?: 'Mutation', sendMessage: { __typename?: 'MessageResponse', success: boolean } };
+
+export type UpdateTerritoryMutationVariables = Exact<{
+  id: Scalars['String'];
+  input: UpdateTerritoryInput;
+}>;
+
+
+export type UpdateTerritoryMutation = { __typename?: 'Mutation', updateTerritory: { __typename?: 'Territory', id: string } };
 
 export type UpdateUserMutationVariables = Exact<{
   id: Scalars['String'];
@@ -227,6 +235,40 @@ export function useSendMessageMutation(baseOptions?: Apollo.MutationHookOptions<
 export type SendMessageMutationHookResult = ReturnType<typeof useSendMessageMutation>;
 export type SendMessageMutationResult = Apollo.MutationResult<SendMessageMutation>;
 export type SendMessageMutationOptions = Apollo.BaseMutationOptions<SendMessageMutation, SendMessageMutationVariables>;
+export const UpdateTerritoryDocument = gql`
+    mutation UpdateTerritory($id: String!, $input: UpdateTerritoryInput!) {
+  updateTerritory(id: $id, input: $input) {
+    id
+  }
+}
+    `;
+export type UpdateTerritoryMutationFn = Apollo.MutationFunction<UpdateTerritoryMutation, UpdateTerritoryMutationVariables>;
+
+/**
+ * __useUpdateTerritoryMutation__
+ *
+ * To run a mutation, you first call `useUpdateTerritoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTerritoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTerritoryMutation, { data, loading, error }] = useUpdateTerritoryMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateTerritoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTerritoryMutation, UpdateTerritoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTerritoryMutation, UpdateTerritoryMutationVariables>(UpdateTerritoryDocument, options);
+      }
+export type UpdateTerritoryMutationHookResult = ReturnType<typeof useUpdateTerritoryMutation>;
+export type UpdateTerritoryMutationResult = Apollo.MutationResult<UpdateTerritoryMutation>;
+export type UpdateTerritoryMutationOptions = Apollo.BaseMutationOptions<UpdateTerritoryMutation, UpdateTerritoryMutationVariables>;
 export const UpdateUserDocument = gql`
     mutation UpdateUser($id: String!, $input: UpdateUserInput!) {
   updateUser(id: $id, input: $input) {
@@ -264,6 +306,7 @@ export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMut
 export const namedOperations = {
   Mutation: {
     SendMessage: 'SendMessage',
+    UpdateTerritory: 'UpdateTerritory',
     UpdateUser: 'UpdateUser'
   }
 }

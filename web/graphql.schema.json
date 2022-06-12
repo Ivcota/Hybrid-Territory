@@ -35,7 +35,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "isCheckedOut",
+            "name": "isCompleted",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -848,7 +848,7 @@
             "deprecationReason": null
           },
           {
-            "name": "isCheckedOut",
+            "name": "isCompleted",
             "description": null,
             "args": [],
             "type": {
@@ -926,7 +926,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "isCheckedOut",
+            "name": "isCompleted",
             "description": null,
             "type": {
               "kind": "SCALAR",

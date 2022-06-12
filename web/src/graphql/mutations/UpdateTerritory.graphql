@@ -1,0 +1,5 @@
+mutation UpdateTerritory($id:String! $input: UpdateTerritoryInput!  ) {
+  updateTerritory(id: $id, input: $input ) {
+    id
+  }
+}
