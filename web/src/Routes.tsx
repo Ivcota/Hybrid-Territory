@@ -18,15 +18,15 @@ const Routes = () => {
 
   return (
     <Router>
-      <Private unauthenticated="home" roles="admin">
-        <Set wrap={TerritoriesLayout}>
-          <Route path="/admin/territories/new" page={TerritoryNewTerritoryPage} name="newTerritory" />
-          <Route path="/admin/territories/{id}/edit" page={TerritoryEditTerritoryPage} name="editTerritory" />
-          <Route path="/admin/territories/{id}" page={TerritoryTerritoryPage} name="territory" />
-          <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
-        </Set>
-      </Private>
       <Set wrap={isAuthenticated ? UserLayout : BaseLayout}>
+        <Private unauthenticated="home" roles="admin">
+          <Set wrap={TerritoriesLayout}>
+            <Route path="/admin/territories/new" page={TerritoryNewTerritoryPage} name="newTerritory" />
+            <Route path="/admin/territories/{id}/edit" page={TerritoryEditTerritoryPage} name="editTerritory" />
+            <Route path="/admin/territories/{id}" page={TerritoryTerritoryPage} name="territory" />
+            <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
+          </Set>
+        </Private>
         <Route prerender path="/about" page={AboutPage} name="about" />
         <Route prerender path="/" page={HomePage} name="home" />
         <Private unauthenticated="home">
