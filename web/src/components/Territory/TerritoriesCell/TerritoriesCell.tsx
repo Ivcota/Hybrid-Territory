@@ -11,6 +11,7 @@ export const QUERY = gql`
       id
       name
       spreadsheetURL
+      isCompleted
       userId
     }
   }
@@ -22,7 +23,10 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No territories yet. '}
-      <Link to={routes.newTerritory()} className="rw-link">
+      <Link
+        to={routes.newTerritory()}
+        className="rw-link"
+      >
         {'Create one?'}
       </Link>
     </div>

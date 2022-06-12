@@ -82,6 +82,7 @@ const TerritoriesList = ({ territories }) => {
             <th>Id</th>
             <th>Name</th>
             <th>Spreadsheet url</th>
+            <th>Is completed</th>
             <th>User id</th>
             <th>&nbsp;</th>
           </tr>
@@ -92,6 +93,7 @@ const TerritoriesList = ({ territories }) => {
               <td>{truncate(territory.id)}</td>
               <td>{truncate(territory.name)}</td>
               <td>{truncate(territory.spreadsheetURL)}</td>
+              <td>{checkboxInputTag(territory.isCompleted)}</td>
               <td>{truncate(territory.userId)}</td>
               <td>
                 <nav className="rw-table-actions">

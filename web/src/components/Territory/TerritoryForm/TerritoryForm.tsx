@@ -4,6 +4,7 @@ import {
   FieldError,
   Label,
   TextField,
+  CheckboxField,
   Submit,
 } from '@redwoodjs/forms'
 
@@ -12,6 +13,9 @@ import {
 const TerritoryForm = (props) => {
   const onSubmit = (data) => {
 
+  
+    
+    
   
     
     
@@ -71,6 +75,24 @@ const TerritoryForm = (props) => {
         
 
         <FieldError name="spreadsheetURL" className="rw-field-error" />
+
+        <Label
+          name="isCompleted"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Is completed
+        </Label>
+        
+          <CheckboxField
+            name="isCompleted"
+            defaultChecked={props.territory?.isCompleted}
+            className="rw-input"
+            errorClassName="rw-input rw-input-error"
+          />
+        
+
+        <FieldError name="isCompleted" className="rw-field-error" />
 
         <Label
           name="userId"

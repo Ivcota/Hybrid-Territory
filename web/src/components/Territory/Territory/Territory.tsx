@@ -80,6 +80,9 @@ const Territory = ({ territory }) => {
               <th>Spreadsheet url</th>
               <td>{territory.spreadsheetURL}</td>
             </tr><tr>
+              <th>Is completed</th>
+              <td>{checkboxInputTag(territory.isCompleted)}</td>
+            </tr><tr>
               <th>User id</th>
               <td>{territory.userId}</td>
             </tr>
