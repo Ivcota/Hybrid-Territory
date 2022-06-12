@@ -2833,6 +2833,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@headlessui/react@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "@headlessui/react@npm:1.6.4"
+  peerDependencies:
+    react: ^16 || ^17 || ^18
+    react-dom: ^16 || ^17 || ^18
+  checksum: 70b3d347dcb78b1588f4964ec7280c4172b0c0cacec5073fa3d6ede9dc7281cbb86e8e83bb59862c460fbd14f2e3c0a3993213d83a0be944d0bab42de97c096d
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.9.2":
   version: 0.9.5
   resolution: "@humanwhocodes/config-array@npm:0.9.5"
@@ -24160,6 +24170,7 @@ __metadata:
     "@graphql-codegen/typescript": 2.5.0
     "@graphql-codegen/typescript-operations": 2.4.1
     "@graphql-codegen/typescript-react-apollo": 3.2.15
+    "@headlessui/react": ^1.6.4
     "@mantine/hooks": ^4.2.8
     "@redwoodjs/auth": 1.5.1
     "@redwoodjs/forms": 1.5.1

@@ -1,5 +1,7 @@
+import { Dialog, Transition } from '@headlessui/react'
 import { Link, routes } from '@redwoodjs/router'
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
+import { Fragment, useState } from 'react'
 import type { MyTerritories } from 'types/graphql'
 
 export const QUERY = gql`
@@ -36,8 +38,8 @@ export const Success = ({
         return (
           <div
             key={id}
-            className={`w-64 px-3 py-2 rounded-sm flex flex-col justify-center items-center ${
-              isCompleted ? 'bg-red-200' : ' bg-slate-50'
+            className={`w-64 px-3 py-4 rounded-lg shadow-lg flex flex-col justify-center items-center ${
+              isCompleted ? '' : ' bg-slate-50'
             }`}
             id={id}
           >
@@ -65,7 +67,10 @@ export const Success = ({
               </Link>
             </div>
             {isCompleted && (
-              <button className="w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800">
+              <button
+                onClick={() => setIsOpen(true)}
+                className="w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800"
+              >
                 Turn in Territory Card
               </button>
             )}
