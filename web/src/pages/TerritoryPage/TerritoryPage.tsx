@@ -15,7 +15,9 @@ const TerritoryPage = ({ id }: PageProps) => {
           Back
         </button>
       </Link>
-      <ViewTerritoryCell id={id} />
+      <div className="flex justify-center">
+        <ViewTerritoryCell id={id} />
+      </div>
     </>
   )
 }

@@ -10,7 +10,8 @@ const AboutPage = () => {
 
       <h1 className="font-serif text-3xl ">About</h1>
       <p className="mt-2">
-        This is a fullstack app for managing territory on a hybrid level.
+        A simple territory distribution app. Documentation on how to use this
+        will be provied shortly.
       </p>
     </>
   )

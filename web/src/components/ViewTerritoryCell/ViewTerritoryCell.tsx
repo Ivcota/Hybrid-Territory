@@ -32,7 +32,7 @@ export const Success = ({
   territory,
 }: CellSuccessProps<FindViewTerritoryQuery, FindTerritoryByIdVariables>) => {
   const [UpdateTerritory, { loading }] = useUpdateTerritoryMutation({
-    refetchQueries: ['FindViewTerritoryQuery', 'MyTerritories'],
+    refetchQueries: ['FindViewTerritoryQuery'],
   })
   return (
     <div
@@ -49,7 +49,7 @@ export const Success = ({
       ) : (
         <p>This territory is not finished.</p>
       )}
-      <a href={territory.spreadsheetURL}>
+      <a href={territory.spreadsheetURL} target="_blank">
         <button className="px-3 py-2 mt-4 text-lg text-white rounded-sm bg-slate-800 hover:bg-slate-700 active:bg-slate-500 ">
           View Spreadsheet
         </button>
