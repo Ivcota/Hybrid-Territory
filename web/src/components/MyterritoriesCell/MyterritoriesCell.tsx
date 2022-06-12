@@ -1,8 +1,8 @@
-import { Dialog, Transition } from '@headlessui/react'
 import { Link, routes } from '@redwoodjs/router'
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
-import { Fragment, useState } from 'react'
 import type { MyTerritories } from 'types/graphql'
+import Modal from '../Modal/Modal'
+import { navigate } from '@redwoodjs/router'
 
 export const QUERY = gql`
   query MyTerritories($userId: String!) {
@@ -32,6 +32,8 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   userTerritories,
 }: CellSuccessProps<MyTerritories>) => {
+  const submitTerritory = () => {}
+
   return (
     <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 gap-y-8 ">
       {userTerritories.map(({ id, name, isCompleted }) => {
@@ -51,25 +53,30 @@ export const Success = ({
               <p></p>
             )}
 
-            <div
+            <button
+              onClick={() =>
+                navigate(
+                  routes.territory({
+                    id,
+                  })
+                )
+              }
               className={`w-full p-2 mt-3 text-center text-white rounded-sm ${
                 !isCompleted
                   ? 'bg-blue-600 hover:bg-blue-500'
                   : 'bg-red-600 hover:bg-red-900 active:bg-red-800 '
               }`}
             >
-              <Link
-                to={routes.territory({
-                  id,
-                })}
-              >
-                View Territory
-              </Link>
-            </div>
+              View Territory
+            </button>
             {isCompleted && (
-              <button className="w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800">
-                Turn in Territory Card
-              </button>
+              <Modal
+                title="Turn in Territory Card"
+                heading="Turn in Territory Card?"
+                text="This will turn in your territory card and notify the territory servant."
+                fn={submitTerritory}
+                className="w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800"
+              />
             )}
           </div>
         )

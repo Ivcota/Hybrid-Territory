@@ -6,9 +6,10 @@ interface ModalProps {
   heading: string
   text: string
   fn: any
+  className: string
 }
 
-const Modal = ({ title, heading, text, fn }: ModalProps) => {
+const Modal = ({ title, heading, text, fn, className }: ModalProps) => {
   let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
@@ -21,15 +22,9 @@ const Modal = ({ title, heading, text, fn }: ModalProps) => {
   }
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-        >
-          {title}
-        </button>
-      </div>
+      <button type="button" onClick={openModal} className={className}>
+        {title}
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -73,7 +68,7 @@ const Modal = ({ title, heading, text, fn }: ModalProps) => {
                       className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
-                      Got it, thanks!
+                      Confirm
                     </button>
                     <button
                       type="button"
