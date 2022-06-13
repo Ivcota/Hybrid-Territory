@@ -43,7 +43,7 @@ const MyTerritoriesPage = () => {
         />
       </div>
 
-      {!loading && <MyTerritoriesCell userId={currentUser?.id} />}
+      {/* {!loading && <MyTerritoriesCell userId={currentUser?.id} />} */}
     </>
   )
 }
