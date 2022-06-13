@@ -23,7 +23,7 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="flex justify-center">
+  <div className="mt-10 text-lg text-center animate-pulse">
     <h3 className="text-lg text-center">Loading...</h3>
   </div>
 )
@@ -45,7 +45,7 @@ export const Success = ({
   userTerritories,
 }: CellSuccessProps<MyTerritories>) => {
   const [sendMessage] = useSendMessageMutation()
-  const [updateTerritory] = useUpdateTerritoryMutation({
+  const [updateTerritory, { loading }] = useUpdateTerritoryMutation({
     refetchQueries: ['MyTerritories'],
   })
   const { currentUser } = useAuth()
@@ -111,11 +111,15 @@ export const Success = ({
             </button>
             {isCompleted && (
               <Modal
-                title="Turn in Territory Card"
+                title={!loading ? 'Turn in Territory Card' : 'Loading...'}
                 heading="Turn in Territory Card?"
                 text="This will turn in your territory card and notify the territory servant."
                 fn={submitTerritory}
-                className="w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800"
+                className={
+                  !loading
+                    ? 'w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800'
+                    : 'w-full p-2 mt-3 text-center text-white bg-green-800 rounded-sm animate-pulse'
+                }
               />
             )}
           </div>

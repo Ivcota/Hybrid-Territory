@@ -14,7 +14,7 @@ interface FormProps {
 
 const UserAccountPage = () => {
   const { currentUser, reauthenticate } = useAuth()
-  const [updateUser] = useUpdateUserMutation({
+  const [updateUser, { loading }] = useUpdateUserMutation({
     onCompleted: () => {
       reauthenticate()
       navigate(routes.myTerritories())
@@ -77,12 +77,22 @@ const UserAccountPage = () => {
           className="px-1 py-1 mt-1 border rounded-sm outline-none focus-within:ring"
           {...register('phone')}
         />
-        <button
-          className="py-1 mt-4 text-white bg-blue-500 rounded-sm hover:bg-blue-600 active:bg-blue-400"
-          type="submit"
-        >
-          Update
-        </button>
+        {!loading ? (
+          <button
+            className="py-1 mt-4 text-white bg-blue-500 rounded-sm hover:bg-blue-600 active:bg-blue-400"
+            type="submit"
+          >
+            Update
+          </button>
+        ) : (
+          <button
+            disabled
+            className="py-1 mt-4 text-white bg-blue-500 rounded-sm hover:bg-blue-600 animate-pulse active:bg-blue-400"
+            type="submit"
+          >
+            Loading...
+          </button>
+        )}
       </form>
     </>
   )
