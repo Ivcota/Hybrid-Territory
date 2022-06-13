@@ -19,7 +19,7 @@ export const handler = async (event, context) => {
     handler: async (user) => {
       sendMessage({
         to: user.phone,
-        message: `Reset your password here: https://example.com/reset-password?resetToken=${user.resetToken}`,
+        message: `Reset your password here: https://hybrid-territory.vercel.app/reset-password?resetToken=${user.resetToken}`,
       })
 
       return user
@@ -114,6 +114,7 @@ export const handler = async (event, context) => {
           hashedPassword: hashedPassword,
           salt: salt,
           firstName: userAttributes.firstName,
+          phone: userAttributes.phone,
           // name: userAttributes.name
         },
       })

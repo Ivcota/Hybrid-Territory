@@ -18,7 +18,7 @@ const SignupPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(routes.home())
+      navigate(routes.myTerritories())
     }
   }, [isAuthenticated])
 
@@ -75,7 +75,8 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="firstName" className="rw-field-error" />
+                  <FieldError name="username" className="rw-field-error" />
+
                   <Label
                     name="firstName"
                     className="rw-label"
@@ -94,7 +95,27 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="username" className="rw-field-error" />
+                  <FieldError name="firstName" className="rw-field-error" />
+
+                  <Label
+                    name="phone"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Phone
+                  </Label>
+                  <TextField
+                    name="phone"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Phone is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="phone" className="rw-field-error" />
 
                   <Label
                     name="password"

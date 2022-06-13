@@ -61,7 +61,7 @@ const ResetPasswordPage = ({ resetToken }) => {
 
       <main className="rw-main">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="rw-scaffold rw-login-container">
+        <div className="mx-auto rw-scaffold w-80">
           <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">
@@ -70,7 +70,7 @@ const ResetPasswordPage = ({ resetToken }) => {
             </header>
 
             <div className="">
-              <div className="rw-form-wrapper">
+              <div className="px-5 py-3 rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
                   <div className="text-left">
                     <Label
