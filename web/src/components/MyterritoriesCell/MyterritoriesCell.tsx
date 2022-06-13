@@ -54,6 +54,7 @@ export const Success = ({
                 id,
                 input: {
                   isCompleted: !isCompleted,
+                  userId: null,
                 },
               },
             })
@@ -61,7 +62,7 @@ export const Success = ({
             await sendMessage({
               variables: {
                 phone: '15205105764',
-                message: `${currentUser?.firstName} turned in territory card ${name} at ${now} .`,
+                message: `${currentUser?.firstName} ${currentUser?.lastName} turned in territory card ${name} at ${now}.`,
               },
             })
           } catch (error) {
