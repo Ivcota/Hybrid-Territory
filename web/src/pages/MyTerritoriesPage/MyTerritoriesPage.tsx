@@ -3,7 +3,7 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import Modal from 'src/components/Modal/Modal'
 import { useSendMessageMutation } from 'src/generated/graphql'
-import MyTerritoriesCell from 'src/components/MyTerritoriesCell/'
+import UserTerritoriesCell from 'src/components/UserTerritoriesCell'
 
 const MyTerritoriesPage = () => {
   const { currentUser, loading } = useAuth()
@@ -43,7 +43,7 @@ const MyTerritoriesPage = () => {
         />
       </div>
 
-      {/* {!loading && <MyTerritoriesCell userId={currentUser?.id} />} */}
+      {!loading && <UserTerritoriesCell userId={currentUser?.id} />}
     </>
   )
 }
