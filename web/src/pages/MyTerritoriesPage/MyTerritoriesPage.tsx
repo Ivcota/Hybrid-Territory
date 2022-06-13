@@ -1,10 +1,9 @@
 import { useAuth } from '@redwoodjs/auth'
-import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
-import { useSendMessageMutation } from 'src/generated/graphql'
-import MyTerritoriesCell from '../../components/MyTerritoriesCell'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import Modal from 'src/components/Modal/Modal'
+import { useSendMessageMutation } from 'src/generated/graphql'
+import MyTerritoriesCell from 'src/components/MyTerritoriesCell/'
 
 const MyTerritoriesPage = () => {
   const { currentUser, loading } = useAuth()

@@ -1,6 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
-import ViewTerritoryCell from '../../components/ViewTerritoryCell'
+import ViewTerritoryCell from 'src/components/ViewTerritoryCell'
 
 interface PageProps {
   id: string
