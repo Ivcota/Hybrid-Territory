@@ -1,8 +1,8 @@
-import { db } from 'src/lib/db'
 import { DbAuthHandler } from '@redwoodjs/api'
+import { db } from 'src/lib/db'
+import { sendMessage } from './twillio'
 
 export const handler = async (event, context) => {
-
   const forgotPasswordOptions = {
     // handler() is invoked after verifying that a user was found with the given
     // username. This is where you can send the user an email with a link to
@@ -16,7 +16,12 @@ export const handler = async (event, context) => {
     // You could use this return value to, for example, show the email
     // address in a toast message so the user will know it worked and where
     // to look for the email.
-    handler: (user) => {
+    handler: async (user) => {
+      sendMessage({
+        to: user.phone,
+        message: `Reset your password here: https://example.com/reset-password?resetToken=${user.resetToken}`,
+      })
+
       return user
     },
 
@@ -108,7 +113,7 @@ export const handler = async (event, context) => {
           email: username,
           hashedPassword: hashedPassword,
           salt: salt,
-          firstName: userAttributes.firstName
+          firstName: userAttributes.firstName,
           // name: userAttributes.name
         },
       })

@@ -29,7 +29,7 @@ const ForgotPasswordPage = () => {
       // been invoked, let the user know how to get the link to reset their
       // password (sent in email, perhaps?)
       toast.success(
-        'A link to reset your password was sent to ' + response.email
+        'A link to reset your password was sent to ' + response.phone
       )
       navigate(routes.login())
     }
@@ -39,7 +39,7 @@ const ForgotPasswordPage = () => {
     <>
       <MetaTags title="Forgot Password" />
 
-      <main className="rw-main">
+      <main className="mx-auto rw-main w-80">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="">
           <div className="rw-segment">
@@ -49,16 +49,16 @@ const ForgotPasswordPage = () => {
               </h2>
             </header>
 
-            <div className="rw-segment-main">
-              <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
+            <div className="rw-segment-main ">
+              <div className="rw-form-wrapper ">
+                <Form onSubmit={onSubmit} className="rw-form-wrapper ">
                   <div className="text-left">
                     <Label
                       name="username"
                       className="rw-label"
                       errorClassName="rw-label rw-label-error"
                     >
-                      Username
+                      Email
                     </Label>
                     <TextField
                       name="username"
