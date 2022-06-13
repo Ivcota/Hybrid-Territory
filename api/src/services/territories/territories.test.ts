@@ -28,7 +28,7 @@ describe('territories', () => {
 
   scenario('creates a territory', async () => {
     const result = await createTerritory({
-      input: { name: 'String' },
+      input: { name: 'String', isCompleted: false },
     })
 
     expect(result.name).toEqual('String')

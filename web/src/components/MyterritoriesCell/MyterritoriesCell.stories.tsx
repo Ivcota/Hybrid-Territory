@@ -14,7 +14,7 @@ export const failure = () => {
 }
 
 export const success = () => {
-  return Success ? <Success {...standard()} /> : null
+  return Success ? <Success {...standard().myTerritories} /> : null
 }
 
 export default { title: 'Cells/MyTerritoriesCell' }
