@@ -10350,7 +10350,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.8.29":
+"dayjs@npm:^1.11.3, dayjs@npm:^1.8.29":
   version: 1.11.3
   resolution: "dayjs@npm:1.11.3"
   checksum: 989758998b6ce11af4a12cd8cdb99ca1d24163db585564472d7bd2cef06fd68998b0e784867b4a1ca4cb8e31af5991ecd9c8f816a8f31967bde375bd58bb4230
@@ -24177,6 +24177,7 @@ __metadata:
     "@redwoodjs/router": 1.5.1
     "@redwoodjs/web": 1.5.1
     autoprefixer: ^10.4.7
+    dayjs: ^1.11.3
     framer-motion: ^6.3.10
     postcss: ^8.4.14
     postcss-loader: ^7.0.0

@@ -21,6 +21,7 @@
     "@redwoodjs/forms": "1.5.1",
     "@redwoodjs/router": "1.5.1",
     "@redwoodjs/web": "1.5.1",
+    "dayjs": "^1.11.3",
     "framer-motion": "^6.3.10",
     "prop-types": "15.8.1",
     "react": "17.0.2",

@@ -1,8 +1,13 @@
-import { Link, routes } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
+import { navigate, routes } from '@redwoodjs/router'
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
+import dayjs from 'dayjs'
+import {
+  useSendMessageMutation,
+  useUpdateTerritoryMutation,
+} from 'src/generated/graphql'
 import type { MyTerritories } from 'types/graphql'
 import Modal from '../Modal/Modal'
-import { navigate } from '@redwoodjs/router'
 
 export const QUERY = gql`
   query MyTerritories($userId: String!) {
@@ -32,11 +37,38 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   userTerritories,
 }: CellSuccessProps<MyTerritories>) => {
-  const submitTerritory = () => {}
+  const [sendMessage] = useSendMessageMutation()
+  const [updateTerritory] = useUpdateTerritoryMutation({
+    refetchQueries: ['MyTerritories'],
+  })
+  const { currentUser } = useAuth()
+  const now = dayjs()
 
   return (
     <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 gap-y-8 ">
       {userTerritories.map(({ id, name, isCompleted }) => {
+        const submitTerritory = async () => {
+          try {
+            await updateTerritory({
+              variables: {
+                id,
+                input: {
+                  isCompleted: !isCompleted,
+                },
+              },
+            })
+
+            await sendMessage({
+              variables: {
+                phone: '15205105764',
+                message: `${currentUser?.firstName} turned in territory card ${name} at ${now} .`,
+              },
+            })
+          } catch (error) {
+            console.log(error)
+          }
+        }
+
         return (
           <div
             key={id}
