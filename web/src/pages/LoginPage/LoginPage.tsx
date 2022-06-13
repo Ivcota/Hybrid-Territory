@@ -1,5 +1,5 @@
 import { Link, navigate, routes } from '@redwoodjs/router'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import {
   Form,
   Label,
@@ -15,6 +15,7 @@ import { useEffect } from 'react'
 
 const LoginPage = () => {
   const { isAuthenticated, logIn } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -28,7 +29,9 @@ const LoginPage = () => {
   }, [])
 
   const onSubmit = async (data) => {
+    setIsLoading(true)
     const response = await logIn({ ...data })
+    setIsLoading(false)
 
     if (response.message) {
       toast(response.message)
@@ -108,7 +111,18 @@ const LoginPage = () => {
                   <FieldError name="password" className="rw-field-error" />
 
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Login</Submit>
+                    {isLoading ? (
+                      <Submit
+                        disabled
+                        className="rw-button rw-button-blue animate-pulse"
+                      >
+                        Loading...
+                      </Submit>
+                    ) : (
+                      <Submit className="rw-button rw-button-blue">
+                        Login
+                      </Submit>
+                    )}
                   </div>
                 </Form>
               </div>

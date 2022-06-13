@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
@@ -7,6 +7,7 @@ import { Form, Label, TextField, Submit, FieldError } from '@redwoodjs/forms'
 
 const ForgotPasswordPage = () => {
   const { isAuthenticated, forgotPassword } = useAuth()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -20,7 +21,9 @@ const ForgotPasswordPage = () => {
   }, [])
 
   const onSubmit = async (data) => {
+    setLoading(true)
     const response = await forgotPassword(data.username)
+    setLoading(true)
 
     if (response.error) {
       toast.error(response.error)
@@ -74,7 +77,18 @@ const ForgotPasswordPage = () => {
                   </div>
 
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Submit</Submit>
+                    {loading ? (
+                      <Submit
+                        disabled
+                        className="rw-button rw-button-blue animate-pulse"
+                      >
+                        Loading...
+                      </Submit>
+                    ) : (
+                      <Submit className="rw-button rw-button-blue">
+                        Submit
+                      </Submit>
+                    )}
                   </div>
                 </Form>
               </div>
