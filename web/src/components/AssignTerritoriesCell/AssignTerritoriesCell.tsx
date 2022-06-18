@@ -1,6 +1,12 @@
-import type { AssignTerritoriesQuery, Territory } from 'types/graphql'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
-import DataTable, { TableColumn, TableRow } from 'react-data-table-component'
+import { CellFailureProps, CellSuccessProps, useQuery } from '@redwoodjs/web'
+import { useMemo } from 'react'
+import DataTable, { TableColumn } from 'react-data-table-component'
+import ReactSelect from 'react-select'
+import type {
+  AllUsersQuery,
+  AssignTerritoriesQuery,
+  Territory,
+} from 'types/graphql'
 
 export const QUERY = gql`
   query AssignTerritoriesQuery(
@@ -27,6 +33,17 @@ export const QUERY = gql`
   }
 `
 
+export const USER_QUERY = gql`
+  query AllUsers {
+    users {
+      id
+      firstName
+      lastName
+      __typename
+    }
+  }
+`
+
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => (
@@ -40,6 +57,23 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   searchTerritories,
 }: CellSuccessProps<AssignTerritoriesQuery>) => {
+  const { data, loading } = useQuery<AllUsersQuery>(USER_QUERY)
+
+  console.log(searchTerritories)
+
+  const generateOptions = useMemo(() => {
+    if (!loading && data) {
+      const newArray = data.users.map((item) => {
+        return {
+          label: `${item.firstName} ${item.lastName ? item.lastName : ''}`,
+          value: item.id,
+        }
+      })
+
+      return newArray
+    }
+  }, [data, loading])
+
   const columns: TableColumn<Territory>[] = [
     {
       name: 'Name',
@@ -48,10 +82,31 @@ export const Success = ({
     },
     {
       name: 'Spreadsheet Link',
-      selector: (row) => row.spreadsheetURL,
-      width: '10rem',
+      cell: (row) => (
+        <a className="text-blue-500 underline" href={row.spreadsheetURL}>
+          View Territory
+        </a>
+      ),
+      width: '8rem',
+      sortable: true,
+    },
+    {
+      name: 'Publisher',
+      width: '8rem',
+      cell: ({ User }) => {
+        return (
+          <div>{User ? User?.firstName + ' ' + User?.lastName : 'None'}</div>
+        )
+      },
+      sortable: true,
+    },
+    {
+      name: 'Assign to Publisher',
+      cell: ({ User }) => {
+        return <ReactSelect options={generateOptions} />
+      },
     },
   ]
 
-  return <DataTable columns={columns} data={searchTerritories} />
+  return <DataTable pagination columns={columns} data={searchTerritories} />
 }
