@@ -1,5 +1,6 @@
-import type { AssignTerritoriesQuery } from 'types/graphql'
+import type { AssignTerritoriesQuery, Territory } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import DataTable, { TableColumn, TableRow } from 'react-data-table-component'
 
 export const QUERY = gql`
   query AssignTerritoriesQuery(
@@ -39,11 +40,18 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   searchTerritories,
 }: CellSuccessProps<AssignTerritoriesQuery>) => {
-  return (
-    <ul>
-      {searchTerritories.map((item) => {
-        return <li key={item.id}>{JSON.stringify(item)}</li>
-      })}
-    </ul>
-  )
+  const columns: TableColumn<Territory>[] = [
+    {
+      name: 'Name',
+      selector: (row) => row.name,
+      width: '8rem',
+    },
+    {
+      name: 'Spreadsheet Link',
+      selector: (row) => row.spreadsheetURL,
+      width: '10rem',
+    },
+  ]
+
+  return <DataTable columns={columns} data={searchTerritories} />
 }
