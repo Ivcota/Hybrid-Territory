@@ -53,11 +53,15 @@ export const Territory: TerritoryResolvers = {
 }
 
 export const searchTerritories: QueryResolvers['searchTerritories'] = async ({
+  cardName,
   firstName,
   lastName,
 }) => {
   return db.territory.findMany({
     where: {
+      name: {
+        contains: cardName,
+      },
       User: {
         firstName: {
           contains: firstName,
