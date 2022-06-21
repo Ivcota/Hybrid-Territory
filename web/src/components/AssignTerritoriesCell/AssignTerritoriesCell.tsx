@@ -94,6 +94,7 @@ export const Success = ({
     },
     {
       name: 'Action',
+      width: '20rem',
       cell: ({ id, User, name }) => {
         return (
           <div className="flex gap-3">

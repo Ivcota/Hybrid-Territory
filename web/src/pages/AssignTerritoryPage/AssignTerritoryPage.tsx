@@ -3,11 +3,7 @@ import { MetaTags } from '@redwoodjs/web'
 import { useEffect, useMemo } from 'react'
 import ReactSelect from 'react-select'
 import AssignTerritoriesCell from 'src/components/AssignTerritoriesCell'
-import {
-  useAllUsersSelectQuery,
-  useSendMessageMutation,
-  useUpdateTerritoryMutation,
-} from 'src/generated/graphql'
+import { useAllUsersSelectQuery } from 'src/generated/graphql'
 import { useUserSelect } from 'src/hooks/useUserSelect'
 
 interface IForm {
