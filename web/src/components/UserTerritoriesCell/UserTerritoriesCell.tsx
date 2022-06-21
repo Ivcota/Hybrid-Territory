@@ -1,6 +1,7 @@
 import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
+import _ from 'lodash'
 import dayjs from 'dayjs'
 import {
   useSendMessageMutation,
@@ -53,7 +54,7 @@ export const Success = ({
 
   return (
     <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 gap-y-8 ">
-      {userTerritories.map(({ id, name, isCompleted }) => {
+      {_.sortBy(userTerritories, ['name']).map(({ id, name, isCompleted }) => {
         const submitTerritory = async () => {
           try {
             await updateTerritory({
@@ -68,7 +69,7 @@ export const Success = ({
 
             await sendMessage({
               variables: {
-                phone: '15205105764',
+                phone: process.env.REDWOOD_ENV_PHONENUMBER,
                 message: `${currentUser?.firstName} turned in territory card ${name} at ${now}.`,
               },
             })

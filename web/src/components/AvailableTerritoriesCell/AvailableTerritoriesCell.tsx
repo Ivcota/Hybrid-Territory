@@ -76,7 +76,7 @@ export const Success = ({
 
                   sendMessage({
                     variables: {
-                      phone: '5205105764',
+                      phone: process.env.REDWOOD_ENV_PHONENUMBER,
                       message: `${currentUser?.firstName} checked out territory card ${item.name} at ${now}.`,
                     },
                   })

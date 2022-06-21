@@ -13,7 +13,7 @@ const MyTerritoriesPage = () => {
     try {
       const res = await sendMessage({
         variables: {
-          phone: '15205105764',
+          phone: process.env.REDWOOD_ENV_PHONENUMBER,
           message: `${currentUser?.firstName} is requesting more territory.`,
         },
       })
@@ -38,7 +38,7 @@ const MyTerritoriesPage = () => {
           title={!isLoading ? 'Request More Territory' : 'Loading...'}
           className="px-3 py-2 mt-4 text-center text-white transition-all duration-200 bg-orange-500 rounded-sm w-[14rem] hover:shadow-md hover:shadow-orange-500/25"
           heading="Send Territory Request?"
-          text="This will send a text request to your service overseer."
+          text="This will send a text request the territory servant."
           fn={sendMessageRightNow}
         />
       </div>
