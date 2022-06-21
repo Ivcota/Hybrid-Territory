@@ -10,7 +10,8 @@ const HomePage = () => {
       <MetaTags title="Home" description="Home page" />
 
       <h1 className="mt-10 font-serif text-3xl text-center">Welcome!</h1>
-      {!loading && (
+
+      {!loading ? (
         <div className="mt-2 text-center">
           {isAuthenticated ? (
             <p> Hello {currentUser?.firstName}! Welcome to Hybrid Territory.</p>
@@ -35,6 +36,8 @@ const HomePage = () => {
             </Link>
           )}
         </div>
+      ) : (
+        <div className="mt-10 text-center animate-pulse ">Loading...</div>
       )}
     </>
   )
