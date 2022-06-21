@@ -130,6 +130,7 @@ export const Success = ({
                       variables: {
                         id,
                         input: {
+                          isCompleted: false,
                           userId: null,
                         },
                       } as AssignTerritoryVariables,

@@ -38,6 +38,14 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 >
                   My Territories
                 </NavLink>
+              </li>{' '}
+              <li>
+                <NavLink
+                  to={routes.selfCheckout()}
+                  activeClassName="underline text-orange-500 "
+                >
+                  Checkout Territory
+                </NavLink>
               </li>
               <li>
                 <NavLink
@@ -47,18 +55,16 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   My Account
                 </NavLink>
               </li>
-
               {currentUser?.roles === 'admin' && (
                 <li>
                   <NavLink
                     to={routes.territories()}
                     activeClassName="underline text-orange-500 "
                   >
-                    Admin Territories
+                    Admin
                   </NavLink>
                 </li>
               )}
-
               {currentUser?.roles === 'admin' && (
                 <li>
                   <NavLink
@@ -69,7 +75,6 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   </NavLink>
                 </li>
               )}
-
               <li>
                 <button
                   onClick={() => {
@@ -127,6 +132,14 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 activeClassName="underline text-orange-500 "
               >
                 My Territories
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={routes.selfCheckout()}
+                activeClassName="underline text-orange-500 "
+              >
+                Checkout Territory
               </NavLink>
             </li>
             <li>
