@@ -13,6 +13,7 @@ export const schema = gql`
     territory(id: String!): Territory @requireAuth
     userTerritories(userId: String!): [Territory!]! @requireAuth
     searchTerritories( cardName: String, firstName: String, lastName: String): [Territory!]! @skipAuth
+    availableTerritories: [Territory!]! @requireAuth
   }
 
   input CreateTerritoryInput {

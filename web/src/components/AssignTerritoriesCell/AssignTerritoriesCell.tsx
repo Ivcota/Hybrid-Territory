@@ -42,7 +42,9 @@ export const MUTATION = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div className="mt-5 text-center animate-pulse">Loading...</div>
+)
 
 export const Empty = () => (
   <div className="text-center mt-7 animate-pulse">Territory not found</div>
@@ -128,6 +130,7 @@ export const Success = ({
                       variables: {
                         id,
                         input: {
+                          isCompleted: false,
                           userId: null,
                         },
                       } as AssignTerritoryVariables,
