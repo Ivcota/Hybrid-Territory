@@ -59,6 +59,17 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 </li>
               )}
 
+              {currentUser?.roles === 'admin' && (
+                <li>
+                  <NavLink
+                    to={routes.assignTerritory()}
+                    activeClassName="underline text-orange-500 "
+                  >
+                    Assign Territory
+                  </NavLink>
+                </li>
+              )}
+
               <li>
                 <button
                   onClick={() => {
@@ -133,6 +144,17 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   activeClassName="underline text-orange-500 "
                 >
                   Admin Territories
+                </NavLink>
+              </li>
+            )}
+
+            {currentUser?.roles === 'admin' && (
+              <li>
+                <NavLink
+                  to={routes.assignTerritory()}
+                  activeClassName="underline text-orange-500 "
+                >
+                  Assign Territory
                 </NavLink>
               </li>
             )}

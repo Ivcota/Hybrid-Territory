@@ -41,14 +41,34 @@ export const deleteTerritory: MutationResolvers['deleteTerritory'] = ({
   })
 }
 
-
-export const userTerritories: QueryResolvers['userTerritories']  = ({userId}) => {
-  return db.territory.findMany({where: {userId}})
-  }
+export const userTerritories: QueryResolvers['userTerritories'] = ({
+  userId,
+}) => {
+  return db.territory.findMany({ where: { userId } })
+}
 
 export const Territory: TerritoryResolvers = {
   User: (_obj, { root }) =>
     db.territory.findUnique({ where: { id: root.id } }).User(),
 }
 
+export const searchTerritories: QueryResolvers['searchTerritories'] = async ({
+  cardName,
+  firstName,
+  lastName,
+}) => {
 
+  console.log({
+    cardName,
+    firstName,
+    lastName
+  })
+
+  return db.territory.findMany({
+    where: {
+      name:{
+        contains:  cardName ? cardName : '',
+      },
+    }
+  })
+}

@@ -103,11 +103,19 @@ export type MutationUpdateUserArgs = {
 export type Query = {
   __typename?: 'Query';
   redwood?: Maybe<Redwood>;
+  searchTerritories: Array<Territory>;
   territories: Array<Territory>;
   territory?: Maybe<Territory>;
   user?: Maybe<User>;
   userTerritories: Array<Territory>;
   users: Array<User>;
+};
+
+
+export type QuerySearchTerritoriesArgs = {
+  cardName?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -199,6 +207,11 @@ export type UpdateUserMutationVariables = Exact<{
 
 
 export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string } };
+
+export type AllUsersSelectQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllUsersSelectQuery = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, firstName?: string | null, lastName?: string | null }> };
 
 
 export const SendMessageDocument = gql`
@@ -303,7 +316,47 @@ export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
 export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export const AllUsersSelectDocument = gql`
+    query AllUsersSelect {
+  users {
+    id
+    firstName
+    lastName
+    __typename
+  }
+}
+    `;
+
+/**
+ * __useAllUsersSelectQuery__
+ *
+ * To run a query within a React component, call `useAllUsersSelectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllUsersSelectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllUsersSelectQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllUsersSelectQuery(baseOptions?: Apollo.QueryHookOptions<AllUsersSelectQuery, AllUsersSelectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllUsersSelectQuery, AllUsersSelectQueryVariables>(AllUsersSelectDocument, options);
+      }
+export function useAllUsersSelectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllUsersSelectQuery, AllUsersSelectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllUsersSelectQuery, AllUsersSelectQueryVariables>(AllUsersSelectDocument, options);
+        }
+export type AllUsersSelectQueryHookResult = ReturnType<typeof useAllUsersSelectQuery>;
+export type AllUsersSelectLazyQueryHookResult = ReturnType<typeof useAllUsersSelectLazyQuery>;
+export type AllUsersSelectQueryResult = Apollo.QueryResult<AllUsersSelectQuery, AllUsersSelectQueryVariables>;
 export const namedOperations = {
+  Query: {
+    AllUsersSelect: 'AllUsersSelect'
+  },
   Mutation: {
     SendMessage: 'SendMessage',
     UpdateTerritory: 'UpdateTerritory',

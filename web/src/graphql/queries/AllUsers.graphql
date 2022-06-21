@@ -1,0 +1,8 @@
+query AllUsersSelect {
+    users {
+      id
+      firstName
+      lastName
+      __typename
+    }
+  }

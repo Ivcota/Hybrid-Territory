@@ -34,6 +34,11 @@ const Routes = () => {
           <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
           <Route path="/user-account" page={UserAccountPage} name="userAccount" />
         </Private>
+
+        <Private unauthenticated="home" roles="admin">
+          <Route path="/assign-territory" page={AssignTerritoryPage} name="assignTerritory" />
+        </Private>
+
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
