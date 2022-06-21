@@ -23,6 +23,7 @@
     "@redwoodjs/web": "1.5.1",
     "dayjs": "^1.11.3",
     "framer-motion": "^6.3.10",
+    "lodash": "^4.17.21",
     "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-data-table-component": "^7.5.2",

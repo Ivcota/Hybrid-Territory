@@ -4,7 +4,7 @@ import AvailableTerritoriesCell from 'src/components/AvailableTerritoriesCell'
 const SelfCheckoutPage = () => {
   return (
     <>
-      <MetaTags title="Self Checkout" description="SelfCheckout page" />
+      <MetaTags title="Self-Checkout" description="Self-Checkout page" />
 
       <h1 className="text-2xl font-extrabold ">Self Checkout</h1>
       <p className="mt-2">
@@ -12,8 +12,9 @@ const SelfCheckoutPage = () => {
         territory you’d like to use, and it will automatically be added to your
         territories page.
       </p>
-
-      <AvailableTerritoriesCell />
+      <div className="mt-4">
+        <AvailableTerritoriesCell />
+      </div>
     </>
   )
 }
