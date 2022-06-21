@@ -1,10 +1,10 @@
-import { CellFailureProps, CellSuccessProps, useQuery } from '@redwoodjs/web'
-import { useMemo } from 'react'
+import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
 import DataTable, { TableColumn } from 'react-data-table-component'
-import ReactSelect from 'react-select'
+import { useUserSelect } from 'src/hooks/useUserSelect'
 import type {
-  AllUsersQuery,
   AssignTerritoriesQuery,
+  AssignTerritory,
+  AssignTerritoryVariables,
   Territory,
 } from 'types/graphql'
 
@@ -33,13 +33,10 @@ export const QUERY = gql`
   }
 `
 
-export const USER_QUERY = gql`
-  query AllUsers {
-    users {
+export const MUTATION = gql`
+  mutation AssignTerritory($id: String!, $input: UpdateTerritoryInput!) {
+    updateTerritory(id: $id, input: $input) {
       id
-      firstName
-      lastName
-      __typename
     }
   }
 `
@@ -54,25 +51,20 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
+interface IForm {
+  selectedUserId: {
+    value: any
+    label: any
+  }
+}
+
 export const Success = ({
   searchTerritories,
 }: CellSuccessProps<AssignTerritoriesQuery>) => {
-  const { data, loading } = useQuery<AllUsersQuery>(USER_QUERY)
-
-  console.log(searchTerritories)
-
-  const generateOptions = useMemo(() => {
-    if (!loading && data) {
-      const newArray = data.users.map((item) => {
-        return {
-          label: `${item.firstName} ${item.lastName ? item.lastName : ''}`,
-          value: item.id,
-        }
-      })
-
-      return newArray
-    }
-  }, [data, loading])
+  const { userId } = useUserSelect()
+  const [assignTerritory] = useMutation<AssignTerritory>(MUTATION, {
+    refetchQueries: ['AssignTerritoriesQuery'],
+  })
 
   const columns: TableColumn<Territory>[] = [
     {
@@ -94,16 +86,30 @@ export const Success = ({
       name: 'Publisher',
       width: '8rem',
       cell: ({ User }) => {
-        return (
-          <div>{User ? User?.firstName + ' ' + User?.lastName : 'None'}</div>
-        )
+        return <div>{User ? User?.firstName : 'None'}</div>
       },
       sortable: true,
     },
     {
-      name: 'Assign to Publisher',
-      cell: ({ User }) => {
-        return <ReactSelect options={generateOptions} />
+      name: 'Action',
+      cell: ({ id }) => {
+        return (
+          <button
+            onClick={async () => {
+              assignTerritory({
+                variables: {
+                  id,
+                  input: {
+                    userId,
+                  },
+                } as AssignTerritoryVariables,
+              })
+            }}
+            className="px-3 py-2 text-white bg-green-500 rounded active:bg-green-700 hover:bg-green-400"
+          >
+            Assign
+          </button>
+        )
       },
     },
   ]

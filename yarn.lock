@@ -24170,6 +24170,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-sync-external-store@npm:1.1.0":
+  version: 1.1.0
+  resolution: "use-sync-external-store@npm:1.1.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 4f522e7f10c85a705358640f3d487f261e34cef4dd80c8f167d246a79fb8768c4fffde2f1155f44406e0ee5eb6703eb487539738d7eb7a0bbd6195fe01e5dbae
+  languageName: node
+  linkType: hard
+
 "use@npm:^3.1.0":
   version: 3.1.1
   resolution: "use@npm:3.1.1"
@@ -24536,6 +24545,7 @@ __metadata:
     react-select: ^5.3.2
     styled-components: ^5.3.5
     tailwindcss: ^3.0.24
+    zustand: ^4.0.0-rc.1
   languageName: unknown
   linkType: soft
 
@@ -25415,6 +25425,23 @@ __metadata:
     compress-commons: ^4.1.0
     readable-stream: ^3.6.0
   checksum: ed9eb9387953576c43bdf7678705e8b0ff4e9149cf92b39fa845ddd5413b08daf68655b1ee8311e2dd7c88ddeb95908a785e8e48473016b2595870b0adf588d4
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^4.0.0-rc.1":
+  version: 4.0.0-rc.1
+  resolution: "zustand@npm:4.0.0-rc.1"
+  dependencies:
+    use-sync-external-store: 1.1.0
+  peerDependencies:
+    immer: ">=9.0"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    immer:
+      optional: true
+    react:
+      optional: true
+  checksum: cc7a24fc4a4c4ecc347203d5c5da0b285b1ea8df984a1bb28e3d4da119e3545948687b4d8bcd12d32bf0abf9c294cf381d59d179217dd43fdbe59491ab6b00e8
   languageName: node
   linkType: hard
 
