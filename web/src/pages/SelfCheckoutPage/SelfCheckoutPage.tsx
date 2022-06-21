@@ -1,5 +1,5 @@
-import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
+import AvailableTerritoriesCell from 'src/components/AvailableTerritoriesCell'
 
 const SelfCheckoutPage = () => {
   return (
@@ -12,6 +12,8 @@ const SelfCheckoutPage = () => {
         territory you’d like to use, and it will automatically be added to your
         territories page.
       </p>
+
+      <AvailableTerritoriesCell />
     </>
   )
 }
