@@ -88,27 +88,47 @@ export const Success = ({
       cell: ({ User }) => {
         return <div>{User ? User?.firstName : 'None'}</div>
       },
+
       sortable: true,
     },
     {
       name: 'Action',
-      cell: ({ id }) => {
+      cell: ({ id, User }) => {
         return (
-          <button
-            onClick={async () => {
-              assignTerritory({
-                variables: {
-                  id,
-                  input: {
-                    userId,
-                  },
-                } as AssignTerritoryVariables,
-              })
-            }}
-            className="px-3 py-2 text-white bg-green-500 rounded active:bg-green-700 hover:bg-green-400"
-          >
-            Assign
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={async () => {
+                assignTerritory({
+                  variables: {
+                    id,
+                    input: {
+                      userId,
+                    },
+                  } as AssignTerritoryVariables,
+                })
+              }}
+              className="px-3 py-2 text-white bg-green-500 rounded active:bg-green-700 hover:bg-green-400"
+            >
+              Assign
+            </button>
+            {User && (
+              <button
+                onClick={async () => {
+                  assignTerritory({
+                    variables: {
+                      id,
+                      input: {
+                        userId: null,
+                      },
+                    } as AssignTerritoryVariables,
+                  })
+                }}
+                className="px-3 py-2 text-white bg-red-500 rounded active:bg-red-700 hover:bg-red-400"
+              >
+                Unassign
+              </button>
+            )}
+          </div>
         )
       },
     },

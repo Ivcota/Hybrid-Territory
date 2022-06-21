@@ -3,7 +3,11 @@ import { MetaTags } from '@redwoodjs/web'
 import { useEffect, useMemo } from 'react'
 import ReactSelect from 'react-select'
 import AssignTerritoriesCell from 'src/components/AssignTerritoriesCell'
-import { useAllUsersSelectQuery } from 'src/generated/graphql'
+import {
+  useAllUsersSelectQuery,
+  useSendMessageMutation,
+  useUpdateTerritoryMutation,
+} from 'src/generated/graphql'
 import { useUserSelect } from 'src/hooks/useUserSelect'
 
 interface IForm {
@@ -17,7 +21,7 @@ interface IForm {
 }
 
 const AssignTerritoryPage = () => {
-  const { register, watch, control, resetField } = useForm<IForm>()
+  const { register, watch, control } = useForm<IForm>()
   const { data, loading } = useAllUsersSelectQuery()
   const { setUserId } = useUserSelect()
 
