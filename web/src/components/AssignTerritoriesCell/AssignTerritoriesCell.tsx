@@ -1,4 +1,5 @@
 import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import { useUserSelect } from 'src/hooks/useUserSelect'
 import type {
@@ -93,19 +94,26 @@ export const Success = ({
     },
     {
       name: 'Action',
-      cell: ({ id, User }) => {
+      cell: ({ id, User, name }) => {
         return (
           <div className="flex gap-3">
             <button
               onClick={async () => {
-                assignTerritory({
-                  variables: {
-                    id,
-                    input: {
-                      userId,
-                    },
-                  } as AssignTerritoryVariables,
-                })
+                toast.promise(
+                  assignTerritory({
+                    variables: {
+                      id,
+                      input: {
+                        userId,
+                      },
+                    } as AssignTerritoryVariables,
+                  }),
+                  {
+                    error: 'Error',
+                    loading: 'Loading...',
+                    success: `${name} has been updated.`,
+                  }
+                )
               }}
               className="px-3 py-2 text-white bg-green-500 rounded active:bg-green-700 hover:bg-green-400"
             >
@@ -114,14 +122,21 @@ export const Success = ({
             {User && (
               <button
                 onClick={async () => {
-                  assignTerritory({
-                    variables: {
-                      id,
-                      input: {
-                        userId: null,
-                      },
-                    } as AssignTerritoryVariables,
-                  })
+                  toast.promise(
+                    assignTerritory({
+                      variables: {
+                        id,
+                        input: {
+                          userId: null,
+                        },
+                      } as AssignTerritoryVariables,
+                    }),
+                    {
+                      error: 'Error',
+                      loading: 'Loading...',
+                      success: `${name} has been updated.`,
+                    }
+                  )
                 }}
                 className="px-3 py-2 text-white bg-red-500 rounded active:bg-red-700 hover:bg-red-400"
               >
@@ -134,5 +149,10 @@ export const Success = ({
     },
   ]
 
-  return <DataTable pagination columns={columns} data={searchTerritories} />
+  return (
+    <>
+      <DataTable pagination columns={columns} data={searchTerritories} />
+      <Toaster />
+    </>
+  )
 }
