@@ -101,6 +101,26 @@ const SignupPage = () => {
                   <FieldError name="firstName" className="rw-field-error" />
 
                   <Label
+                    name="lastName"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Last Name
+                  </Label>
+                  <TextField
+                    name="lastName"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Last Name is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="lastName" className="rw-field-error" />
+
+                  <Label
                     name="phone"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
