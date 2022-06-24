@@ -159,7 +159,11 @@ export const Success = ({
       <DataTable
         pagination
         columns={columns}
-        data={_.sortBy(searchTerritories, 'name')}
+        data={searchTerritories
+          .slice()
+          .sort((a, b) =>
+            a.name.localeCompare(b.name, undefined, { numeric: true })
+          )}
       />
       <Toaster />
     </>

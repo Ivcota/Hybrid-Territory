@@ -6,6 +6,11 @@ import { Link, routes } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/Territory/TerritoriesCell'
 import _ from 'lodash'
+import {
+  FindTerritories,
+  FindViewTerritoryQuery,
+  Territory,
+} from 'types/graphql'
 
 const DELETE_TERRITORY_MUTATION = gql`
   mutation DeleteTerritoryMutation($id: String!) {
@@ -54,7 +59,7 @@ const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
 
-const TerritoriesList = ({ territories }) => {
+const TerritoriesList = ({ territories }: FindTerritories) => {
   const [deleteTerritory] = useMutation(DELETE_TERRITORY_MUTATION, {
     onCompleted: () => {
       toast.success('Territory deleted')
@@ -89,41 +94,46 @@ const TerritoriesList = ({ territories }) => {
           </tr>
         </thead>
         <tbody>
-          {_.sortBy(territories, 'name').map((territory) => (
-            <tr key={territory.id}>
-              <td>{truncate(territory.id)}</td>
-              <td>{truncate(territory.name)}</td>
-              <td>{truncate(territory.spreadsheetURL)}</td>
-              <td>{checkboxInputTag(territory.isCompleted)}</td>
-              <td>{truncate(territory.userId)}</td>
-              <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.territory({ id: territory.id })}
-                    title={'Show territory ' + territory.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editTerritory({ id: territory.id })}
-                    title={'Edit territory ' + territory.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={'Delete territory ' + territory.id}
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(territory.id)}
-                  >
-                    Delete
-                  </button>
-                </nav>
-              </td>
-            </tr>
-          ))}
+          {territories
+            .slice()
+            .sort((a, b) =>
+              a.name.localeCompare(b.name, undefined, { numeric: true })
+            )
+            .map((territory) => (
+              <tr key={territory.id}>
+                <td>{truncate(territory.id)}</td>
+                <td>{truncate(territory.name)}</td>
+                <td>{truncate(territory.spreadsheetURL)}</td>
+                <td>{checkboxInputTag(territory.isCompleted)}</td>
+                <td>{truncate(territory.userId)}</td>
+                <td>
+                  <nav className="rw-table-actions">
+                    <Link
+                      to={routes.territory({ id: territory.id })}
+                      title={'Show territory ' + territory.id + ' detail'}
+                      className="rw-button rw-button-small"
+                    >
+                      Show
+                    </Link>
+                    <Link
+                      to={routes.editTerritory({ id: territory.id })}
+                      title={'Edit territory ' + territory.id}
+                      className="rw-button rw-button-small rw-button-blue"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      type="button"
+                      title={'Delete territory ' + territory.id}
+                      className="rw-button rw-button-small rw-button-red"
+                      onClick={() => onDeleteClick(territory.id)}
+                    >
+                      Delete
+                    </button>
+                  </nav>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
