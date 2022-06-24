@@ -5,6 +5,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { Link, routes } from '@redwoodjs/router'
 
 import { QUERY } from 'src/components/Territory/TerritoriesCell'
+import _ from 'lodash'
 
 const DELETE_TERRITORY_MUTATION = gql`
   mutation DeleteTerritoryMutation($id: String!) {
@@ -88,7 +89,7 @@ const TerritoriesList = ({ territories }) => {
           </tr>
         </thead>
         <tbody>
-          {territories.map((territory) => (
+          {_.sortBy(territories, 'name').map((territory) => (
             <tr key={territory.id}>
               <td>{truncate(territory.id)}</td>
               <td>{truncate(territory.name)}</td>
