@@ -1,6 +1,7 @@
 import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import DataTable, { TableColumn } from 'react-data-table-component'
+import _ from 'lodash'
 import { useUserSelect } from 'src/hooks/useUserSelect'
 import type {
   AssignTerritoriesQuery,
@@ -155,7 +156,11 @@ export const Success = ({
 
   return (
     <>
-      <DataTable pagination columns={columns} data={searchTerritories} />
+      <DataTable
+        pagination
+        columns={columns}
+        data={_.sortBy(searchTerritories, 'name')}
+      />
       <Toaster />
     </>
   )
