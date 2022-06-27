@@ -22,7 +22,9 @@ const ForgotPasswordPage = () => {
 
   const onSubmit = async (data) => {
     setLoading(true)
-    const response = await forgotPassword(data.username)
+    const response = await forgotPassword(
+      (data.username as string).toLowerCase()
+    )
     setLoading(true)
 
     if (response.error) {
@@ -31,9 +33,7 @@ const ForgotPasswordPage = () => {
       // The function `forgotPassword.handler` in api/src/functions/auth.js has
       // been invoked, let the user know how to get the link to reset their
       // password (sent in email, perhaps?)
-      toast.success(
-        'A link to reset your password was sent to ' + response.phone
-      )
+      toast.success('A password reset email will be delivered to you shortly.')
       navigate(routes.login())
     }
   }
