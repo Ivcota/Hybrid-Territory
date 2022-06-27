@@ -1,6 +1,8 @@
 import { DbAuthHandler } from '@redwoodjs/api'
+import sgMail from '@sendgrid/mail'
 import { db } from 'src/lib/db'
-import { sendMessage } from './twillio'
+
+sgMail.setApiKey(process.env.SENDGRID_API)
 
 export const handler = async (event, context) => {
   const forgotPasswordOptions = {
@@ -17,9 +19,16 @@ export const handler = async (event, context) => {
     // address in a toast message so the user will know it worked and where
     // to look for the email.
     handler: async (user) => {
-      sendMessage({
-        to: user.phone,
-        message: `Reset your password here: https://hybrid-territory.vercel.app/reset-password?resetToken=${user.resetToken}`,
+      // sendMessage({
+      //   to: user.phone,
+      //   message: `Reset your password here: https://hybrid-territory.vercel.app/reset-password?resetToken=${user.resetToken}`,
+      // })
+
+     await sgMail.send({
+        from: 'hybridterritory@prolitigation.com',
+        to: user.email,
+        subject: `${user.firstName}, here's your password reset link.`,
+        text: `Reset your password here: https://hybrid-territory.vercel.app/reset-password?resetToken=${user.resetToken}`,
       })
 
       return user
@@ -110,7 +119,7 @@ export const handler = async (event, context) => {
     handler: ({ username, hashedPassword, salt, userAttributes }) => {
       return db.user.create({
         data: {
-          email: (username as string).toLowerCase() ,
+          email: (username as string).toLowerCase(),
           hashedPassword: hashedPassword,
           salt: salt,
           firstName: userAttributes.firstName,
