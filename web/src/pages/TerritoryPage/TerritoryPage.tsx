@@ -18,7 +18,12 @@ interface IForm {
 
 const TerritoryPage = ({ id }: PageProps) => {
   const { currentUser } = useAuth()
-  const { register, handleSubmit, reset } = useForm<IForm>()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IForm>()
   const [createIssue] = useMutation(MUTATION, {
     refetchQueries: ['IssuesQuery'],
   })
@@ -63,8 +68,11 @@ const TerritoryPage = ({ id }: PageProps) => {
               className="px-3 py-2 transition-all outline-none w-80 bg-slate-50 ring-1 ring-black/25 focus-within:ring-blue-400 focus-within:ring-2 "
               placeholder="Comment"
               type="text"
-              {...register('comment')}
+              {...register('comment', { required: 'Comment cannot be empty' })}
             />
+            {errors.comment && (
+              <p className="mt-1 text-red-500">{errors.comment.message}</p>
+            )}
             <button className="px-5 py-2 mt-3 text-white bg-blue-500 ">
               Comment
             </button>
