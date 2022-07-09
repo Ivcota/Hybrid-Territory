@@ -6340,6 +6340,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-timeago@npm:^4.1.3":
+  version: 4.1.3
+  resolution: "@types/react-timeago@npm:4.1.3"
+  dependencies:
+    "@types/react": "*"
+  checksum: 1c5e09f75b00b9984e2bc22592873b351fe33820e56019b6b1f79b5c27ef0676562601d7e4eacb36367505678525c7b090c9687e6680ad1ffee48cd86f579d2a
+  languageName: node
+  linkType: hard
+
 "@types/react-transition-group@npm:^4.4.0":
   version: 4.4.4
   resolution: "@types/react-transition-group@npm:4.4.4"
@@ -20704,6 +20713,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-timeago@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "react-timeago@npm:7.1.0"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 19727412b3b26e1080dba2a48372fa10d43777b87fa4672eb244f4ccbb4cd48c0f79aa596db20524c51a702557f976cf422dbb37bbcec1d6ab058f058eb69022
+  languageName: node
+  linkType: hard
+
 "react-transition-group@npm:^4.3.0":
   version: 4.4.2
   resolution: "react-transition-group@npm:4.4.2"
@@ -24606,6 +24624,7 @@ __metadata:
     "@types/prop-types": 15.7.5
     "@types/react": 17.0.2
     "@types/react-dom": 17.0.2
+    "@types/react-timeago": ^4.1.3
     "@types/styled-components": ^5.1.25
     autoprefixer: ^10.4.7
     dayjs: ^1.11.3
@@ -24619,6 +24638,7 @@ __metadata:
     react-dom: 17.0.2
     react-icons: ^4.4.0
     react-select: ^5.3.2
+    react-timeago: ^7.1.0
     styled-components: ^5.3.5
     tailwindcss: ^3.0.24
     zustand: ^4.0.0-rc.1

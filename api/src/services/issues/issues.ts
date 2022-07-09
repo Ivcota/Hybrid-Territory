@@ -36,6 +36,17 @@ export const deleteIssue: MutationResolvers['deleteIssue'] = ({ id }) => {
     where: { id },
   })
 }
+export const issuesByTerritory: QueryResolvers['issuesByTerritory'] = ({
+  territoryId,
+}) => {
+  return db.issue.findMany({
+    where: {
+      territoryId: {
+        equals: territoryId,
+      },
+    },
+  })
+}
 
 export const Issue: IssueResolvers = {
   user: (_obj, { root }) =>

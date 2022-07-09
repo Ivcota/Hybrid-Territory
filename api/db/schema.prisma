@@ -34,9 +34,10 @@ model Territory {
 }
 
 model Issue {
-  id       String  @id @default(uuid())
-  comment  String
-  isClosed Boolean
+  id        String   @id @default(uuid())
+  comment   String
+  isClosed  Boolean
+  createdAt DateTime @default(now())
 
 
   user      User      @relation(fields: [userId], references: [id])

@@ -8,7 +8,7 @@ export const standard = defineScenario<Prisma.IssueCreateArgs>({
         isClosed: true,
         user: {
           create: {
-            email: 'String9325880',
+            email: 'String6300169',
             hashedPassword: 'String',
             salt: 'String',
           },
@@ -22,7 +22,7 @@ export const standard = defineScenario<Prisma.IssueCreateArgs>({
         isClosed: true,
         user: {
           create: {
-            email: 'String2058308',
+            email: 'String8638076',
             hashedPassword: 'String',
             salt: 'String',
           },
