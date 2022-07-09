@@ -5,7 +5,6 @@ import { MetaTags, useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import IssuesCell, { MUTATION } from 'src/components/IssuesCell'
 import ViewTerritoryCell from 'src/components/ViewTerritoryCell'
-import { useTerritoryId } from 'src/hooks/useTerritoryId'
 import { CreateIssueVariables } from 'types/graphql'
 
 interface PageProps {
