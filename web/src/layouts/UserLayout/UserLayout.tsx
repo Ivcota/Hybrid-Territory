@@ -24,7 +24,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     <>
       <>
         <header className="sticky top-0 z-20 bg-white shadow-md">
-          <nav className="flex justify-between px-2 py-4 mx-auto md:max-w-4xl">
+          <nav className="flex justify-between px-2 py-4 mx-auto text-center md:max-w-4xl">
             <div className="text-2xl">
               <Link to={routes.home()}>
                 Hybrid<span className="font-bold">Territory</span>
