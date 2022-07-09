@@ -20,6 +20,7 @@ model User {
   resetTokenExpiresAt DateTime?
   roles               String      @default("user")
   territories         Territory[]
+  issues              Issue[]
 }
 
 model Territory {
@@ -29,4 +30,19 @@ model Territory {
   isCompleted    Boolean @default(false)
   User           User?   @relation(fields: [userId], references: [id])
   userId         String?
+  issues         Issue[]
+}
+
+model Issue {
+  id        String   @id @default(uuid())
+  comment   String
+  isClosed  Boolean
+  createdAt DateTime @default(now())
+
+
+  user      User      @relation(fields: [userId], references: [id])
+  territory Territory @relation(fields: [territoryId], references: [id])
+
+  territoryId String
+  userId      String
 }
