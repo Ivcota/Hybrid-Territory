@@ -1,11 +1,11 @@
+import { useAuth } from '@redwoodjs/auth'
+import { useForm } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags, useMutation } from '@redwoodjs/web'
-import ViewTerritoryCell from 'src/components/ViewTerritoryCell'
+import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import IssuesCell, { MUTATION } from 'src/components/IssuesCell'
+import ViewTerritoryCell from 'src/components/ViewTerritoryCell'
 import { useTerritoryId } from 'src/hooks/useTerritoryId'
-import { useEffect } from 'react'
-import { useForm } from '@redwoodjs/forms'
-import { useAuth } from '@redwoodjs/auth'
 import { CreateIssueVariables } from 'types/graphql'
 
 interface PageProps {
@@ -17,10 +17,8 @@ interface IForm {
 }
 
 const TerritoryPage = ({ id }: PageProps) => {
-  const { setTerritoryId } = useTerritoryId()
   const { currentUser } = useAuth()
   const { register, handleSubmit, reset } = useForm<IForm>()
-  const { territoryId } = useTerritoryId()
   const [createIssue] = useMutation(MUTATION, {
     refetchQueries: ['IssuesQuery'],
   })
@@ -38,16 +36,23 @@ const TerritoryPage = ({ id }: PageProps) => {
         <form
           className="mt-10"
           onSubmit={handleSubmit(async ({ comment }) => {
-            await createIssue({
-              variables: {
-                input: {
-                  userId: currentUser.id,
-                  comment,
-                  isClosed: true,
-                  territoryId: id,
-                },
-              } as CreateIssueVariables,
-            })
+            toast.promise(
+              createIssue({
+                variables: {
+                  input: {
+                    userId: currentUser.id,
+                    comment,
+                    isClosed: true,
+                    territoryId: id,
+                  },
+                } as CreateIssueVariables,
+              }),
+              {
+                loading: 'Loading...',
+                error: 'Error',
+                success: 'Comment Issue Created',
+              }
+            )
 
             reset()
           })}
@@ -67,6 +72,7 @@ const TerritoryPage = ({ id }: PageProps) => {
         </form>
         <IssuesCell territoryId={id} />
       </div>
+      <Toaster />
     </>
   )
 }
