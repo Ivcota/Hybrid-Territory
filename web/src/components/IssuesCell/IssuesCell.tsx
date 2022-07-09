@@ -36,7 +36,7 @@ export const DELETE_MUTATION = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <div className="mt-5">Loading...</div>
 
 export const Empty = () => <div></div>
 
@@ -56,7 +56,11 @@ export const Success = ({
   return (
     <div className="p-4 rounded-sm w-80 md:w-[25rem]">
       <div className="mt-4">
-        {_.orderBy(issuesByTerritory, ['createdAt'], ['desc']).map((issue) => {
+        {_.orderBy(
+          _.filter(issuesByTerritory, { isClosed: false }),
+          ['createdAt'],
+          ['desc']
+        ).map((issue) => {
           return (
             <div className="p-4 mt-4 rounded-md bg-slate-100 " key={issue.id}>
               <div className="flex gap-2 ">

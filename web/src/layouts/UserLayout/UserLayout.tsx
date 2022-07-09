@@ -38,7 +38,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 >
                   My Territories
                 </NavLink>
-              </li>{' '}
+              </li>
               <li>
                 <NavLink
                   to={routes.selfCheckout()}
@@ -58,10 +58,10 @@ const UserLayout = ({ children }: UserLayoutProps) => {
               {currentUser?.roles === 'admin' && (
                 <li>
                   <NavLink
-                    to={routes.territories()}
+                    to={routes.issueTracker()}
                     activeClassName="underline text-orange-500 "
                   >
-                    Admin
+                    Issue Tracking
                   </NavLink>
                 </li>
               )}
@@ -153,10 +153,10 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             {currentUser?.roles === 'admin' && (
               <li>
                 <NavLink
-                  to={routes.territories()}
+                  to={routes.issueTracker()}
                   activeClassName="underline text-orange-500 "
                 >
-                  Admin Territories
+                  Issue Tracking
                 </NavLink>
               </li>
             )}

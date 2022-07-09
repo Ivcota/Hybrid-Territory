@@ -5,7 +5,6 @@ import { MetaTags, useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import IssuesCell, { MUTATION } from 'src/components/IssuesCell'
 import ViewTerritoryCell from 'src/components/ViewTerritoryCell'
-import { useTerritoryId } from 'src/hooks/useTerritoryId'
 import { CreateIssueVariables } from 'types/graphql'
 
 interface PageProps {
@@ -24,6 +23,7 @@ const TerritoryPage = ({ id }: PageProps) => {
     reset,
     formState: { errors },
   } = useForm<IForm>()
+
   const [createIssue] = useMutation(MUTATION, {
     refetchQueries: ['IssuesQuery'],
   })
@@ -47,7 +47,7 @@ const TerritoryPage = ({ id }: PageProps) => {
                   input: {
                     userId: currentUser.id,
                     comment,
-                    isClosed: true,
+                    isClosed: false,
                     territoryId: id,
                   },
                 } as CreateIssueVariables,

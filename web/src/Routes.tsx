@@ -37,6 +37,7 @@ const Routes = () => {
         </Private>
 
         <Private unauthenticated="home" roles="admin">
+          <Route path="/issue-tracker" page={IssueTrackerPage} name="issueTracker" />
           <Route path="/assign-territory" page={AssignTerritoryPage} name="assignTerritory" />
         </Private>
 
@@ -45,7 +46,7 @@ const Routes = () => {
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       </Set>
-      s
+
       <Route notfound page={NotFoundPage} />
     </Router>
   )
