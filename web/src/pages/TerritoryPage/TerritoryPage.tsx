@@ -23,6 +23,7 @@ const TerritoryPage = ({ id }: PageProps) => {
     reset,
     formState: { errors },
   } = useForm<IForm>()
+
   const [createIssue] = useMutation(MUTATION, {
     refetchQueries: ['IssuesQuery'],
   })
@@ -46,7 +47,7 @@ const TerritoryPage = ({ id }: PageProps) => {
                   input: {
                     userId: currentUser.id,
                     comment,
-                    isClosed: true,
+                    isClosed: false,
                     territoryId: id,
                   },
                 } as CreateIssueVariables,
