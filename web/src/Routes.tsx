@@ -39,6 +39,7 @@ const Routes = () => {
         <Private unauthenticated="home" roles="admin">
           <Route path="/issue-tracker" page={IssueTrackerPage} name="issueTracker" />
           <Route path="/assign-territory" page={AssignTerritoryPage} name="assignTerritory" />
+          <Route path="/records" page={RecordsPage} name="records" />
         </Private>
 
         <Route path="/login" page={LoginPage} name="login" />

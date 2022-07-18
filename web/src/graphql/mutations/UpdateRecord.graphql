@@ -1,0 +1,14 @@
+mutation UpdateRecordByIds(
+  $territoryId: String!
+  $userId: String!
+  $input: UpdateRecordInput!
+) {
+  updateRecordByTerritoryAndUserId(
+    territoryId: $territoryId
+    userId: $userId
+    input: $input
+  ) {
+    id
+    checkinDate
+  }
+}

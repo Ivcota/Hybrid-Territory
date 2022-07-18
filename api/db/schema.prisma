@@ -21,16 +21,18 @@ model User {
   roles               String      @default("user")
   territories         Territory[]
   issues              Issue[]
+  Record              Record[]
 }
 
 model Territory {
-  id             String  @id @default(uuid())
+  id             String   @id @default(uuid())
   name           String
   spreadsheetURL String?
-  isCompleted    Boolean @default(false)
-  User           User?   @relation(fields: [userId], references: [id])
+  isCompleted    Boolean  @default(false)
+  User           User?    @relation(fields: [userId], references: [id])
   userId         String?
   issues         Issue[]
+  Record         Record[]
 }
 
 model Issue {
@@ -45,4 +47,16 @@ model Issue {
 
   territoryId String
   userId      String
+}
+
+model Record {
+  id           String    @id @default(uuid())
+  checkoutDate DateTime  @default(now())
+  checkinDate  DateTime?
+
+  user      User      @relation(fields: [userId], references: [id])
+  territory Territory @relation(fields: [territoryId], references: [id])
+
+  userId      String
+  territoryId String
 }
