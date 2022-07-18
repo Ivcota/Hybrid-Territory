@@ -4,6 +4,7 @@ import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import {
+  useCreateRecordMutation,
   useSendMessageMutation,
   useUpdateTerritoryMutation,
 } from 'src/generated/graphql'
@@ -42,6 +43,7 @@ export const Success = ({
 
   const { currentUser } = useAuth()
   const [sendMessage] = useSendMessageMutation()
+  const [createRecord] = useCreateRecordMutation()
 
   const now = dayjs()
 
@@ -79,7 +81,17 @@ export const Success = ({
                       }
                     )
 
-                    sendMessage({
+                    await createRecord({
+                      variables: {
+                        input: {
+                          territoryId: item.id,
+                          userId: currentUser.id,
+                          checkoutDate: now,
+                        },
+                      },
+                    })
+
+                    await sendMessage({
                       variables: {
                         phone: process.env.REDWOOD_ENV_PHONENUMBER,
                         message: `${currentUser?.firstName} checked out territory card ${item.name} at ${now}.`,

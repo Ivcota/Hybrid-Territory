@@ -43,6 +43,7 @@ export const updateRecordByTerritoryAndUserId: MutationResolvers['updateRecordBy
       where: {
         userId,
         territoryId,
+        checkinDate: null,
       },
     })
 

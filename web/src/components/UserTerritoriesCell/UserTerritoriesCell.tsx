@@ -5,6 +5,7 @@ import _ from 'lodash'
 import dayjs from 'dayjs'
 import {
   useSendMessageMutation,
+  useUpdateRecordByIdsMutation,
   useUpdateTerritoryMutation,
 } from 'src/generated/graphql'
 import type { MyTerritories } from 'types/graphql'
@@ -49,6 +50,7 @@ export const Success = ({
   const [updateTerritory, { loading }] = useUpdateTerritoryMutation({
     refetchQueries: ['MyTerritories'],
   })
+  const [updateRecordsByIds] = useUpdateRecordByIdsMutation()
   const { currentUser } = useAuth()
   const now = dayjs()
 
@@ -68,6 +70,16 @@ export const Success = ({
                   input: {
                     isCompleted: !isCompleted,
                     userId: null,
+                  },
+                },
+              })
+
+              await updateRecordsByIds({
+                variables: {
+                  userId: currentUser.id,
+                  territoryId: id,
+                  input: {
+                    checkinDate: dayjs(),
                   },
                 },
               })
