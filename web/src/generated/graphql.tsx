@@ -27,6 +27,20 @@ export type Scalars = {
   Time: any;
 };
 
+export type CreateIssueInput = {
+  comment: Scalars['String'];
+  isClosed: Scalars['Boolean'];
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
+export type CreateRecordInput = {
+  checkinDate?: InputMaybe<Scalars['DateTime']>;
+  checkoutDate: Scalars['DateTime'];
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type CreateTerritoryInput = {
   isCompleted: Scalars['Boolean'];
   name: Scalars['String'];
@@ -46,6 +60,18 @@ export type CreateUserInput = {
   salt: Scalars['String'];
 };
 
+export type Issue = {
+  __typename?: 'Issue';
+  comment: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['String'];
+  isClosed: Scalars['Boolean'];
+  territory: Territory;
+  territoryId: Scalars['String'];
+  user: User;
+  userId: Scalars['String'];
+};
+
 export type MessageResponse = {
   __typename?: 'MessageResponse';
   success: Scalars['Boolean'];
@@ -53,13 +79,30 @@ export type MessageResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createIssue: Issue;
+  createRecord: Record;
   createTerritory: Territory;
   createUser: User;
+  deleteIssue: Issue;
+  deleteRecord: Record;
   deleteTerritory: Territory;
   deleteUser: User;
   sendMessage: MessageResponse;
+  updateIssue: Issue;
+  updateRecord: Record;
+  updateRecordByTerritoryAndUserId: Record;
   updateTerritory: Territory;
   updateUser: User;
+};
+
+
+export type MutationCreateIssueArgs = {
+  input: CreateIssueInput;
+};
+
+
+export type MutationCreateRecordArgs = {
+  input: CreateRecordInput;
 };
 
 
@@ -70,6 +113,16 @@ export type MutationCreateTerritoryArgs = {
 
 export type MutationCreateUserArgs = {
   input: CreateUserInput;
+};
+
+
+export type MutationDeleteIssueArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationDeleteRecordArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -89,6 +142,25 @@ export type MutationSendMessageArgs = {
 };
 
 
+export type MutationUpdateIssueArgs = {
+  id: Scalars['String'];
+  input: UpdateIssueInput;
+};
+
+
+export type MutationUpdateRecordArgs = {
+  id: Scalars['String'];
+  input: UpdateRecordInput;
+};
+
+
+export type MutationUpdateRecordByTerritoryAndUserIdArgs = {
+  input: UpdateRecordInput;
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
+
 export type MutationUpdateTerritoryArgs = {
   id: Scalars['String'];
   input: UpdateTerritoryInput;
@@ -102,6 +174,12 @@ export type MutationUpdateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  availableTerritories: Array<Territory>;
+  issue?: Maybe<Issue>;
+  issues: Array<Issue>;
+  issuesByTerritory?: Maybe<Array<Issue>>;
+  record?: Maybe<Record>;
+  records: Array<Record>;
   redwood?: Maybe<Redwood>;
   searchTerritories: Array<Territory>;
   territories: Array<Territory>;
@@ -109,6 +187,21 @@ export type Query = {
   user?: Maybe<User>;
   userTerritories: Array<Territory>;
   users: Array<User>;
+};
+
+
+export type QueryIssueArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryIssuesByTerritoryArgs = {
+  territoryId: Scalars['String'];
+};
+
+
+export type QueryRecordArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -133,6 +226,17 @@ export type QueryUserTerritoriesArgs = {
   userId: Scalars['String'];
 };
 
+export type Record = {
+  __typename?: 'Record';
+  checkinDate?: Maybe<Scalars['DateTime']>;
+  checkoutDate: Scalars['DateTime'];
+  id: Scalars['String'];
+  territory: Territory;
+  territoryId: Scalars['String'];
+  user: User;
+  userId: Scalars['String'];
+};
+
 export type Redwood = {
   __typename?: 'Redwood';
   currentUser?: Maybe<Scalars['JSON']>;
@@ -148,6 +252,20 @@ export type Territory = {
   name: Scalars['String'];
   spreadsheetURL?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateIssueInput = {
+  comment?: InputMaybe<Scalars['String']>;
+  isClosed?: InputMaybe<Scalars['Boolean']>;
+  territoryId?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateRecordInput = {
+  checkinDate?: InputMaybe<Scalars['DateTime']>;
+  checkoutDate?: InputMaybe<Scalars['DateTime']>;
+  territoryId?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateTerritoryInput = {
@@ -184,6 +302,13 @@ export type User = {
   territories: Array<Maybe<Territory>>;
 };
 
+export type CreateRecordMutationVariables = Exact<{
+  input: CreateRecordInput;
+}>;
+
+
+export type CreateRecordMutation = { __typename?: 'Mutation', createRecord: { __typename?: 'Record', id: string } };
+
 export type SendMessageMutationVariables = Exact<{
   phone: Scalars['String'];
   message: Scalars['String'];
@@ -191,6 +316,15 @@ export type SendMessageMutationVariables = Exact<{
 
 
 export type SendMessageMutation = { __typename?: 'Mutation', sendMessage: { __typename?: 'MessageResponse', success: boolean } };
+
+export type UpdateRecordByIdsMutationVariables = Exact<{
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+  input: UpdateRecordInput;
+}>;
+
+
+export type UpdateRecordByIdsMutation = { __typename?: 'Mutation', updateRecordByTerritoryAndUserId: { __typename?: 'Record', id: string, checkinDate?: any | null } };
 
 export type UpdateTerritoryMutationVariables = Exact<{
   id: Scalars['String'];
@@ -214,6 +348,39 @@ export type AllUsersSelectQueryVariables = Exact<{ [key: string]: never; }>;
 export type AllUsersSelectQuery = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, firstName?: string | null, lastName?: string | null }> };
 
 
+export const CreateRecordDocument = gql`
+    mutation CreateRecord($input: CreateRecordInput!) {
+  createRecord(input: $input) {
+    id
+  }
+}
+    `;
+export type CreateRecordMutationFn = Apollo.MutationFunction<CreateRecordMutation, CreateRecordMutationVariables>;
+
+/**
+ * __useCreateRecordMutation__
+ *
+ * To run a mutation, you first call `useCreateRecordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateRecordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createRecordMutation, { data, loading, error }] = useCreateRecordMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateRecordMutation(baseOptions?: Apollo.MutationHookOptions<CreateRecordMutation, CreateRecordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateRecordMutation, CreateRecordMutationVariables>(CreateRecordDocument, options);
+      }
+export type CreateRecordMutationHookResult = ReturnType<typeof useCreateRecordMutation>;
+export type CreateRecordMutationResult = Apollo.MutationResult<CreateRecordMutation>;
+export type CreateRecordMutationOptions = Apollo.BaseMutationOptions<CreateRecordMutation, CreateRecordMutationVariables>;
 export const SendMessageDocument = gql`
     mutation SendMessage($phone: String!, $message: String!) {
   sendMessage(phone: $phone, message: $message) {
@@ -248,6 +415,46 @@ export function useSendMessageMutation(baseOptions?: Apollo.MutationHookOptions<
 export type SendMessageMutationHookResult = ReturnType<typeof useSendMessageMutation>;
 export type SendMessageMutationResult = Apollo.MutationResult<SendMessageMutation>;
 export type SendMessageMutationOptions = Apollo.BaseMutationOptions<SendMessageMutation, SendMessageMutationVariables>;
+export const UpdateRecordByIdsDocument = gql`
+    mutation UpdateRecordByIds($territoryId: String!, $userId: String!, $input: UpdateRecordInput!) {
+  updateRecordByTerritoryAndUserId(
+    territoryId: $territoryId
+    userId: $userId
+    input: $input
+  ) {
+    id
+    checkinDate
+  }
+}
+    `;
+export type UpdateRecordByIdsMutationFn = Apollo.MutationFunction<UpdateRecordByIdsMutation, UpdateRecordByIdsMutationVariables>;
+
+/**
+ * __useUpdateRecordByIdsMutation__
+ *
+ * To run a mutation, you first call `useUpdateRecordByIdsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateRecordByIdsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateRecordByIdsMutation, { data, loading, error }] = useUpdateRecordByIdsMutation({
+ *   variables: {
+ *      territoryId: // value for 'territoryId'
+ *      userId: // value for 'userId'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateRecordByIdsMutation(baseOptions?: Apollo.MutationHookOptions<UpdateRecordByIdsMutation, UpdateRecordByIdsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateRecordByIdsMutation, UpdateRecordByIdsMutationVariables>(UpdateRecordByIdsDocument, options);
+      }
+export type UpdateRecordByIdsMutationHookResult = ReturnType<typeof useUpdateRecordByIdsMutation>;
+export type UpdateRecordByIdsMutationResult = Apollo.MutationResult<UpdateRecordByIdsMutation>;
+export type UpdateRecordByIdsMutationOptions = Apollo.BaseMutationOptions<UpdateRecordByIdsMutation, UpdateRecordByIdsMutationVariables>;
 export const UpdateTerritoryDocument = gql`
     mutation UpdateTerritory($id: String!, $input: UpdateTerritoryInput!) {
   updateTerritory(id: $id, input: $input) {
@@ -358,7 +565,9 @@ export const namedOperations = {
     AllUsersSelect: 'AllUsersSelect'
   },
   Mutation: {
+    CreateRecord: 'CreateRecord',
     SendMessage: 'SendMessage',
+    UpdateRecordByIds: 'UpdateRecordByIds',
     UpdateTerritory: 'UpdateTerritory',
     UpdateUser: 'UpdateUser'
   }
