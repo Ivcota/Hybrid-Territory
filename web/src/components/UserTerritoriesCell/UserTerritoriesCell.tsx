@@ -50,7 +50,9 @@ export const Success = ({
   const [updateTerritory, { loading }] = useUpdateTerritoryMutation({
     refetchQueries: ['MyTerritories'],
   })
-  const [updateRecordsByIds] = useUpdateRecordByIdsMutation()
+  const [updateRecordsByIds] = useUpdateRecordByIdsMutation({
+    refetchQueries: ['RecordsQuery'],
+  })
   const { currentUser } = useAuth()
   const now = dayjs()
 
