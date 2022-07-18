@@ -9,6 +9,11 @@ import type {
   AssignTerritoryVariables,
   Territory,
 } from 'types/graphql'
+import {
+  useCreateRecordMutation,
+  useUpdateRecordByIdsMutation,
+} from 'src/generated/graphql'
+import dayjs from 'dayjs'
 
 export const QUERY = gql`
   query AssignTerritoriesQuery(
@@ -55,19 +60,19 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-interface IForm {
-  selectedUserId: {
-    value: any
-    label: any
-  }
-}
-
 export const Success = ({
   searchTerritories,
 }: CellSuccessProps<AssignTerritoriesQuery>) => {
   const { userId } = useUserSelect()
   const [assignTerritory] = useMutation<AssignTerritory>(MUTATION, {
     refetchQueries: ['AssignTerritoriesQuery'],
+  })
+
+  const [createRecord] = useCreateRecordMutation({
+    refetchQueries: ['RecordsQuery'],
+  })
+  const [updateRecordByIds] = useUpdateRecordByIdsMutation({
+    refetchQueries: ['RecordsQuery'],
   })
 
   const columns: TableColumn<Territory>[] = [
@@ -103,10 +108,10 @@ export const Success = ({
           <div className="flex gap-3">
             <button
               onClick={async () => {
-                toast.promise(
+                await toast.promise(
                   assignTerritory({
                     variables: {
-                      id,
+                      id: id,
                       input: {
                         userId,
                       },
@@ -118,6 +123,17 @@ export const Success = ({
                     success: `${name} has been updated.`,
                   }
                 )
+
+                await createRecord({
+                  variables: {
+                    input: {
+                      territoryId: id,
+                      userId: userId,
+
+                      checkoutDate: dayjs(),
+                    },
+                  },
+                })
               }}
               className="px-3 py-2 text-white bg-green-500 rounded active:bg-green-700 hover:bg-green-400"
             >
@@ -126,7 +142,7 @@ export const Success = ({
             {User && (
               <button
                 onClick={async () => {
-                  toast.promise(
+                  await toast.promise(
                     assignTerritory({
                       variables: {
                         id,
@@ -142,6 +158,16 @@ export const Success = ({
                       success: `${name} has been updated.`,
                     }
                   )
+
+                  await updateRecordByIds({
+                    variables: {
+                      userId: User.id,
+                      territoryId: id,
+                      input: {
+                        checkinDate: dayjs(),
+                      },
+                    },
+                  })
                 }}
                 className="px-3 py-2 text-white bg-red-500 rounded active:bg-red-700 hover:bg-red-400"
               >
