@@ -1,7 +1,8 @@
 import { useAuth, CurrentUser } from '@redwoodjs/auth'
 import { NavLink, routes } from '@redwoodjs/router'
 import { createContext } from 'react'
-import Navbar from 'src/components/Navbar/Navbar'
+import { FiX } from 'react-icons/fi'
+import Navbar, { Logo } from 'src/components/Navbar/Navbar'
 import { useToggle } from 'src/hooks/useToggle'
 
 interface LayoutContext {
@@ -33,14 +34,27 @@ const UserLayout = ({ children }: UserLayoutProps) => {
         <Navbar />
 
         <main>
-          <div id="side-bar" className="sticky top-0 left-0 p-3 bg-red-300 ">
-            <NavLink to={routes.home()} activeClassName="text-blue-400">
-              Home
-            </NavLink>
-            <NavLink to={routes.home()} activeClassName="text-blue-400">
-              Home
-            </NavLink>
-          </div>
+          {isActive && (
+            <div
+              id="side-bar"
+              className="fixed top-0 right-0 flex min-h-full gap-3 p-3 bg-white shadow-xl md:left-0 md:right-0 w-80 "
+            >
+              <div className="flex flex-col min-w-full">
+                <div className="flex items-center justify-between w-full py-2">
+                  <Logo />
+                  <FiX onClick={toggle} size={25} />
+                </div>
+                <div className="flex flex-col items-center gap-1 mt-4 ">
+                  <NavLink to={routes.home()} activeClassName="text-blue-400">
+                    Home
+                  </NavLink>
+                  <NavLink to={routes.about()} activeClassName="text-blue-400">
+                    About
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="max-w-4xl px-4 mx-auto mt-5">{children}</div>
         </main>
       </Provider>
