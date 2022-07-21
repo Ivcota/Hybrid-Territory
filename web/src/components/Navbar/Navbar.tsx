@@ -18,8 +18,8 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 py-4 bg-white shadow-lg ">
-      <div className="px-4 mx-auto ">
-        <div className="flex items-center justify-between gap-5 md:justify-start ">
+      <div className="px-4 mx-auto">
+        <div className="flex items-center justify-between gap-5 md:justify-start">
           <Logo />
           {!isActive && <FiMenu onClick={toggle} size={25} />}
         </div>
