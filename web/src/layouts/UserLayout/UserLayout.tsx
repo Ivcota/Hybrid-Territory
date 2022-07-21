@@ -1,192 +1,132 @@
+import { Transition } from '@headlessui/react'
 import { useClickOutside } from '@mantine/hooks'
-import { useAuth } from '@redwoodjs/auth'
-import { Link, routes, NavLink, navigate } from '@redwoodjs/router'
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { FiMenu, FiX } from 'react-icons/fi'
+import { CurrentUser, useAuth } from '@redwoodjs/auth'
+import { NavLink, routes } from '@redwoodjs/router'
+import { createContext } from 'react'
+import { FiX } from 'react-icons/fi'
+import Navbar, { Logo } from 'src/components/Navbar/Navbar'
+import { useToggle } from 'src/hooks/useToggle'
+
+interface LayoutContext {
+  isActive: boolean
+  toggle: () => void
+  currentUser?: CurrentUser
+}
+
+export const layoutContext = createContext<LayoutContext | null>(null)
 
 type UserLayoutProps = {
   children?: React.ReactNode
 }
 
 const UserLayout = ({ children }: UserLayoutProps) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const ref = useClickOutside(() => setIsOpen(false))
-  const { isAuthenticated, logOut, loading, currentUser } = useAuth()
-
-  useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      navigate(routes.home())
-    }
-  }, [isAuthenticated])
+  const { currentUser, logOut } = useAuth()
+  const ref = useClickOutside(() => {
+    toggle()
+  })
+  const { isActive, toggle } = useToggle({ defaultActive: false })
+  const { Provider } = layoutContext
 
   return (
     <>
-      <>
-        <header className="sticky top-0 z-20 bg-white shadow-md">
-          <nav className="flex justify-between px-2 py-4 mx-auto text-center md:max-w-4xl">
-            <div className="text-2xl">
-              <Link to={routes.home()}>
-                Hybrid<span className="font-bold">Territory</span>
-              </Link>
-            </div>
-            <ul className="hidden gap-4 md:flex">
-              <li>
+      <Provider
+        value={{
+          currentUser,
+          isActive,
+          toggle,
+        }}
+      >
+        <Navbar />
+
+        <main>
+          <Transition
+            show={isActive}
+            ref={ref}
+            id="side-bar"
+            className="fixed top-0 right-0 z-50 flex min-h-full gap-3 p-3 bg-white shadow-xl md:left-0 md:right-0 w-80 "
+            enter="transition-opacity duration-75"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity duration-150"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="flex flex-col min-w-full">
+              <div className="flex items-center justify-between w-full py-2">
+                <Logo />
+                <FiX onClick={toggle} size={25} />
+              </div>
+              <div className="flex flex-col items-center gap-4 mt-4 ">
+                <NavLink
+                  to={routes.home()}
+                  onClick={toggle}
+                  activeClassName="text-blue-400"
+                >
+                  Home
+                </NavLink>
                 <NavLink
                   to={routes.myTerritories()}
-                  activeClassName="underline text-orange-500 "
+                  onClick={toggle}
+                  activeClassName="text-blue-400"
                 >
                   My Territories
                 </NavLink>
-              </li>
-              <li>
                 <NavLink
                   to={routes.selfCheckout()}
-                  activeClassName="underline text-orange-500 "
+                  onClick={toggle}
+                  activeClassName="text-blue-400"
                 >
                   Checkout Territory
                 </NavLink>
-              </li>
-              <li>
                 <NavLink
                   to={routes.userAccount()}
-                  activeClassName="underline text-orange-500 "
+                  onClick={toggle}
+                  activeClassName="text-blue-400"
                 >
                   My Account
                 </NavLink>
-              </li>
-              {currentUser?.roles === 'admin' && (
-                <li>
-                  <NavLink
-                    to={routes.issueTracker()}
-                    activeClassName="underline text-orange-500 "
-                  >
-                    Issue Tracking
-                  </NavLink>
-                </li>
-              )}
-              {currentUser?.roles === 'admin' && (
-                <li>
-                  <NavLink
-                    to={routes.assignTerritory()}
-                    activeClassName="underline text-orange-500 "
-                  >
-                    Assign Territory
-                  </NavLink>
-                </li>
-              )}
-              <li>
+
                 <button
-                  onClick={() => {
-                    logOut()
-                  }}
+                  className="px-3 py-1 text-white bg-blue-500"
+                  onClick={logOut}
                 >
                   Logout
                 </button>
-              </li>
-            </ul>
-            <FiMenu
-              onClick={() => {
-                setIsOpen(true)
-              }}
-              className="md:hidden"
-              size={24}
-            />
-          </nav>
-        </header>
 
-        <motion.div
-          ref={ref}
-          initial={{
-            x: 400,
-          }}
-          variants={{
-            open: {
-              x: 0,
-            },
-            closed: {
-              x: 400,
-            },
-          }}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
-          animate={isOpen ? 'open' : 'closed'}
-          className="fixed z-20 min-h-screen shadow-lg top-0 right-0 bg-white w-[18rem]"
-        >
-          <FiX
-            className="absolute top-3 right-3"
-            size={20}
-            onClick={() => {
-              setIsOpen(false)
-            }}
-          />
+                {currentUser?.roles === 'admin' && (
+                  <>
+                    <h3 className="mt-5 text-xl font-bold">Admin</h3>
 
-          <ul
-            onClick={() => {
-              setIsOpen(false)
-            }}
-            className="flex flex-col items-center min-h-screen gap-4 pt-10"
-          >
-            <li>
-              <NavLink
-                to={routes.myTerritories()}
-                activeClassName="underline text-orange-500 "
-              >
-                My Territories
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={routes.selfCheckout()}
-                activeClassName="underline text-orange-500 "
-              >
-                Checkout Territory
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to={routes.userAccount()}
-                activeClassName="underline text-orange-500 "
-              >
-                My Account
-              </NavLink>
-            </li>
-            {currentUser?.roles === 'admin' && (
-              <li>
-                <NavLink
-                  to={routes.issueTracker()}
-                  activeClassName="underline text-orange-500 "
-                >
-                  Issue Tracking
-                </NavLink>
-              </li>
-            )}
+                    <NavLink
+                      to={routes.records()}
+                      onClick={toggle}
+                      activeClassName="text-blue-400"
+                    >
+                      Records
+                    </NavLink>
+                    <NavLink
+                      to={routes.assignTerritory()}
+                      onClick={toggle}
+                      activeClassName="text-blue-400"
+                    >
+                      Assign Territory
+                    </NavLink>
+                    <NavLink
+                      to={routes.territories()}
+                      onClick={toggle}
+                      activeClassName="text-blue-400"
+                    >
+                      Territory Cards
+                    </NavLink>
+                  </>
+                )}
+              </div>
+            </div>
+          </Transition>
 
-            {currentUser?.roles === 'admin' && (
-              <li>
-                <NavLink
-                  to={routes.assignTerritory()}
-                  activeClassName="underline text-orange-500 "
-                >
-                  Assign Territory
-                </NavLink>
-              </li>
-            )}
-            <li>
-              <button
-                onClick={() => {
-                  logOut()
-                }}
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
-        </motion.div>
-
-        <main>
           <div className="max-w-4xl px-4 mx-auto mt-5">{children}</div>
         </main>
-      </>
+      </Provider>
     </>
   )
 }
