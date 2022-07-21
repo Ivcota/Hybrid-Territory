@@ -86,7 +86,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     Logout
                   </button>
 
-                  {currentUser.roles === 'admin' && (
+                  {currentUser?.roles === 'admin' && (
                     <>
                       <h3 className="mt-5 text-xl font-bold">Admin</h3>
 
