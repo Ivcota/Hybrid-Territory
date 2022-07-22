@@ -96,6 +96,13 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 {currentUser?.roles === 'admin' && (
                   <>
                     <h3 className="mt-5 text-xl font-bold">Admin</h3>
+                    <NavLink
+                      to={routes.issueTracker()}
+                      onClick={toggle}
+                      activeClassName="text-blue-400"
+                    >
+                      Issue Tracker
+                    </NavLink>
 
                     <NavLink
                       to={routes.records()}
