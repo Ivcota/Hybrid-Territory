@@ -1,8 +1,6 @@
-import type { RecordsQuery } from 'types/graphql'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import dayjs from 'dayjs'
-import { useContext } from 'react'
-import { RecordsPageContext } from 'src/pages/RecordsPage/RecordsPage'
+import type { RecordsQuery } from 'types/graphql'
 
 export const QUERY = gql`
   query RecordsQuery {
@@ -30,8 +28,6 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
-  const { territoryName } = useContext(RecordsPageContext)
-
   return (
     <div className="flex flex-col items-center justify-center mt-4 ">
       {records

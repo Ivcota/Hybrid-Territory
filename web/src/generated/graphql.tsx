@@ -342,6 +342,11 @@ export type UpdateUserMutationVariables = Exact<{
 
 export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string } };
 
+export type AllTerritoryNamesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllTerritoryNamesQuery = { __typename?: 'Query', territories: Array<{ __typename?: 'Territory', id: string, name: string }> };
+
 export type AllUsersSelectQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -523,6 +528,41 @@ export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
 export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export const AllTerritoryNamesDocument = gql`
+    query AllTerritoryNames {
+  territories {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useAllTerritoryNamesQuery__
+ *
+ * To run a query within a React component, call `useAllTerritoryNamesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllTerritoryNamesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllTerritoryNamesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllTerritoryNamesQuery(baseOptions?: Apollo.QueryHookOptions<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>(AllTerritoryNamesDocument, options);
+      }
+export function useAllTerritoryNamesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>(AllTerritoryNamesDocument, options);
+        }
+export type AllTerritoryNamesQueryHookResult = ReturnType<typeof useAllTerritoryNamesQuery>;
+export type AllTerritoryNamesLazyQueryHookResult = ReturnType<typeof useAllTerritoryNamesLazyQuery>;
+export type AllTerritoryNamesQueryResult = Apollo.QueryResult<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>;
 export const AllUsersSelectDocument = gql`
     query AllUsersSelect {
   users {
@@ -562,6 +602,7 @@ export type AllUsersSelectLazyQueryHookResult = ReturnType<typeof useAllUsersSel
 export type AllUsersSelectQueryResult = Apollo.QueryResult<AllUsersSelectQuery, AllUsersSelectQueryVariables>;
 export const namedOperations = {
   Query: {
+    AllTerritoryNames: 'AllTerritoryNames',
     AllUsersSelect: 'AllUsersSelect'
   },
   Mutation: {
