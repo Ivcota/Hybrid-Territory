@@ -1,5 +1,7 @@
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import dayjs from 'dayjs'
+import { useContext, useMemo } from 'react'
+import { RecordsPageFilterContext } from 'src/pages/RecordsPage/RPC'
 import type { RecordsQuery } from 'types/graphql'
 
 export const QUERY = gql`
@@ -28,9 +30,22 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
+  const { territoryName } = useContext(RecordsPageFilterContext)
+
+  const filteredRecords = useMemo(() => {
+    if (territoryName !== undefined && territoryName !== '') {
+      console.log(territoryName)
+      return records.filter(({ territory: { name } }) => {
+        return name === territoryName
+      })
+    }
+
+    return records
+  }, [territoryName])
+
   return (
     <div className="flex flex-col items-center justify-center mt-4 ">
-      {records
+      {filteredRecords
         .slice()
         .sort((a, b) =>
           a.territory.name.localeCompare(b.territory.name, undefined, {

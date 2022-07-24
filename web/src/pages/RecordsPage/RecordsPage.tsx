@@ -1,12 +1,16 @@
-import { useForm } from '@redwoodjs/forms'
+import { Controller, useForm } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
-import { useMemo } from 'react'
+import { createContext, useEffect, useMemo } from 'react'
 import ReactSelect from 'react-select'
 import RecordsCell from 'src/components/RecordsCell/'
 import { useAllTerritoryNamesQuery } from 'src/generated/graphql'
+import { RecordsPageFilterContext } from './RPC'
 
 interface IForm {
-  territoryName: string
+  territoryName: {
+    value?: string
+    label?: string
+  }
 }
 
 const RecordsPage = () => {
@@ -15,7 +19,7 @@ const RecordsPage = () => {
    * Build a form connection and create a filter on the Cell.
    */
 
-  const { register, watch } = useForm<IForm>()
+  const { register, watch, control, reset } = useForm<IForm>()
   const { data, loading } = useAllTerritoryNamesQuery()
 
   const generateOptions = useMemo(() => {
@@ -31,6 +35,10 @@ const RecordsPage = () => {
     }
   }, [data, loading])
 
+  useEffect(() => {
+    console.log(watch('territoryName')?.value)
+  }, [watch('territoryName')])
+
   return (
     <>
       <MetaTags title="Records" description="Records page" />
@@ -39,10 +47,37 @@ const RecordsPage = () => {
       {loading ? (
         <div className="text-center"> Loading... </div>
       ) : (
-        <ReactSelect options={generateOptions} />
+        <Controller
+          name="territoryName"
+          control={control}
+          render={({ field }) => (
+            <ReactSelect
+              onChange={field.onChange}
+              options={generateOptions}
+              isSearchable
+              className="mt-3"
+            />
+          )}
+        />
+      )}
+      {watch('territoryName') && (
+        <button
+          onClick={() => {
+            reset()
+          }}
+          className="px-3 py-1 mt-3 text-white bg-red-500 rounded-sm hover:bg-red-600 active:bg-red-700 "
+        >
+          Clear
+        </button>
       )}
 
-      <RecordsCell />
+      <RecordsPageFilterContext.Provider
+        value={{
+          territoryName: watch('territoryName')?.label,
+        }}
+      >
+        <RecordsCell />
+      </RecordsPageFilterContext.Provider>
     </>
   )
 }
