@@ -1,0 +1,6 @@
+query AllTerritoryNames {
+  territories {
+    id
+    name
+  }
+}
