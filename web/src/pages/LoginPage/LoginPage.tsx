@@ -54,7 +54,7 @@ const LoginPage = () => {
             <p className='text-xs capitalize text-off-white font-Roboto'>your territory. simplified.</p>
           </div>
         </header>
-        <div className="">
+        <div className="w-2/3 max-w-sm">
           <div className="mx-auto md:w-96 sm:w-8/12">
             <header className="flex items-center justify-center w-full">
               <h2 className="my-8 text-2xl font-medium font-Roboto text-off-white">Welcome!</h2>
@@ -72,7 +72,7 @@ const LoginPage = () => {
                 </Label>
                 <TextField
                     name="username"
-                    className="mt-1 rw-input caret-dark-blue"
+                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
                     errorClassName="rw-input border-red-600 mt-1 caret-red-600"
                     ref={usernameRef}
                     validation={{
@@ -87,14 +87,14 @@ const LoginPage = () => {
               <div className='h-32 mt-2'>
               <Label
                     name="password"
-                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans "
                     errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
-                    className="mt-1 rw-input caret-dark-blue"
+                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
                     errorClassName="rw-input border-red-600 mt-1 caret-red-600"
                     autoComplete="current-password"
                     validation={{
@@ -125,7 +125,7 @@ const LoginPage = () => {
                         Loading...
                       </Submit>
                     ) : (
-                      <Submit className="rw-button rw-button-blue">
+                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto">
                         Login
                       </Submit>
                     )}
@@ -133,9 +133,9 @@ const LoginPage = () => {
                 </Form>
             </div>
           </div>
-          <div className="text-xs text-off-white font-OpenSans">
+          <div className="flex items-center justify-center mt-3 text-xs text-off-white font-OpenSans">
             <span>Don&apos;t have an account?</span>{' '}
-            <Link to={routes.signup()} className="font-bold underline capitalize">
+            <Link to={routes.signup()} className="ml-1 font-bold underline capitalize">
               Sign up!
             </Link>
           </div>
