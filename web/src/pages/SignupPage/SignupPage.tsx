@@ -48,9 +48,15 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main className="mx-auto rw-main md:w-96 sm:w-8/12 rw-segment">
+      <main className="flex flex-col items-center justify-between w-full h-screen bg-gradient-to-br from-teal-blue to-light-blue">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="">
+        <header className='flex items-center justify-start w-full h-16 px-4'>
+          <div className='flex flex-col'>
+            <h1 className='text-2xl font-Albert text-off-white'>Hybrid<span className='font-bold'>Territory</span></h1>
+            <p className='text-xs capitalize text-off-white font-Roboto'>your territory. simplified.</p>
+          </div>
+        </header>
+        <div className="w-2/3 max-w-sm">
           <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">Signup</h2>
