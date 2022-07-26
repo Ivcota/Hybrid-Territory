@@ -46,50 +46,46 @@ const LoginPage = () => {
     <>
       <MetaTags title="Login" />
 
-      <main className="rw-main">
+      <main className="flex flex-col items-center justify-between w-full h-screen bg-gradient-to-br from-teal-blue to-light-blue">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="">
-          <div className="mx-auto md:w-96 sm:w-8/12 rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Login</h2>
-            </header>
-
-            <div className="rw-segment-main">
-              <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
-                  <Label
-                    name="username"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    Email
-                  </Label>
+        <header className='flex items-center justify-start w-full h-16 px-4'>
+          <div className='flex flex-col'>
+            <h1 className='text-2xl font-Albert text-off-white'>Hybrid<span className='font-bold'>Territory</span></h1>
+            <p className='text-xs capitalize text-off-white font-Roboto'>your territory. simplified.</p>
+          </div>
+        </header>
+        <div className="w-1/2">
+          <div className="mx-auto md:w-96 sm:w-8/12">
+            <div className="">
+              <div className='flex items-center justify-center w-full'>
+                <h3 className='text-2xl font-medium font-Roboto text-off-white'>Welcome!</h3>
+              </div>
+              <Form onSubmit={onSubmit} className="flex flex-col items-center justify-between w-full my-8 h-fit">
+                <div className='flex flex-col justify-end h-16'>
+                <FieldError name="username" className="text-xs font-bold tracking-wide uppercase text-error font-OpenSans" />
                   <TextField
                     name="username"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
+                    className="w-full border-b rounded-t-sm outline-none bg-off-white/0 border-off-white caret-off-white text-dark-blue placeholder-off-white"
+                    errorClassName=""
+                    placeholder='Email'
                     ref={usernameRef}
                     validation={{
                       required: {
                         value: true,
-                        message: 'Username is required',
+                        message: 'Email is required',
                       },
                     }}
                   />
 
-                  <FieldError name="username" className="rw-field-error" />
 
-                  <Label
-                    name="password"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    Password
-                  </Label>
+                </div>
+                <div className='flex flex-col justify-end h-16'>
+                  <FieldError name="password" className="text-xs font-bold tracking-wide uppercase text-error font-OpenSans" />
                   <PasswordField
                     name="password"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
+                    className="w-full border-b rounded-t-sm outline-none bg-off-white/0 border-off-white caret-off-white text-dark-blue placeholder-off-white"
+                    errorClassName=""
+                    placeholder='Password'
                     autoComplete="current-password"
                     validation={{
                       required: {
@@ -99,18 +95,19 @@ const LoginPage = () => {
                     }}
                   />
 
-                  <div className="rw-forgot-link">
+
+
+
+                </div>
+                <div className="flex items-center justify-end w-full my-2">
                     <Link
                       to={routes.forgotPassword()}
-                      className="rw-forgot-link"
+                      className="text-off-white text-right mt-0.5 text-xs"
                     >
                       Forgot Password?
                     </Link>
                   </div>
-
-                  <FieldError name="password" className="rw-field-error" />
-
-                  <div className="rw-button-group">
+                  <div className="flex items-center justify-center w-full mt-2">
                     {isLoading ? (
                       <Submit
                         disabled
@@ -119,22 +116,25 @@ const LoginPage = () => {
                         Loading...
                       </Submit>
                     ) : (
-                      <Submit className="rw-button rw-button-blue">
-                        Login
+                      <Submit className="w-full h-10 font-medium tracking-wider capitalize rounded-sm font-Roboto bg-dark-blue text-off-white">
+                        LOGIN
                       </Submit>
                     )}
                   </div>
                 </Form>
-              </div>
+
             </div>
           </div>
-          <div className="rw-login-link">
+          <div className="text-xs text-off-white font-OpenSans">
             <span>Don&apos;t have an account?</span>{' '}
-            <Link to={routes.signup()} className="rw-link">
+            <Link to={routes.signup()} className="font-bold underline capitalize">
               Sign up!
             </Link>
           </div>
         </div>
+        <footer>
+          <p>-</p>
+        </footer>
       </main>
     </>
   )
