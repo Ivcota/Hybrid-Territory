@@ -120,7 +120,7 @@ const LoginPage = () => {
                     {isLoading ? (
                       <Submit
                         disabled
-                        className="rw-button rw-button-blue animate-pulse"
+                        className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto animate-pulse"
                       >
                         Loading...
                       </Submit>

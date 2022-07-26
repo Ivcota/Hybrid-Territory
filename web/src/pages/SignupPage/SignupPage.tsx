@@ -48,7 +48,7 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main className="flex flex-col items-center justify-between w-full h-screen bg-gradient-to-br from-teal-blue to-light-blue">
+      <main className="flex flex-col items-center justify-between w-full h-max lg:h-screen bg-gradient-to-br from-teal-blue to-light-blue">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <header className='flex items-center justify-start w-full h-16 px-4'>
           <div className='flex flex-col'>
@@ -59,7 +59,7 @@ const SignupPage = () => {
         <div className="w-2/3 max-w-sm">
           <div className="mx-auto md:w-96 sm:w-8/12">
             <header className="flex items-center justify-center w-full">
-              <h2 className="my-8 text-2xl font-medium font-Roboto text-off-white">Create An Account!</h2>
+              <h2 className="my-8 text-2xl font-medium lg:mt-4 font-Roboto text-off-white">Create An Account!</h2>
             </header>
 
             <div className="p-4 rounded bg-off-white">
@@ -175,12 +175,12 @@ const SignupPage = () => {
                     {loading ? (
                       <Submit
                         disabled
-                        className="rw-button rw-button-blue animate-pulse"
+                        className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto animate-pulse"
                       >
                         Loading...
                       </Submit>
                     ) : (
-                      <Submit className="rw-button rw-button-blue ">
+                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto">
                         Sign Up
                       </Submit>
                     )}
@@ -188,9 +188,9 @@ const SignupPage = () => {
                 </Form>
             </div>
           </div>
-          <div className="rw-login-link">
+          <div className="flex items-center justify-center my-3 text-xs text-off-white font-OpenSans">
             <span>Already have an account?</span>{' '}
-            <Link to={routes.login()} className="rw-link">
+            <Link to={routes.login()} className="ml-1 font-bold underline capitalize">
               Log in!
             </Link>
           </div>
