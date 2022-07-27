@@ -43,11 +43,11 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             show={isActive}
             ref={ref}
             id="side-bar"
-            className="fixed top-0 right-0 z-50 flex justify-end w-full min-h-full bg-black/50 "
-            enter="transition-opacity duration-75"
+            className="fixed top-0 right-0 z-50 flex justify-end w-full min-h-full bg-black/50 backdrop-blur-sm"
+            enter="transition-opacity duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="transition-opacity duration-150"
+            leave="transition-opacity duration-450"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
