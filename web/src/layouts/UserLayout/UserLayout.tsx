@@ -96,14 +96,14 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 {currentUser?.roles === 'admin' && (
                       <>
                         <div className='w-full border-b-2 border-dark-blue'>
-                          <h3 className="mt-5 text-xl font-semibold font-Roboto text-off-black ">Admin Settings</h3>
+                          <h3 className="mt-5 text-xl font-semibold tracking-wide font-Roboto text-off-black">Admin Settings</h3>
                         </div>
 
                     <NavLink
                     className='text-base font-medium font-OpenSans'
                       to={routes.issueTracker()}
                       onClick={toggle}
-                      activeClassName="text-blue-400"
+                      activeClassName="text-violet-500"
                     >
                       Issue Tracker
                     </NavLink>
@@ -112,7 +112,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     className='text-base font-medium font-OpenSans'
                       to={routes.records()}
                       onClick={toggle}
-                      activeClassName="text-blue-400"
+                      activeClassName="text-violet-500"
                     >
                       Records
                     </NavLink>
@@ -120,7 +120,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     className='text-base font-medium font-OpenSans'
                       to={routes.assignTerritory()}
                       onClick={toggle}
-                      activeClassName="text-blue-400"
+                      activeClassName="text-violet-500"
                     >
                       Assign Territory
                     </NavLink>
@@ -128,7 +128,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     className='text-base font-medium font-OpenSans'
                       to={routes.territories()}
                       onClick={toggle}
-                      activeClassName="text-blue-400"
+                      activeClassName="text-violet-500"
                     >
                       Territory Cards
                     </NavLink>
