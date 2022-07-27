@@ -48,49 +48,56 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main className="mx-auto rw-main md:w-96 sm:w-8/12 rw-segment">
+      <main className="flex flex-col items-center justify-between w-full h-max lg:h-screen bg-gradient-to-br from-teal-blue to-light-blue">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="">
-          <div className="rw-segment">
-            <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
+        <header className='flex items-center justify-start w-full h-16 px-4'>
+          <div className='flex flex-col'>
+            <h1 className='text-2xl font-Albert text-off-white'>Hybrid<span className='font-bold'>Territory</span></h1>
+            <p className='text-xs capitalize text-off-white font-Roboto'>your territory. simplified.</p>
+          </div>
+        </header>
+        <div className="w-2/3 max-w-sm">
+          <div className="mx-auto md:w-96 sm:w-8/12">
+            <header className="flex items-center justify-center w-full">
+              <h2 className="my-8 text-2xl font-medium lg:mt-4 font-Roboto text-off-white">Create An Account!</h2>
             </header>
 
-            <div className="rw-segment-main ">
-              <div className="rw-form-wrapper">
-                <Form onSubmit={onSubmit} className="rw-form-wrapper">
+            <div className="p-4 rounded bg-off-white">
+              <Form onSubmit={onSubmit} className="flex flex-col justify-between">
+                <div className='h-24'>
                   <Label
                     name="username"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
                   >
                     Email
                   </Label>
                   <TextField
                     name="username"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
+                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
                     ref={usernameRef}
                     validation={{
                       required: {
                         value: true,
-                        message: 'Username is required',
+                        message: 'Email is required',
                       },
                     }}
                   />
-                  <FieldError name="username" className="rw-field-error" />
-
+                  <FieldError name="username" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                </div>
+                <div className='h-24'>
                   <Label
                     name="firstName"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
                   >
                     First Name
                   </Label>
                   <TextField
                     name="firstName"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
+                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
                     validation={{
                       required: {
                         value: true,
@@ -98,19 +105,20 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="firstName" className="rw-field-error" />
-
+                  <FieldError name="firstName" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                </div>
+                <div className='h-24'>
                   <Label
                     name="lastName"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
                   >
                     Last Name
                   </Label>
                   <TextField
                     name="lastName"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
+                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
                     validation={{
                       required: {
                         value: true,
@@ -118,19 +126,20 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="lastName" className="rw-field-error" />
-
+                  <FieldError name="lastName" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                </div>
+                <div className='h-24'>
                   <Label
                     name="phone"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
                   >
                     Phone
                   </Label>
                   <TextField
                     name="phone"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
+                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
                     validation={{
                       required: {
                         value: true,
@@ -138,19 +147,20 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="phone" className="rw-field-error" />
-
+                  <FieldError name="phone" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                </div>
+                <div className='h-24'>
                   <Label
                     name="password"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
+                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
+                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
                     autoComplete="current-password"
                     validation={{
                       required: {
@@ -159,29 +169,28 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="password" className="rw-field-error" />
-
+                  <FieldError name="password" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                </div>
                   <div className="rw-button-group">
                     {loading ? (
                       <Submit
                         disabled
-                        className="rw-button rw-button-blue animate-pulse"
+                        className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto animate-pulse"
                       >
                         Loading...
                       </Submit>
                     ) : (
-                      <Submit className="rw-button rw-button-blue ">
+                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto">
                         Sign Up
                       </Submit>
                     )}
                   </div>
                 </Form>
-              </div>
             </div>
           </div>
-          <div className="rw-login-link">
+          <div className="flex items-center justify-center my-3 text-xs text-off-white font-OpenSans">
             <span>Already have an account?</span>{' '}
-            <Link to={routes.login()} className="rw-link">
+            <Link to={routes.login()} className="ml-1 font-bold underline capitalize">
               Log in!
             </Link>
           </div>
