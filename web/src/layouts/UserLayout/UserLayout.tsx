@@ -43,7 +43,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             show={isActive}
             ref={ref}
             id="side-bar"
-            className="fixed top-0 right-0 z-50 flex min-h-full gap-3 p-3 bg-white shadow-xl md:left-0 md:right-0 w-80 "
+            className="fixed top-0 right-0 z-50 flex justify-end w-full min-h-full bg-black/50 "
             enter="transition-opacity duration-75"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -51,20 +51,23 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="flex flex-col min-w-full">
-              <div className="flex items-center justify-between w-full py-2">
-                <Logo />
+            <div className='gap-3 p-4 bg-white shadow-xl md:left-0 md:right-0 w-60'>
+            <div className="flex flex-col h-full min-w-full">
+              <div className="flex items-center justify-end w-full py-2">
                 <FiX onClick={toggle} size={25} />
               </div>
-              <div className="flex flex-col items-center gap-4 mt-4 ">
-                <NavLink
-                  to={routes.home()}
-                  onClick={toggle}
-                  activeClassName="text-blue-400"
+                <div className="flex flex-col items-start justify-between h-full">
+                  <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 text-gray-400">
+                    <NavLink
+                      className='text-base font-medium font-OpenSans'
+                      to={routes.home()}
+                      onClick={toggle}
+                      activeClassName="text-blue-400"
                 >
                   Home
                 </NavLink>
                 <NavLink
+                className='text-base font-medium font-OpenSans'
                   to={routes.myTerritories()}
                   onClick={toggle}
                   activeClassName="text-blue-400"
@@ -72,6 +75,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   My Territories
                 </NavLink>
                 <NavLink
+                className='text-base font-medium font-OpenSans'
                   to={routes.selfCheckout()}
                   onClick={toggle}
                   activeClassName="text-blue-400"
@@ -79,6 +83,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   Checkout Territory
                 </NavLink>
                 <NavLink
+                className='text-base font-medium font-OpenSans'
                   to={routes.userAccount()}
                   onClick={toggle}
                   activeClassName="text-blue-400"
@@ -86,17 +91,16 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   My Account
                 </NavLink>
 
-                <button
-                  className="px-3 py-1 text-white bg-blue-500"
-                  onClick={logOut}
-                >
-                  Logout
-                </button>
+
 
                 {currentUser?.roles === 'admin' && (
-                  <>
-                    <h3 className="mt-5 text-xl font-bold">Admin</h3>
+                      <>
+                        <div className='w-full border-b-2 border-dark-blue'>
+                          <h3 className="mt-5 text-xl font-semibold font-Roboto text-off-black ">Admin Settings</h3>
+                        </div>
+
                     <NavLink
+                    className='text-base font-medium font-OpenSans'
                       to={routes.issueTracker()}
                       onClick={toggle}
                       activeClassName="text-blue-400"
@@ -105,6 +109,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     </NavLink>
 
                     <NavLink
+                    className='text-base font-medium font-OpenSans'
                       to={routes.records()}
                       onClick={toggle}
                       activeClassName="text-blue-400"
@@ -112,6 +117,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       Records
                     </NavLink>
                     <NavLink
+                    className='text-base font-medium font-OpenSans'
                       to={routes.assignTerritory()}
                       onClick={toggle}
                       activeClassName="text-blue-400"
@@ -119,6 +125,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       Assign Territory
                     </NavLink>
                     <NavLink
+                    className='text-base font-medium font-OpenSans'
                       to={routes.territories()}
                       onClick={toggle}
                       activeClassName="text-blue-400"
@@ -126,9 +133,19 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       Territory Cards
                     </NavLink>
                   </>
-                )}
+                  )}
+                  </div>
+
+                  <button
+                  className="w-full px-3 py-2 tracking-wider uppercase rounded text-off-white text-md bg-accent font-Roboto"
+                  onClick={logOut}
+                >
+                  Logout
+                </button>
               </div>
             </div>
+            </div>
+
           </Transition>
 
           <div className="max-w-4xl px-4 mx-auto mt-5">{children}</div>
