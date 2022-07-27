@@ -141,7 +141,7 @@ const LoginPage = () => {
           </div>
         </div>
         <footer>
-          <p>-</p>
+          <p className='text-transparent'>-</p>
         </footer>
       </main>
     </>
