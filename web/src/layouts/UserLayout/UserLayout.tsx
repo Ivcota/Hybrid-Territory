@@ -29,15 +29,14 @@ const UserLayout = ({ children }: UserLayoutProps) => {
 
   return (
     <>
-      <Provider
-        value={{
-          currentUser,
-          isActive,
-          toggle,
-        }}
-      >
+        <Provider
+          value={{
+            currentUser,
+            isActive,
+            toggle,
+          }}
+        >
         <Navbar />
-
         <main>
           <Transition
             show={isActive}
@@ -51,7 +50,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className='gap-3 p-4 bg-white shadow-xl md:left-0 md:right-0 w-60'>
+            <div className='gap-3 p-4 bg-white shadow-xl md:left-0 md:right-0 w-60 lg:w-72'>
             <div className="flex flex-col h-full min-w-full">
               <div className="flex items-center justify-end w-full py-2">
                 <FiX onClick={toggle} size={25} />
@@ -59,95 +58,87 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 <div className="flex flex-col items-start justify-between h-full">
                   <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 text-gray-400">
                     <NavLink
-                      className='text-base font-medium font-OpenSans'
+                      className='text-base font-medium font-OpenSans hover:text-blue-300'
                       to={routes.home()}
                       onClick={toggle}
                       activeClassName="text-blue-400"
-                >
-                  Home
-                </NavLink>
-                <NavLink
-                className='text-base font-medium font-OpenSans'
-                  to={routes.myTerritories()}
-                  onClick={toggle}
-                  activeClassName="text-blue-400"
-                >
-                  My Territories
-                </NavLink>
-                <NavLink
-                className='text-base font-medium font-OpenSans'
-                  to={routes.selfCheckout()}
-                  onClick={toggle}
-                  activeClassName="text-blue-400"
-                >
-                  Checkout Territory
-                </NavLink>
-                <NavLink
-                className='text-base font-medium font-OpenSans'
-                  to={routes.userAccount()}
-                  onClick={toggle}
-                  activeClassName="text-blue-400"
-                >
-                  My Account
-                </NavLink>
-
-
-
-                {currentUser?.roles === 'admin' && (
-                      <>
-                        <div className='w-full border-b-2 border-dark-blue'>
-                          <h3 className="mt-5 text-xl font-semibold tracking-wide font-Roboto text-off-black">Admin Settings</h3>
-                        </div>
-
-                    <NavLink
-                    className='text-base font-medium font-OpenSans'
-                      to={routes.issueTracker()}
-                      onClick={toggle}
-                      activeClassName="text-violet-500"
                     >
-                      Issue Tracker
-                    </NavLink>
-
-                    <NavLink
-                    className='text-base font-medium font-OpenSans'
-                      to={routes.records()}
-                      onClick={toggle}
-                      activeClassName="text-violet-500"
-                    >
-                      Records
+                      Home
                     </NavLink>
                     <NavLink
-                    className='text-base font-medium font-OpenSans'
-                      to={routes.assignTerritory()}
+                      className='text-base font-medium font-OpenSans hover:text-blue-300'
+                      to={routes.myTerritories()}
                       onClick={toggle}
-                      activeClassName="text-violet-500"
+                      activeClassName="text-blue-400"
                     >
-                      Assign Territory
+                      My Territories
                     </NavLink>
                     <NavLink
-                    className='text-base font-medium font-OpenSans'
-                      to={routes.territories()}
+                      className='text-base font-medium font-OpenSans hover:text-blue-300'
+                      to={routes.selfCheckout()}
                       onClick={toggle}
-                      activeClassName="text-violet-500"
+                      activeClassName="text-blue-400"
                     >
-                      Territory Cards
+                      Checkout Territory
                     </NavLink>
-                  </>
-                  )}
+                    <NavLink
+                      className='text-base font-medium font-OpenSans hover:text-blue-300'
+                      to={routes.userAccount()}
+                      onClick={toggle}
+                      activeClassName="text-blue-400"
+                    >
+                      My Account
+                    </NavLink>
+                    {currentUser?.roles === 'admin' && (
+                        <>
+                          <div className='w-full border-b-2 border-dark-blue'>
+                            <h3 className="mt-5 text-xl font-semibold tracking-wide font-Roboto text-off-black">Admin Settings</h3>
+                          </div>
+                        <NavLink
+                          className='text-base font-medium font-OpenSans hover:text-violet-300'
+                          to={routes.issueTracker()}
+                          onClick={toggle}
+                          activeClassName="text-violet-500"
+                        >
+                          Issue Tracker
+                        </NavLink>
+                        <NavLink
+                          className='text-base font-medium font-OpenSans hover:text-violet-300'
+                          to={routes.records()}
+                          onClick={toggle}
+                          activeClassName="text-violet-500"
+                        >
+                          Records
+                        </NavLink>
+                        <NavLink
+                          className='text-base font-medium font-OpenSans hover:text-violet-300'
+                          to={routes.assignTerritory()}
+                          onClick={toggle}
+                          activeClassName="text-violet-500"
+                        >
+                          Assign Territory
+                        </NavLink>
+                        <NavLink
+                          className='text-base font-medium font-OpenSans hover:text-violet-300'
+                          to={routes.territories()}
+                          onClick={toggle}
+                          activeClassName="text-violet-500"
+                        >
+                          Territory Cards
+                        </NavLink>
+                      </>
+                    )}
                   </div>
-
                   <button
-                  className="w-full px-3 py-2 tracking-wider uppercase rounded text-off-white text-md bg-accent font-Roboto"
-                  onClick={logOut}
-                >
-                  Logout
-                </button>
+                    className="w-full px-3 py-2 tracking-wider uppercase rounded text-off-white text-md bg-accent font-Roboto hover:bg-accent/80"
+                    onClick={logOut}
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
             </div>
-            </div>
-
           </Transition>
-
           <div className="max-w-4xl px-4 mx-auto mt-5">{children}</div>
         </main>
       </Provider>

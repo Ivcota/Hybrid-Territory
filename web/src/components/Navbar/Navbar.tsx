@@ -7,7 +7,7 @@ export const Logo = () => {
   return (
     <div className="text-2xl">
       <Link to={routes.home()}>
-        Hybrid<span className="font-bold">Territory</span>
+        <h1 className='text-2xl font-Albert text-off-black'>Hybrid<span className='font-bold'>Territory</span></h1>
       </Link>
     </div>
   )
@@ -18,8 +18,8 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 py-4 bg-white shadow-lg ">
-      <div className="px-4 mx-auto">
-        <div className="flex items-center justify-between gap-5 md:justify-start">
+      <div className="px-4 mx-auto lg:px-8">
+        <div className="flex items-center justify-between gap-5 ">
           <Logo />
           {!isActive && <FiMenu onClick={toggle} size={25} />}
         </div>
