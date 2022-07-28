@@ -195,6 +195,9 @@ const SignupPage = () => {
             </Link>
           </div>
         </div>
+        <footer>
+          <p className='text-transparent'>-</p>
+        </footer>
       </main>
     </>
   )
