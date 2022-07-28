@@ -66,14 +66,14 @@ const LoginPage = () => {
                 <Label
                     name="username"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
-                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
+                    errorClassName="text-sm font-bold text-error font-OpenSan"
                 >
                     Email
                 </Label>
                 <TextField
                     name="username"
                     className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
-                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
+                    errorClassName="rw-input border-error mt-1 caret-error"
                     ref={usernameRef}
                     validation={{
                       required: {
@@ -82,20 +82,20 @@ const LoginPage = () => {
                       },
                     }}
                 />
-                <FieldError name="username" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                <FieldError name="username" className="mt-2 text-xs font-semibold uppercase text-error" />
               </div>
               <div className='h-32 mt-2'>
               <Label
                     name="password"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans "
-                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
+                    errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
                     className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
-                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
+                    errorClassName="rw-input border-error mt-1 caret-error"
                     autoComplete="current-password"
                     validation={{
                       required: {
@@ -108,13 +108,13 @@ const LoginPage = () => {
                   <div className="flex items-center justify-end">
                     <Link
                       to={routes.forgotPassword()}
-                      className="mt-2 text-xs font-medium text-gray-500 font-OpenSans"
+                      className="mt-2 text-xs font-medium text-htd-grey font-OpenSans"
                     >
                       Forgot Password?
                     </Link>
                   </div>
 
-                  <FieldError name="password" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                  <FieldError name="password" className="mt-2 text-xs font-semibold uppercase text-error" />
                 </div>
                 <div className="rw-button-group">
                     {isLoading ? (
@@ -125,7 +125,7 @@ const LoginPage = () => {
                         Loading...
                       </Submit>
                     ) : (
-                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto">
+                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto hover:bg-accent">
                         Login
                       </Submit>
                     )}
