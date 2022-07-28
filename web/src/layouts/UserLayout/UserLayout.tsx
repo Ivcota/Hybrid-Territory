@@ -42,7 +42,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             show={isActive}
             ref={ref}
             id="side-bar"
-            className="fixed top-0 right-0 z-50 flex justify-end w-full min-h-full bg-black/50 backdrop-blur-sm"
+            className="fixed top-0 right-0 z-50 flex justify-end w-full min-h-full bg-black/40 backdrop-blur-sm"
             enter="transition-opacity duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -56,12 +56,12 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                 <FiX onClick={toggle} size={25} />
               </div>
                 <div className="flex flex-col items-start justify-between h-full">
-                  <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 text-gray-400">
+                  <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 text-htd-grey">
                     <NavLink
                       className='text-base font-medium font-OpenSans hover:text-blue-300'
                       to={routes.home()}
                       onClick={toggle}
-                      activeClassName="text-blue-400"
+                      activeClassName="text-sky-blue"
                     >
                       Home
                     </NavLink>
@@ -69,7 +69,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       className='text-base font-medium font-OpenSans hover:text-blue-300'
                       to={routes.myTerritories()}
                       onClick={toggle}
-                      activeClassName="text-blue-400"
+                      activeClassName="text-sky-blue"
                     >
                       My Territories
                     </NavLink>
@@ -77,7 +77,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       className='text-base font-medium font-OpenSans hover:text-blue-300'
                       to={routes.selfCheckout()}
                       onClick={toggle}
-                      activeClassName="text-blue-400"
+                      activeClassName="text-sky-blue"
                     >
                       Checkout Territory
                     </NavLink>
@@ -85,7 +85,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       className='text-base font-medium font-OpenSans hover:text-blue-300'
                       to={routes.userAccount()}
                       onClick={toggle}
-                      activeClassName="text-blue-400"
+                      activeClassName="text-sky-blue"
                     >
                       My Account
                     </NavLink>
