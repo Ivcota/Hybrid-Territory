@@ -49,7 +49,7 @@ const SignupPage = () => {
       <MetaTags title="Signup" />
 
       <main className="flex flex-col items-center justify-between w-full h-max lg:h-screen bg-gradient-to-br from-teal-blue to-light-blue">
-        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
+        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000}} />
         <header className='flex items-center justify-start w-full h-16 px-4'>
           <div className='flex flex-col'>
             <h1 className='text-2xl font-Albert text-off-white'>Hybrid<span className='font-bold'>Territory</span></h1>
@@ -68,14 +68,14 @@ const SignupPage = () => {
                   <Label
                     name="username"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
-                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
+                    errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Email
                   </Label>
                   <TextField
                     name="username"
                     className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
-                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
+                    errorClassName="rw-input border-error mt-1 caret-error"
                     ref={usernameRef}
                     validation={{
                       required: {
@@ -84,20 +84,20 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="username" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                  <FieldError name="username" className="mt-2 text-xs font-semibold uppercase text-error" />
                 </div>
                 <div className='h-24'>
                   <Label
                     name="firstName"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
-                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
+                    errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     First Name
                   </Label>
                   <TextField
                     name="firstName"
                     className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
-                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
+                    errorClassName="rw-input border-error mt-1 caret-error"
                     validation={{
                       required: {
                         value: true,
@@ -105,20 +105,20 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="firstName" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                  <FieldError name="firstName" className="mt-2 text-xs font-semibold uppercase text-error" />
                 </div>
                 <div className='h-24'>
                   <Label
                     name="lastName"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
-                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
+                    errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Last Name
                   </Label>
                   <TextField
                     name="lastName"
                     className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
-                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
+                    errorClassName="rw-input border-error mt-1 caret-error"
                     validation={{
                       required: {
                         value: true,
@@ -126,20 +126,20 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="lastName" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                  <FieldError name="lastName" className="mt-2 text-xs font-semibold uppercase text-error" />
                 </div>
                 <div className='h-24'>
                   <Label
                     name="phone"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
-                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
+                    errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Phone
                   </Label>
                   <TextField
                     name="phone"
                     className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
-                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
+                    errorClassName="rw-input border-error mt-1 caret-error"
                     validation={{
                       required: {
                         value: true,
@@ -147,20 +147,20 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="phone" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                  <FieldError name="phone" className="mt-2 text-xs font-semibold uppercase text-error" />
                 </div>
                 <div className='h-24'>
                   <Label
                     name="password"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
-                    errorClassName="text-sm font-bold text-red-600 font-OpenSans mt-0"
+                    errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
                     className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
-                    errorClassName="rw-input border-red-600 mt-1 caret-red-600"
+                    errorClassName="rw-input border-error mt-1 caret-error"
                     autoComplete="current-password"
                     validation={{
                       required: {
@@ -169,7 +169,7 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="password" className="mt-2 text-xs font-semibold text-red-600 uppercase" />
+                  <FieldError name="password" className="mt-2 text-xs font-semibold uppercase text-error" />
                 </div>
                   <div className="rw-button-group">
                     {loading ? (
@@ -180,7 +180,7 @@ const SignupPage = () => {
                         Loading...
                       </Submit>
                     ) : (
-                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto">
+                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto hover:bg-accent">
                         Sign Up
                       </Submit>
                     )}
