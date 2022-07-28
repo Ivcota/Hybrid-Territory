@@ -49,7 +49,7 @@ const SignupPage = () => {
       <MetaTags title="Signup" />
 
       <main className="flex flex-col items-center justify-between w-full h-max lg:h-screen bg-gradient-to-br from-teal-blue to-light-blue">
-        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000}} />
+        <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <header className='flex items-center justify-start w-full h-16 px-4'>
           <div className='flex flex-col'>
             <h1 className='text-2xl font-Albert text-off-white'>Hybrid<span className='font-bold'>Territory</span></h1>
