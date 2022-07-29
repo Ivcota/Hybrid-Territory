@@ -21,7 +21,12 @@ const UserAccountPage = () => {
     },
   })
 
-  const { register, setValue, handleSubmit } = useForm<FormProps>()
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormProps>()
 
   useEffect(() => {
     setValue('firstName', currentUser?.firstName)
@@ -60,23 +65,38 @@ const UserAccountPage = () => {
         <input
           autoComplete="off"
           className="px-1 py-1 mt-1 border rounded-sm outline-none focus-within:ring"
-          {...register('firstName')}
+          {...register('firstName', {
+            required: 'This field is required...',
+          })}
         />
+        {errors.firstName && (
+          <div className="mt-2 text-error"> {errors.firstName.message} </div>
+        )}
         <label className="mt-3">Last Name</label>
 
         <input
           autoComplete="off"
           className="px-1 py-1 mt-1 border rounded-sm outline-none focus-within:ring"
-          {...register('lastName')}
+          {...register('lastName', {
+            required: 'This field is required...',
+          })}
         />
+        {errors.lastName && (
+          <div className="mt-2 text-error"> {errors.lastName.message} </div>
+        )}
 
         <label className="mt-3">Phone</label>
 
         <input
           autoComplete="off"
           className="px-1 py-1 mt-1 border rounded-sm outline-none focus-within:ring"
-          {...register('phone')}
+          {...register('phone', {
+            required: 'This field is required...',
+          })}
         />
+        {errors.phone && (
+          <div className="mt-2 text-error"> {errors.phone.message} </div>
+        )}
         {!loading ? (
           <button
             className="py-1 mt-4 text-white bg-blue-500 rounded-sm hover:bg-blue-600 active:bg-blue-400"
