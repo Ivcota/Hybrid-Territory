@@ -6,19 +6,14 @@ interface ButtonProps
     HTMLButtonElement
   > {
   variant: 'full' | 'outline' | 'bare' | 'custom'
-  colors?: {
-    base: string
-    hover: string
-    active: string
-  }
   children?: React.ReactNode
 }
 
-const Button = ({ variant, colors, children, ...props }: ButtonProps) => {
+const Button = ({ variant, className, children, ...props }: ButtonProps) => {
   if (variant === 'custom') {
     return (
       <button
-        className={`px-5 py-1 text-white transition-all duration-100 rounded-sm ${colors.base} hover:${colors.hover} active:${colors.active} font-Roboto `}
+        className={`px-5 py-1 text-white transition-all duration-100 rounded-sm font-Roboto ${className} `}
         {...props}
       >
         {children}
