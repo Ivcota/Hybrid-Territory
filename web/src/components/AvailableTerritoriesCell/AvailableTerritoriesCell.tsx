@@ -41,7 +41,7 @@ export const Success = ({
 }: CellSuccessProps<AvailableTerritoriesQuery>) => {
   return (
     <>
-      <div className="flex flex-col flex-wrap items-center justify-center gap-4 md:flex-row">
+      <div className="flex flex-col flex-wrap items-center justify-center gap-4 lg:gap-8 md:flex-row">
         {availableTerritories
           .slice()
           .sort((a, b) =>
@@ -69,47 +69,51 @@ const TerritoryCard = ({ item }) => {
   const now = dayjs()
   return (
     <div
-      className="flex flex-row justify-between items-center gap-3 px-4 py-4 mb-3 bg-off-white transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-2/4"
+      className="flex flex-row justify-between items-center gap-3 px-4 py-4 mb-3 bg-off-white transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32"
       key={item.id}
     >
-      <h2 className="text-xl text-center font-Roboto font-medium tracking-wider text-off-black text-ellipsis overflow-hidden whitespace-nowrap"> {item.name} </h2>
-      <Button
-        variant='outline'
-        onClick={async () => {
-          await toast.promise(
-            updateTerritory({
+      <div className='lg:h-full'>
+        <h2 className="text-xl text-center font-Roboto font-medium tracking-wider text-off-black text-ellipsis overflow-hidden whitespace-nowrap"> {item.name} </h2>
+      </div>
+      <div className='lg:h-full flex items-end'>
+        <Button
+          variant='outline'
+          onClick={async () => {
+            await toast.promise(
+              updateTerritory({
+                variables: {
+                  id: item.id,
+                  input: {
+                    userId: currentUser?.id,
+                  },
+                },
+              }),
+              {
+                loading: 'loading...',
+                error: 'Error...',
+                success: `${item.name} has been assigned to you.`,
+              }
+            )
+            await createRecord({
               variables: {
-                id: item.id,
                 input: {
-                  userId: currentUser?.id,
+                  territoryId: item.id,
+                  userId: currentUser.id,
+                  checkoutDate: now,
                 },
               },
-            }),
-            {
-              loading: 'loading...',
-              error: 'Error...',
-              success: `${item.name} has been assigned to you.`,
-            }
-          )
-          await createRecord({
-            variables: {
-              input: {
-                territoryId: item.id,
-                userId: currentUser.id,
-                checkoutDate: now,
+            })
+            await sendMessage({
+              variables: {
+                phone: process.env.REDWOOD_ENV_PHONENUMBER,
+                message: `${currentUser?.firstName} checked out territory card ${item.name} at ${now}.`,
               },
-            },
-          })
-          await sendMessage({
-            variables: {
-              phone: process.env.REDWOOD_ENV_PHONENUMBER,
-              message: `${currentUser?.firstName} checked out territory card ${item.name} at ${now}.`,
-            },
-          })
-        }}
-      >
-        Checkout
-      </Button>
+            })
+          }}
+        >
+          Checkout
+        </Button>
+      </div>
     </div>
   )
 }
