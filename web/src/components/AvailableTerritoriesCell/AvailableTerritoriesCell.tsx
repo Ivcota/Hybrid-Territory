@@ -49,7 +49,7 @@ export const Success = ({
           )
           .map((item) => {
             return (
-              <TerritoryCard item={item} />
+              <TerritoryCard item={item} key={item.id} />
             )
           })}
       </div>
@@ -69,10 +69,10 @@ const TerritoryCard = ({ item }) => {
   const now = dayjs()
   return (
     <div
-      className="flex flex-row justify-between items-center gap-3 px-4 py-4 mt-3 transition-all duration-300 rounded-lg shadow-lg hover:-translate-y-1 min-w-[88%]"
+      className="flex flex-row justify-between items-center gap-3 px-4 py-4 mt-3 bg-off-white transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-2/4"
       key={item.id}
     >
-      <h2 className="text-xl text-center font-Roboto font-medium tracking-wider text-off-black"> {item.name} </h2>
+      <h2 className="text-xl text-center font-Roboto font-medium tracking-wider text-off-black text-ellipsis overflow-hidden whitespace-nowrap"> {item.name} </h2>
       <Button
         variant='outline'
         onClick={async () => {
