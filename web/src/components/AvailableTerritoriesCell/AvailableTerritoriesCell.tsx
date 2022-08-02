@@ -69,7 +69,7 @@ const TerritoryCard = ({ item }) => {
   const now = dayjs()
   return (
     <div
-      className="flex flex-row justify-between items-center gap-3 px-4 py-4 mt-3 bg-off-white transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-2/4"
+      className="flex flex-row justify-between items-center gap-3 px-4 py-4 mb-3 bg-off-white transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-2/4"
       key={item.id}
     >
       <h2 className="text-xl text-center font-Roboto font-medium tracking-wider text-off-black text-ellipsis overflow-hidden whitespace-nowrap"> {item.name} </h2>
