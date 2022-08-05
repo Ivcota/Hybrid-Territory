@@ -1,5 +1,9 @@
 import Modal from '../Modal/Modal'
+import Button from '../Button/Button';
 import { navigate, routes } from '@redwoodjs/router'
+
+import placeholderImg from '../../assets/polaroid_placeholder.png';
+import testImg from '../../assets/testImg.png';
 
 interface Props {
   territoryCard: {
@@ -30,7 +34,11 @@ const UserListTerritoryCard = ({
       }`}
       id={id}
     >
-      <h2 className="text-xl font-bold text-center"> {name} </h2>
+      <div className='aspect-[4/3] w-full h-56 flex justify-center items-center'>
+        <img src={placeholderImg} alt="Territory Photo" />
+      </div>
+      <div className='w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4'>-</div>
+      <h2 className="my-2 overflow-hidden text-xl font-medium text-center capitalize font-Roboto text-ellipsis"> {name} </h2>
 
       {isCompleted ? (
         <p className="mt-2">You're done with this territory.</p>
@@ -38,7 +46,7 @@ const UserListTerritoryCard = ({
         <p></p>
       )}
 
-      <button
+      <Button
         onClick={() =>
           navigate(
             routes.territory({
@@ -46,14 +54,10 @@ const UserListTerritoryCard = ({
             })
           )
         }
-        className={`w-full p-2 mt-3 text-center text-white rounded-sm ${
-          !isCompleted
-            ? 'bg-blue-600 hover:bg-blue-500'
-            : 'bg-red-600 hover:bg-red-900 active:bg-red-800 '
-        }`}
+        variant='bare'
       >
         View Territory
-      </button>
+      </Button>
       {isCompleted && (
         <Modal
           title={!loading ? 'Turn in Territory Card' : 'Loading...'}
