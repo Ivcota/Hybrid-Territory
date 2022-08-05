@@ -29,23 +29,16 @@ const UserListTerritoryCard = ({
   return (
     <div
       key={id}
-      className={`w-64 px-3 py-4 rounded-lg shadow-lg flex flex-col justify-center items-center ${
-        isCompleted ? '' : ' bg-slate-50'
-      }`}
+      className={`w-64 px-3 py-4 rounded-lg shadow-sm flex flex-col justify-center items-center border-2 bg-off-white ${
+        isCompleted ? 'border-success/40' : ' border-transparent'
+      } lg:justify-start`}
       id={id}
     >
       <div className='aspect-[4/3] w-full h-56 flex justify-center items-center'>
-        <img src={placeholderImg} alt="Territory Photo" />
+        <img src={imageURL ? imageURL : placeholderImg} alt="Territory Photo" />
       </div>
       <div className='w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4'>-</div>
       <h2 className="my-2 overflow-hidden text-xl font-medium text-center capitalize font-Roboto text-ellipsis"> {name} </h2>
-
-      {isCompleted ? (
-        <p className="mt-2">You're done with this territory.</p>
-      ) : (
-        <p></p>
-      )}
-
       <Button
         onClick={() =>
           navigate(
@@ -60,15 +53,11 @@ const UserListTerritoryCard = ({
       </Button>
       {isCompleted && (
         <Modal
-          title={!loading ? 'Turn in Territory Card' : 'Loading...'}
+          title={!loading ? 'Turn In Territory' : 'Loading...'}
           heading="Turn in Territory Card?"
           text="This will turn in your territory card and notify the territory servant."
           fn={submitTerritory}
-          className={
-            !loading
-              ? 'w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800'
-              : 'w-full p-2 mt-3 text-center text-white bg-green-800 rounded-sm animate-pulse'
-          }
+          className='px-5 py-1 mt-2 font-medium tracking-wider transition-all duration-100 rounded-sm bg-none text-success/50 hover:text-accent active:text-light-blue font-Roboto animate-pulse'
         />
       )}
     </div>

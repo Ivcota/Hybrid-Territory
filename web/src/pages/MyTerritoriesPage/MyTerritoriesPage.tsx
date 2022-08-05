@@ -36,7 +36,7 @@ const MyTerritoriesPage = () => {
         <div className='w-2/3 mx-auto text-transparent border-b border-off-black lg:mb-4'>-</div>
         <Modal
           title={!isLoading ? 'Request New Territory' : 'Loading...'}
-          className="px-10 py-2 mx-auto mt-4 font-medium tracking-wider text-white transition-all duration-100 rounded-sm active:bg-teal-blue bg-accent hover:bg-accent/70 font-Roboto lg:w-1/3"
+          className="px-10 py-2 mx-auto mt-4 font-medium tracking-wider text-white transition-all duration-100 rounded-sm lg:mb-4 active:bg-teal-blue bg-accent hover:bg-accent/70 font-Roboto lg:w-1/3"
           heading="Send Territory Request?"
           text="This will send a text request the territory servant."
           fn={sendMessageRightNow}
