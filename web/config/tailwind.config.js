@@ -17,7 +17,7 @@ module.exports = {
         'off-black': "#0C0D0D",
         'htd-grey': "#A2ABAA",
         'error': "#BC1723",
-        'success': "#A5BE00",
+        'success': "#70e000",
       },
     },
   },
