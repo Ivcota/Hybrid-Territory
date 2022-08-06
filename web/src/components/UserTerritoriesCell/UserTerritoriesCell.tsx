@@ -10,12 +10,14 @@ import {
 } from 'src/generated/graphql'
 import type { MyTerritories } from 'types/graphql'
 import Modal from '../Modal/Modal'
+import UserListTerritoryCard from '../UserListTerritoryCard/UserListTerritoryCard'
 
 export const QUERY = gql`
   query MyTerritories($userId: String!) {
     userTerritories(userId: $userId) {
       id
       name
+      imageURL
       spreadsheetURL
       userId
       isCompleted
@@ -57,20 +59,20 @@ export const Success = ({
   const now = dayjs()
 
   return (
-    <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 gap-y-8 ">
+    <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 gap-y-8 lg:gap-x-8">
       {userTerritories
         .slice()
         .sort((a, b) =>
           a.name.localeCompare(b.name, undefined, { numeric: true })
         )
-        .map(({ id, name, isCompleted }) => {
+        .map((territoryCard) => {
           const submitTerritory = async () => {
             try {
               await updateTerritory({
                 variables: {
-                  id,
+                  id: territoryCard.id,
                   input: {
-                    isCompleted: !isCompleted,
+                    isCompleted: !territoryCard.isCompleted,
                     userId: null,
                   },
                 },
@@ -79,7 +81,7 @@ export const Success = ({
               await updateRecordsByIds({
                 variables: {
                   userId: currentUser.id,
-                  territoryId: id,
+                  territoryId: territoryCard.id,
                   input: {
                     checkinDate: dayjs(),
                   },
@@ -89,7 +91,7 @@ export const Success = ({
               await sendMessage({
                 variables: {
                   phone: process.env.REDWOOD_ENV_PHONENUMBER,
-                  message: `${currentUser?.firstName} turned in territory card ${name} at ${now}.`,
+                  message: `${currentUser?.firstName} turned in territory card ${territoryCard.name} at ${now}.`,
                 },
               })
             } catch (error) {
@@ -98,51 +100,12 @@ export const Success = ({
           }
 
           return (
-            <div
-              key={id}
-              className={`w-64 px-3 py-4 rounded-lg shadow-lg flex flex-col justify-center items-center ${
-                isCompleted ? '' : ' bg-slate-50'
-              }`}
-              id={id}
-            >
-              <h2 className="text-xl font-bold text-center"> {name} </h2>
-
-              {isCompleted ? (
-                <p className="mt-2">You're done with this territory.</p>
-              ) : (
-                <p></p>
-              )}
-
-              <button
-                onClick={() =>
-                  navigate(
-                    routes.territory({
-                      id,
-                    })
-                  )
-                }
-                className={`w-full p-2 mt-3 text-center text-white rounded-sm ${
-                  !isCompleted
-                    ? 'bg-blue-600 hover:bg-blue-500'
-                    : 'bg-red-600 hover:bg-red-900 active:bg-red-800 '
-                }`}
-              >
-                View Territory
-              </button>
-              {isCompleted && (
-                <Modal
-                  title={!loading ? 'Turn in Territory Card' : 'Loading...'}
-                  heading="Turn in Territory Card?"
-                  text="This will turn in your territory card and notify the territory servant."
-                  fn={submitTerritory}
-                  className={
-                    !loading
-                      ? 'w-full p-2 mt-3 text-center text-white bg-green-600 rounded-sm active:bg-green-900 hover:bg-green-800'
-                      : 'w-full p-2 mt-3 text-center text-white bg-green-800 rounded-sm animate-pulse'
-                  }
-                />
-              )}
-            </div>
+            <UserListTerritoryCard
+              key={territoryCard.id}
+              submitTerritory={submitTerritory}
+              territoryCard={territoryCard}
+              loading={loading}
+            />
           )
         })}
     </div>

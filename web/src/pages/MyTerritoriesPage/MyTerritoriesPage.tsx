@@ -29,14 +29,14 @@ const MyTerritoriesPage = () => {
       <Toaster />
       <MetaTags title="MyTerritories" description="MyTerritories page" />
 
-      <div className="flex flex-col items-center mt-4">
-        <h1 className="text-3xl font-black">Your Territories</h1>
+      <div className="flex flex-col w-full">
+        <h1 className="text-2xl font-bold font-Roboto text-dark-blue lg:ml-12">Your Territories</h1>
 
-        <p className="mt-3">Here are the territories assigned to you.</p>
-
+        <p className="mx-auto mt-2 text-sm italic font-light tracking-wide text-center font-OpenSans text-off-black/80 lg:w-2/3 lg:mt-4">Here are the territories assigned to you.</p>
+        <div className='w-2/3 mx-auto text-transparent border-b border-off-black lg:mb-4'>-</div>
         <Modal
-          title={!isLoading ? 'Request More Territory' : 'Loading...'}
-          className="px-3 py-2 mt-4 text-center text-white transition-all duration-200 bg-orange-500 rounded-sm w-[14rem] hover:shadow-md hover:shadow-orange-500/25"
+          title={!isLoading ? 'Request New Territory' : 'Loading...'}
+          className="px-10 py-2 mx-auto mt-4 font-medium tracking-wider text-white transition-all duration-100 rounded-sm lg:mb-4 active:bg-teal-blue bg-accent hover:bg-accent/70 font-Roboto lg:w-1/3"
           heading="Send Territory Request?"
           text="This will send a text request the territory servant."
           fn={sendMessageRightNow}

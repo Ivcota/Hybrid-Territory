@@ -2,10 +2,13 @@ export const schema = gql`
   type Territory {
     id: String!
     name: String!
+    imageURL: String
     spreadsheetURL: String
     isCompleted: Boolean!
     User: User
     userId: String
+    issues: [Issue]!
+    Record: [Record]!
   }
 
   type Query {

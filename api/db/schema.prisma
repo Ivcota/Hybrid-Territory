@@ -27,6 +27,7 @@ model User {
 model Territory {
   id             String   @id @default(uuid())
   name           String
+  imageURL       String?
   spreadsheetURL String?
   isCompleted    Boolean  @default(false)
   User           User?    @relation(fields: [userId], references: [id])
@@ -40,7 +41,6 @@ model Issue {
   comment   String
   isClosed  Boolean
   createdAt DateTime @default(now())
-
 
   user      User      @relation(fields: [userId], references: [id])
   territory Territory @relation(fields: [territoryId], references: [id])
