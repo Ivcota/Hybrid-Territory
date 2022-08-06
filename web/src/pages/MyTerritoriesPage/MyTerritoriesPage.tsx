@@ -30,10 +30,16 @@ const MyTerritoriesPage = () => {
       <MetaTags title="MyTerritories" description="MyTerritories page" />
 
       <div className="flex flex-col w-full">
-        <h1 className="text-2xl font-bold font-Roboto text-dark-blue lg:ml-12">Your Territories</h1>
+        <h1 className="text-2xl font-bold font-Roboto text-dark-blue lg:ml-12">
+          Your Territories
+        </h1>
 
-        <p className="mx-auto mt-2 text-sm italic font-light tracking-wide text-center font-OpenSans text-off-black/80 lg:w-2/3 lg:mt-4">Here are the territories assigned to you.</p>
-        <div className='w-2/3 mx-auto text-transparent border-b border-off-black lg:mb-4'>-</div>
+        <p className="mx-auto mt-2 text-sm italic font-light tracking-wide text-center font-OpenSans text-off-black/80 lg:w-2/3 lg:mt-4 md:text-lg ">
+          Here are the territories assigned to you.
+        </p>
+        <div className="w-2/3 mx-auto text-transparent border-b border-off-black lg:mb-4">
+          -
+        </div>
         <Modal
           title={!isLoading ? 'Request New Territory' : 'Loading...'}
           className="px-10 py-2 mx-auto mt-4 font-medium tracking-wider text-white transition-all duration-100 rounded-sm lg:mb-4 active:bg-teal-blue bg-accent hover:bg-accent/70 font-Roboto lg:w-1/3"
