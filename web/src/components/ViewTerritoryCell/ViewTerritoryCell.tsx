@@ -7,6 +7,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useUpdateTerritoryMutation } from 'src/generated/graphql'
 import { useAuth } from '@redwoodjs/auth'
 
+import placeholderImg from '../../assets/polaroid_placeholder.png'
+
 export const QUERY = gql`
   query FindViewTerritoryQuery($id: String!) {
     territory(id: $id) {
@@ -43,7 +45,7 @@ export const Success = ({
 
   if (territory.userId !== currentUser?.id) {
     return (
-      <div className="text-red-600">
+      <div className="text-error">
         You're not authorized to view this territory.
       </div>
     )
@@ -51,10 +53,16 @@ export const Success = ({
 
   return (
     <div
-      className="flex flex-col justify-between px-5 py-4 text-center rounded-md shadow-2xl w-72 "
+      className="flex flex-col justify-between px-5 py-4 rounded-md shadow-sm w-72 bg-off-white"
       key={territory.id}
     >
-      <h1 className="text-2xl font-extrabold"> {territory.name} </h1>
+      <div className="aspect-[4/3] w-full h-56 flex justify-center items-center">
+        <img src={placeholderImg} alt="Territory Photo" />
+      </div>
+      <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
+        -
+      </div>
+      <h1 className="mt-4 ml-4 text-xl font-medium font-Roboto text-dark-blue"> {territory.name} </h1>
 
       {territory.isCompleted ? (
         <p className="mt-2">

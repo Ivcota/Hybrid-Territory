@@ -7,6 +7,9 @@ import IssuesCell, { MUTATION } from 'src/components/IssuesCell'
 import ViewTerritoryCell from 'src/components/ViewTerritoryCell'
 import { CreateIssueVariables } from 'types/graphql'
 
+import { MdArrowBack } from "react-icons/md";
+import Button from '../../components/Button/Button'
+
 interface PageProps {
   id: string
 }
@@ -31,11 +34,14 @@ const TerritoryPage = ({ id }: PageProps) => {
   return (
     <>
       <MetaTags title="Territory" description="Territory page" />
-      <Link to={routes.myTerritories()}>
-        <button className="px-3 py-1 mb-5 text-white bg-red-500 rounded-sm hover:bg-red-400 ">
-          Back
-        </button>
-      </Link>
+      <div className='pb-4 mb-2'>
+        <Link to={routes.myTerritories()}>
+          <Button variant='bare'>
+            <MdArrowBack /> Back
+          </Button>
+        </Link>
+      </div>
+
       <div className="flex flex-col items-center">
         <ViewTerritoryCell id={id} />
         <form

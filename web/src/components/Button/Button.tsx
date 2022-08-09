@@ -24,7 +24,7 @@ const Button = ({ variant, className, children, ...props }: ButtonProps) => {
   if (variant === 'outline') {
     return (
       <button
-        className="px-5 py-1 transition-all duration-100 border font-medium tracking-wider rounded-sm bg-none text-dark-blue hover:text-accent active:text-light-blue border-dark-blue hover:border-accent active:border-light-blue font-Roboto"
+        className="px-5 py-1 font-medium tracking-wider transition-all duration-100 border rounded-sm bg-none text-dark-blue hover:text-accent active:text-light-blue border-dark-blue hover:border-accent active:border-light-blue font-Roboto"
         {...props}
       >
         {children}
@@ -35,7 +35,7 @@ const Button = ({ variant, className, children, ...props }: ButtonProps) => {
   if (variant === 'bare') {
     return (
       <button
-        className="px-5 py-1 transition-all duration-100 rounded-sm bg-none font-medium tracking-wider text-dark-blue hover:text-accent active:text-light-blue font-Roboto "
+        className="flex items-center px-5 py-1 font-medium tracking-wider transition-all duration-100 rounded-sm bg-none text-dark-blue hover:text-accent active:text-light-blue font-Roboto"
         {...props}
       >
         {children}
@@ -45,7 +45,7 @@ const Button = ({ variant, className, children, ...props }: ButtonProps) => {
 
   return (
     <button
-      className="px-5 py-1 text-white transition-all duration-100 rounded-sm font-medium tracking-wider active:bg-light-blue bg-dark-blue hover:bg-accent font-Roboto"
+      className="px-5 py-1 font-medium tracking-wider text-white transition-all duration-100 rounded-sm active:bg-light-blue bg-dark-blue hover:bg-accent font-Roboto"
       {...props}
     >
       {children}
