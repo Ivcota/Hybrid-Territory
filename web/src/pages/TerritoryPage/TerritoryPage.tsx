@@ -81,7 +81,7 @@ const TerritoryPage = ({ id }: PageProps) => {
                 type="text"
                 {...register('comment', { required: 'Comment cannot be empty' })}
               />
-              <div className={`flex ${errors.comment ? 'justify-between' : 'justify-end'} w-full mb-4 mt-2`}>
+              <div className={`flex ${errors.comment ? 'justify-between' : 'justify-end'} w-full my-2`}>
                 {errors.comment && (
                   <p className="text-error">{errors.comment.message}</p>
                 )}
