@@ -8,6 +8,7 @@ import { useUpdateTerritoryMutation } from 'src/generated/graphql'
 import { useAuth } from '@redwoodjs/auth'
 
 import placeholderImg from '../../assets/polaroid_placeholder.png'
+import Button from '../Button/Button'
 
 export const QUERY = gql`
   query FindViewTerritoryQuery($id: String!) {
@@ -53,7 +54,7 @@ export const Success = ({
 
   return (
     <div
-      className="flex flex-col justify-between px-5 py-4 rounded-md shadow-sm w-72 bg-off-white"
+      className={`flex flex-col justify-between px-5 py-4 rounded-md shadow-sm w-72 bg-off-white border-2 ${territory.isCompleted ? 'border-success/60' : 'border-transparent' }`}
       key={territory.id}
     >
       <div className="aspect-[4/3] w-full h-56 flex justify-center items-center">
@@ -62,24 +63,23 @@ export const Success = ({
       <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
         -
       </div>
-      <h1 className="mt-4 ml-4 text-xl font-medium font-Roboto text-dark-blue"> {territory.name} </h1>
-
-      {territory.isCompleted ? (
-        <p className="mt-2">
-          <b>You're done with this territory.</b> Let your territory servant
-          know you're ready to turn it in.
+      <h1 className="mt-3 ml-4 text-xl font-medium font-Roboto text-dark-blue"> {territory.name} </h1>
+      <p className='text-xs font-OpenSans font-light italic ml-4'>Status: {territory.isCompleted ? (
+        <p className="inline text-base font-Roboto font-normal not-italic text-success">
+          Completed
         </p>
       ) : (
-        <p>This territory is not finished.</p>
-      )}
-      <a href={territory.spreadsheetURL} target="_blank">
-        <button className="px-3 py-2 mt-4 text-lg text-white rounded-sm bg-slate-800 hover:bg-slate-700 active:bg-slate-500 ">
+        <p className='inline text-base font-Roboto font-normal not-italic text-dark-blue'>In Progress</p>
+      )}</p>
+
+      <a href={territory.spreadsheetURL} target="_blank" className='flex justify-center items-center'>
+        <Button variant='custom' className='flex items-center font-medium tracking-wider rounded-sm bg-none text-htd-grey hover:text-accent active:text-light-blue mt-6 mb-2'>
           View Spreadsheet
-        </button>
+        </Button>
       </a>
 
       {territory.isCompleted ? (
-        <button
+        <Button
           onClick={async () => {
             UpdateTerritory({
               variables: {
@@ -91,14 +91,15 @@ export const Success = ({
             })
           }}
           disabled={loading ? true : false}
-          className={`px-3 py-2 mt-4 text-lg text-white bg-red-500 rounded-sm hover:bg-red-700 active:bg-red-300 ${
+          variant='custom'
+          className={`tracking-wider text-white bg-error rounded-sm hover:bg-error/70 active:bg-error/70 pt-2 pb-2 ${
             loading && 'animate-pulse'
-          } `}
+          }`}
         >
           {!loading ? 'Mark as Not Completed' : 'Loading...'}
-        </button>
+        </Button>
       ) : (
-        <button
+        <Button
           disabled={loading ? true : false}
           onClick={async () => {
             UpdateTerritory({
@@ -110,12 +111,13 @@ export const Success = ({
               },
             })
           }}
-          className={`px-3 py-2 mt-4 text-lg text-white bg-green-500 rounded-sm hover:bg-green-700 active:bg-green-300 ${
+          variant='custom'
+          className={`tracking-wider text-white bg-success rounded-sm hover:bg-success/70 active:bg-success/50 pt-2 pb-2 ${
             loading && 'animate-pulse'
           }`}
         >
           {!loading ? 'Mark as Complete' : 'Loading...'}
-        </button>
+        </Button>
       )}
     </div>
   )
