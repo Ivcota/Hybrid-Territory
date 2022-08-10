@@ -56,7 +56,7 @@ export const Success = ({
   })
 
   return (
-    <div className="mb-4 rounded-sm w-80 md:w-[25rem]">
+    <div className="mb-4 rounded-sm w-80 lg:w-72 md:w-[25rem]">
       <div>
         {_.orderBy(
           _.filter(issuesByTerritory, { isClosed: false }),

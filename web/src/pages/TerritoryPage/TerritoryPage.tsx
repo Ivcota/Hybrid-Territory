@@ -42,10 +42,13 @@ const TerritoryPage = ({ id }: PageProps) => {
         </Link>
       </div>
 
-      <div className="flex flex-col items-center">
-        <ViewTerritoryCell id={id} />
+      <div className="flex flex-col items-center lg:flex-row lg:justify-center lg:gap-12 lg:items-start lg:mt-12">
+        <div className="flex flex-col items-center">
+          <ViewTerritoryCell id={id} />
+        </div>
+        <div className="flex flex-col items-center">
         <form
-          className="mt-10"
+          className="mt-10 lg:mt-0"
           onSubmit={handleSubmit(async ({ comment }) => {
             toast.promise(
               createIssue({
@@ -76,7 +79,7 @@ const TerritoryPage = ({ id }: PageProps) => {
             <div className='flex flex-col items-end'>
               <input
                 autoComplete="off"
-                className={`px-3 py-2 transition-all outline-none w-80 bg-white ring-1 ring-htd-grey rounded focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black caret-dark-blue ${errors.comment ? 'focus-within:ring-error caret-error' : 'focus-within:ring-light-blue/60'}`}
+                className={`px-3 py-2 transition-all outline-none w-80 lg:w-72 bg-white ring-1 ring-htd-grey rounded focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black caret-dark-blue ${errors.comment ? 'focus-within:ring-error caret-error' : 'focus-within:ring-light-blue/60'}`}
                 placeholder="Comment"
                 type="text"
                 {...register('comment', { required: 'Comment cannot be empty' })}
@@ -93,6 +96,7 @@ const TerritoryPage = ({ id }: PageProps) => {
           </div>
         </form>
         <IssuesCell territoryId={id} />
+        </div>
       </div>
       <Toaster />
     </>

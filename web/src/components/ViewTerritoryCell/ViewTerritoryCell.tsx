@@ -54,10 +54,10 @@ export const Success = ({
 
   return (
     <div
-      className={`flex flex-col justify-between px-5 py-4 rounded-md shadow-sm w-72 bg-off-white border-2 ${territory.isCompleted ? 'border-success/60' : 'border-transparent' }`}
+      className={`flex flex-col justify-between px-5 py-4 rounded-md shadow-sm w-72 lg:w-96  bg-off-white border-2 ${territory.isCompleted ? 'border-success/60' : 'border-transparent' }`}
       key={territory.id}
     >
-      <div className="aspect-[4/3] w-full h-56 flex justify-center items-center">
+      <div className="aspect-[4/3] w-full h-56 lg:h-64 flex justify-center items-center">
         <img src={placeholderImg} alt="Territory Photo" />
       </div>
       <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
@@ -73,7 +73,7 @@ export const Success = ({
       )}</p>
 
       <a href={territory.spreadsheetURL} target="_blank" className='flex justify-center items-center'>
-        <Button variant='custom' className='flex items-center font-medium tracking-wider rounded-sm bg-none text-htd-grey hover:text-accent active:text-light-blue mt-6 mb-2'>
+        <Button variant='custom' className='flex items-center font-medium tracking-wider rounded-sm bg-none text-htd-grey hover:text-accent active:text-light-blue mt-6 mb-2 lg:mt-12'>
           View Spreadsheet
         </Button>
       </a>
