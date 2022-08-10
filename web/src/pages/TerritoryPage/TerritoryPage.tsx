@@ -68,20 +68,28 @@ const TerritoryPage = ({ id }: PageProps) => {
             reset()
           })}
         >
-          <div className="flex flex-col items-center ">
-            <input
-              autoComplete="off"
-              className="px-3 py-2 transition-all outline-none w-80 bg-slate-50 ring-1 ring-black/25 focus-within:ring-blue-400 focus-within:ring-2 "
-              placeholder="Comment"
-              type="text"
-              {...register('comment', { required: 'Comment cannot be empty' })}
-            />
-            {errors.comment && (
-              <p className="mt-1 text-red-500">{errors.comment.message}</p>
-            )}
-            <button className="px-5 py-2 mt-3 text-white bg-blue-500 ">
-              Comment
-            </button>
+          <div className="flex flex-col items-start">
+            <h3 className='font-Roboto text-dark-blue mb-2 font-medium tracking-wider'>Publisher Feedback</h3>
+            <div className="w-3/4 text-transparent border-t border-htd-grey/50 lg:mb-4">
+              -
+            </div>
+            <div className='flex flex-col items-end'>
+              <input
+                autoComplete="off"
+                className={`px-3 py-2 transition-all outline-none w-80 bg-white ring-1 ring-htd-grey rounded focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black caret-dark-blue ${errors.comment ? 'focus-within:ring-error caret-error' : 'focus-within:ring-light-blue/60'}`}
+                placeholder="Comment"
+                type="text"
+                {...register('comment', { required: 'Comment cannot be empty' })}
+              />
+              <div className={`flex ${errors.comment ? 'justify-between' : 'justify-end'} w-full mb-4 mt-2`}>
+                {errors.comment && (
+                  <p className="text-error">{errors.comment.message}</p>
+                )}
+                <Button variant='full'>
+                  Send
+                </Button>
+              </div>
+            </div>
           </div>
         </form>
         <IssuesCell territoryId={id} />

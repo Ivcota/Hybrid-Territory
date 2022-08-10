@@ -45,7 +45,7 @@ const Button = ({ variant, className, children, ...props }: ButtonProps) => {
 
   return (
     <button
-      className="px-5 py-1 font-medium tracking-wider text-white transition-all duration-100 rounded-sm active:bg-light-blue bg-dark-blue hover:bg-accent font-Roboto"
+      className="px-5 py-1 font-medium tracking-wider text-white transition-all duration-100 rounded-sm min-h-[39px] active:bg-light-blue bg-dark-blue hover:bg-accent font-Roboto"
       {...props}
     >
       {children}
