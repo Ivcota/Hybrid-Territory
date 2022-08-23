@@ -1,9 +1,10 @@
-import { useAuth } from '@redwoodjs/auth'
-import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/dist/toast'
 import _ from 'lodash'
 import ReactTimeago from 'react-timeago'
 import type { DeleteIssueVariables, IssuesQuery } from 'types/graphql'
+
+import { useAuth } from '@redwoodjs/auth'
+import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 import Button from '../Button/Button'
 
