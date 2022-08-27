@@ -1,9 +1,10 @@
-import { useAuth } from '@redwoodjs/auth'
-import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/dist/toast'
 import _ from 'lodash'
 import ReactTimeago from 'react-timeago'
 import type { DeleteIssueVariables, IssuesQuery } from 'types/graphql'
+
+import { useAuth } from '@redwoodjs/auth'
+import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 import Button from '../Button/Button'
 
@@ -64,19 +65,26 @@ export const Success = ({
           ['desc']
         ).map((issue) => {
           return (
-            <div className="p-4 mt-6 rounded bg-off-white shadow-sm" key={issue.id}>
-              <div className="flex gap-2 items-center">
-                <h3 className="text-left text-sm font-Roboto text-dark-blue font-medium tracking-wider">{issue.user.firstName}</h3>
-                <div className="text-htd-grey text-xs italic tracking-wider">
+            <div
+              className="p-4 mt-6 rounded shadow-sm bg-off-white"
+              key={issue.id}
+            >
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-medium tracking-wider text-left font-Roboto text-dark-blue">
+                  {issue.user.firstName}
+                </h3>
+                <div className="text-xs italic tracking-wider text-htd-grey">
                   <ReactTimeago date={issue.createdAt} live />
                 </div>
               </div>
 
-              <p className="mt-2 font-OpenSans text-off-black text-xs tracking-wide">{issue.comment} </p>
+              <p className="mt-2 text-xs tracking-wide font-OpenSans text-off-black">
+                {issue.comment}{' '}
+              </p>
               {currentUser.id === issue.user.id && (
                 <div className="flex justify-end mt-1">
                   <Button
-                    variant='custom'
+                    variant="custom"
                     onClick={async () => {
                       toast.promise(
                         deleteIssue({
