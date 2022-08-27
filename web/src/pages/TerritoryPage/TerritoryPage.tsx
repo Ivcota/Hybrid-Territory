@@ -1,13 +1,15 @@
+import { MdArrowBack } from 'react-icons/md'
+import { CreateIssueVariables } from 'types/graphql'
+
 import { useAuth } from '@redwoodjs/auth'
 import { useForm } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags, useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
+
 import IssuesCell, { MUTATION } from 'src/components/IssuesCell'
 import ViewTerritoryCell from 'src/components/ViewTerritoryCell'
-import { CreateIssueVariables } from 'types/graphql'
 
-import { MdArrowBack } from "react-icons/md";
 import Button from '../../components/Button/Button'
 
 interface PageProps {
