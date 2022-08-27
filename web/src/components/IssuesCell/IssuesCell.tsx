@@ -95,7 +95,7 @@ export const Success = ({
                         {
                           loading: 'Loading...',
                           error: 'Error',
-                          success: 'Comment Issue Created',
+                          success: 'Comment Deleted...',
                         }
                       )
                     }}
