@@ -36,9 +36,9 @@ const TerritoryPage = ({ id }: PageProps) => {
   return (
     <>
       <MetaTags title="Territory" description="Territory page" />
-      <div className='pb-4 mb-2'>
+      <div className="pb-4 mb-2">
         <Link to={routes.myTerritories()}>
-          <Button variant='bare'>
+          <Button variant="bare">
             <MdArrowBack /> Back
           </Button>
         </Link>
@@ -49,55 +49,65 @@ const TerritoryPage = ({ id }: PageProps) => {
           <ViewTerritoryCell id={id} />
         </div>
         <div className="flex flex-col items-center">
-        <form
-          className="mt-10 lg:mt-0"
-          onSubmit={handleSubmit(async ({ comment }) => {
-            toast.promise(
-              createIssue({
-                variables: {
-                  input: {
-                    userId: currentUser.id,
-                    comment,
-                    isClosed: false,
-                    territoryId: id,
-                  },
-                } as CreateIssueVariables,
-              }),
-              {
-                loading: 'Loading...',
-                error: 'Error',
-                success: 'Comment Issue Created',
-              }
-            )
+          <form
+            className="mt-10 lg:mt-0"
+            onSubmit={handleSubmit(async ({ comment }) => {
+              toast.promise(
+                createIssue({
+                  variables: {
+                    input: {
+                      userId: currentUser.id,
+                      comment,
+                      isClosed: false,
+                      territoryId: id,
+                    },
+                  } as CreateIssueVariables,
+                }),
+                {
+                  loading: 'Loading...',
+                  error: 'Error',
+                  success: 'Comment Issue Created',
+                }
+              )
 
-            reset()
-          })}
-        >
-          <div className="flex flex-col items-start">
-            <h3 className='font-Roboto text-dark-blue mb-2 font-medium tracking-wider'>Publisher Feedback</h3>
-            <div className="w-3/4 text-transparent border-t border-htd-grey/50 lg:mb-4">
-              -
-            </div>
-            <div className='flex flex-col items-end'>
-              <input
-                autoComplete="off"
-                className={`px-3 py-2 transition-all outline-none w-80 lg:w-72 bg-white ring-1 ring-htd-grey rounded focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black caret-dark-blue ${errors.comment ? 'focus-within:ring-error caret-error' : 'focus-within:ring-light-blue/60'}`}
-                placeholder="Comment"
-                type="text"
-                {...register('comment', { required: 'Comment cannot be empty' })}
-              />
-              <div className={`flex ${errors.comment ? 'justify-between' : 'justify-end'} w-full my-2`}>
-                {errors.comment && (
-                  <p className="text-error">{errors.comment.message}</p>
-                )}
-                <Button variant='full'>
-                  Send
-                </Button>
+              reset()
+            })}
+          >
+            <div className="flex flex-col items-start">
+              <h3 className="mb-2 font-medium tracking-wider font-Roboto text-dark-blue">
+                Publisher Feedback
+              </h3>
+              <div className="w-3/4 text-transparent border-t border-htd-grey/50 lg:mb-4">
+                -
+              </div>
+              <div className="flex flex-col items-end">
+                <input
+                  autoComplete="off"
+                  className={`px-3 py-2 transition-all outline-none w-80 lg:w-72 bg-white ring-1 ring-htd-grey rounded focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black caret-dark-blue ${
+                    errors.comment
+                      ? 'focus-within:ring-error caret-error'
+                      : 'focus-within:ring-light-blue/60'
+                  }`}
+                  placeholder="Comment"
+                  type="text"
+                  {...register('comment', {
+                    required: 'Comment cannot be empty',
+                  })}
+                />
+                <div
+                  className={`flex ${
+                    errors.comment ? 'justify-between' : 'justify-end'
+                  } w-full my-2`}
+                >
+                  {errors.comment && (
+                    <p className="text-error">{errors.comment.message}</p>
+                  )}
+                  <Button variant="full">Send</Button>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-        <IssuesCell territoryId={id} />
+          </form>
+          <IssuesCell territoryId={id} />
         </div>
       </div>
       <Toaster />
