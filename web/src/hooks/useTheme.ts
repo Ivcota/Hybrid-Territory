@@ -1,4 +1,4 @@
-import create from "zustand/react";
+import create from "zustand";
 
 interface ThemeStore {
   theme: string;
