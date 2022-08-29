@@ -18,7 +18,7 @@ const Navbar = () => {
   const { isActive, toggle, currentUser } = useContext(layoutContext)
 
   return (
-    <nav className="sticky top-0 py-4 bg-white shadow-lg ">
+    <nav className="sticky top-0 py-4 bg-white shadow-lg dark:bg-gray-700">
       <div className="px-4 mx-auto lg:px-8">
         <div className="flex items-center justify-between gap-5 ">
           <Logo />

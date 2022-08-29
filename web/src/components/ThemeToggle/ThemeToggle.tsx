@@ -7,6 +7,8 @@ const ThemeToggle = () => {
   const themeToggleHandler = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
+    const mainHTML = document.querySelector('html');
+    mainHTML.classList.toggle("dark");
   }
 
   return (
