@@ -12,7 +12,7 @@ const ThemeToggle = () => {
   }
 
   return (
-    <div className='flex items-center justify-center w-8 text-off-black h-7' onClick={themeToggleHandler}>
+    <div className='flex items-center justify-center w-8 h-7' onClick={themeToggleHandler}>
       {theme === 'light' ? <BsSun size={20}/> : <BsMoon size={20}/>}
     </div>
   )
