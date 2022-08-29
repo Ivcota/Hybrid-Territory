@@ -20,6 +20,7 @@ export const QUERY = gql`
       spreadsheetURL
       isCompleted
       userId
+      imageURL
       __typename
     }
   }
@@ -62,8 +63,16 @@ export const Success = ({
       key={territory.id}
     >
       <div className="aspect-[4/3] w-full h-56 lg:h-64 flex justify-center items-center">
-        <a href={placeholderImg} target="_blank" rel="noreferrer">
-          <img className="rounded-md" src={placeholderImg} alt="Territory" />
+        <a
+          href={territory.imageURL ? territory.imageURL : placeholderImg}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            className="rounded-md"
+            src={territory.imageURL ? territory.imageURL : placeholderImg}
+            alt="Territory"
+          />
         </a>
       </div>
       <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
