@@ -23,6 +23,7 @@ model User {
   territories         Territory[]
   issues              Issue[]
   Record              Record[]
+  DNC                 DNC[]
 }
 
 model Territory {
@@ -35,6 +36,16 @@ model Territory {
   userId         String?
   issues         Issue[]
   Record         Record[]
+  DNC            DNC[]
+}
+
+model DNC {
+  id          String    @id @default(uuid())
+  createdBy   User      @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
+  territory   Territory @relation(fields: [territoryId], references: [id])
+  territoryId String
+  userId      String
 }
 
 model Issue {
