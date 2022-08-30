@@ -18,7 +18,8 @@ model User {
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
-  roles               String      @default("user")
+  // roles: deactivated, user, admin
+  roles               String      @default("deactivated")
   territories         Territory[]
   issues              Issue[]
   Record              Record[]
