@@ -9,8 +9,10 @@ import {
   useUpdateTerritoryMutation,
 } from 'src/generated/graphql'
 import type { AvailableTerritoriesQuery } from 'types/graphql'
+import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
 
 import Button from '../Button/Button'
+
 
 export const QUERY = gql`
   query AvailableTerritoriesQuery {
@@ -18,6 +20,7 @@ export const QUERY = gql`
       id
       name
       isCompleted
+      imageURL
     }
   }
 `
@@ -69,13 +72,16 @@ const TerritoryCard = ({ item }) => {
   const now = dayjs()
   return (
     <div
-      className="flex flex-row justify-between items-center gap-3 px-4 py-4 mb-3 bg-off-white transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32"
+      className="flex flex-row justify-between items-center gap-2 px-4 py-4 mb-3 bg-off-white lg:flex-col transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32"
       key={item.id}
     >
-      <div className='lg:h-full'>
-        <h2 className="text-xl text-center font-Roboto font-medium tracking-wider text-off-black text-ellipsis overflow-hidden whitespace-nowrap"> {item.name} </h2>
+      <div className='flex items-center justify-between w-full lg:h-full'>
+        <h2 className="overflow-hidden text-xl font-medium tracking-wider text-center font-Roboto text-off-black text-ellipsis whitespace-nowrap"> {item.name} </h2>
+        <div className='mr-3 text-htd-grey'>
+          {item.imageURL && <MdOutlinePhotoSizeSelectActual className='animate-pulse' size={24} />}
+        </div>
       </div>
-      <div className='lg:h-full flex items-end'>
+      <div className='flex items-end justify-end lg:h-full lg:w-full'>
         <Button
           variant='outline'
           onClick={async () => {
