@@ -1,8 +1,12 @@
-import { useClickOutside } from '@mantine/hooks'
-import { Link, NavLink, routes } from '@redwoodjs/router'
-import { motion } from 'framer-motion'
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react'
+
+import { useClickOutside } from '@mantine/hooks'
+import { motion } from 'framer-motion'
 import { FiMenu, FiX } from 'react-icons/fi'
+
+import { Link, NavLink, routes } from '@redwoodjs/router'
 
 type BaseLayoutProps = {
   children?: React.ReactNode
@@ -16,6 +20,10 @@ interface NavItem {
 const BaseLayout = ({ children }: BaseLayoutProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const ref = useClickOutside(() => setIsOpen(false))
+
+  const handleClick = () => {
+    setIsOpen(false)
+  }
 
   const navLinks: NavItem[] = [
     {
@@ -93,9 +101,7 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
         />
 
         <ul
-          onClick={() => {
-            setIsOpen(false)
-          }}
+          onClick={handleClick}
           className="flex flex-col items-center min-h-screen gap-4 pt-10"
         >
           {navLinks.map(({ title, route }, i) => {
