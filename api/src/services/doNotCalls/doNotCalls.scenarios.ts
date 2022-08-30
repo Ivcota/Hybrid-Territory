@@ -1,12 +1,12 @@
 import type { Prisma } from '@prisma/client'
 
-export const standard = defineScenario<Prisma.DNCCreateArgs>({
-  dnc: {
+export const standard = defineScenario<Prisma.DoNotCallCreateArgs>({
+  doNotCall: {
     one: {
       data: {
         createdBy: {
           create: {
-            email: 'String6747750',
+            email: 'String9068249',
             hashedPassword: 'String',
             salt: 'String',
           },
@@ -18,7 +18,7 @@ export const standard = defineScenario<Prisma.DNCCreateArgs>({
       data: {
         createdBy: {
           create: {
-            email: 'String3507200',
+            email: 'String9674567',
             hashedPassword: 'String',
             salt: 'String',
           },

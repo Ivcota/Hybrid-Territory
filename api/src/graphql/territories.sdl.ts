@@ -9,6 +9,7 @@ export const schema = gql`
     userId: String
     issues: [Issue]!
     Record: [Record]!
+    doNotCalls: [DoNotCall]!
   }
 
   type Query {
