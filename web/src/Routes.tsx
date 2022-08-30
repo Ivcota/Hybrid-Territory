@@ -8,8 +8,10 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { useAuth } from '@redwoodjs/auth'
-import { Router, Route, Set, routes, Private } from '@redwoodjs/router'
+import { Router, Route, Set, Private } from '@redwoodjs/router'
+
 import TerritoriesLayout from 'src/layouts/TerritoriesLayout'
+
 import BaseLayout from './layouts/BaseLayout/BaseLayout'
 import UserLayout from './layouts/UserLayout/UserLayout'
 
@@ -29,7 +31,7 @@ const Routes = () => {
         </Private>
         <Route prerender path="/about" page={AboutPage} name="about" />
         <Route prerender path="/" page={HomePage} name="home" />
-        <Private unauthenticated="home">
+        <Private unauthenticated="home" roles={['user', 'admin']}>
           <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
           <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
           <Route path="/user-account" page={UserAccountPage} name="userAccount" />
@@ -41,7 +43,6 @@ const Routes = () => {
           <Route path="/assign-territory" page={AssignTerritoryPage} name="assignTerritory" />
           <Route path="/records" page={RecordsPage} name="records" />
         </Private>
-
 
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
