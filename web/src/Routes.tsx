@@ -29,13 +29,18 @@ const Routes = () => {
             <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
           </Set>
         </Private>
-        <Route prerender path="/about" page={AboutPage} name="about" />
-        <Route prerender path="/" page={HomePage} name="home" />
-        <Private unauthenticated="home" roles={['user', 'admin']}>
-          <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
-          <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
-          <Route path="/user-account" page={UserAccountPage} name="userAccount" />
-          <Route path="/self-checkout" page={SelfCheckoutPage} name="selfCheckout" />
+        <Route path="/about" page={AboutPage} name="about" />
+        <Route path="/" page={HomePage} name="home" />
+        <Private unauthenticated="home">
+          <Route path="/deactivated" page={DeactivatedPage} name="deactivated" />
+        </Private>
+        <Private unauthenticated="home">
+          <Private unauthenticated="deactivated" roles={['user', 'admin']}>
+            <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
+            <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
+            <Route path="/user-account" page={UserAccountPage} name="userAccount" />
+            <Route path="/self-checkout" page={SelfCheckoutPage} name="selfCheckout" />
+          </Private>
         </Private>
 
         <Private unauthenticated="home" roles="admin">
