@@ -15,7 +15,11 @@ export const schema = gql`
     territories: [Territory!]! @requireAuth
     territory(id: String!): Territory @requireAuth
     userTerritories(userId: String!): [Territory!]! @requireAuth
-    searchTerritories( cardName: String, firstName: String, lastName: String): [Territory!]! @skipAuth
+    searchTerritories(
+      cardName: String
+      firstName: String
+      lastName: String
+    ): [Territory!]! @skipAuth
     availableTerritories: [Territory!]! @requireAuth
   }
 
