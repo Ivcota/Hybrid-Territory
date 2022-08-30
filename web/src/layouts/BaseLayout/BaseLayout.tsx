@@ -14,6 +14,7 @@ type BaseLayoutProps = {
 
 interface NavItem {
   title: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   route: any
 }
 
