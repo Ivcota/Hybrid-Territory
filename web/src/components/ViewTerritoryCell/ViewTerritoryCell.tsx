@@ -122,7 +122,7 @@ export const Success = ({
           }}
           disabled={loading ? true : false}
           variant="custom"
-          className={`tracking-wider text-white bg-error rounded-sm hover:bg-error/70 active:bg-error/70 pt-2 pb-2 ${
+          className={`tracking-wider text-white bg-accent rounded-sm hover:bg-accent/70 active:bg-accent/70 pt-2 pb-2 ${
             loading && 'animate-pulse'
           }`}
         >

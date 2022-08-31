@@ -62,7 +62,7 @@ const UserListTerritoryCard = ({
           heading="Turn in Territory Card?"
           text="This will turn in your territory card and notify the territory servant."
           fn={submitTerritory}
-          className="px-5 py-1 mt-2 font-medium tracking-wider transition-all duration-100 rounded-sm bg-none text-success/50 hover:text-accent active:text-light-blue font-Roboto animate-pulse"
+          className="px-5 py-1 mt-2 font-medium tracking-wider transition-all duration-100 rounded-sm bg-none text-success/60 hover:text-accent active:text-light-blue font-Roboto animate-pulse"
         />
       )}
     </div>

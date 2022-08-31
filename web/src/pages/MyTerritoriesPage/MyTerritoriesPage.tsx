@@ -1,9 +1,11 @@
 import { useAuth } from '@redwoodjs/auth'
 import { MetaTags } from '@redwoodjs/web'
+import { Link, routes } from '@redwoodjs/router'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import Modal from 'src/components/Modal/Modal'
 import { useSendMessageMutation } from 'src/generated/graphql'
 import UserTerritoriesCell from 'src/components/UserTerritoriesCell'
+import Button from 'src/components/Button/Button'
 
 const MyTerritoriesPage = () => {
   const { currentUser, loading } = useAuth()
@@ -40,13 +42,18 @@ const MyTerritoriesPage = () => {
         <div className="w-2/3 mx-auto text-transparent border-b border-off-black lg:mb-4">
           -
         </div>
-        <Modal
-          title={!isLoading ? 'Request New Territory' : 'Loading...'}
-          className="px-10 py-2 mx-auto mt-4 font-medium tracking-wider text-white transition-all duration-100 rounded-sm lg:mb-4 active:bg-teal-blue bg-accent hover:bg-accent/70 font-Roboto lg:w-1/3"
-          heading="Send Territory Request?"
-          text="This will send a text request the territory servant."
-          fn={sendMessageRightNow}
-        />
+        <div className="flex flex-col mx-auto lg:flex-row lg:justify-center lg:gap-4 lg:pb-4 lg:w-3/4">
+          <Modal
+            title={!isLoading ? 'Request New Territory' : 'Loading...'}
+            className="px-10 py-1 min-h-[40px] w-full mt-4 font-medium text-white transition-all duration-100 rounded-sm lg:min-h-[48px] lg:max-w-[300px] active:bg-teal-blue bg-accent hover:bg-accent/70 font-Roboto"
+            heading="Send Territory Request?"
+            text="This will send a text request the territory servant."
+            fn={sendMessageRightNow}
+          />
+          <Link to={routes.selfCheckout()} className='w-full lg:max-w-[300px]'>
+            <Button variant='custom' className='px-10 w-full min-h-[40px] mt-4 font-medium lg:min-h-[48px] bg-success hover:bg-success/70'>Checkout New Territory</Button>
+          </Link>
+        </div>
       </div>
 
       {!loading && <UserTerritoriesCell userId={currentUser?.id} />}
