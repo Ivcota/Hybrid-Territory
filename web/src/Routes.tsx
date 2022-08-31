@@ -8,8 +8,10 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { useAuth } from '@redwoodjs/auth'
-import { Router, Route, Set, routes, Private } from '@redwoodjs/router'
+import { Router, Route, Set, Private } from '@redwoodjs/router'
+
 import TerritoriesLayout from 'src/layouts/TerritoriesLayout'
+
 import BaseLayout from './layouts/BaseLayout/BaseLayout'
 import UserLayout from './layouts/UserLayout/UserLayout'
 
@@ -27,13 +29,18 @@ const Routes = () => {
             <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
           </Set>
         </Private>
-        <Route prerender path="/about" page={AboutPage} name="about" />
-        <Route prerender path="/" page={HomePage} name="home" />
+        <Route path="/about" page={AboutPage} name="about" />
+        <Route path="/" page={HomePage} name="home" />
         <Private unauthenticated="home">
-          <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
-          <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
-          <Route path="/user-account" page={UserAccountPage} name="userAccount" />
-          <Route path="/self-checkout" page={SelfCheckoutPage} name="selfCheckout" />
+          <Route path="/deactivated" page={DeactivatedPage} name="deactivated" />
+        </Private>
+        <Private unauthenticated="home">
+          <Private unauthenticated="deactivated" roles={['user', 'admin']}>
+            <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
+            <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
+            <Route path="/user-account" page={UserAccountPage} name="userAccount" />
+            <Route path="/self-checkout" page={SelfCheckoutPage} name="selfCheckout" />
+          </Private>
         </Private>
 
         <Private unauthenticated="home" roles="admin">
@@ -41,7 +48,6 @@ const Routes = () => {
           <Route path="/assign-territory" page={AssignTerritoryPage} name="assignTerritory" />
           <Route path="/records" page={RecordsPage} name="records" />
         </Private>
-
 
         <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
