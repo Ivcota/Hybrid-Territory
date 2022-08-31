@@ -1,11 +1,22 @@
+import { MdArrowBack } from 'react-icons/md'
 import { MetaTags } from '@redwoodjs/web'
 import AvailableTerritoriesCell from 'src/components/AvailableTerritoriesCell'
+
+import { Link, routes } from '@redwoodjs/router'
+import Button from 'src/components/Button/Button'
 
 const SelfCheckoutPage = () => {
   return (
     <>
       <MetaTags title="Self-Checkout" description="Self-Checkout page" />
       <div className="flex flex-col w-full">
+        <div className="mb-2">
+          <Link to={routes.myTerritories()}>
+            <Button variant="custom" className='flex items-center pl-0 font-medium text-dark-blue hover:text-accent active:text-light-blue lg:ml-12'>
+              <MdArrowBack /> My Territories
+            </Button>
+          </Link>
+        </div>
         <h1 className="text-2xl font-bold font-Roboto text-dark-blue lg:ml-12">
           Self Checkout
         </h1>
