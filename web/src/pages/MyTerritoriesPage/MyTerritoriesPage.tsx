@@ -1,5 +1,6 @@
 import { useAuth } from '@redwoodjs/auth'
 import { MetaTags } from '@redwoodjs/web'
+import { Link, routes } from '@redwoodjs/router'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import Modal from 'src/components/Modal/Modal'
 import { useSendMessageMutation } from 'src/generated/graphql'
@@ -49,7 +50,9 @@ const MyTerritoriesPage = () => {
             text="This will send a text request the territory servant."
             fn={sendMessageRightNow}
           />
-          <Button variant='custom' className='px-10 w-full min-h-[40px] mt-4 font-medium  lg:min-h-[48px]  bg-success hover:bg-success/70 '>Checkout New Territory</Button>
+          <Link to={routes.selfCheckout()}>
+            <Button variant='custom' className='px-10 w-full min-h-[40px] mt-4 font-medium  lg:min-h-[48px]  bg-success hover:bg-success/70 '>Checkout New Territory</Button>
+          </Link>
         </div>
       </div>
 
