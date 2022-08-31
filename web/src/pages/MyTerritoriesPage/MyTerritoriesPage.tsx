@@ -42,16 +42,16 @@ const MyTerritoriesPage = () => {
         <div className="w-2/3 mx-auto text-transparent border-b border-off-black lg:mb-4">
           -
         </div>
-        <div className="flex flex-col mx-auto lg:flex-row lg:justify-center lg:gap-4 lg:pb-4 lg:w-2/3">
+        <div className="flex flex-col mx-auto lg:flex-row lg:justify-center lg:gap-4 lg:pb-4 lg:w-3/4">
           <Modal
             title={!isLoading ? 'Request New Territory' : 'Loading...'}
-            className="px-10 py-1 min-h-[40px] w-full mt-4 font-medium tracking-wider text-white transition-all duration-100 rounded-sm lg:min-h-[48px]  active:bg-teal-blue bg-accent hover:bg-accent/70 font-Roboto"
+            className="px-10 py-1 min-h-[40px] w-full mt-4 font-medium text-white transition-all duration-100 rounded-sm lg:min-h-[48px] lg:max-w-[300px] active:bg-teal-blue bg-accent hover:bg-accent/70 font-Roboto"
             heading="Send Territory Request?"
             text="This will send a text request the territory servant."
             fn={sendMessageRightNow}
           />
-          <Link to={routes.selfCheckout()}>
-            <Button variant='custom' className='px-10 w-full min-h-[40px] mt-4 font-medium  lg:min-h-[48px]  bg-success hover:bg-success/70 '>Checkout New Territory</Button>
+          <Link to={routes.selfCheckout()} className='w-full lg:max-w-[300px]'>
+            <Button variant='custom' className='px-10 w-full min-h-[40px] mt-4 font-medium lg:min-h-[48px] bg-success hover:bg-success/70'>Checkout New Territory</Button>
           </Link>
         </div>
       </div>

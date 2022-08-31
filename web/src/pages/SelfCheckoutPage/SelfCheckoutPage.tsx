@@ -12,7 +12,7 @@ const SelfCheckoutPage = () => {
       <div className="flex flex-col w-full">
         <div className="mb-2">
           <Link to={routes.myTerritories()}>
-            <Button variant="custom" className='flex items-center pl-0 font-medium text-dark-blue hover:text-accent active:text-light-blue'>
+            <Button variant="custom" className='flex items-center pl-0 font-medium text-dark-blue hover:text-accent active:text-light-blue lg:ml-12'>
               <MdArrowBack /> My Territories
             </Button>
           </Link>
