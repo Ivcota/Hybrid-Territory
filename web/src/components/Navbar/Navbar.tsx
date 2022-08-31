@@ -21,7 +21,7 @@ export const Logo = () => {
 }
 
 const Navbar = () => {
-  const { isActive, toggle, currentUser } = useContext(layoutContext)
+  const { isActive, toggle } = useContext(layoutContext)
 
   return (
     <nav className="sticky top-0 py-4 duration-300 bg-white shadow-lg dark:bg-light-black-dark">
