@@ -1,5 +1,7 @@
-import { DbAuthHandler } from '@redwoodjs/api'
 import sgMail from '@sendgrid/mail'
+
+import { DbAuthHandler } from '@redwoodjs/api'
+
 import { db } from 'src/lib/db'
 
 sgMail.setApiKey(process.env.SENDGRID_API)
@@ -24,7 +26,7 @@ export const handler = async (event, context) => {
       //   message: `Reset your password here: https://hybrid-territory.vercel.app/reset-password?resetToken=${user.resetToken}`,
       // })
 
-     await sgMail.send({
+      await sgMail.send({
         from: 'hybridterritory@prolitigation.com',
         to: user.email,
         subject: `${user.firstName}, here's your password reset link.`,
