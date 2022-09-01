@@ -77,7 +77,7 @@ export const Success = ({
           />
         </a>
       </div>
-      <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
+      <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 dark:border-htd-grey-dark lg:mb-4">
         -
       </div>
       <h1 className="mt-3 ml-4 text-xl font-medium font-Roboto text-dark-blue dark:text-light-blue">
@@ -86,7 +86,7 @@ export const Success = ({
       <p className="ml-4 text-xs italic font-light font-OpenSans sm:text-base dark:text-off-white">
         Status:{' '}
         {territory.isCompleted ? (
-          <p className="inline text-base not-italic font-normal font-Roboto text-success ">
+          <p className="inline text-base not-italic font-normal font-Roboto text-success dark:text-success-dark">
             Completed
           </p>
         ) : (
@@ -104,7 +104,7 @@ export const Success = ({
       >
         <Button
           variant="custom"
-          className="flex items-center mt-6 mb-2 font-medium tracking-wider rounded-sm bg-none text-htd-grey hover:text-accent active:text-light-blue lg:mt-12"
+          className="flex items-center mt-6 mb-2 font-medium tracking-wider rounded-sm bg-none text-htd-grey dark:text-htd-grey-dark hover:text-accent dark:hover:text-accent-dark active:text-light-blue lg:mt-12"
         >
           View Spreadsheet
         </Button>
@@ -124,7 +124,7 @@ export const Success = ({
           }}
           disabled={loading ? true : false}
           variant="custom"
-          className={`tracking-wider text-white bg-accent rounded-sm hover:bg-accent/70 active:bg-accent/70 pt-2 pb-2 ${
+          className={`tracking-wider text-off-white bg-accent dark:bg-accent-dark rounded-sm hover:bg-accent/70 dark:hover:bg-accent-dark/70 active:bg-accent/70 pt-2 pb-2 ${
             loading && 'animate-pulse'
           }`}
         >
@@ -144,7 +144,7 @@ export const Success = ({
             })
           }}
           variant="custom"
-          className={`tracking-wider text-white bg-success rounded-sm hover:bg-success/70 active:bg-success/50 pt-2 pb-2 ${
+          className={`tracking-wider text-white bg-success dark:bg-success-dark rounded-sm hover:bg-success/70 dark:hover:bg-success-dark/70 active:bg-success/50 pt-2 pb-2 ${
             loading && 'animate-pulse'
           }`}
         >
