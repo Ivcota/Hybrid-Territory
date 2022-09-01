@@ -1,18 +1,19 @@
+import dayjs from 'dayjs'
+import _ from 'lodash'
+import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md'
+import type { AvailableTerritoriesQuery } from 'types/graphql'
+
 import { useAuth } from '@redwoodjs/auth'
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
-import dayjs from 'dayjs'
-import _ from 'lodash'
+
 import {
   useCreateRecordMutation,
   useSendMessageMutation,
   useUpdateTerritoryMutation,
 } from 'src/generated/graphql'
-import type { AvailableTerritoriesQuery } from 'types/graphql'
-import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
 
 import Button from '../Button/Button'
-
 
 export const QUERY = gql`
   query AvailableTerritoriesQuery {
@@ -51,9 +52,7 @@ export const Success = ({
             a.name.localeCompare(b.name, undefined, { numeric: true })
           )
           .map((item) => {
-            return (
-              <TerritoryCard item={item} key={item.id} />
-            )
+            return <TerritoryCard item={item} key={item.id} />
           })}
       </div>
       <Toaster />
@@ -75,15 +74,23 @@ const TerritoryCard = ({ item }) => {
       className="flex flex-row justify-between items-center gap-2 px-4 py-4 mb-3 bg-off-white lg:flex-col transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32"
       key={item.id}
     >
-      <div className='flex items-center justify-between w-full lg:h-full'>
-        <h2 className="overflow-hidden text-xl font-medium tracking-wider text-center font-Roboto text-off-black text-ellipsis whitespace-nowrap"> {item.name} </h2>
-        <div className='mr-3 text-htd-grey'>
-          {item.imageURL && <MdOutlinePhotoSizeSelectActual className='animate-pulse' size={24} />}
+      <div className="flex items-center justify-between w-full lg:h-full">
+        <h2 className="overflow-hidden text-xl font-medium tracking-wider text-center font-Roboto text-off-black text-ellipsis whitespace-nowrap">
+          {' '}
+          {item.name}{' '}
+        </h2>
+        <div className="mr-3 text-htd-grey">
+          {item.imageURL && (
+            <MdOutlinePhotoSizeSelectActual
+              className="animate-pulse"
+              size={24}
+            />
+          )}
         </div>
       </div>
-      <div className='flex items-end justify-end lg:h-full lg:w-full'>
+      <div className="flex items-end justify-end lg:h-full lg:w-full">
         <Button
-          variant='outline'
+          variant="outline"
           onClick={async () => {
             await toast.promise(
               updateTerritory({
