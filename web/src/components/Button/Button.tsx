@@ -24,7 +24,7 @@ const Button = ({ variant, className, children, ...props }: ButtonProps) => {
   if (variant === 'outline') {
     return (
       <button
-        className="px-5 py-1 font-medium tracking-wider transition-all duration-100 border rounded-sm bg-none text-dark-blue hover:text-accent active:text-light-blue border-dark-blue hover:border-accent active:border-light-blue font-Roboto"
+        className="px-5 py-1 font-medium tracking-wider transition-all duration-100 border rounded-sm bg-none text-dark-blue hover:text-accent active:text-light-blue border-dark-blue hover:border-accent active:border-light-blue font-Roboto dark:text-light-blue dark:outline-light-blue dark:hover:text-accent"
         {...props}
       >
         {children}
