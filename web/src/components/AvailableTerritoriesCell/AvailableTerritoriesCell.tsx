@@ -27,11 +27,11 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="mt-5 text-center animate-pulse">Loading...</div>
+  <div className="mt-5 text-center animate-pulse font-OpenSans text-off-black dark:text-off-white-dark">Loading...</div>
 )
 
 export const Empty = () => (
-  <div className="mt-5 text-xl font-bold text-center animate-pulse">
+  <div className="mt-5 text-xl font-bold text-center animate-pulse font-OpenSans text-off-black dark:text-off-white-dark">
     All Territories are checked out right now...
   </div>
 )
@@ -79,7 +79,7 @@ const TerritoryCard = ({ item }) => {
           {' '}
           {item.name}{' '}
         </h2>
-        <div className="mr-3 text-htd-grey">
+        <div className="mr-3 text-htd-grey dark:text-htd-grey-dark">
           {item.imageURL && (
             <MdOutlinePhotoSizeSelectActual
               className="animate-pulse"
