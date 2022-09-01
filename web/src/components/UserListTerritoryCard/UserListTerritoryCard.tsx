@@ -44,8 +44,7 @@ const UserListTerritoryCard = ({
       <h2 className="my-2 overflow-hidden text-xl font-medium text-center capitalize font-Roboto text-ellipsis dark:text-off-white ">
         {name}
       </h2>
-      <button
-        className="px-5 py-1 font-medium tracking-wider transition-all duration-100 border rounded-sm bg-none text-dark-blue hover:text-accent dark:hover:text-accent active:text-light-blue border-dark-blue hover:border-accent active:border-light-blue font-Roboto dark:text-light-blue dark:outline-light-blue"
+      <Button
         onClick={() =>
           navigate(
             routes.territory({
@@ -53,9 +52,10 @@ const UserListTerritoryCard = ({
             })
           )
         }
+        variant="outline"
       >
         View Territory
-      </button>
+      </Button>
 
       {isCompleted && (
         <Modal
