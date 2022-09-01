@@ -1,25 +1,15 @@
-import { useEffect } from 'react'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { BsSun, BsMoon } from 'react-icons/bs'
 
-import useTheme from 'src/hooks/useTheme'
+import { useThemeToggle } from 'src/hooks/useTheme'
 
 const ThemeToggle = () => {
-  const { theme, setTheme } = useTheme()
-
-  useEffect(() => {
-    if (localStorage.theme === 'dark') {
-      setTheme('dark');
-      document.querySelector('html').classList.add('dark')
-    } else {
-      document.querySelector('html').classList.remove('dark')
-    }
-  }, [setTheme])
-
-
+  const { theme, setTheme } = useThemeToggle()
   const themeToggleHandler = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(newTheme)
-    localStorage.theme = newTheme;
+    localStorage.theme = newTheme
     const mainHTML = document.querySelector('html')
     mainHTML.classList.toggle('dark')
   }
