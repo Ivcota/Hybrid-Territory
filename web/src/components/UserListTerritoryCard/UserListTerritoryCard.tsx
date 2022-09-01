@@ -1,9 +1,8 @@
-import Modal from '../Modal/Modal'
-import Button from '../Button/Button'
 import { navigate, routes } from '@redwoodjs/router'
 
 import placeholderImg from '../../assets/polaroid_placeholder.png'
-import testImg from '../../assets/testImg.png'
+import Button from '../Button/Button'
+import Modal from '../Modal/Modal'
 
 interface Props {
   territoryCard: {
@@ -14,6 +13,7 @@ interface Props {
     userId?: string
     isCompleted: boolean
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   submitTerritory: any
   loading: boolean
 }
@@ -23,8 +23,7 @@ const UserListTerritoryCard = ({
   submitTerritory,
   loading,
 }: Props) => {
-  const { id, name, isCompleted, spreadsheetURL, userId, imageURL } =
-    territoryCard
+  const { id, name, isCompleted, imageURL } = territoryCard
 
   return (
     <div
@@ -35,7 +34,7 @@ const UserListTerritoryCard = ({
       id={id}
     >
       <div className="aspect-[4/3] w-full h-56 flex justify-center items-center">
-        <img src={imageURL ? imageURL : placeholderImg} alt="Territory Photo" />
+        <img src={imageURL ? imageURL : placeholderImg} alt="Territory" />
       </div>
       <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
         -
