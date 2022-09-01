@@ -139,7 +139,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
               </div>
             </div>
           </Transition>
-          <div className="max-w-4xl px-4 mx-auto mt-5 bg-white">{children}</div>
+          <div className="max-w-4xl px-4 pt-5 mx-auto bg-white dark:bg-off-black">{children}</div>
         </main>
       </Provider>
     </>
