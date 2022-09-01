@@ -29,7 +29,9 @@ const UserListTerritoryCard = ({
     <div
       key={id}
       className={`w-64 px-3 py-4 rounded-lg shadow-sm flex flex-col justify-center items-center border-2 hover:-translate-y-3 transition-all duration-300 bg-off-white dark:bg-dark-grey-dark ${
-        isCompleted ? 'border-success/40' : ' border-transparent'
+        isCompleted
+          ? 'border-success/40 dark:border-success'
+          : ' border-transparent'
       } lg:justify-start`}
       id={id}
     >
