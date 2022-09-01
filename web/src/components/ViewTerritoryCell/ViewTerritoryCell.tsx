@@ -57,8 +57,10 @@ export const Success = ({
 
   return (
     <div
-      className={`flex flex-col justify-between px-5 py-4 rounded-md shadow-sm w-72 lg:w-96  bg-off-white border-2 ${
-        territory.isCompleted ? 'border-success/60' : 'border-transparent'
+      className={`flex flex-col justify-between px-5 py-4 pt-10 rounded-md shadow-sm w-72 dark:bg-dark-grey-dark lg:w-96  bg-off-white border-2 ${
+        territory.isCompleted
+          ? 'border-success/60 dark:border-success'
+          : 'border-transparent'
       }`}
       key={territory.id}
     >
@@ -78,17 +80,17 @@ export const Success = ({
       <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
         -
       </div>
-      <h1 className="mt-3 ml-4 text-xl font-medium font-Roboto text-dark-blue">
+      <h1 className="mt-3 ml-4 text-xl font-medium font-Roboto text-dark-blue dark:text-light-blue">
         {territory.name}
       </h1>
-      <p className="ml-4 text-xs italic font-light font-OpenSans sm:text-base">
+      <p className="ml-4 text-xs italic font-light font-OpenSans sm:text-base dark:text-off-white">
         Status:{' '}
         {territory.isCompleted ? (
-          <p className="inline text-base not-italic font-normal font-Roboto text-success">
+          <p className="inline text-base not-italic font-normal font-Roboto text-success ">
             Completed
           </p>
         ) : (
-          <p className="inline text-base not-italic font-normal font-Roboto text-dark-blue">
+          <p className="inline text-base not-italic font-normal font-Roboto text-dark-blue dark:text-light-blue">
             In Progress
           </p>
         )}
