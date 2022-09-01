@@ -24,9 +24,18 @@ export const useThemeToggle = () => {
     }
   }, [setTheme])
 
+  const themeToggleHandler = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    localStorage.theme = newTheme
+    const mainHTML = document.querySelector('html')
+    mainHTML.classList.toggle('dark')
+  }
+
   return {
     theme,
     setTheme,
+    themeToggleHandler,
   }
 }
 

@@ -5,14 +5,7 @@ import { BsSun, BsMoon } from 'react-icons/bs'
 import { useThemeToggle } from 'src/hooks/useTheme'
 
 const ThemeToggle = () => {
-  const { theme, setTheme } = useThemeToggle()
-  const themeToggleHandler = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    localStorage.theme = newTheme
-    const mainHTML = document.querySelector('html')
-    mainHTML.classList.toggle('dark')
-  }
+  const { theme, themeToggleHandler } = useThemeToggle()
 
   return (
     <div
