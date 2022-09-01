@@ -28,7 +28,7 @@ const UserListTerritoryCard = ({
   return (
     <div
       key={id}
-      className={`w-64 px-3 py-4 rounded-lg shadow-sm flex flex-col justify-center items-center border-2 hover:-translate-y-3 transition-all duration-300 bg-off-white ${
+      className={`w-64 px-3 py-4 rounded-lg shadow-sm flex flex-col justify-center items-center border-2 hover:-translate-y-3 transition-all duration-300 bg-off-white dark:bg-dark-grey-dark ${
         isCompleted ? 'border-success/40' : ' border-transparent'
       } lg:justify-start`}
       id={id}
@@ -39,11 +39,11 @@ const UserListTerritoryCard = ({
       <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
         -
       </div>
-      <h2 className="my-2 overflow-hidden text-xl font-medium text-center capitalize font-Roboto text-ellipsis">
-        {' '}
-        {name}{' '}
+      <h2 className="my-2 overflow-hidden text-xl font-medium text-center capitalize font-Roboto text-ellipsis dark:text-off-white ">
+        {name}
       </h2>
-      <Button
+      <button
+        className="px-5 py-1 font-medium tracking-wider transition-all duration-100 border rounded-sm bg-none text-dark-blue hover:text-accent dark:hover:text-accent active:text-light-blue border-dark-blue hover:border-accent active:border-light-blue font-Roboto dark:text-light-blue dark:outline-light-blue"
         onClick={() =>
           navigate(
             routes.territory({
@@ -51,10 +51,10 @@ const UserListTerritoryCard = ({
             })
           )
         }
-        variant="bare"
       >
         View Territory
-      </Button>
+      </button>
+
       {isCompleted && (
         <Modal
           title={!loading ? 'Turn In Territory' : 'Loading...'}
