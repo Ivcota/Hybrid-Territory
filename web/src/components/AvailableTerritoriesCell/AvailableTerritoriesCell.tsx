@@ -107,7 +107,7 @@ const TerritoryCard = ({ item }) => {
                 success: `${item.name} has been assigned to you.`,
               }
             )
-            await createRecord({
+            const recordPromise = createRecord({
               variables: {
                 input: {
                   territoryId: item.id,
@@ -116,12 +116,14 @@ const TerritoryCard = ({ item }) => {
                 },
               },
             })
-            await sendMessage({
+            const messagePromise = sendMessage({
               variables: {
                 phone: process.env.REDWOOD_ENV_PHONENUMBER,
                 message: `${currentUser?.firstName} checked out territory card ${item.name} at ${now}.`,
               },
             })
+
+            await Promise.all([recordPromise, messagePromise])
           }}
         >
           Checkout
