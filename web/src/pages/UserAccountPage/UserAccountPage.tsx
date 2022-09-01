@@ -61,7 +61,7 @@ const UserAccountPage = () => {
               })
             }
           )}
-          className="flex flex-col px-4 pb-4 mx-auto rounded shadow-xl shadow-black/5 bg-off-white dark:bg-dark-grey-dark w-80 mt-9 sm:w-96"
+          className="flex flex-col px-4 pb-4 mx-auto duration-300 rounded shadow-xl shadow-black/5 bg-off-white dark:bg-dark-grey-dark w-80 mt-9 sm:w-96"
         >
           <h2 className="mt-4 text-2xl font-bold text-center font-Roboto text-dark-blue dark:text-sky-blue-dark">
             Account Details
