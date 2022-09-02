@@ -5,6 +5,7 @@ import { NavLink, routes } from '@redwoodjs/router'
 import { createContext } from 'react'
 import { FiX } from 'react-icons/fi'
 import Navbar, { Logo } from 'src/components/Navbar/Navbar'
+import Button from 'src/components/Button/Button'
 import { useToggle } from 'src/hooks/useToggle'
 
 interface LayoutContext {
@@ -50,13 +51,13 @@ const UserLayout = ({ children }: UserLayoutProps) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className='gap-3 p-4 bg-white shadow-xl md:left-0 md:right-0 w-60 lg:w-72'>
+            <div className='gap-3 p-4 bg-white shadow-xl dark:bg-light-black-dark md:left-0 md:right-0 w-60 lg:w-72'>
             <div className="flex flex-col h-full min-w-full">
-              <div className="flex items-center justify-end w-full py-2">
+              <div className="flex items-center justify-end w-full py-2 text-off-black dark:text-htd-grey-dark">
                 <FiX onClick={toggle} size={25} />
               </div>
                 <div className="flex flex-col items-start justify-between h-full">
-                  <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 text-htd-grey">
+                  <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 text-htd-grey dark:text-htd-grey-dark">
                     <NavLink
                       className='text-base font-medium font-OpenSans hover:text-blue-300'
                       to={routes.home()}
@@ -91,8 +92,8 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     </NavLink>
                     {currentUser?.roles === 'admin' && (
                         <>
-                          <div className='w-full border-b-2 border-dark-blue'>
-                            <h3 className="mt-5 text-xl font-semibold tracking-wide font-Roboto text-off-black">Admin Settings</h3>
+                          <div className='w-full border-b-2 border-dark-blue dark:border-dark-blue-dark'>
+                            <h3 className="mt-5 text-xl font-semibold tracking-wide font-Roboto text-off-black dark:text-off-white-dark">Admin Settings</h3>
                           </div>
                         <NavLink
                           className='text-base font-medium font-OpenSans hover:text-violet-300'
@@ -129,12 +130,13 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                       </>
                     )}
                   </div>
-                  <button
-                    className="w-full px-3 py-2 tracking-wider uppercase rounded text-off-white text-md bg-accent font-Roboto hover:bg-accent/80"
+                  <Button
+                    variant='custom'
+                    className="w-full tracking-wider uppercase text-off-white text-md bg-accent font-Roboto hover:bg-accent/80"
                     onClick={logOut}
                   >
                     Logout
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

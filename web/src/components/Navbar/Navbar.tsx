@@ -30,7 +30,7 @@ const Navbar = () => {
           <Logo />
           <div className="flex items-center justify-center gap-3 text-off-black dark:text-off-white-dark">
             <ThemeToggle />
-            {!isActive && <FiMenu onClick={toggle} size={25} />}
+            <FiMenu onClick={toggle} size={25} />
           </div>
         </div>
       </div>
