@@ -66,19 +66,19 @@ export const Success = ({
         ).map((issue) => {
           return (
             <div
-              className="p-4 mt-6 rounded shadow-sm bg-off-white"
+              className="p-4 mt-6 rounded shadow-sm bg-off-white dark:bg-dark-grey-dark"
               key={issue.id}
             >
               <div className="flex items-center gap-2">
-                <h3 className="text-sm font-medium tracking-wider text-left font-Roboto text-dark-blue">
+                <h3 className="text-sm font-medium tracking-wider text-left font-Roboto text-dark-blue dark:text-sky-blue-dark">
                   {issue.user.firstName}
                 </h3>
-                <div className="text-xs italic tracking-wider text-htd-grey">
+                <div className="text-xs italic tracking-wider text-htd-grey dark:text-off-white-dark/80">
                   <ReactTimeago date={issue.createdAt} live />
                 </div>
               </div>
 
-              <p className="mt-2 text-xs tracking-wide font-OpenSans text-off-black">
+              <p className="mt-2 text-xs tracking-wide font-OpenSans text-off-black dark:text-off-white-dark">
                 {issue.comment}{' '}
               </p>
               {currentUser.id === issue.user.id && (
@@ -99,7 +99,7 @@ export const Success = ({
                         }
                       )
                     }}
-                    className="flex items-center px-5 py-1 font-medium tracking-wider transition-all duration-100 rounded-sm bg-none text-error hover:text-accent active:text-error/60 font-Roboto"
+                    className="flex items-center px-5 py-1 font-medium tracking-wider transition-all duration-100 rounded-sm bg-none text-error dark:text-error-dark hover:text-accent dark:hover:text-accent-dark active:text-error/60 font-Roboto"
                   >
                     Delete
                   </Button>

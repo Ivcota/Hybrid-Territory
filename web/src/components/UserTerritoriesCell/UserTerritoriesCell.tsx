@@ -1,15 +1,16 @@
-import { useAuth } from '@redwoodjs/auth'
-import { navigate, routes } from '@redwoodjs/router'
-import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
-import _ from 'lodash'
 import dayjs from 'dayjs'
+import _ from 'lodash'
+import type { MyTerritories } from 'types/graphql'
+
+import { useAuth } from '@redwoodjs/auth'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
+
 import {
   useSendMessageMutation,
   useUpdateRecordByIdsMutation,
   useUpdateTerritoryMutation,
 } from 'src/generated/graphql'
-import type { MyTerritories } from 'types/graphql'
-import Modal from '../Modal/Modal'
+
 import UserListTerritoryCard from '../UserListTerritoryCard/UserListTerritoryCard'
 
 export const QUERY = gql`
@@ -33,9 +34,9 @@ export const Loading = () => (
 )
 
 export const Empty = () => (
-  <div className="mt-10 text-lg text-center animate-pulse">
+  <div className="mt-10 text-lg text-center animate-pulse dark:text-off-white">
     <div className="py-4 ">
-      <p> You're empty.</p>
+      <p> You&#39;re empty.</p>
       <p>Request some territory.</p>
     </div>
   </div>
@@ -68,7 +69,7 @@ export const Success = ({
         .map((territoryCard) => {
           const submitTerritory = async () => {
             try {
-              await updateTerritory({
+              const updateTerritoryPromise = await updateTerritory({
                 variables: {
                   id: territoryCard.id,
                   input: {
@@ -78,7 +79,7 @@ export const Success = ({
                 },
               })
 
-              await updateRecordsByIds({
+              const updateRecordsByIdPromise = updateRecordsByIds({
                 variables: {
                   userId: currentUser.id,
                   territoryId: territoryCard.id,
@@ -88,12 +89,18 @@ export const Success = ({
                 },
               })
 
-              await sendMessage({
+              const sendMessagePromise = sendMessage({
                 variables: {
                   phone: process.env.REDWOOD_ENV_PHONENUMBER,
                   message: `${currentUser?.firstName} turned in territory card ${territoryCard.name} at ${now}.`,
                 },
               })
+
+              await Promise.all([
+                updateTerritoryPromise,
+                updateRecordsByIdPromise,
+                sendMessagePromise,
+              ])
             } catch (error) {
               console.log(error)
             }

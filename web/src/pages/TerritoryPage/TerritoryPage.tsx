@@ -74,18 +74,18 @@ const TerritoryPage = ({ id }: PageProps) => {
             })}
           >
             <div className="flex flex-col items-start">
-              <h3 className="mb-2 font-medium tracking-wider font-Roboto text-dark-blue">
+              <h3 className="mb-2 font-medium tracking-wider font-Roboto text-dark-blue dark:text-sky-blue-dark">
                 Publisher Feedback
               </h3>
-              <div className="w-3/4 text-transparent border-t border-htd-grey/50 lg:mb-4">
+              <div className="w-3/4 text-transparent border-t border-htd-grey/50 dark:border-htd-grey-dark lg:mb-4">
                 -
               </div>
               <div className="flex flex-col items-end">
                 <input
                   autoComplete="off"
-                  className={`px-3 py-2 transition-all outline-none w-80 lg:w-72 bg-white ring-1 ring-htd-grey rounded focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black caret-dark-blue ${
+                  className={`px-3 py-2 transition-all outline-none w-80 lg:w-72 bg-white dark:bg-light-black-dark ring-1 ring-htd-grey dark:ring-htd-grey-dark rounded focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black dark:text-off-white-dark caret-dark-blue dark:caret-sky-blue-dark ${
                     errors.comment
-                      ? 'focus-within:ring-error caret-error'
+                      ? 'focus-within:ring-error dark:focus-within:ring-error-dark caret-error dark:caret-error-dark'
                       : 'focus-within:ring-light-blue/60'
                   }`}
                   placeholder="Comment"
@@ -100,7 +100,7 @@ const TerritoryPage = ({ id }: PageProps) => {
                   } w-full my-2`}
                 >
                   {errors.comment && (
-                    <p className="text-error">{errors.comment.message}</p>
+                    <p className="text-error dark:text-error-dark">{errors.comment.message}</p>
                   )}
                   <Button variant="full">Send</Button>
                 </div>
