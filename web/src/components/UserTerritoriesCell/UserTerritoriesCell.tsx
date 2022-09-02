@@ -34,7 +34,7 @@ export const Loading = () => (
 )
 
 export const Empty = () => (
-  <div className="mt-10 text-lg text-center animate-pulse">
+  <div className="mt-10 text-lg text-center animate-pulse dark:text-off-white">
     <div className="py-4 ">
       <p> You&#39;re empty.</p>
       <p>Request some territory.</p>

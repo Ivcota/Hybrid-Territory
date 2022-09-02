@@ -8,6 +8,8 @@ import { FiMenu, FiX } from 'react-icons/fi'
 
 import { Link, NavLink, routes } from '@redwoodjs/router'
 
+import ThemeToggle from 'src/components/ThemeToggle/ThemeToggle'
+
 type BaseLayoutProps = {
   children?: React.ReactNode
 }
@@ -43,14 +45,14 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 bg-white shadow-md">
+      <header className="sticky top-0 z-20 bg-white shadow-md dark:bg-light-black-dark dark:text-off-white">
         <nav className="flex justify-between px-2 py-4 mx-auto md:max-w-4xl">
           <div className="text-2xl">
             <Link to={routes.home()}>
               Hybrid<span className="font-bold">Territory</span>
             </Link>
           </div>
-          <ul className="hidden gap-4 md:flex">
+          <ul className="items-center hidden gap-4 md:flex">
             {navLinks.map(({ title, route }, i) => {
               return (
                 <li key={i}>
@@ -63,6 +65,9 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
                 </li>
               )
             })}
+            <li>
+              <ThemeToggle />
+            </li>
           </ul>
           <FiMenu
             onClick={() => {
