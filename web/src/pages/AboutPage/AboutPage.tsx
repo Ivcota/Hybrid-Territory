@@ -5,7 +5,7 @@ const AboutPage = () => {
     <>
       <MetaTags title="About" description="About page" />
 
-      <h1 className="font-serif text-3xl ">About</h1>
+      <h1 className="font-serif text-3xl dark:text-off-white-dark">About</h1>
       <p className="mt-2 dark:text-off-white-dark">
         A simple territory distribution app. Documentation on how to use this
         will be provied shortly.

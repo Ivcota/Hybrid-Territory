@@ -45,7 +45,7 @@ const BaseLayout = ({ children }: BaseLayoutProps) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 bg-white shadow-md dark:bg-light-black-dark dark:text-off-white">
+      <header className="sticky top-0 z-20 transition-all duration-200 bg-white shadow-md dark:bg-light-black-dark dark:text-off-white">
         <nav className="flex justify-between px-2 py-4 mx-auto md:max-w-4xl">
           <div className="text-2xl">
             <Link to={routes.home()}>
