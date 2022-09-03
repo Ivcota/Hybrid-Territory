@@ -102,12 +102,9 @@ export const Success = ({
         className="flex items-center justify-center"
         rel="noreferrer"
       >
-        <Button
-          variant="custom"
-          className="flex items-center mt-6 mb-2 font-medium tracking-wider rounded-sm bg-none text-htd-grey dark:text-htd-grey-dark hover:text-accent dark:hover:text-accent-dark active:text-light-blue lg:mt-12"
-        >
+        <button className="flex items-center mt-6 mb-4 font-medium tracking-wider rounded-sm bg-none font-Roboto text-htd-grey dark:text-htd-grey-dark hover:text-accent dark:hover:text-accent-dark active:text-light-blue lg:mt-12">
           View Spreadsheet
-        </Button>
+        </button>
       </a>
 
       {territory.isCompleted ? (
