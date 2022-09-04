@@ -8,11 +8,8 @@ import { FiMenu, FiX } from 'react-icons/fi'
 
 import { Link, NavLink, routes } from '@redwoodjs/router'
 
-<<<<<<< HEAD
-=======
 import ThemeToggle from 'src/components/ThemeToggle/ThemeToggle'
 
->>>>>>> main
 type BaseLayoutProps = {
   children?: React.ReactNode
 }

@@ -29,12 +29,6 @@ const Routes = () => {
             <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
           </Set>
         </Private>
-<<<<<<< HEAD
-        <Route path="/about" page={AboutPage} name="about" />
-        <Route path="/" page={HomePage} name="home" />
-=======
-
->>>>>>> main
         <Private unauthenticated="home">
           <Route path="/deactivated" page={DeactivatedPage} name="deactivated" />
         </Private>
