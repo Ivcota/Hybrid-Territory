@@ -1,14 +1,17 @@
+import dayjs from 'dayjs'
+import _ from 'lodash'
+import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md'
+import type { AvailableTerritoriesQuery } from 'types/graphql'
+
 import { useAuth } from '@redwoodjs/auth'
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
-import dayjs from 'dayjs'
-import _ from 'lodash'
+
 import {
   useCreateRecordMutation,
   useSendMessageMutation,
   useUpdateTerritoryMutation,
 } from 'src/generated/graphql'
-import type { AvailableTerritoriesQuery } from 'types/graphql'
 
 import Button from '../Button/Button'
 
@@ -18,16 +21,17 @@ export const QUERY = gql`
       id
       name
       isCompleted
+      imageURL
     }
   }
 `
 
 export const Loading = () => (
-  <div className="mt-5 text-center animate-pulse">Loading...</div>
+  <div className="mt-5 text-center animate-pulse font-OpenSans text-off-black dark:text-off-white-dark">Loading...</div>
 )
 
 export const Empty = () => (
-  <div className="mt-5 text-xl font-bold text-center animate-pulse">
+  <div className="mt-5 text-xl font-bold text-center animate-pulse font-OpenSans text-off-black dark:text-off-white-dark">
     All Territories are checked out right now...
   </div>
 )
@@ -48,9 +52,7 @@ export const Success = ({
             a.name.localeCompare(b.name, undefined, { numeric: true })
           )
           .map((item) => {
-            return (
-              <TerritoryCard item={item} key={item.id} />
-            )
+            return <TerritoryCard item={item} key={item.id} />
           })}
       </div>
       <Toaster />
@@ -69,15 +71,26 @@ const TerritoryCard = ({ item }) => {
   const now = dayjs()
   return (
     <div
-      className="flex flex-row justify-between items-center gap-3 px-4 py-4 mb-3 bg-off-white transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32"
+      className="flex flex-row justify-between items-center gap-2 px-4 py-4 mb-3 bg-off-white lg:flex-col transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32 dark:bg-dark-grey-dark  "
       key={item.id}
     >
-      <div className='lg:h-full'>
-        <h2 className="text-xl text-center font-Roboto font-medium tracking-wider text-off-black text-ellipsis overflow-hidden whitespace-nowrap"> {item.name} </h2>
+      <div className="flex items-center justify-between w-full lg:h-full">
+        <h2 className="overflow-hidden text-xl font-medium tracking-wider text-center font-Roboto text-off-black text-ellipsis whitespace-nowrap dark:text-off-white">
+          {' '}
+          {item.name}{' '}
+        </h2>
+        <div className="mr-3 text-htd-grey dark:text-htd-grey-dark">
+          {item.imageURL && (
+            <MdOutlinePhotoSizeSelectActual
+              className="animate-pulse"
+              size={24}
+            />
+          )}
+        </div>
       </div>
-      <div className='lg:h-full flex items-end'>
+      <div className="flex items-end justify-end lg:h-full lg:w-full">
         <Button
-          variant='outline'
+          variant="outline"
           onClick={async () => {
             await toast.promise(
               updateTerritory({
@@ -94,7 +107,7 @@ const TerritoryCard = ({ item }) => {
                 success: `${item.name} has been assigned to you.`,
               }
             )
-            await createRecord({
+            const recordPromise = createRecord({
               variables: {
                 input: {
                   territoryId: item.id,
@@ -103,12 +116,14 @@ const TerritoryCard = ({ item }) => {
                 },
               },
             })
-            await sendMessage({
+            const messagePromise = sendMessage({
               variables: {
                 phone: process.env.REDWOOD_ENV_PHONENUMBER,
                 message: `${currentUser?.firstName} checked out territory card ${item.name} at ${now}.`,
               },
             })
+
+            await Promise.all([recordPromise, messagePromise])
           }}
         >
           Checkout

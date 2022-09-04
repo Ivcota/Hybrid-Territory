@@ -57,8 +57,10 @@ export const Success = ({
 
   return (
     <div
-      className={`flex flex-col justify-between px-5 py-4 rounded-md shadow-sm w-72 lg:w-96  bg-off-white border-2 ${
-        territory.isCompleted ? 'border-success/60' : 'border-transparent'
+      className={`flex flex-col justify-between px-5 py-4 pt-10 rounded-md shadow-sm w-72 dark:bg-dark-grey-dark lg:w-96  bg-off-white border-2 ${
+        territory.isCompleted
+          ? 'border-success/60 dark:border-success'
+          : 'border-transparent'
       }`}
       key={territory.id}
     >
@@ -75,20 +77,20 @@ export const Success = ({
           />
         </a>
       </div>
-      <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 lg:mb-4">
+      <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 dark:border-htd-grey-dark lg:mb-4">
         -
       </div>
-      <h1 className="mt-3 ml-4 text-xl font-medium font-Roboto text-dark-blue">
+      <h1 className="mt-3 ml-4 text-xl font-medium font-Roboto text-dark-blue dark:text-light-blue">
         {territory.name}
       </h1>
-      <p className="ml-4 text-xs italic font-light font-OpenSans sm:text-base">
+      <p className="ml-4 text-xs italic font-light font-OpenSans sm:text-base dark:text-off-white">
         Status:{' '}
         {territory.isCompleted ? (
-          <p className="inline text-base not-italic font-normal font-Roboto text-success">
+          <p className="inline text-base not-italic font-normal font-Roboto text-success dark:text-success-dark">
             Completed
           </p>
         ) : (
-          <p className="inline text-base not-italic font-normal font-Roboto text-dark-blue">
+          <p className="inline text-base not-italic font-normal font-Roboto text-dark-blue dark:text-light-blue">
             In Progress
           </p>
         )}
@@ -100,12 +102,9 @@ export const Success = ({
         className="flex items-center justify-center"
         rel="noreferrer"
       >
-        <Button
-          variant="custom"
-          className="flex items-center mt-6 mb-2 font-medium tracking-wider rounded-sm bg-none text-htd-grey hover:text-accent active:text-light-blue lg:mt-12"
-        >
+        <button className="flex items-center mt-6 mb-4 font-medium tracking-wider rounded-sm bg-none font-Roboto text-htd-grey dark:text-htd-grey-dark hover:text-accent dark:hover:text-accent-dark active:text-light-blue lg:mt-12">
           View Spreadsheet
-        </Button>
+        </button>
       </a>
 
       {territory.isCompleted ? (
@@ -122,7 +121,7 @@ export const Success = ({
           }}
           disabled={loading ? true : false}
           variant="custom"
-          className={`tracking-wider text-white bg-error rounded-sm hover:bg-error/70 active:bg-error/70 pt-2 pb-2 ${
+          className={`tracking-wider text-off-white bg-accent dark:bg-accent-dark rounded-sm hover:bg-accent/70 dark:hover:bg-accent-dark/70 active:bg-accent/70 pt-2 pb-2 ${
             loading && 'animate-pulse'
           }`}
         >
@@ -142,7 +141,7 @@ export const Success = ({
             })
           }}
           variant="custom"
-          className={`tracking-wider text-white bg-success rounded-sm hover:bg-success/70 active:bg-success/50 pt-2 pb-2 ${
+          className={`tracking-wider text-white bg-success dark:bg-success-dark rounded-sm hover:bg-success/70 dark:hover:bg-success-dark/70 active:bg-success/50 pt-2 pb-2 ${
             loading && 'animate-pulse'
           }`}
         >
