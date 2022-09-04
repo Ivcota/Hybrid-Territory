@@ -1,6 +1,7 @@
 export const schema = gql`
   type DoNotCall {
     id: String!
+    address: String!
     createdBy: User!
     createdAt: DateTime!
     territory: Territory!
@@ -17,6 +18,7 @@ export const schema = gql`
   input CreateDoNotCallInput {
     territoryId: String!
     userId: String!
+    address: String!
   }
 
   input UpdateDoNotCallInput {
