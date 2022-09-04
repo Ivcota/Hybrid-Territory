@@ -29,7 +29,6 @@ const Routes = () => {
             <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
           </Set>
         </Private>
-
         <Private unauthenticated="home">
           <Route path="/deactivated" page={DeactivatedPage} name="deactivated" />
         </Private>

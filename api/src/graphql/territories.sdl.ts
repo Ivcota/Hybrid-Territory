@@ -9,13 +9,18 @@ export const schema = gql`
     userId: String
     issues: [Issue]!
     Record: [Record]!
+    doNotCalls: [DoNotCall]!
   }
 
   type Query {
     territories: [Territory!]! @requireAuth
     territory(id: String!): Territory @requireAuth
     userTerritories(userId: String!): [Territory!]! @requireAuth
-    searchTerritories( cardName: String, firstName: String, lastName: String): [Territory!]! @skipAuth
+    searchTerritories(
+      cardName: String
+      firstName: String
+      lastName: String
+    ): [Territory!]! @skipAuth
     availableTerritories: [Territory!]! @requireAuth
   }
 
