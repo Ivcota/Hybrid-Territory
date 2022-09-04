@@ -16,6 +16,18 @@ export const doNotCall: QueryResolvers['doNotCall'] = ({ id }) => {
   })
 }
 
+export const territoryDoNotCalls: QueryResolvers['territoryDoNotCalls'] = ({
+  territoryId,
+}) => {
+  return db.doNotCall.findMany({
+    where: {
+      territoryId: {
+        equals: territoryId,
+      },
+    },
+  })
+}
+
 export const createDoNotCall: MutationResolvers['createDoNotCall'] = ({
   input,
 }) => {

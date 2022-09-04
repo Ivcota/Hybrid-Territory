@@ -11,6 +11,7 @@ export const schema = gql`
   type Query {
     doNotCalls: [DoNotCall!]! @requireAuth
     doNotCall(id: String!): DoNotCall @requireAuth
+    territoryDoNotCalls(territoryId: String): [DoNotCall!]! @requireAuth
   }
 
   input CreateDoNotCallInput {
