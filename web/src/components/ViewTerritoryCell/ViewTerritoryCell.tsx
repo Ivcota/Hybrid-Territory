@@ -11,6 +11,7 @@ import { useUpdateTerritoryMutation } from 'src/generated/graphql'
 
 import placeholderImg from '../../assets/polaroid_placeholder.png'
 import Button from '../Button/Button'
+import DNCModal from '../DNCModal/DNCModal'
 
 export const QUERY = gql`
   query FindViewTerritoryQuery($id: String!) {
@@ -107,9 +108,7 @@ export const Success = ({
         </button>
       </a>
 
-      <Button variant='custom' className='px-5 py-1 mb-4 font-medium tracking-wider transition-all duration-100 border rounded-sm bg-none text-error hover:text-error/70 active:text-error/50 border-error hover:border-error/70 active:border-error/50 font-Roboto dark:text-error-dark dark:border-error-dark/80 dark:hover:text-error-dark'>
-          Do Not Calls
-      </Button>
+      <DNCModal fn={() => {}} />
 
       {territory.isCompleted ? (
         <Button
