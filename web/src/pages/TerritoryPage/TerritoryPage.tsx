@@ -36,7 +36,7 @@ const TerritoryPage = ({ id }: PageProps) => {
   return (
     <>
       <MetaTags title="Territory" description="Territory page" />
-      <div className="pb-4 mb-2">
+      <div className="mb-4">
         <Link to={routes.myTerritories()}>
           <Button variant="bare">
             <MdArrowBack /> Back
