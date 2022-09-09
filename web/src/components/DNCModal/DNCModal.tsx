@@ -93,7 +93,7 @@ const DncModal = () => {
                     <div className="flex justify-between text-accent dark:text-accent-dark">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-medium leading-6 tracking-wide text-error dark:text-sky-blue-dark font-Roboto"
+                        className="text-lg font-medium leading-6 tracking-wide text-error dark:text-error-dark font-Roboto"
                       >
                         Do Not Calls
                       </Dialog.Title>
