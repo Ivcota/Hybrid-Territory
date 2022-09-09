@@ -1,3 +1,5 @@
+import { createContext } from 'react'
+
 import type {
   FindViewTerritoryQuery,
   FindTerritoryByIdVariables,
@@ -12,6 +14,13 @@ import { useUpdateTerritoryMutation } from 'src/generated/graphql'
 import placeholderImg from '../../assets/polaroid_placeholder.png'
 import Button from '../Button/Button'
 import DNCModal from '../DNCModal/DNCModal'
+
+interface IViewViewTerritoryCellContext {
+  territoryId: string
+}
+
+export const ViewTerritoryCellContext =
+  createContext<IViewViewTerritoryCellContext | null>(null)
 
 export const QUERY = gql`
   query FindViewTerritoryQuery($id: String!) {
@@ -107,8 +116,13 @@ export const Success = ({
           View Details
         </button>
       </a>
-
-      <DNCModal fn={() => {}} />
+      <ViewTerritoryCellContext.Provider
+        value={{
+          territoryId: territory.id,
+        }}
+      >
+        <DNCModal />
+      </ViewTerritoryCellContext.Provider>
 
       {territory.isCompleted ? (
         <Button
