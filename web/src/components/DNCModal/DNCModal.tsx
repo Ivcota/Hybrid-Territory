@@ -34,8 +34,9 @@ const DncModal = () => {
 
   const {
     register,
-    // formState: { errors },
+    formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<IForm>()
 
   const {
@@ -76,6 +77,7 @@ const DncModal = () => {
                   },
                 },
               })
+              reset()
             })}
           >
             <div className="fixed inset-0 overflow-y-auto backdrop-blur-sm bg-black/20 dark:bg-black/40">
@@ -107,12 +109,23 @@ const DncModal = () => {
                     <div className="box-border flex flex-col items-center">
                       <input
                         autoComplete="off"
-                        className="w-full px-3 py-2 my-2 transition-all bg-white rounded outline-none lg:w-72 dark:bg-light-black-dark ring-1 ring-htd-grey dark:ring-htd-grey-dark focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black dark:text-off-white-dark caret-dark-blue dark:caret-sky-blue-dark"
+                        className={`w-full px-3 py-2 my-2 transition-all bg-white rounded outline-none lg:w-72 dark:bg-light-black-dark ring-1 ring-htd-grey dark:ring-htd-grey-dark focus-within:ring-light-blue/60 focus-within:ring-2 font-OpenSans text-off-black dark:text-off-white-dark caret-dark-blue dark:caret-sky-blue-dark ${
+                          errors.comment
+                            ? 'focus-within:ring-error dark:focus-within:ring-error-dark caret-error dark:caret-error-dark'
+                            : 'focus-within:ring-light-blue/60'
+                        }`}
                         placeholder="Comment"
                         type="text"
-                        {...register('comment')}
+                        {...register('comment', {required: "DNC cannot be empty",})}
                       />
-                      <div className="flex justify-end w-full ">
+                      <div className={`flex justify-end w-full ${
+                        errors.comment ? 'justify-between' : 'justify-end'
+                      }`}>
+                        {errors.comment && (
+                          <p className="text-error dark:text-error-dark">
+                            {errors.comment.message}
+                          </p>
+                        )}
                         <Button variant="full">Send</Button>
                       </div>
                     </div>
