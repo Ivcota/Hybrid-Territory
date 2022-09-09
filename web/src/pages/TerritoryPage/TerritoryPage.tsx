@@ -100,7 +100,9 @@ const TerritoryPage = ({ id }: PageProps) => {
                   } w-full my-2`}
                 >
                   {errors.comment && (
-                    <p className="text-error dark:text-error-dark">{errors.comment.message}</p>
+                    <p className="text-error dark:text-error-dark">
+                      {errors.comment.message}
+                    </p>
                   )}
                   <Button variant="full">Send</Button>
                 </div>
