@@ -1,0 +1,7 @@
+mutation CreateTerritoryDNC($input: CreateDoNotCallInput!) {
+  createDoNotCall (input: $input ) {
+    id
+    address
+    createdAt
+  }
+}
