@@ -99,7 +99,11 @@ const DncModal = () => {
                       >
                         Do Not Calls
                       </Dialog.Title>
-                      <MdOutlineClose onClick={closeModal} size={20} className="hover:cursor-pointer hover:animate-pulse" />
+                      <MdOutlineClose
+                        onClick={closeModal}
+                        size={20}
+                        className="hover:cursor-pointer hover:animate-pulse"
+                      />
                     </div>
 
                     <div className="w-3/4 mt-2 text-transparent border-t border-htd-grey/50 dark:border-htd-grey-dark lg:mb-4" />
@@ -116,11 +120,15 @@ const DncModal = () => {
                         }`}
                         placeholder="Home Address"
                         type="text"
-                        {...register('comment', {required: "DNC cannot be empty",})}
+                        {...register('comment', {
+                          required: 'DNC cannot be empty',
+                        })}
                       />
-                      <div className={`flex justify-end w-full ${
-                        errors.comment ? 'justify-between' : 'justify-end'
-                      }`}>
+                      <div
+                        className={`flex justify-end w-full ${
+                          errors.comment ? 'justify-between' : 'justify-end'
+                        }`}
+                      >
                         {errors.comment && (
                           <p className="text-error dark:text-error-dark">
                             {errors.comment.message}
