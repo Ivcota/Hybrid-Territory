@@ -27,6 +27,12 @@ export type Scalars = {
   Time: any;
 };
 
+export type CreateDoNotCallInput = {
+  address: Scalars['String'];
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type CreateIssueInput = {
   comment: Scalars['String'];
   isClosed: Scalars['Boolean'];
@@ -60,6 +66,17 @@ export type CreateUserInput = {
   salt: Scalars['String'];
 };
 
+export type DoNotCall = {
+  __typename?: 'DoNotCall';
+  address: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  createdBy: User;
+  id: Scalars['String'];
+  territory: Territory;
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type Issue = {
   __typename?: 'Issue';
   comment: Scalars['String'];
@@ -79,20 +96,28 @@ export type MessageResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createDoNotCall: DoNotCall;
   createIssue: Issue;
   createRecord: Record;
   createTerritory: Territory;
   createUser: User;
+  deleteDoNotCall: DoNotCall;
   deleteIssue: Issue;
   deleteRecord: Record;
   deleteTerritory: Territory;
   deleteUser: User;
   sendMessage: MessageResponse;
+  updateDoNotCall: DoNotCall;
   updateIssue: Issue;
   updateRecord: Record;
   updateRecordByTerritoryAndUserId: Record;
   updateTerritory: Territory;
   updateUser: User;
+};
+
+
+export type MutationCreateDoNotCallArgs = {
+  input: CreateDoNotCallInput;
 };
 
 
@@ -113,6 +138,11 @@ export type MutationCreateTerritoryArgs = {
 
 export type MutationCreateUserArgs = {
   input: CreateUserInput;
+};
+
+
+export type MutationDeleteDoNotCallArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -139,6 +169,12 @@ export type MutationDeleteUserArgs = {
 export type MutationSendMessageArgs = {
   message: Scalars['String'];
   phone: Scalars['String'];
+};
+
+
+export type MutationUpdateDoNotCallArgs = {
+  id: Scalars['String'];
+  input: UpdateDoNotCallInput;
 };
 
 
@@ -175,6 +211,8 @@ export type MutationUpdateUserArgs = {
 export type Query = {
   __typename?: 'Query';
   availableTerritories: Array<Territory>;
+  doNotCall?: Maybe<DoNotCall>;
+  doNotCalls: Array<DoNotCall>;
   issue?: Maybe<Issue>;
   issues: Array<Issue>;
   issuesByTerritory?: Maybe<Array<Issue>>;
@@ -184,9 +222,15 @@ export type Query = {
   searchTerritories: Array<Territory>;
   territories: Array<Territory>;
   territory?: Maybe<Territory>;
+  territoryDoNotCalls: Array<DoNotCall>;
   user?: Maybe<User>;
   userTerritories: Array<Territory>;
   users: Array<User>;
+};
+
+
+export type QueryDoNotCallArgs = {
+  id: Scalars['String'];
 };
 
 
@@ -214,6 +258,11 @@ export type QuerySearchTerritoriesArgs = {
 
 export type QueryTerritoryArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryTerritoryDoNotCallsArgs = {
+  territoryId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -246,12 +295,21 @@ export type Redwood = {
 
 export type Territory = {
   __typename?: 'Territory';
+  Record: Array<Maybe<Record>>;
   User?: Maybe<User>;
+  doNotCalls: Array<Maybe<DoNotCall>>;
   id: Scalars['String'];
+  imageURL?: Maybe<Scalars['String']>;
   isCompleted: Scalars['Boolean'];
+  issues: Array<Maybe<Issue>>;
   name: Scalars['String'];
   spreadsheetURL?: Maybe<Scalars['String']>;
   userId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateDoNotCallInput = {
+  territoryId?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateIssueInput = {
@@ -308,6 +366,13 @@ export type CreateRecordMutationVariables = Exact<{
 
 
 export type CreateRecordMutation = { __typename?: 'Mutation', createRecord: { __typename?: 'Record', id: string } };
+
+export type CreateTerritoryDncMutationVariables = Exact<{
+  input: CreateDoNotCallInput;
+}>;
+
+
+export type CreateTerritoryDncMutation = { __typename?: 'Mutation', createDoNotCall: { __typename?: 'DoNotCall', id: string, address: string, createdAt: any } };
 
 export type SendMessageMutationVariables = Exact<{
   phone: Scalars['String'];
@@ -386,6 +451,41 @@ export function useCreateRecordMutation(baseOptions?: Apollo.MutationHookOptions
 export type CreateRecordMutationHookResult = ReturnType<typeof useCreateRecordMutation>;
 export type CreateRecordMutationResult = Apollo.MutationResult<CreateRecordMutation>;
 export type CreateRecordMutationOptions = Apollo.BaseMutationOptions<CreateRecordMutation, CreateRecordMutationVariables>;
+export const CreateTerritoryDncDocument = gql`
+    mutation CreateTerritoryDNC($input: CreateDoNotCallInput!) {
+  createDoNotCall(input: $input) {
+    id
+    address
+    createdAt
+  }
+}
+    `;
+export type CreateTerritoryDncMutationFn = Apollo.MutationFunction<CreateTerritoryDncMutation, CreateTerritoryDncMutationVariables>;
+
+/**
+ * __useCreateTerritoryDncMutation__
+ *
+ * To run a mutation, you first call `useCreateTerritoryDncMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTerritoryDncMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTerritoryDncMutation, { data, loading, error }] = useCreateTerritoryDncMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateTerritoryDncMutation(baseOptions?: Apollo.MutationHookOptions<CreateTerritoryDncMutation, CreateTerritoryDncMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTerritoryDncMutation, CreateTerritoryDncMutationVariables>(CreateTerritoryDncDocument, options);
+      }
+export type CreateTerritoryDncMutationHookResult = ReturnType<typeof useCreateTerritoryDncMutation>;
+export type CreateTerritoryDncMutationResult = Apollo.MutationResult<CreateTerritoryDncMutation>;
+export type CreateTerritoryDncMutationOptions = Apollo.BaseMutationOptions<CreateTerritoryDncMutation, CreateTerritoryDncMutationVariables>;
 export const SendMessageDocument = gql`
     mutation SendMessage($phone: String!, $message: String!) {
   sendMessage(phone: $phone, message: $message) {
@@ -607,6 +707,7 @@ export const namedOperations = {
   },
   Mutation: {
     CreateRecord: 'CreateRecord',
+    CreateTerritoryDNC: 'CreateTerritoryDNC',
     SendMessage: 'SendMessage',
     UpdateRecordByIds: 'UpdateRecordByIds',
     UpdateTerritory: 'UpdateTerritory',

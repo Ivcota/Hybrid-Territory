@@ -36,7 +36,7 @@ const TerritoryPage = ({ id }: PageProps) => {
   return (
     <>
       <MetaTags title="Territory" description="Territory page" />
-      <div className="pb-4 mb-2">
+      <div className="mb-4">
         <Link to={routes.myTerritories()}>
           <Button variant="bare">
             <MdArrowBack /> Back
@@ -100,7 +100,9 @@ const TerritoryPage = ({ id }: PageProps) => {
                   } w-full my-2`}
                 >
                   {errors.comment && (
-                    <p className="text-error dark:text-error-dark">{errors.comment.message}</p>
+                    <p className="text-error dark:text-error-dark">
+                      {errors.comment.message}
+                    </p>
                   )}
                   <Button variant="full">Send</Button>
                 </div>
