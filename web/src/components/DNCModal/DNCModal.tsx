@@ -5,6 +5,7 @@ import { MdOutlineClose } from 'react-icons/md'
 
 import { useAuth } from '@redwoodjs/auth'
 import { useForm } from '@redwoodjs/forms'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 import DoNotCallsCell from 'src/components/DoNotCallsCell'
 import { useCreateTerritoryDncMutation } from 'src/generated/graphql'
@@ -67,8 +68,8 @@ const DncModal = () => {
             <div className="fixed inset-0 bg-opacity-25 bg-off-black" />
           </Transition.Child>
           <form
-            onSubmit={handleSubmit(({ comment }) => {
-              mutate({
+            onSubmit={handleSubmit(async ({ comment }) => {
+              const addDNCPromise = mutate({
                 variables: {
                   input: {
                     address: comment,
@@ -77,6 +78,13 @@ const DncModal = () => {
                   },
                 },
               })
+
+              await toast.promise(addDNCPromise, {
+                error: 'Error',
+                loading: 'Sending...',
+                success: 'DNC Added',
+              })
+
               reset()
             })}
           >
