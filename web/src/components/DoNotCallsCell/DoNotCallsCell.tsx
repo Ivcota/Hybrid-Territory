@@ -5,6 +5,7 @@ import type {
 } from 'types/graphql'
 
 import { CellSuccessProps, CellFailureProps, useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 export const QUERY = gql`
   query DoNotCallsQuery($territoryId: String!) {
@@ -62,7 +63,11 @@ export const Success = ({
       } as DeleteDoNotCallMutationVariables,
     })
 
-    await Promise.all([deleteDNCPromise])
+    await toast.promise(deleteDNCPromise, {
+      error: 'Error',
+      loading: 'Removing...',
+      success: 'DNC Removed',
+    })
   }
 
   return (
