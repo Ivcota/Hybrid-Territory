@@ -33,6 +33,7 @@ model Territory {
   imageURL       String?
   spreadsheetURL String?
   isCompleted    Boolean  @default(false)
+  type           String   @default("letter writing") // letter writing, phone, in-person
   User           User?    @relation(fields: [userId], references: [id])
   userId         String?
   issues         Issue[]
@@ -68,6 +69,7 @@ model Record {
   id           String    @id @default(uuid())
   checkoutDate DateTime  @default(now())
   checkinDate  DateTime?
+  isResolved   Boolean   @default(false)
 
   user      User      @relation(fields: [userId], references: [id])
   territory Territory @relation(fields: [territoryId], references: [id])
