@@ -5,6 +5,7 @@ export const schema = gql`
     imageURL: String
     spreadsheetURL: String
     isCompleted: Boolean!
+    type: String!
     User: User
     userId: String
     issues: [Issue]!

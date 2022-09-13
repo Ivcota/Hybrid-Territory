@@ -1,9 +1,10 @@
-import { db } from 'src/lib/db'
 import type {
   QueryResolvers,
   MutationResolvers,
   TerritoryResolvers,
 } from 'types/graphql'
+
+import { db } from 'src/lib/db'
 
 export const territories: QueryResolvers['territories'] = () => {
   return db.territory.findMany()
@@ -54,15 +55,7 @@ export const Territory: TerritoryResolvers = {
 
 export const searchTerritories: QueryResolvers['searchTerritories'] = async ({
   cardName,
-  firstName,
-  lastName,
 }) => {
-  console.log({
-    cardName,
-    firstName,
-    lastName,
-  })
-
   return db.territory.findMany({
     where: {
       name: {
