@@ -20,6 +20,7 @@ const Routes = () => {
 
   return (
     <Router>
+      <Route path="/landing" page={LandingPage} name="landing" />
       <Set wrap={UserLayout}>
         <Private unauthenticated="home" roles="admin">
           <Set wrap={TerritoriesLayout}>
@@ -52,9 +53,10 @@ const Routes = () => {
       </Set>
       <Set wrap={!isAuthenticated ? BaseLayout : UserLayout}>
         <Route path="/about" page={AboutPage} name="about" />
-        <Route path="/" page={HomePage} name="home" />
+        <Route path="/home" page={HomePage} name="home" />
       </Set>
       <Route path="/login" page={LoginPage} name="login" />
+      <Route path="/" page={LandingPage} name="landing" />
       <Route path="/signup" page={SignupPage} name="signup" />
 
       <Route notfound page={NotFoundPage} />
