@@ -3,6 +3,7 @@ export const schema = gql`
     id: String!
     checkoutDate: DateTime!
     checkinDate: DateTime
+    isResolved: Boolean!
     user: User!
     territory: Territory!
     userId: String!
@@ -32,6 +33,10 @@ export const schema = gql`
     createRecord(input: CreateRecordInput!): Record! @requireAuth
     updateRecord(id: String!, input: UpdateRecordInput!): Record! @requireAuth
     deleteRecord(id: String!): Record! @requireAuth
-    updateRecordByTerritoryAndUserId( territoryId: String!, userId: String!, input: UpdateRecordInput!): Record! @requireAuth
+    updateRecordByTerritoryAndUserId(
+      territoryId: String!
+      userId: String!
+      input: UpdateRecordInput!
+    ): Record! @requireAuth
   }
 `
