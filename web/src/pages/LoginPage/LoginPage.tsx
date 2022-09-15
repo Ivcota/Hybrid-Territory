@@ -50,7 +50,9 @@ const LoginPage = () => {
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <header className='flex items-center justify-start w-full h-16 px-4'>
           <div className='flex flex-col'>
-            <h1 className='text-2xl font-Albert text-off-white'>Hybrid<span className='font-bold'>Territory</span></h1>
+            <Link to={routes.landing()}>
+              <h1 className='text-2xl font-Albert text-off-white'>Hybrid<span className='font-bold'>Territory</span></h1>
+            </Link>
             <p className='text-xs capitalize text-off-white font-Roboto'>your territory. simplified.</p>
           </div>
         </header>
