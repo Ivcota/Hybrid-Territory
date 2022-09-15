@@ -1,5 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
+
 import Button from 'src/components/Button/Button';
 
 import LandingBG from '../../../public/landingBg.svg';
