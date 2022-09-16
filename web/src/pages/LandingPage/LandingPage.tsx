@@ -14,12 +14,12 @@ const LandingPage = () => {
       <MetaTags title="Landing" description="Landing page" />
 
       <div className='relative w-full'>
-      <div className='max-h-screen overflow-hidden z-[-1]'>
-        <LandingBG className='' />
+      <div className='max-h-screen overflow-hidden'>
+        <LandingBG className='min-w-full min-h-screen ' />
       </div>
-        <div className='absolute top-0 left-0 flex flex-col items-center justify-between w-full h-full py-10 lg:py-16'>
+        <div className='absolute top-0 left-0 flex flex-col items-center justify-between w-full h-full py-10 2xl:justify-center 2xl:gap-28 2xl:py-12'>
           <div className='text-transparent'>-</div>
-          <div className='w-[300px] h-[400px] lg:w-[450px] lg:h-[550px] bg-white rounded-lg flex flex-col items-center justify-between p-6 lg:p-14'>
+          <div className='w-[300px] h-[400px] lg:w-[350px] lg:h-[450px] 2xl:w-[450px] 2xl:h-[550px] bg-white rounded-lg flex flex-col items-center justify-between p-6 lg:p-8 2xl:p-14'>
             <div className='flex flex-col items-center'>
               <h1 className='mb-1 text-2xl font-light lg:text-3xl font-Albert text-off-black'>Hybrid<span className='font-semibold'>Territory</span></h1>
               <p className='text-xs italic font-light tracking-wide lg:text-sm font-OpenSans text-off-black'>Your Territory. Simplified.</p>
