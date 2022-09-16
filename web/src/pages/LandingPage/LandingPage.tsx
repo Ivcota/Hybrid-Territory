@@ -1,3 +1,4 @@
+import { useAuth } from '@redwoodjs/auth'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
@@ -7,6 +8,7 @@ import LandingBG from '../../../public/landingBg.svg';
 import WelcomeIMG from '../../../public/welcomeImg.svg';
 
 const LandingPage = () => {
+  const { isAuthenticated } = useAuth();
   return (
     <>
       <MetaTags title="Landing" description="Landing page" />
@@ -26,7 +28,7 @@ const LandingPage = () => {
               <WelcomeIMG className='w-[238px] h-[240px] lg:w-[304px] lg:h-[307px]' />
             </div>
           </div>
-          <Link to={routes.login()}>
+          <Link to={!isAuthenticated ? routes.login() : routes.myTerritories()}>
             <Button variant='custom' className='font-medium tracking-wider text-dark-blue min-h-[39px] active:bg-light-blue active:text-off-white bg-off-white lg:hover:bg-dark-blue lg:hover:text-off-white'>ENTER</Button>
           </Link>
         </div>
