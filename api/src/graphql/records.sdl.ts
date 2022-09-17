@@ -27,6 +27,7 @@ export const schema = gql`
     checkinDate: DateTime
     userId: String
     territoryId: String
+    isResolved: Boolean
   }
 
   type Mutation {
