@@ -1,11 +1,34 @@
-import { useContext, useMemo } from 'react'
-
+import {
+  createColumnHelper,
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from '@tanstack/react-table'
 import dayjs from 'dayjs'
 import type { RecordsQuery } from 'types/graphql'
 
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
-import { RecordsPageFilterContext } from 'src/pages/RecordsPage/RPC'
+import { useUpdateRecordByIdMutation } from 'src/generated/graphql'
+
+import Button from '../Button/Button'
+
+interface ITableRecord {
+  __typename?: 'Record'
+  id: string
+  checkinDate?: string
+  checkoutDate: string
+  isResolved: boolean
+  territory: {
+    __typename?: 'Territory'
+    name: string
+  }
+  user: {
+    __typename?: 'User'
+    firstName?: string
+    lastName?: string
+  }
+}
 
 export const QUERY = gql`
   query RecordsQuery {
@@ -20,6 +43,7 @@ export const QUERY = gql`
       }
       checkinDate
       checkoutDate
+      isResolved
     }
   }
 `
@@ -33,51 +57,126 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
-  const { territoryName } = useContext(RecordsPageFilterContext)
+  const [updateRecord] = useUpdateRecordByIdMutation()
 
-  const filteredRecords = useMemo(() => {
-    if (territoryName !== undefined && territoryName !== '') {
-      console.log(territoryName)
-      return records.filter(({ territory: { name } }) => {
-        return name === territoryName
-      })
-    }
+  const resolveRecord = async (id: string) => {
+    await updateRecord({
+      variables: {
+        id,
+        input: {
+          isResolved: true,
+        },
+      },
+      refetchQueries: ['RecordsQuery'],
+    })
+  }
 
-    return records
-  }, [records, territoryName])
+  const unResolveRecord = async (id: string) => {
+    await updateRecord({
+      variables: {
+        id,
+        input: {
+          isResolved: false,
+        },
+      },
+      refetchQueries: ['RecordsQuery'],
+    })
+  }
+
+  const columnHelper = createColumnHelper<ITableRecord>()
+
+  const columns = [
+    columnHelper.accessor('id', {
+      id: 'id',
+      cell: (info) => info.getValue(),
+      header: () => <span>Id</span>,
+      enableHiding: true,
+    }),
+    columnHelper.accessor('territory.name', {
+      cell: (info) => info.getValue(),
+      header: () => <span>Name</span>,
+    }),
+    columnHelper.accessor('checkoutDate', {
+      header: () => <span>Checkout Date</span>,
+      cell: (info) => dayjs(info.getValue()).format('MM/DD/YYYY'),
+    }),
+    columnHelper.accessor('checkinDate', {
+      header: () => <span>Checkin Date</span>,
+      cell: (info) =>
+        info.getValue() ? dayjs(info.getValue()).format('MM/DD/YYYY') : '',
+    }),
+    columnHelper.accessor('user', {
+      header: () => <span>Publisher</span>,
+      cell: (info) =>
+        info.getValue().firstName + ' ' + info.getValue().lastName,
+    }),
+    columnHelper.accessor('isResolved', {
+      header: () => <span>Synced</span>,
+      cell: (info) =>
+        !info.getValue() ? (
+          <Button
+            onClick={async () => await resolveRecord(info.row.getValue('id'))}
+            variant="custom"
+            className={`bg-dark-blue active:translate-y-1 `}
+          >
+            Resolve
+          </Button>
+        ) : (
+          <Button
+            onClick={async () => await unResolveRecord(info.row.getValue('id'))}
+            variant="custom"
+            className="bg-red-600 active:translate-y-1"
+          >
+            Unresolve
+          </Button>
+        ),
+    }),
+  ]
+
+  const table = useReactTable({
+    columns,
+    data: records,
+    getCoreRowModel: getCoreRowModel(),
+  })
 
   return (
-    <div className="flex flex-col items-center justify-center mt-4 ">
-      {filteredRecords
-        .slice()
-        .sort((a, b) =>
-          a.territory.name.localeCompare(b.territory.name, undefined, {
-            numeric: true,
-          })
-        )
-        .map((item) => {
-          return (
-            <div
-              key={item.id}
-              className="flex flex-col items-center w-56 py-5 mt-3 border-0 rounded shadow-md"
+    <div className="relative flex flex-col items-center justify-center mt-4 overflow-x-auto rounded dark:text-off-white ">
+      <table className="w-full text-sm text-left text-gray-500 dark:text-white">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-dark-grey-dark dark:text-gray-400">
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th
+                  key={header.id}
+                  scope="col"
+                  className="px-6 py-3 text-center"
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr
+              key={row.id}
+              className="bg-white border-b dark:bg-dark-grey-dark dark:border-gray-700"
             >
-              <h2 className="text-center">
-                {item.territory.name} | {item.user.firstName}{' '}
-                {item.user.lastName}
-              </h2>
-              <div className="flex flex-1 gap-2 mt-1 ">
-                <div className="basis-1/2">
-                  {dayjs(item.checkoutDate).format('MM/DD/YYYY')}
-                </div>
-                <div className="basis-1/2">
-                  {item.checkinDate
-                    ? dayjs(item.checkinDate).format('MM/DD/YYYY')
-                    : ''}
-                </div>
-              </div>
-            </div>
-          )
-        })}
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className="text-center">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }

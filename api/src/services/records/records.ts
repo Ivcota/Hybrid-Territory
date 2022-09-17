@@ -7,7 +7,16 @@ import type {
 import { db } from 'src/lib/db'
 
 export const records: QueryResolvers['records'] = () => {
-  return db.record.findMany()
+  return db.record.findMany({
+    orderBy: [
+      {
+        checkinDate: 'asc',
+      },
+      {
+        isResolved: 'asc',
+      },
+    ],
+  })
 }
 
 export const record: QueryResolvers['record'] = ({ id }) => {
