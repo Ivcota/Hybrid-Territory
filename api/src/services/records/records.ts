@@ -10,6 +10,11 @@ export const records: QueryResolvers['records'] = () => {
   return db.record.findMany({
     orderBy: [
       {
+        territory: {
+          name: 'asc',
+        },
+      },
+      {
         checkinDate: 'asc',
       },
       {

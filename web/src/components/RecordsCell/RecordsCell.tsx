@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import type { RecordsQuery } from 'types/graphql'
 
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useUpdateRecordByIdMutation } from 'src/generated/graphql'
 
@@ -59,8 +60,16 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
   const [updateRecord] = useUpdateRecordByIdMutation()
 
+  const handleToastPromise = async (promise: Promise<any>) => {
+    await toast.promise(promise, {
+      error: 'Error',
+      loading: 'Loading...',
+      success: 'Record Updated',
+    })
+  }
+
   const resolveRecord = async (id: string) => {
-    await updateRecord({
+    const updatePromise = updateRecord({
       variables: {
         id,
         input: {
@@ -69,10 +78,12 @@ export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
       },
       refetchQueries: ['RecordsQuery'],
     })
+
+    await handleToastPromise(updatePromise)
   }
 
   const unResolveRecord = async (id: string) => {
-    await updateRecord({
+    const updatePromise = updateRecord({
       variables: {
         id,
         input: {
@@ -81,6 +92,8 @@ export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
       },
       refetchQueries: ['RecordsQuery'],
     })
+
+    await handleToastPromise(updatePromise)
   }
 
   const columnHelper = createColumnHelper<ITableRecord>()
@@ -177,6 +190,7 @@ export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
           ))}
         </tbody>
       </table>
+      <Toaster />
     </div>
   )
 }
