@@ -60,7 +60,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
   const [updateRecord] = useUpdateRecordByIdMutation()
 
-  const handleToastPromise = async (promise: Promise<any>) => {
+  const handleToastPromise = async (promise: Promise<unknown>) => {
     await toast.promise(promise, {
       error: 'Error',
       loading: 'Loading...',
