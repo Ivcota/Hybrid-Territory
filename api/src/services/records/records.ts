@@ -1,12 +1,27 @@
-import { db } from 'src/lib/db'
 import type {
   QueryResolvers,
   MutationResolvers,
   RecordResolvers,
 } from 'types/graphql'
 
+import { db } from 'src/lib/db'
+
 export const records: QueryResolvers['records'] = () => {
-  return db.record.findMany()
+  return db.record.findMany({
+    orderBy: [
+      {
+        territory: {
+          name: 'asc',
+        },
+      },
+      {
+        checkinDate: 'asc',
+      },
+      {
+        isResolved: 'asc',
+      },
+    ],
+  })
 }
 
 export const record: QueryResolvers['record'] = ({ id }) => {

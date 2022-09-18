@@ -5628,6 +5628,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-table@npm:^8.5.13":
+  version: 8.5.13
+  resolution: "@tanstack/react-table@npm:8.5.13"
+  dependencies:
+    "@tanstack/table-core": 8.5.13
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: fa67301d24c86ee5343b9f3e852cfca26dab873752d20c71a3fcfed49f4bb0f2b7f19c813ca3b195679a7a75705a9a32fa732d410d27d4853c93a1b9f4cc30d1
+  languageName: node
+  linkType: hard
+
+"@tanstack/table-core@npm:8.5.13":
+  version: 8.5.13
+  resolution: "@tanstack/table-core@npm:8.5.13"
+  checksum: 51fd45d5776370990e98aca303c0f132c6fb65dae913c44fe49b1f8e4ce23443a6eae7c8c3403198f979d37feda3a65fd681cabc62ca6b65026afcbc20fd0029
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^8.0.0, @testing-library/dom@npm:^8.11.1":
   version: 8.13.0
   resolution: "@testing-library/dom@npm:8.13.0"
@@ -24321,6 +24340,7 @@ __metadata:
     "@redwoodjs/router": ^2.1.1
     "@redwoodjs/web": ^2.1.1
     "@storybook/react": 6.5.9
+    "@tanstack/react-table": ^8.5.13
     "@types/lodash": ^4.14.182
     "@types/prop-types": 15.7.5
     "@types/react": 17.0.2

@@ -22,6 +22,7 @@
     "@redwoodjs/router": "^2.1.1",
     "@redwoodjs/web": "^2.1.1",
     "@storybook/react": "6.5.9",
+    "@tanstack/react-table": "^8.5.13",
     "dayjs": "^1.11.3",
     "framer-motion": "^6.3.10",
     "lodash": "^4.17.21",

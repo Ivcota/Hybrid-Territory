@@ -1,0 +1,6 @@
+mutation updateRecordById ($id: String! $input: UpdateRecordInput!) {
+  updateRecord (id: $id, input: $input) {
+    id
+    isResolved
+  }
+}
