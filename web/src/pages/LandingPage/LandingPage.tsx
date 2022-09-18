@@ -17,7 +17,7 @@ const LandingPage = () => {
       <div className='max-h-screen overflow-hidden'>
         <LandingBG className='min-w-full min-h-screen ' />
       </div>
-        <div className='absolute top-0 left-0 flex flex-col items-center justify-between w-full h-full py-10 xl:justify-center lg:gap-6 2xl:gap-10 2xl:py-12'>
+        <div className='absolute top-0 left-0 flex flex-col items-center justify-between w-full h-full py-10 md:justify-center md:gap-6 2xl:gap-10 2xl:py-12'>
           <div className='text-transparent'>-</div>
           <div className='w-[300px] h-[400px] lg:w-[350px] lg:h-[450px] 2xl:w-[450px] 2xl:h-[550px] bg-white rounded-lg flex flex-col items-center justify-between p-6 lg:p-8 2xl:p-14'>
             <div className='flex flex-col items-center'>
