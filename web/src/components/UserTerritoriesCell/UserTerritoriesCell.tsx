@@ -85,6 +85,7 @@ export const Success = ({
                   territoryId: territoryCard.id,
                   input: {
                     checkinDate: dayjs(),
+                    isResolved: false,
                   },
                 },
               })
