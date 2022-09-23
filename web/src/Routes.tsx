@@ -12,6 +12,7 @@ import { Router, Route, Set, Private } from '@redwoodjs/router'
 
 import TerritoriesLayout from 'src/layouts/TerritoriesLayout'
 
+import EntryLayout from './layouts/EntryLayout/EntryLayout'
 import BaseLayout from './layouts/BaseLayout/BaseLayout'
 import UserLayout from './layouts/UserLayout/UserLayout'
 
@@ -20,6 +21,7 @@ const Routes = () => {
 
   return (
     <Router>
+      <Route path="/landing" page={LandingPage} name="landing" />
       <Set wrap={UserLayout}>
         <Private unauthenticated="home" roles="admin">
           <Set wrap={TerritoriesLayout}>
@@ -52,10 +54,14 @@ const Routes = () => {
       </Set>
       <Set wrap={!isAuthenticated ? BaseLayout : UserLayout}>
         <Route path="/about" page={AboutPage} name="about" />
-        <Route path="/" page={HomePage} name="home" />
+        <Route path="/home" page={HomePage} name="home" />
       </Set>
-      <Route path="/login" page={LoginPage} name="login" />
-      <Route path="/signup" page={SignupPage} name="signup" />
+
+      <Route path="/" page={LandingPage} name="landing" />
+      <Set wrap={EntryLayout}>
+        <Route path="/login" page={LoginPage} name="login" />
+        <Route path="/signup" page={SignupPage} name="signup" />
+      </Set>
 
       <Route notfound page={NotFoundPage} />
     </Router>
