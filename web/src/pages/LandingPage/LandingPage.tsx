@@ -29,7 +29,7 @@ const LandingPage = () => {
             </div>
           </div>
           <Link to={!isAuthenticated ? routes.login() : routes.myTerritories()}>
-            <Button variant='custom' className='font-medium tracking-wider text-dark-blue min-h-[39px] active:bg-light-blue active:text-off-white bg-off-white lg:hover:bg-dark-blue lg:hover:text-off-white'>ENTER</Button>
+            <Button variant='custom' className='font-medium tracking-wider text-dark-blue min-h-[39px] active:bg-light-blue active:text-off-white bg-white lg:hover:bg-dark-blue lg:hover:text-off-white'>ENTER</Button>
           </Link>
         </div>
       </div>
