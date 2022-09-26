@@ -13,6 +13,7 @@ export const schema = gql`
   type Query {
     records: [Record!]! @requireAuth
     record(id: String!): Record @requireAuth
+    latestCheckInDate(territoryId: String!): Record @requireAuth
   }
 
   input CreateRecordInput {

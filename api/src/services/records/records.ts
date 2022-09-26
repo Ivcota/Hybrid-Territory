@@ -52,6 +52,19 @@ export const deleteRecord: MutationResolvers['deleteRecord'] = ({ id }) => {
   })
 }
 
+export const latestCheckInDate: QueryResolvers['latestCheckInDate'] = ({
+  territoryId,
+}) => {
+  return db.record.findFirst({
+    where: {
+      territoryId,
+    },
+    orderBy: {
+      checkinDate: 'desc',
+    },
+  })
+}
+
 export const updateRecordByTerritoryAndUserId: MutationResolvers['updateRecordByTerritoryAndUserId'] =
   async ({ territoryId, userId, input }) => {
     const record = await db.record.findFirst({
