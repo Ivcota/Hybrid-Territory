@@ -15,43 +15,42 @@ import Button from '../Button/Button'
 import { ITerritory } from '.'
 
 export function UpdateTerritoryButton(props) {
+  const handleClick = async () => {
+    await toast.promise(
+      props.updateTerritory({
+        variables: {
+          id: props.item.id,
+          input: {
+            userId: props.currentUser?.id,
+          },
+        },
+      }),
+      {
+        loading: 'loading...',
+        error: 'Error...',
+        success: `${props.item.name} has been assigned to you.`,
+      }
+    )
+    const recordPromise = props.createRecord({
+      variables: {
+        input: {
+          territoryId: props.item.id,
+          userId: props.currentUser.id,
+          checkoutDate: props.now,
+        },
+      },
+    })
+    const messagePromise = props.sendMessage({
+      variables: {
+        phone: process.env.REDWOOD_ENV_PHONENUMBER,
+        message: `${props.currentUser?.firstName} checked out territory card ${props.item.name} at ${props.now}.`,
+      },
+    })
+    await Promise.all([recordPromise, messagePromise])
+  }
+
   return (
-    <Button
-      variant="outline"
-      onClick={async () => {
-        await toast.promise(
-          props.updateTerritory({
-            variables: {
-              id: props.item.id,
-              input: {
-                userId: props.currentUser?.id,
-              },
-            },
-          }),
-          {
-            loading: 'loading...',
-            error: 'Error...',
-            success: `${props.item.name} has been assigned to you.`,
-          }
-        )
-        const recordPromise = props.createRecord({
-          variables: {
-            input: {
-              territoryId: props.item.id,
-              userId: props.currentUser.id,
-              checkoutDate: props.now,
-            },
-          },
-        })
-        const messagePromise = props.sendMessage({
-          variables: {
-            phone: process.env.REDWOOD_ENV_PHONENUMBER,
-            message: `${props.currentUser?.firstName} checked out territory card ${props.item.name} at ${props.now}.`,
-          },
-        })
-        await Promise.all([recordPromise, messagePromise])
-      }}
-    >
+    <Button variant="outline" onClick={handleClick}>
       Checkout
     </Button>
   )
