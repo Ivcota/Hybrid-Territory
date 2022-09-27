@@ -1,3 +1,6 @@
+import { Fragment, useContext } from 'react'
+
+import { Dialog, Transition } from '@headlessui/react'
 import dayjs from 'dayjs'
 import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md'
 
@@ -6,11 +9,17 @@ import { toast } from '@redwoodjs/web/dist/toast'
 
 import {
   useCreateRecordMutation,
+  useGetLatestCheckInDateQuery,
   useSendMessageMutation,
   useUpdateTerritoryMutation,
 } from 'src/generated/graphql'
 
 import Button from '../Button/Button'
+
+import {
+  ITerritory,
+  MappedTerritoriesContext,
+} from './AvailableTerritoriesCell'
 
 interface IMappedTerritories {
   availableTerritories: {
@@ -21,8 +30,6 @@ interface IMappedTerritories {
     imageURL?: string
   }[]
 }
-
-import { ITerritory } from '.'
 
 export const MappedTerritories = ({
   availableTerritories,
@@ -42,6 +49,13 @@ export const MappedTerritories = ({
 )
 
 export const TerritoryCard = ({ item }: { item: ITerritory }) => {
+  const context = useContext(MappedTerritoriesContext)
+
+  const handleClick = () => {
+    context.setTerritoryId(item.id)
+    context.setIsOpen(true)
+  }
+
   return (
     <div className="flex flex-row justify-between items-center gap-2 px-4 py-4 mb-3 bg-off-white lg:flex-col transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32 dark:bg-dark-grey-dark">
       <div className="flex items-center justify-between w-full lg:h-full">
@@ -59,8 +73,91 @@ export const TerritoryCard = ({ item }: { item: ITerritory }) => {
       </div>
       <div className="flex items-end justify-end lg:h-full lg:w-full">
         <UpdateTerritoryButton item={item} />
+        <Button onClick={handleClick} variant="outline">
+          Get Stuff
+        </Button>
       </div>
     </div>
+  )
+}
+
+interface IPropsTerritoryModal {
+  territoryId: string
+  isOpen: boolean
+  setIsOpen: (value: boolean) => void
+}
+
+export const TerritoryModal = ({
+  isOpen,
+  setIsOpen,
+  territoryId,
+}: IPropsTerritoryModal) => {
+  const { data } = useGetLatestCheckInDateQuery({
+    variables: {
+      territoryId,
+    },
+  })
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  return (
+    <>
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-full p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Payment successful
+                  </Dialog.Title>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      {JSON.stringify(data)}
+                    </p>
+                  </div>
+
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}
+                    >
+                      Got it, thanks!
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
   )
 }
 

@@ -1,456 +1,455 @@
-import { gql } from '@apollo/client'
-import * as Apollo from '@apollo/client'
-export type Maybe<T> = T | null
-export type InputMaybe<T> = Maybe<T>
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K]
-}
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>
-}
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>
-}
-const defaultOptions = {} as const
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
+export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string
-  String: string
-  Boolean: boolean
-  Int: number
-  Float: number
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
   /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
-  BigInt: any
+  BigInt: any;
   /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: any
+  Date: any;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  DateTime: any
+  DateTime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
-  JSON: any
+  JSON: any;
   /** The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
-  JSONObject: any
+  JSONObject: any;
   /** A time string at UTC, such as 10:15:30Z, compliant with the `full-time` format outlined in section 5.6 of the RFC 3339profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Time: any
-}
+  Time: any;
+};
 
 export type CreateDoNotCallInput = {
-  address: Scalars['String']
-  territoryId: Scalars['String']
-  userId: Scalars['String']
-}
+  address: Scalars['String'];
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
 
 export type CreateIssueInput = {
-  comment: Scalars['String']
-  isClosed: Scalars['Boolean']
-  territoryId: Scalars['String']
-  userId: Scalars['String']
-}
+  comment: Scalars['String'];
+  isClosed: Scalars['Boolean'];
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
 
 export type CreateRecordInput = {
-  checkinDate?: InputMaybe<Scalars['DateTime']>
-  checkoutDate: Scalars['DateTime']
-  territoryId: Scalars['String']
-  userId: Scalars['String']
-}
+  checkinDate?: InputMaybe<Scalars['DateTime']>;
+  checkoutDate: Scalars['DateTime'];
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
 
 export type CreateTerritoryInput = {
-  isCompleted: Scalars['Boolean']
-  name: Scalars['String']
-  spreadsheetURL?: InputMaybe<Scalars['String']>
-  userId?: InputMaybe<Scalars['String']>
-}
+  isCompleted: Scalars['Boolean'];
+  name: Scalars['String'];
+  spreadsheetURL?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
 
 export type CreateUserInput = {
-  email: Scalars['String']
-  firstName?: InputMaybe<Scalars['String']>
-  hashedPassword: Scalars['String']
-  lastName?: InputMaybe<Scalars['String']>
-  phone?: InputMaybe<Scalars['String']>
-  resetToken?: InputMaybe<Scalars['String']>
-  resetTokenExpiresAt?: InputMaybe<Scalars['DateTime']>
-  roles: Scalars['String']
-  salt: Scalars['String']
-}
+  email: Scalars['String'];
+  firstName?: InputMaybe<Scalars['String']>;
+  hashedPassword: Scalars['String'];
+  lastName?: InputMaybe<Scalars['String']>;
+  phone?: InputMaybe<Scalars['String']>;
+  resetToken?: InputMaybe<Scalars['String']>;
+  resetTokenExpiresAt?: InputMaybe<Scalars['DateTime']>;
+  roles: Scalars['String'];
+  salt: Scalars['String'];
+};
 
 export type DoNotCall = {
-  __typename?: 'DoNotCall'
-  address: Scalars['String']
-  createdAt: Scalars['DateTime']
-  createdBy: User
-  id: Scalars['String']
-  territory: Territory
-  territoryId: Scalars['String']
-  userId: Scalars['String']
-}
+  __typename?: 'DoNotCall';
+  address: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  createdBy: User;
+  id: Scalars['String'];
+  territory: Territory;
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
 
 export type Issue = {
-  __typename?: 'Issue'
-  comment: Scalars['String']
-  createdAt: Scalars['DateTime']
-  id: Scalars['String']
-  isClosed: Scalars['Boolean']
-  territory: Territory
-  territoryId: Scalars['String']
-  user: User
-  userId: Scalars['String']
-}
+  __typename?: 'Issue';
+  comment: Scalars['String'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['String'];
+  isClosed: Scalars['Boolean'];
+  territory: Territory;
+  territoryId: Scalars['String'];
+  user: User;
+  userId: Scalars['String'];
+};
 
 export type MessageResponse = {
-  __typename?: 'MessageResponse'
-  success: Scalars['Boolean']
-}
+  __typename?: 'MessageResponse';
+  success: Scalars['Boolean'];
+};
 
 export type Mutation = {
-  __typename?: 'Mutation'
-  createDoNotCall: DoNotCall
-  createIssue: Issue
-  createRecord: Record
-  createTerritory: Territory
-  createUser: User
-  deleteDoNotCall: DoNotCall
-  deleteIssue: Issue
-  deleteRecord: Record
-  deleteTerritory: Territory
-  deleteUser: User
-  sendMessage: MessageResponse
-  updateDoNotCall: DoNotCall
-  updateIssue: Issue
-  updateRecord: Record
-  updateRecordByTerritoryAndUserId: Record
-  updateTerritory: Territory
-  updateUser: User
-}
+  __typename?: 'Mutation';
+  createDoNotCall: DoNotCall;
+  createIssue: Issue;
+  createRecord: Record;
+  createTerritory: Territory;
+  createUser: User;
+  deleteDoNotCall: DoNotCall;
+  deleteIssue: Issue;
+  deleteRecord: Record;
+  deleteTerritory: Territory;
+  deleteUser: User;
+  sendMessage: MessageResponse;
+  updateDoNotCall: DoNotCall;
+  updateIssue: Issue;
+  updateRecord: Record;
+  updateRecordByTerritoryAndUserId: Record;
+  updateTerritory: Territory;
+  updateUser: User;
+};
+
 
 export type MutationCreateDoNotCallArgs = {
-  input: CreateDoNotCallInput
-}
+  input: CreateDoNotCallInput;
+};
+
 
 export type MutationCreateIssueArgs = {
-  input: CreateIssueInput
-}
+  input: CreateIssueInput;
+};
+
 
 export type MutationCreateRecordArgs = {
-  input: CreateRecordInput
-}
+  input: CreateRecordInput;
+};
+
 
 export type MutationCreateTerritoryArgs = {
-  input: CreateTerritoryInput
-}
+  input: CreateTerritoryInput;
+};
+
 
 export type MutationCreateUserArgs = {
-  input: CreateUserInput
-}
+  input: CreateUserInput;
+};
+
 
 export type MutationDeleteDoNotCallArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type MutationDeleteIssueArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type MutationDeleteRecordArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type MutationDeleteTerritoryArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type MutationDeleteUserArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type MutationSendMessageArgs = {
-  message: Scalars['String']
-  phone: Scalars['String']
-}
+  message: Scalars['String'];
+  phone: Scalars['String'];
+};
+
 
 export type MutationUpdateDoNotCallArgs = {
-  id: Scalars['String']
-  input: UpdateDoNotCallInput
-}
+  id: Scalars['String'];
+  input: UpdateDoNotCallInput;
+};
+
 
 export type MutationUpdateIssueArgs = {
-  id: Scalars['String']
-  input: UpdateIssueInput
-}
+  id: Scalars['String'];
+  input: UpdateIssueInput;
+};
+
 
 export type MutationUpdateRecordArgs = {
-  id: Scalars['String']
-  input: UpdateRecordInput
-}
+  id: Scalars['String'];
+  input: UpdateRecordInput;
+};
+
 
 export type MutationUpdateRecordByTerritoryAndUserIdArgs = {
-  input: UpdateRecordInput
-  territoryId: Scalars['String']
-  userId: Scalars['String']
-}
+  input: UpdateRecordInput;
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 
 export type MutationUpdateTerritoryArgs = {
-  id: Scalars['String']
-  input: UpdateTerritoryInput
-}
+  id: Scalars['String'];
+  input: UpdateTerritoryInput;
+};
+
 
 export type MutationUpdateUserArgs = {
-  id: Scalars['String']
-  input: UpdateUserInput
-}
+  id: Scalars['String'];
+  input: UpdateUserInput;
+};
 
 export type Query = {
-  __typename?: 'Query'
-  availableTerritories: Array<Territory>
-  doNotCall?: Maybe<DoNotCall>
-  doNotCalls: Array<DoNotCall>
-  issue?: Maybe<Issue>
-  issues: Array<Issue>
-  issuesByTerritory?: Maybe<Array<Issue>>
-  record?: Maybe<Record>
-  records: Array<Record>
-  redwood?: Maybe<Redwood>
-  searchTerritories: Array<Territory>
-  territories: Array<Territory>
-  territory?: Maybe<Territory>
-  territoryDoNotCalls: Array<DoNotCall>
-  user?: Maybe<User>
-  userTerritories: Array<Territory>
-  users: Array<User>
-}
+  __typename?: 'Query';
+  availableTerritories: Array<Territory>;
+  doNotCall?: Maybe<DoNotCall>;
+  doNotCalls: Array<DoNotCall>;
+  issue?: Maybe<Issue>;
+  issues: Array<Issue>;
+  issuesByTerritory?: Maybe<Array<Issue>>;
+  latestCheckInDate?: Maybe<Record>;
+  record?: Maybe<Record>;
+  records: Array<Record>;
+  redwood?: Maybe<Redwood>;
+  searchTerritories: Array<Territory>;
+  territories: Array<Territory>;
+  territory?: Maybe<Territory>;
+  territoryDoNotCalls: Array<DoNotCall>;
+  user?: Maybe<User>;
+  userTerritories: Array<Territory>;
+  users: Array<User>;
+};
+
 
 export type QueryDoNotCallArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type QueryIssueArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type QueryIssuesByTerritoryArgs = {
-  territoryId: Scalars['String']
-}
+  territoryId: Scalars['String'];
+};
+
+
+export type QueryLatestCheckInDateArgs = {
+  territoryId: Scalars['String'];
+};
+
 
 export type QueryRecordArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type QuerySearchTerritoriesArgs = {
-  cardName?: InputMaybe<Scalars['String']>
-  firstName?: InputMaybe<Scalars['String']>
-  lastName?: InputMaybe<Scalars['String']>
-}
+  cardName?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+};
+
 
 export type QueryTerritoryArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type QueryTerritoryDoNotCallsArgs = {
-  territoryId?: InputMaybe<Scalars['String']>
-}
+  territoryId?: InputMaybe<Scalars['String']>;
+};
+
 
 export type QueryUserArgs = {
-  id: Scalars['String']
-}
+  id: Scalars['String'];
+};
+
 
 export type QueryUserTerritoriesArgs = {
-  userId: Scalars['String']
-}
+  userId: Scalars['String'];
+};
 
 export type Record = {
-  __typename?: 'Record'
-  checkinDate?: Maybe<Scalars['DateTime']>
-  checkoutDate: Scalars['DateTime']
-  id: Scalars['String']
-  isResolved: Scalars['Boolean']
-  territory: Territory
-  territoryId: Scalars['String']
-  user: User
-  userId: Scalars['String']
-}
+  __typename?: 'Record';
+  checkinDate?: Maybe<Scalars['DateTime']>;
+  checkoutDate: Scalars['DateTime'];
+  id: Scalars['String'];
+  isResolved: Scalars['Boolean'];
+  territory: Territory;
+  territoryId: Scalars['String'];
+  user: User;
+  userId: Scalars['String'];
+};
 
 export type Redwood = {
-  __typename?: 'Redwood'
-  currentUser?: Maybe<Scalars['JSON']>
-  prismaVersion?: Maybe<Scalars['String']>
-  version?: Maybe<Scalars['String']>
-}
+  __typename?: 'Redwood';
+  currentUser?: Maybe<Scalars['JSON']>;
+  prismaVersion?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+};
 
 export type Territory = {
-  __typename?: 'Territory'
-  Record: Array<Maybe<Record>>
-  User?: Maybe<User>
-  doNotCalls: Array<Maybe<DoNotCall>>
-  id: Scalars['String']
-  imageURL?: Maybe<Scalars['String']>
-  isCompleted: Scalars['Boolean']
-  issues: Array<Maybe<Issue>>
-  name: Scalars['String']
-  spreadsheetURL?: Maybe<Scalars['String']>
-  type: Scalars['String']
-  userId?: Maybe<Scalars['String']>
-}
+  __typename?: 'Territory';
+  Record: Array<Maybe<Record>>;
+  User?: Maybe<User>;
+  doNotCalls: Array<Maybe<DoNotCall>>;
+  id: Scalars['String'];
+  imageURL?: Maybe<Scalars['String']>;
+  isCompleted: Scalars['Boolean'];
+  issues: Array<Maybe<Issue>>;
+  name: Scalars['String'];
+  spreadsheetURL?: Maybe<Scalars['String']>;
+  type: Scalars['String'];
+  userId?: Maybe<Scalars['String']>;
+};
 
 export type UpdateDoNotCallInput = {
-  territoryId?: InputMaybe<Scalars['String']>
-  userId?: InputMaybe<Scalars['String']>
-}
+  territoryId?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
 
 export type UpdateIssueInput = {
-  comment?: InputMaybe<Scalars['String']>
-  isClosed?: InputMaybe<Scalars['Boolean']>
-  territoryId?: InputMaybe<Scalars['String']>
-  userId?: InputMaybe<Scalars['String']>
-}
+  comment?: InputMaybe<Scalars['String']>;
+  isClosed?: InputMaybe<Scalars['Boolean']>;
+  territoryId?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
 
 export type UpdateRecordInput = {
-  checkinDate?: InputMaybe<Scalars['DateTime']>
-  checkoutDate?: InputMaybe<Scalars['DateTime']>
-  isResolved?: InputMaybe<Scalars['Boolean']>
-  territoryId?: InputMaybe<Scalars['String']>
-  userId?: InputMaybe<Scalars['String']>
-}
+  checkinDate?: InputMaybe<Scalars['DateTime']>;
+  checkoutDate?: InputMaybe<Scalars['DateTime']>;
+  isResolved?: InputMaybe<Scalars['Boolean']>;
+  territoryId?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
 
 export type UpdateTerritoryInput = {
-  isCompleted?: InputMaybe<Scalars['Boolean']>
-  name?: InputMaybe<Scalars['String']>
-  spreadsheetURL?: InputMaybe<Scalars['String']>
-  userId?: InputMaybe<Scalars['String']>
-}
+  isCompleted?: InputMaybe<Scalars['Boolean']>;
+  name?: InputMaybe<Scalars['String']>;
+  spreadsheetURL?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
+};
 
 export type UpdateUserInput = {
-  email?: InputMaybe<Scalars['String']>
-  firstName?: InputMaybe<Scalars['String']>
-  hashedPassword?: InputMaybe<Scalars['String']>
-  lastName?: InputMaybe<Scalars['String']>
-  phone?: InputMaybe<Scalars['String']>
-  resetToken?: InputMaybe<Scalars['String']>
-  resetTokenExpiresAt?: InputMaybe<Scalars['DateTime']>
-  roles?: InputMaybe<Scalars['String']>
-  salt?: InputMaybe<Scalars['String']>
-}
+  email?: InputMaybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  hashedPassword?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
+  phone?: InputMaybe<Scalars['String']>;
+  resetToken?: InputMaybe<Scalars['String']>;
+  resetTokenExpiresAt?: InputMaybe<Scalars['DateTime']>;
+  roles?: InputMaybe<Scalars['String']>;
+  salt?: InputMaybe<Scalars['String']>;
+};
 
 export type User = {
-  __typename?: 'User'
-  email: Scalars['String']
-  firstName?: Maybe<Scalars['String']>
-  hashedPassword: Scalars['String']
-  id: Scalars['String']
-  lastName?: Maybe<Scalars['String']>
-  phone?: Maybe<Scalars['String']>
-  resetToken?: Maybe<Scalars['String']>
-  resetTokenExpiresAt?: Maybe<Scalars['DateTime']>
-  roles: Scalars['String']
-  salt: Scalars['String']
-  territories: Array<Maybe<Territory>>
-}
+  __typename?: 'User';
+  email: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
+  hashedPassword: Scalars['String'];
+  id: Scalars['String'];
+  lastName?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  resetToken?: Maybe<Scalars['String']>;
+  resetTokenExpiresAt?: Maybe<Scalars['DateTime']>;
+  roles: Scalars['String'];
+  salt: Scalars['String'];
+  territories: Array<Maybe<Territory>>;
+};
 
 export type CreateRecordMutationVariables = Exact<{
-  input: CreateRecordInput
-}>
+  input: CreateRecordInput;
+}>;
 
-export type CreateRecordMutation = {
-  __typename?: 'Mutation'
-  createRecord: { __typename?: 'Record'; id: string }
-}
+
+export type CreateRecordMutation = { __typename?: 'Mutation', createRecord: { __typename?: 'Record', id: string } };
 
 export type CreateTerritoryDncMutationVariables = Exact<{
-  input: CreateDoNotCallInput
-}>
+  input: CreateDoNotCallInput;
+}>;
 
-export type CreateTerritoryDncMutation = {
-  __typename?: 'Mutation'
-  createDoNotCall: {
-    __typename?: 'DoNotCall'
-    id: string
-    address: string
-    createdAt: any
-  }
-}
+
+export type CreateTerritoryDncMutation = { __typename?: 'Mutation', createDoNotCall: { __typename?: 'DoNotCall', id: string, address: string, createdAt: any } };
 
 export type SendMessageMutationVariables = Exact<{
-  phone: Scalars['String']
-  message: Scalars['String']
-}>
+  phone: Scalars['String'];
+  message: Scalars['String'];
+}>;
 
-export type SendMessageMutation = {
-  __typename?: 'Mutation'
-  sendMessage: { __typename?: 'MessageResponse'; success: boolean }
-}
+
+export type SendMessageMutation = { __typename?: 'Mutation', sendMessage: { __typename?: 'MessageResponse', success: boolean } };
 
 export type UpdateRecordByIdsMutationVariables = Exact<{
-  territoryId: Scalars['String']
-  userId: Scalars['String']
-  input: UpdateRecordInput
-}>
+  territoryId: Scalars['String'];
+  userId: Scalars['String'];
+  input: UpdateRecordInput;
+}>;
 
-export type UpdateRecordByIdsMutation = {
-  __typename?: 'Mutation'
-  updateRecordByTerritoryAndUserId: {
-    __typename?: 'Record'
-    id: string
-    checkinDate?: any | null
-  }
-}
+
+export type UpdateRecordByIdsMutation = { __typename?: 'Mutation', updateRecordByTerritoryAndUserId: { __typename?: 'Record', id: string, checkinDate?: any | null } };
 
 export type UpdateRecordByIdMutationVariables = Exact<{
-  id: Scalars['String']
-  input: UpdateRecordInput
-}>
+  id: Scalars['String'];
+  input: UpdateRecordInput;
+}>;
 
-export type UpdateRecordByIdMutation = {
-  __typename?: 'Mutation'
-  updateRecord: { __typename?: 'Record'; id: string; isResolved: boolean }
-}
+
+export type UpdateRecordByIdMutation = { __typename?: 'Mutation', updateRecord: { __typename?: 'Record', id: string, isResolved: boolean } };
 
 export type UpdateTerritoryMutationVariables = Exact<{
-  id: Scalars['String']
-  input: UpdateTerritoryInput
-}>
+  id: Scalars['String'];
+  input: UpdateTerritoryInput;
+}>;
 
-export type UpdateTerritoryMutation = {
-  __typename?: 'Mutation'
-  updateTerritory: { __typename?: 'Territory'; id: string }
-}
+
+export type UpdateTerritoryMutation = { __typename?: 'Mutation', updateTerritory: { __typename?: 'Territory', id: string } };
 
 export type UpdateUserMutationVariables = Exact<{
-  id: Scalars['String']
-  input: UpdateUserInput
-}>
+  id: Scalars['String'];
+  input: UpdateUserInput;
+}>;
 
-export type UpdateUserMutation = {
-  __typename?: 'Mutation'
-  updateUser: { __typename?: 'User'; id: string }
-}
 
-export type AllTerritoryNamesQueryVariables = Exact<{ [key: string]: never }>
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string } };
 
-export type AllTerritoryNamesQuery = {
-  __typename?: 'Query'
-  territories: Array<{ __typename?: 'Territory'; id: string; name: string }>
-}
+export type AllTerritoryNamesQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type AllUsersSelectQueryVariables = Exact<{ [key: string]: never }>
 
-export type AllUsersSelectQuery = {
-  __typename?: 'Query'
-  users: Array<{
-    __typename: 'User'
-    id: string
-    firstName?: string | null
-    lastName?: string | null
-  }>
-}
+export type AllTerritoryNamesQuery = { __typename?: 'Query', territories: Array<{ __typename?: 'Territory', id: string, name: string }> };
+
+export type AllUsersSelectQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllUsersSelectQuery = { __typename?: 'Query', users: Array<{ __typename: 'User', id: string, firstName?: string | null, lastName?: string | null }> };
+
+export type GetLatestCheckInDateQueryVariables = Exact<{
+  territoryId: Scalars['String'];
+}>;
+
+
+export type GetLatestCheckInDateQuery = { __typename?: 'Query', latestCheckInDate?: { __typename?: 'Record', checkinDate?: any | null } | null };
+
 
 export const CreateRecordDocument = gql`
-  mutation CreateRecord($input: CreateRecordInput!) {
-    createRecord(input: $input) {
-      id
-    }
+    mutation CreateRecord($input: CreateRecordInput!) {
+  createRecord(input: $input) {
+    id
   }
-`
-export type CreateRecordMutationFn = Apollo.MutationFunction<
-  CreateRecordMutation,
-  CreateRecordMutationVariables
->
+}
+    `;
+export type CreateRecordMutationFn = Apollo.MutationFunction<CreateRecordMutation, CreateRecordMutationVariables>;
 
 /**
  * __useCreateRecordMutation__
@@ -469,40 +468,23 @@ export type CreateRecordMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateRecordMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateRecordMutation,
-    CreateRecordMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<
-    CreateRecordMutation,
-    CreateRecordMutationVariables
-  >(CreateRecordDocument, options)
-}
-export type CreateRecordMutationHookResult = ReturnType<
-  typeof useCreateRecordMutation
->
-export type CreateRecordMutationResult =
-  Apollo.MutationResult<CreateRecordMutation>
-export type CreateRecordMutationOptions = Apollo.BaseMutationOptions<
-  CreateRecordMutation,
-  CreateRecordMutationVariables
->
+export function useCreateRecordMutation(baseOptions?: Apollo.MutationHookOptions<CreateRecordMutation, CreateRecordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateRecordMutation, CreateRecordMutationVariables>(CreateRecordDocument, options);
+      }
+export type CreateRecordMutationHookResult = ReturnType<typeof useCreateRecordMutation>;
+export type CreateRecordMutationResult = Apollo.MutationResult<CreateRecordMutation>;
+export type CreateRecordMutationOptions = Apollo.BaseMutationOptions<CreateRecordMutation, CreateRecordMutationVariables>;
 export const CreateTerritoryDncDocument = gql`
-  mutation CreateTerritoryDNC($input: CreateDoNotCallInput!) {
-    createDoNotCall(input: $input) {
-      id
-      address
-      createdAt
-    }
+    mutation CreateTerritoryDNC($input: CreateDoNotCallInput!) {
+  createDoNotCall(input: $input) {
+    id
+    address
+    createdAt
   }
-`
-export type CreateTerritoryDncMutationFn = Apollo.MutationFunction<
-  CreateTerritoryDncMutation,
-  CreateTerritoryDncMutationVariables
->
+}
+    `;
+export type CreateTerritoryDncMutationFn = Apollo.MutationFunction<CreateTerritoryDncMutation, CreateTerritoryDncMutationVariables>;
 
 /**
  * __useCreateTerritoryDncMutation__
@@ -521,38 +503,21 @@ export type CreateTerritoryDncMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateTerritoryDncMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateTerritoryDncMutation,
-    CreateTerritoryDncMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<
-    CreateTerritoryDncMutation,
-    CreateTerritoryDncMutationVariables
-  >(CreateTerritoryDncDocument, options)
-}
-export type CreateTerritoryDncMutationHookResult = ReturnType<
-  typeof useCreateTerritoryDncMutation
->
-export type CreateTerritoryDncMutationResult =
-  Apollo.MutationResult<CreateTerritoryDncMutation>
-export type CreateTerritoryDncMutationOptions = Apollo.BaseMutationOptions<
-  CreateTerritoryDncMutation,
-  CreateTerritoryDncMutationVariables
->
+export function useCreateTerritoryDncMutation(baseOptions?: Apollo.MutationHookOptions<CreateTerritoryDncMutation, CreateTerritoryDncMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTerritoryDncMutation, CreateTerritoryDncMutationVariables>(CreateTerritoryDncDocument, options);
+      }
+export type CreateTerritoryDncMutationHookResult = ReturnType<typeof useCreateTerritoryDncMutation>;
+export type CreateTerritoryDncMutationResult = Apollo.MutationResult<CreateTerritoryDncMutation>;
+export type CreateTerritoryDncMutationOptions = Apollo.BaseMutationOptions<CreateTerritoryDncMutation, CreateTerritoryDncMutationVariables>;
 export const SendMessageDocument = gql`
-  mutation SendMessage($phone: String!, $message: String!) {
-    sendMessage(phone: $phone, message: $message) {
-      success
-    }
+    mutation SendMessage($phone: String!, $message: String!) {
+  sendMessage(phone: $phone, message: $message) {
+    success
   }
-`
-export type SendMessageMutationFn = Apollo.MutationFunction<
-  SendMessageMutation,
-  SendMessageMutationVariables
->
+}
+    `;
+export type SendMessageMutationFn = Apollo.MutationFunction<SendMessageMutation, SendMessageMutationVariables>;
 
 /**
  * __useSendMessageMutation__
@@ -572,47 +537,26 @@ export type SendMessageMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useSendMessageMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    SendMessageMutation,
-    SendMessageMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<SendMessageMutation, SendMessageMutationVariables>(
-    SendMessageDocument,
-    options
-  )
-}
-export type SendMessageMutationHookResult = ReturnType<
-  typeof useSendMessageMutation
->
-export type SendMessageMutationResult =
-  Apollo.MutationResult<SendMessageMutation>
-export type SendMessageMutationOptions = Apollo.BaseMutationOptions<
-  SendMessageMutation,
-  SendMessageMutationVariables
->
+export function useSendMessageMutation(baseOptions?: Apollo.MutationHookOptions<SendMessageMutation, SendMessageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SendMessageMutation, SendMessageMutationVariables>(SendMessageDocument, options);
+      }
+export type SendMessageMutationHookResult = ReturnType<typeof useSendMessageMutation>;
+export type SendMessageMutationResult = Apollo.MutationResult<SendMessageMutation>;
+export type SendMessageMutationOptions = Apollo.BaseMutationOptions<SendMessageMutation, SendMessageMutationVariables>;
 export const UpdateRecordByIdsDocument = gql`
-  mutation UpdateRecordByIds(
-    $territoryId: String!
-    $userId: String!
-    $input: UpdateRecordInput!
+    mutation UpdateRecordByIds($territoryId: String!, $userId: String!, $input: UpdateRecordInput!) {
+  updateRecordByTerritoryAndUserId(
+    territoryId: $territoryId
+    userId: $userId
+    input: $input
   ) {
-    updateRecordByTerritoryAndUserId(
-      territoryId: $territoryId
-      userId: $userId
-      input: $input
-    ) {
-      id
-      checkinDate
-    }
+    id
+    checkinDate
   }
-`
-export type UpdateRecordByIdsMutationFn = Apollo.MutationFunction<
-  UpdateRecordByIdsMutation,
-  UpdateRecordByIdsMutationVariables
->
+}
+    `;
+export type UpdateRecordByIdsMutationFn = Apollo.MutationFunction<UpdateRecordByIdsMutation, UpdateRecordByIdsMutationVariables>;
 
 /**
  * __useUpdateRecordByIdsMutation__
@@ -633,39 +577,22 @@ export type UpdateRecordByIdsMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateRecordByIdsMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateRecordByIdsMutation,
-    UpdateRecordByIdsMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<
-    UpdateRecordByIdsMutation,
-    UpdateRecordByIdsMutationVariables
-  >(UpdateRecordByIdsDocument, options)
-}
-export type UpdateRecordByIdsMutationHookResult = ReturnType<
-  typeof useUpdateRecordByIdsMutation
->
-export type UpdateRecordByIdsMutationResult =
-  Apollo.MutationResult<UpdateRecordByIdsMutation>
-export type UpdateRecordByIdsMutationOptions = Apollo.BaseMutationOptions<
-  UpdateRecordByIdsMutation,
-  UpdateRecordByIdsMutationVariables
->
+export function useUpdateRecordByIdsMutation(baseOptions?: Apollo.MutationHookOptions<UpdateRecordByIdsMutation, UpdateRecordByIdsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateRecordByIdsMutation, UpdateRecordByIdsMutationVariables>(UpdateRecordByIdsDocument, options);
+      }
+export type UpdateRecordByIdsMutationHookResult = ReturnType<typeof useUpdateRecordByIdsMutation>;
+export type UpdateRecordByIdsMutationResult = Apollo.MutationResult<UpdateRecordByIdsMutation>;
+export type UpdateRecordByIdsMutationOptions = Apollo.BaseMutationOptions<UpdateRecordByIdsMutation, UpdateRecordByIdsMutationVariables>;
 export const UpdateRecordByIdDocument = gql`
-  mutation updateRecordById($id: String!, $input: UpdateRecordInput!) {
-    updateRecord(id: $id, input: $input) {
-      id
-      isResolved
-    }
+    mutation updateRecordById($id: String!, $input: UpdateRecordInput!) {
+  updateRecord(id: $id, input: $input) {
+    id
+    isResolved
   }
-`
-export type UpdateRecordByIdMutationFn = Apollo.MutationFunction<
-  UpdateRecordByIdMutation,
-  UpdateRecordByIdMutationVariables
->
+}
+    `;
+export type UpdateRecordByIdMutationFn = Apollo.MutationFunction<UpdateRecordByIdMutation, UpdateRecordByIdMutationVariables>;
 
 /**
  * __useUpdateRecordByIdMutation__
@@ -685,38 +612,21 @@ export type UpdateRecordByIdMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateRecordByIdMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateRecordByIdMutation,
-    UpdateRecordByIdMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<
-    UpdateRecordByIdMutation,
-    UpdateRecordByIdMutationVariables
-  >(UpdateRecordByIdDocument, options)
-}
-export type UpdateRecordByIdMutationHookResult = ReturnType<
-  typeof useUpdateRecordByIdMutation
->
-export type UpdateRecordByIdMutationResult =
-  Apollo.MutationResult<UpdateRecordByIdMutation>
-export type UpdateRecordByIdMutationOptions = Apollo.BaseMutationOptions<
-  UpdateRecordByIdMutation,
-  UpdateRecordByIdMutationVariables
->
+export function useUpdateRecordByIdMutation(baseOptions?: Apollo.MutationHookOptions<UpdateRecordByIdMutation, UpdateRecordByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateRecordByIdMutation, UpdateRecordByIdMutationVariables>(UpdateRecordByIdDocument, options);
+      }
+export type UpdateRecordByIdMutationHookResult = ReturnType<typeof useUpdateRecordByIdMutation>;
+export type UpdateRecordByIdMutationResult = Apollo.MutationResult<UpdateRecordByIdMutation>;
+export type UpdateRecordByIdMutationOptions = Apollo.BaseMutationOptions<UpdateRecordByIdMutation, UpdateRecordByIdMutationVariables>;
 export const UpdateTerritoryDocument = gql`
-  mutation UpdateTerritory($id: String!, $input: UpdateTerritoryInput!) {
-    updateTerritory(id: $id, input: $input) {
-      id
-    }
+    mutation UpdateTerritory($id: String!, $input: UpdateTerritoryInput!) {
+  updateTerritory(id: $id, input: $input) {
+    id
   }
-`
-export type UpdateTerritoryMutationFn = Apollo.MutationFunction<
-  UpdateTerritoryMutation,
-  UpdateTerritoryMutationVariables
->
+}
+    `;
+export type UpdateTerritoryMutationFn = Apollo.MutationFunction<UpdateTerritoryMutation, UpdateTerritoryMutationVariables>;
 
 /**
  * __useUpdateTerritoryMutation__
@@ -736,38 +646,21 @@ export type UpdateTerritoryMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateTerritoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateTerritoryMutation,
-    UpdateTerritoryMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<
-    UpdateTerritoryMutation,
-    UpdateTerritoryMutationVariables
-  >(UpdateTerritoryDocument, options)
-}
-export type UpdateTerritoryMutationHookResult = ReturnType<
-  typeof useUpdateTerritoryMutation
->
-export type UpdateTerritoryMutationResult =
-  Apollo.MutationResult<UpdateTerritoryMutation>
-export type UpdateTerritoryMutationOptions = Apollo.BaseMutationOptions<
-  UpdateTerritoryMutation,
-  UpdateTerritoryMutationVariables
->
+export function useUpdateTerritoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTerritoryMutation, UpdateTerritoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTerritoryMutation, UpdateTerritoryMutationVariables>(UpdateTerritoryDocument, options);
+      }
+export type UpdateTerritoryMutationHookResult = ReturnType<typeof useUpdateTerritoryMutation>;
+export type UpdateTerritoryMutationResult = Apollo.MutationResult<UpdateTerritoryMutation>;
+export type UpdateTerritoryMutationOptions = Apollo.BaseMutationOptions<UpdateTerritoryMutation, UpdateTerritoryMutationVariables>;
 export const UpdateUserDocument = gql`
-  mutation UpdateUser($id: String!, $input: UpdateUserInput!) {
-    updateUser(id: $id, input: $input) {
-      id
-    }
+    mutation UpdateUser($id: String!, $input: UpdateUserInput!) {
+  updateUser(id: $id, input: $input) {
+    id
   }
-`
-export type UpdateUserMutationFn = Apollo.MutationFunction<
-  UpdateUserMutation,
-  UpdateUserMutationVariables
->
+}
+    `;
+export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
 
 /**
  * __useUpdateUserMutation__
@@ -787,34 +680,21 @@ export type UpdateUserMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateUserMutation,
-    UpdateUserMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(
-    UpdateUserDocument,
-    options
-  )
-}
-export type UpdateUserMutationHookResult = ReturnType<
-  typeof useUpdateUserMutation
->
-export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>
-export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<
-  UpdateUserMutation,
-  UpdateUserMutationVariables
->
+export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
+      }
+export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
+export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
 export const AllTerritoryNamesDocument = gql`
-  query AllTerritoryNames {
-    territories {
-      id
-      name
-    }
+    query AllTerritoryNames {
+  territories {
+    id
+    name
   }
-`
+}
+    `;
 
 /**
  * __useAllTerritoryNamesQuery__
@@ -831,50 +711,27 @@ export const AllTerritoryNamesDocument = gql`
  *   },
  * });
  */
-export function useAllTerritoryNamesQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllTerritoryNamesQuery,
-    AllTerritoryNamesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<
-    AllTerritoryNamesQuery,
-    AllTerritoryNamesQueryVariables
-  >(AllTerritoryNamesDocument, options)
-}
-export function useAllTerritoryNamesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllTerritoryNamesQuery,
-    AllTerritoryNamesQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<
-    AllTerritoryNamesQuery,
-    AllTerritoryNamesQueryVariables
-  >(AllTerritoryNamesDocument, options)
-}
-export type AllTerritoryNamesQueryHookResult = ReturnType<
-  typeof useAllTerritoryNamesQuery
->
-export type AllTerritoryNamesLazyQueryHookResult = ReturnType<
-  typeof useAllTerritoryNamesLazyQuery
->
-export type AllTerritoryNamesQueryResult = Apollo.QueryResult<
-  AllTerritoryNamesQuery,
-  AllTerritoryNamesQueryVariables
->
+export function useAllTerritoryNamesQuery(baseOptions?: Apollo.QueryHookOptions<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>(AllTerritoryNamesDocument, options);
+      }
+export function useAllTerritoryNamesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>(AllTerritoryNamesDocument, options);
+        }
+export type AllTerritoryNamesQueryHookResult = ReturnType<typeof useAllTerritoryNamesQuery>;
+export type AllTerritoryNamesLazyQueryHookResult = ReturnType<typeof useAllTerritoryNamesLazyQuery>;
+export type AllTerritoryNamesQueryResult = Apollo.QueryResult<AllTerritoryNamesQuery, AllTerritoryNamesQueryVariables>;
 export const AllUsersSelectDocument = gql`
-  query AllUsersSelect {
-    users {
-      id
-      firstName
-      lastName
-      __typename
-    }
+    query AllUsersSelect {
+  users {
+    id
+    firstName
+    lastName
+    __typename
   }
-`
+}
+    `;
 
 /**
  * __useAllUsersSelectQuery__
@@ -891,44 +748,57 @@ export const AllUsersSelectDocument = gql`
  *   },
  * });
  */
-export function useAllUsersSelectQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    AllUsersSelectQuery,
-    AllUsersSelectQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<AllUsersSelectQuery, AllUsersSelectQueryVariables>(
-    AllUsersSelectDocument,
-    options
-  )
+export function useAllUsersSelectQuery(baseOptions?: Apollo.QueryHookOptions<AllUsersSelectQuery, AllUsersSelectQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllUsersSelectQuery, AllUsersSelectQueryVariables>(AllUsersSelectDocument, options);
+      }
+export function useAllUsersSelectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllUsersSelectQuery, AllUsersSelectQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllUsersSelectQuery, AllUsersSelectQueryVariables>(AllUsersSelectDocument, options);
+        }
+export type AllUsersSelectQueryHookResult = ReturnType<typeof useAllUsersSelectQuery>;
+export type AllUsersSelectLazyQueryHookResult = ReturnType<typeof useAllUsersSelectLazyQuery>;
+export type AllUsersSelectQueryResult = Apollo.QueryResult<AllUsersSelectQuery, AllUsersSelectQueryVariables>;
+export const GetLatestCheckInDateDocument = gql`
+    query GetLatestCheckInDate($territoryId: String!) {
+  latestCheckInDate(territoryId: $territoryId) {
+    checkinDate
+  }
 }
-export function useAllUsersSelectLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AllUsersSelectQuery,
-    AllUsersSelectQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<AllUsersSelectQuery, AllUsersSelectQueryVariables>(
-    AllUsersSelectDocument,
-    options
-  )
-}
-export type AllUsersSelectQueryHookResult = ReturnType<
-  typeof useAllUsersSelectQuery
->
-export type AllUsersSelectLazyQueryHookResult = ReturnType<
-  typeof useAllUsersSelectLazyQuery
->
-export type AllUsersSelectQueryResult = Apollo.QueryResult<
-  AllUsersSelectQuery,
-  AllUsersSelectQueryVariables
->
+    `;
+
+/**
+ * __useGetLatestCheckInDateQuery__
+ *
+ * To run a query within a React component, call `useGetLatestCheckInDateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLatestCheckInDateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetLatestCheckInDateQuery({
+ *   variables: {
+ *      territoryId: // value for 'territoryId'
+ *   },
+ * });
+ */
+export function useGetLatestCheckInDateQuery(baseOptions: Apollo.QueryHookOptions<GetLatestCheckInDateQuery, GetLatestCheckInDateQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetLatestCheckInDateQuery, GetLatestCheckInDateQueryVariables>(GetLatestCheckInDateDocument, options);
+      }
+export function useGetLatestCheckInDateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetLatestCheckInDateQuery, GetLatestCheckInDateQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetLatestCheckInDateQuery, GetLatestCheckInDateQueryVariables>(GetLatestCheckInDateDocument, options);
+        }
+export type GetLatestCheckInDateQueryHookResult = ReturnType<typeof useGetLatestCheckInDateQuery>;
+export type GetLatestCheckInDateLazyQueryHookResult = ReturnType<typeof useGetLatestCheckInDateLazyQuery>;
+export type GetLatestCheckInDateQueryResult = Apollo.QueryResult<GetLatestCheckInDateQuery, GetLatestCheckInDateQueryVariables>;
 export const namedOperations = {
   Query: {
     AllTerritoryNames: 'AllTerritoryNames',
     AllUsersSelect: 'AllUsersSelect',
+    GetLatestCheckInDate: 'GetLatestCheckInDate'
   },
   Mutation: {
     CreateRecord: 'CreateRecord',
@@ -937,6 +807,6 @@ export const namedOperations = {
     UpdateRecordByIds: 'UpdateRecordByIds',
     updateRecordById: 'updateRecordById',
     UpdateTerritory: 'UpdateTerritory',
-    UpdateUser: 'UpdateUser',
-  },
+    UpdateUser: 'UpdateUser'
+  }
 }

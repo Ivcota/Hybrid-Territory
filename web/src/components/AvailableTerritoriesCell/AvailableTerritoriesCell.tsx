@@ -1,16 +1,12 @@
-import { useState } from 'react'
+import { createContext, useState } from 'react'
 
-import { Dialog } from '@headlessui/react'
 import _ from 'lodash'
 import type { AvailableTerritoriesQuery } from 'types/graphql'
 
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { Toaster } from '@redwoodjs/web/dist/toast'
 
-import {
-  MappedTerritories,
-  MappedTerritoriesWrapper,
-} from './SupportingComponents'
+import { MappedTerritories, TerritoryModal } from './SupportingComponents'
 
 export const QUERY = gql`
   query AvailableTerritoriesQuery {
@@ -51,38 +47,36 @@ export const Success = ({
   availableTerritories,
 }: CellSuccessProps<AvailableTerritoriesQuery>) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [territoryId, setTerritoryId] = useState('')
+  const { Provider } = MappedTerritoriesContext
 
   return (
     <>
       <Toaster />
-      <MappedTerritories availableTerritories={availableTerritories} />
-      <TerritoryModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Provider
+        value={{
+          isOpen,
+          setIsOpen,
+          setTerritoryId,
+        }}
+      >
+        <MappedTerritories availableTerritories={availableTerritories} />
+      </Provider>
+      <TerritoryModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        territoryId={territoryId}
+      />
     </>
   )
 }
 
-interface IPropsTerritoryModal {
+interface IMappedContext {
   isOpen: boolean
   setIsOpen: (value: boolean) => void
+  setTerritoryId: (territoryId: string) => void
 }
 
-const TerritoryModal = ({ isOpen, setIsOpen }: IPropsTerritoryModal) => {
-  return (
-    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-      <Dialog.Panel>
-        <Dialog.Title>Deactivate account</Dialog.Title>
-        <Dialog.Description>
-          This will permanently deactivate your account
-        </Dialog.Description>
-
-        <p>
-          Are you sure you want to deactivate your account? All of your data
-          will be permanently removed. This action cannot be undone.
-        </p>
-
-        <button onClick={() => setIsOpen(false)}>Deactivate</button>
-        <button onClick={() => setIsOpen(false)}>Cancel</button>
-      </Dialog.Panel>
-    </Dialog>
-  )
-}
+export const MappedTerritoriesContext = createContext<IMappedContext | null>(
+  null
+)
