@@ -12,42 +12,60 @@ import {
 
 import Button from '../Button/Button'
 
+interface IMappedTerritories {
+  availableTerritories: {
+    __typename?: 'Territory'
+    id: string
+    name: string
+    isCompleted: boolean
+    imageURL?: string
+  }[]
+}
+
 import { ITerritory } from '.'
 
-export function UpdateTerritoryButton(props) {
-  const handleClick = async () => {
-    await toast.promise(
-      props.updateTerritory({
-        variables: {
-          id: props.item.id,
-          input: {
-            userId: props.currentUser?.id,
-          },
-        },
-      }),
-      {
-        loading: 'loading...',
-        error: 'Error...',
-        success: `${props.item.name} has been assigned to you.`,
-      }
-    )
-    const recordPromise = props.createRecord({
-      variables: {
-        input: {
-          territoryId: props.item.id,
-          userId: props.currentUser.id,
-          checkoutDate: props.now,
-        },
-      },
-    })
-    const messagePromise = props.sendMessage({
-      variables: {
-        phone: process.env.REDWOOD_ENV_PHONENUMBER,
-        message: `${props.currentUser?.firstName} checked out territory card ${props.item.name} at ${props.now}.`,
-      },
-    })
-    await Promise.all([recordPromise, messagePromise])
-  }
+export const MappedTerritories = ({
+  availableTerritories,
+}: IMappedTerritories) => (
+  <div className="flex flex-col flex-wrap items-center justify-center gap-4 lg:gap-8 md:flex-row">
+    <div className="flex flex-col flex-wrap items-center justify-center gap-4 lg:gap-8 md:flex-row">
+      {availableTerritories
+        .slice()
+        .sort((a, b) =>
+          a.name.localeCompare(b.name, undefined, { numeric: true })
+        )
+        .map((item) => {
+          return <TerritoryCard item={item} key={item.id} />
+        })}
+    </div>
+  </div>
+)
+
+export const TerritoryCard = ({ item }: { item: ITerritory }) => {
+  return (
+    <div className="flex flex-row justify-between items-center gap-2 px-4 py-4 mb-3 bg-off-white lg:flex-col transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32 dark:bg-dark-grey-dark">
+      <div className="flex items-center justify-between w-full lg:h-full">
+        <h2 className="overflow-hidden text-xl font-medium tracking-wider text-center font-Roboto text-off-black text-ellipsis whitespace-nowrap dark:text-off-white">
+          {item.name}
+        </h2>
+        <div className="mr-3 text-htd-grey dark:text-htd-grey-dark">
+          {item.imageURL && (
+            <MdOutlinePhotoSizeSelectActual
+              className="animate-pulse"
+              size={24}
+            />
+          )}
+        </div>
+      </div>
+      <div className="flex items-end justify-end lg:h-full lg:w-full">
+        <UpdateTerritoryButton item={item} />
+      </div>
+    </div>
+  )
+}
+
+export const UpdateTerritoryButton = ({ item }: { item: ITerritory }) => {
+  const { handleClick } = useUpdateTerritoryHook(item)
 
   return (
     <Button variant="outline" onClick={handleClick}>
@@ -55,58 +73,47 @@ export function UpdateTerritoryButton(props) {
     </Button>
   )
 }
-
-export function CardDetails({ item }: { item: ITerritory }) {
-  return (
-    <div className="flex items-center justify-between w-full lg:h-full">
-      <h2 className="overflow-hidden text-xl font-medium tracking-wider text-center font-Roboto text-off-black text-ellipsis whitespace-nowrap dark:text-off-white">
-        {item.name}
-      </h2>
-      <div className="mr-3 text-htd-grey dark:text-htd-grey-dark">
-        {item.imageURL && (
-          <MdOutlinePhotoSizeSelectActual className="animate-pulse" size={24} />
-        )}
-      </div>
-    </div>
-  )
-}
-
-export function TerritoryCard(props) {
-  return (
-    <div className="flex flex-row justify-between items-center gap-2 px-4 py-4 mb-3 bg-off-white lg:flex-col transition-all duration-300 rounded-lg shadow hover:-translate-y-1 w-[88%] lg:w-56 lg:h-32 dark:bg-dark-grey-dark  ">
-      <CardDetails item={props.item}></CardDetails>
-      <div className="flex items-end justify-end lg:h-full lg:w-full">
-        <UpdateTerritoryButton
-          updateTerritory={props.updateTerritory}
-          currentUser={props.currentUser}
-          sendMessage={props.sendMessage}
-          createRecord={props.createRecord}
-          now={props.now}
-          item={props.item}
-        ></UpdateTerritoryButton>
-      </div>
-    </div>
-  )
-}
-
-export const TerritoryCardWrapper = ({ item }: { item: ITerritory }) => {
+function useUpdateTerritoryHook(item: ITerritory) {
   const [updateTerritory] = useUpdateTerritoryMutation({
     refetchQueries: ['AvailableTerritoriesQuery'],
   })
   const { currentUser } = useAuth()
   const [sendMessage] = useSendMessageMutation()
   const [createRecord] = useCreateRecordMutation()
-
   const now = dayjs()
-  return (
-    <TerritoryCard
-      key={item.id}
-      updateTerritory={updateTerritory}
-      currentUser={currentUser}
-      sendMessage={sendMessage}
-      createRecord={createRecord}
-      now={now}
-      item={item}
-    ></TerritoryCard>
-  )
+
+  const handleClick = async () => {
+    await toast.promise(
+      updateTerritory({
+        variables: {
+          id: item.id,
+          input: {
+            userId: currentUser?.id,
+          },
+        },
+      }),
+      {
+        loading: 'loading...',
+        error: 'Error...',
+        success: `${item.name} has been assigned to you.`,
+      }
+    )
+    const recordPromise = createRecord({
+      variables: {
+        input: {
+          territoryId: item.id,
+          userId: currentUser.id,
+          checkoutDate: now,
+        },
+      },
+    })
+    const messagePromise = sendMessage({
+      variables: {
+        phone: process.env.REDWOOD_ENV_PHONENUMBER,
+        message: `${currentUser?.firstName} checked out territory card ${item.name} at ${now}.`,
+      },
+    })
+    await Promise.all([recordPromise, messagePromise])
+  }
+  return { handleClick }
 }

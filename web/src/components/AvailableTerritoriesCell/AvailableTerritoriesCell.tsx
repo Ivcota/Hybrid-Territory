@@ -7,7 +7,10 @@ import type { AvailableTerritoriesQuery } from 'types/graphql'
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { Toaster } from '@redwoodjs/web/dist/toast'
 
-import { TerritoryCardWrapper } from './SupportingComponents'
+import {
+  MappedTerritories,
+  MappedTerritoriesWrapper,
+} from './SupportingComponents'
 
 export const QUERY = gql`
   query AvailableTerritoriesQuery {
@@ -47,26 +50,23 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   availableTerritories,
 }: CellSuccessProps<AvailableTerritoriesQuery>) => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <>
-      <div className="flex flex-col flex-wrap items-center justify-center gap-4 lg:gap-8 md:flex-row">
-        {availableTerritories
-          .slice()
-          .sort((a, b) =>
-            a.name.localeCompare(b.name, undefined, { numeric: true })
-          )
-          .map((item) => {
-            return <TerritoryCardWrapper item={item} key={item.id} />
-          })}
-      </div>
       <Toaster />
+      <MappedTerritories availableTerritories={availableTerritories} />
+      <TerritoryModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   )
 }
 
-function TerritoryModal() {
-  const [isOpen, setIsOpen] = useState(true)
+interface IPropsTerritoryModal {
+  isOpen: boolean
+  setIsOpen: (value: boolean) => void
+}
 
+const TerritoryModal = ({ isOpen, setIsOpen }: IPropsTerritoryModal) => {
   return (
     <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
       <Dialog.Panel>
