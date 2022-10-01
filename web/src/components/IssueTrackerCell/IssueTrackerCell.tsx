@@ -1,11 +1,12 @@
+import _ from 'lodash'
+import ReactTimeago from 'react-timeago'
 import type {
   IssueTrackerQuery,
   IssueTrackerQueryVariables,
   UpdateIssueVariables,
 } from 'types/graphql'
+
 import { CellSuccessProps, CellFailureProps, useMutation } from '@redwoodjs/web'
-import ReactTimeago from 'react-timeago'
-import _ from 'lodash'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 
 export const QUERY = gql`

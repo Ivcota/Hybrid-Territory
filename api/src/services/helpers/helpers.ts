@@ -1,4 +1,5 @@
 import { MutationResolvers } from 'types/graphql'
+
 import { sendMessage as sendTwilio } from '../../functions/twillio'
 
 export const sendMessage: MutationResolvers['sendMessage'] = async ({

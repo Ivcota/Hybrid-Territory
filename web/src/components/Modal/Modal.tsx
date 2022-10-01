@@ -1,5 +1,6 @@
-import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+
+import { Dialog, Transition } from '@headlessui/react'
 
 interface ModalProps {
   title: string
@@ -10,7 +11,7 @@ interface ModalProps {
 }
 
 const Modal = ({ title, heading, text, fn, className }: ModalProps) => {
-  let [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
     setIsOpen(false)
@@ -63,7 +64,9 @@ const Modal = ({ title, heading, text, fn, className }: ModalProps) => {
                     {heading}
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-center text-htd-grey dark:text-off-white-dark/80">{text}</p>
+                    <p className="text-sm text-center text-htd-grey dark:text-off-white-dark/80">
+                      {text}
+                    </p>
                   </div>
 
                   <div className="flex gap-3 mt-4">

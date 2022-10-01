@@ -1,5 +1,7 @@
-import { Link, navigate, routes } from '@redwoodjs/router'
 import { useRef, useState } from 'react'
+import { useEffect } from 'react'
+
+import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   Label,
@@ -8,10 +10,9 @@ import {
   Submit,
   FieldError,
 } from '@redwoodjs/forms'
-import { useAuth } from '@redwoodjs/auth'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
-import { useEffect } from 'react'
 
 const LoginPage = () => {
   const { isAuthenticated, logIn } = useAuth()
@@ -47,25 +48,29 @@ const LoginPage = () => {
       <MetaTags title="Login" />
 
       <main className="flex flex-col items-center justify-between w-full h-screen pt-14">
-
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
         <div className="w-2/3 max-w-sm">
           <div className="mx-auto md:w-96 sm:w-8/12">
             <header className="flex items-center justify-center w-full">
-              <h2 className="my-8 text-2xl font-medium font-Roboto text-off-white">Welcome!</h2>
+              <h2 className="my-8 text-2xl font-medium font-Roboto text-off-white">
+                Welcome!
+              </h2>
             </header>
 
             <div className="p-4 rounded bg-off-white">
-                <Form onSubmit={onSubmit} className="flex flex-col justify-between">
-              <div className='h-24'>
-                <Label
+              <Form
+                onSubmit={onSubmit}
+                className="flex flex-col justify-between"
+              >
+                <div className="h-24">
+                  <Label
                     name="username"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
                     errorClassName="text-sm font-bold text-error font-OpenSan"
-                >
+                  >
                     Email
-                </Label>
-                <TextField
+                  </Label>
+                  <TextField
                     name="username"
                     className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
                     errorClassName="rw-input border-error mt-1 caret-error"
@@ -76,11 +81,14 @@ const LoginPage = () => {
                         message: 'Username is required',
                       },
                     }}
-                />
-                <FieldError name="username" className="mt-2 text-xs font-semibold uppercase text-error" />
-              </div>
-              <div className='h-32 mt-2'>
-              <Label
+                  />
+                  <FieldError
+                    name="username"
+                    className="mt-2 text-xs font-semibold uppercase text-error"
+                  />
+                </div>
+                <div className="h-32 mt-2">
+                  <Label
                     name="password"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans "
                     errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
@@ -109,34 +117,40 @@ const LoginPage = () => {
                     </Link>
                   </div>
 
-                  <FieldError name="password" className="mt-2 text-xs font-semibold uppercase text-error" />
+                  <FieldError
+                    name="password"
+                    className="mt-2 text-xs font-semibold uppercase text-error"
+                  />
                 </div>
                 <div className="rw-button-group">
-                    {isLoading ? (
-                      <Submit
-                        disabled
-                        className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto animate-pulse"
-                      >
-                        Loading...
-                      </Submit>
-                    ) : (
-                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto hover:bg-accent">
-                        Login
-                      </Submit>
-                    )}
-                  </div>
-                </Form>
+                  {isLoading ? (
+                    <Submit
+                      disabled
+                      className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto animate-pulse"
+                    >
+                      Loading...
+                    </Submit>
+                  ) : (
+                    <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto hover:bg-accent">
+                      Login
+                    </Submit>
+                  )}
+                </div>
+              </Form>
             </div>
           </div>
           <div className="flex items-center justify-center mt-3 text-xs text-off-white font-OpenSans">
             <span>Don&apos;t have an account?</span>{' '}
-            <Link to={routes.signup()} className="ml-1 font-bold underline capitalize">
+            <Link
+              to={routes.signup()}
+              className="ml-1 font-bold underline capitalize"
+            >
               Sign up!
             </Link>
           </div>
         </div>
         <footer>
-          <p className='text-transparent'>-</p>
+          <p className="text-transparent">-</p>
         </footer>
       </main>
     </>

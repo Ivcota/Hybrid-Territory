@@ -1,6 +1,7 @@
+import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { navigate, routes } from '@redwoodjs/router'
+
 import TerritoryForm from 'src/components/Territory/TerritoryForm'
 
 const CREATE_TERRITORY_MUTATION = gql`
@@ -12,15 +13,18 @@ const CREATE_TERRITORY_MUTATION = gql`
 `
 
 const NewTerritory = () => {
-  const [createTerritory, { loading, error }] = useMutation(CREATE_TERRITORY_MUTATION, {
-    onCompleted: () => {
-      toast.success('Territory created')
-      navigate(routes.territories())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [createTerritory, { loading, error }] = useMutation(
+    CREATE_TERRITORY_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Territory created')
+        navigate(routes.territories())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input) => {
     createTerritory({ variables: { input } })

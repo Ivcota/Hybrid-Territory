@@ -1,19 +1,21 @@
-import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/dist/toast'
-import DataTable, { TableColumn } from 'react-data-table-component'
+import dayjs from 'dayjs'
 import _ from 'lodash'
-import { useUserSelect } from 'src/hooks/useUserSelect'
+import DataTable, { TableColumn } from 'react-data-table-component'
 import type {
   AssignTerritoriesQuery,
   AssignTerritory,
   AssignTerritoryVariables,
   Territory,
 } from 'types/graphql'
+
+import { CellFailureProps, CellSuccessProps, useMutation } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/dist/toast'
+
 import {
   useCreateRecordMutation,
   useUpdateRecordByIdsMutation,
 } from 'src/generated/graphql'
-import dayjs from 'dayjs'
+import { useUserSelect } from 'src/hooks/useUserSelect'
 
 export const QUERY = gql`
   query AssignTerritoriesQuery(

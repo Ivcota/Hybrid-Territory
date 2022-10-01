@@ -1,5 +1,7 @@
-import { Link, navigate, routes } from '@redwoodjs/router'
 import { useRef, useState } from 'react'
+import { useEffect } from 'react'
+
+import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   Label,
@@ -8,10 +10,9 @@ import {
   FieldError,
   Submit,
 } from '@redwoodjs/forms'
-import { useAuth } from '@redwoodjs/auth'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
-import { useEffect } from 'react'
 
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth()
@@ -53,12 +54,17 @@ const SignupPage = () => {
         <div className="w-2/3 max-w-sm">
           <div className="mx-auto md:w-96 sm:w-8/12">
             <header className="flex items-center justify-center w-full">
-              <h2 className="my-8 text-2xl font-medium lg:mt-4 font-Roboto text-off-white">Create An Account!</h2>
+              <h2 className="my-8 text-2xl font-medium lg:mt-4 font-Roboto text-off-white">
+                Create An Account!
+              </h2>
             </header>
 
             <div className="p-4 rounded bg-off-white">
-              <Form onSubmit={onSubmit} className="flex flex-col justify-between">
-                <div className='h-24'>
+              <Form
+                onSubmit={onSubmit}
+                className="flex flex-col justify-between"
+              >
+                <div className="h-24">
                   <Label
                     name="username"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
@@ -78,9 +84,12 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="username" className="mt-2 text-xs font-semibold uppercase text-error" />
+                  <FieldError
+                    name="username"
+                    className="mt-2 text-xs font-semibold uppercase text-error"
+                  />
                 </div>
-                <div className='h-24'>
+                <div className="h-24">
                   <Label
                     name="firstName"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
@@ -99,9 +108,12 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="firstName" className="mt-2 text-xs font-semibold uppercase text-error" />
+                  <FieldError
+                    name="firstName"
+                    className="mt-2 text-xs font-semibold uppercase text-error"
+                  />
                 </div>
-                <div className='h-24'>
+                <div className="h-24">
                   <Label
                     name="lastName"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
@@ -120,9 +132,12 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="lastName" className="mt-2 text-xs font-semibold uppercase text-error" />
+                  <FieldError
+                    name="lastName"
+                    className="mt-2 text-xs font-semibold uppercase text-error"
+                  />
                 </div>
-                <div className='h-24'>
+                <div className="h-24">
                   <Label
                     name="phone"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
@@ -141,9 +156,12 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="phone" className="mt-2 text-xs font-semibold uppercase text-error" />
+                  <FieldError
+                    name="phone"
+                    className="mt-2 text-xs font-semibold uppercase text-error"
+                  />
                 </div>
-                <div className='h-24'>
+                <div className="h-24">
                   <Label
                     name="password"
                     className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
@@ -163,34 +181,40 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="password" className="mt-2 text-xs font-semibold uppercase text-error" />
+                  <FieldError
+                    name="password"
+                    className="mt-2 text-xs font-semibold uppercase text-error"
+                  />
                 </div>
-                  <div className="rw-button-group">
-                    {loading ? (
-                      <Submit
-                        disabled
-                        className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto animate-pulse"
-                      >
-                        Loading...
-                      </Submit>
-                    ) : (
-                      <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto hover:bg-accent">
-                        Sign Up
-                      </Submit>
-                    )}
-                  </div>
-                </Form>
+                <div className="rw-button-group">
+                  {loading ? (
+                    <Submit
+                      disabled
+                      className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto animate-pulse"
+                    >
+                      Loading...
+                    </Submit>
+                  ) : (
+                    <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto hover:bg-accent">
+                      Sign Up
+                    </Submit>
+                  )}
+                </div>
+              </Form>
             </div>
           </div>
           <div className="flex items-center justify-center my-3 text-xs text-off-white font-OpenSans">
             <span>Already have an account?</span>{' '}
-            <Link to={routes.login()} className="ml-1 font-bold underline capitalize">
+            <Link
+              to={routes.login()}
+              className="ml-1 font-bold underline capitalize"
+            >
               Log in!
             </Link>
           </div>
         </div>
         <footer>
-          <p className='text-transparent'>-</p>
+          <p className="text-transparent">-</p>
         </footer>
       </main>
     </>
