@@ -1,0 +1,6 @@
+query GetLatestCheckInDate ($territoryId: String!) {
+  latestCheckInDate (territoryId: $territoryId ) {
+    checkinDate
+
+  }
+}
