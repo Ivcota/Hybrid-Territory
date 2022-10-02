@@ -1,8 +1,10 @@
+import { useEffect } from 'react'
+
 import { useAuth } from '@redwoodjs/auth'
 import { useForm } from '@redwoodjs/forms'
-import { MetaTags } from '@redwoodjs/web'
-import { useEffect } from 'react'
 import { navigate, routes } from '@redwoodjs/router'
+import { MetaTags } from '@redwoodjs/web'
+
 import { useUpdateUserMutation } from 'src/generated/graphql'
 
 interface FormProps {
@@ -37,7 +39,7 @@ const UserAccountPage = () => {
   return (
     <>
       <MetaTags title="UserAccount" description="UserAccount page" />
-      <div className='h-screen'>
+      <div className="h-screen">
         <h1 className="text-2xl font-bold font-Roboto text-dark-blue dark:text-sky-blue-dark">
           My Account
         </h1>
@@ -80,7 +82,10 @@ const UserAccountPage = () => {
             })}
           />
           {errors.firstName && (
-            <div className="mt-2 text-error dark:text-error-dark"> {errors.firstName.message} </div>
+            <div className="mt-2 text-error dark:text-error-dark">
+              {' '}
+              {errors.firstName.message}{' '}
+            </div>
           )}
           <label className="mt-3 italic font-light text-gray-500 font-OpenSans">
             Last Name
@@ -94,7 +99,10 @@ const UserAccountPage = () => {
             })}
           />
           {errors.lastName && (
-            <div className="mt-2 text-error dark:text-error-dark"> {errors.lastName.message} </div>
+            <div className="mt-2 text-error dark:text-error-dark">
+              {' '}
+              {errors.lastName.message}{' '}
+            </div>
           )}
 
           <label className="mt-3 italic font-light text-gray-500 font-OpenSans">
@@ -109,7 +117,10 @@ const UserAccountPage = () => {
             })}
           />
           {errors.phone && (
-            <div className="mt-2 text-error dark:text-error-dark"> {errors.phone.message} </div>
+            <div className="mt-2 text-error dark:text-error-dark">
+              {' '}
+              {errors.phone.message}{' '}
+            </div>
           )}
           {!loading ? (
             <button

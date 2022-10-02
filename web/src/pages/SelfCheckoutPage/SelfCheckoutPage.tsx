@@ -1,8 +1,9 @@
 import { MdArrowBack } from 'react-icons/md'
-import { MetaTags } from '@redwoodjs/web'
-import AvailableTerritoriesCell from 'src/components/AvailableTerritoriesCell'
 
 import { Link, routes } from '@redwoodjs/router'
+import { MetaTags } from '@redwoodjs/web'
+
+import AvailableTerritoriesCell from 'src/components/AvailableTerritoriesCell'
 import Button from 'src/components/Button/Button'
 
 const SelfCheckoutPage = () => {
@@ -12,7 +13,10 @@ const SelfCheckoutPage = () => {
       <div className="flex flex-col w-full">
         <div className="mb-2">
           <Link to={routes.myTerritories()}>
-            <Button variant="custom" className='flex items-center pl-0 font-medium text-dark-blue dark:text-sky-blue-dark hover:text-accent dark:hover:text-accent-dark active:text-light-blue lg:ml-12'>
+            <Button
+              variant="custom"
+              className="flex items-center pl-0 font-medium text-dark-blue dark:text-sky-blue-dark hover:text-accent dark:hover:text-accent-dark active:text-light-blue lg:ml-12"
+            >
               <MdArrowBack /> My Territories
             </Button>
           </Link>

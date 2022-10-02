@@ -1,4 +1,8 @@
-import type { FindDoNotCallQuery, FindDoNotCallQueryVariables } from 'types/graphql'
+import type {
+  FindDoNotCallQuery,
+  FindDoNotCallQueryVariables,
+} from 'types/graphql'
+
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`

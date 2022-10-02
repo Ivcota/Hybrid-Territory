@@ -1,8 +1,8 @@
 import humanize from 'humanize-string'
 
+import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { Link, routes, navigate } from '@redwoodjs/router'
 
 const DELETE_TERRITORY_MUTATION = gql`
   mutation DeleteTerritoryMutation($id: String!) {
@@ -66,23 +66,29 @@ const Territory = ({ territory }) => {
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Territory {territory.id} Detail</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Territory {territory.id} Detail
+          </h2>
         </header>
         <table className="rw-table">
           <tbody>
             <tr>
               <th>Id</th>
               <td>{territory.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Name</th>
               <td>{territory.name}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Spreadsheet url</th>
               <td>{territory.spreadsheetURL}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Is completed</th>
               <td>{checkboxInputTag(territory.isCompleted)}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>User id</th>
               <td>{territory.userId}</td>
             </tr>

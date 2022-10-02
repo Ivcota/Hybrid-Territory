@@ -1,16 +1,16 @@
 import humanize from 'humanize-string'
-
-import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
-import { Link, routes } from '@redwoodjs/router'
-
-import { QUERY } from 'src/components/Territory/TerritoriesCell'
 import _ from 'lodash'
 import {
   FindTerritories,
   FindViewTerritoryQuery,
   Territory,
 } from 'types/graphql'
+
+import { Link, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+
+import { QUERY } from 'src/components/Territory/TerritoriesCell'
 
 const DELETE_TERRITORY_MUTATION = gql`
   mutation DeleteTerritoryMutation($id: String!) {

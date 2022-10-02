@@ -27,7 +27,9 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="mt-5 text-center animate-pulse font-OpenSans text-off-black dark:text-off-white-dark">Loading...</div>
+  <div className="mt-5 text-center animate-pulse font-OpenSans text-off-black dark:text-off-white-dark">
+    Loading...
+  </div>
 )
 
 export const Empty = () => (

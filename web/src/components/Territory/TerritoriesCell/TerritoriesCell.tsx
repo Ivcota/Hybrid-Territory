@@ -1,7 +1,7 @@
 import type { FindTerritories } from 'types/graphql'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import { Link, routes } from '@redwoodjs/router'
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Territories from 'src/components/Territory/Territories'
 
@@ -23,10 +23,7 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No territories yet. '}
-      <Link
-        to={routes.newTerritory()}
-        className="rw-link"
-      >
+      <Link to={routes.newTerritory()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

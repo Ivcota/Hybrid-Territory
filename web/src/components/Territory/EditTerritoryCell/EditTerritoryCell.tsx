@@ -1,9 +1,9 @@
 import type { EditTerritoryById } from 'types/graphql'
 
+import { navigate, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { navigate, routes } from '@redwoodjs/router'
 
 import TerritoryForm from 'src/components/Territory/TerritoryForm'
 
@@ -19,7 +19,10 @@ export const QUERY = gql`
   }
 `
 const UPDATE_TERRITORY_MUTATION = gql`
-  mutation UpdateTerritoryMutation($id: String!, $input: UpdateTerritoryInput!) {
+  mutation UpdateTerritoryMutation(
+    $id: String!
+    $input: UpdateTerritoryInput!
+  ) {
     updateTerritory(id: $id, input: $input) {
       id
       name
@@ -37,15 +40,18 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ territory }: CellSuccessProps<EditTerritoryById>) => {
-  const [updateTerritory, { loading, error }] = useMutation(UPDATE_TERRITORY_MUTATION, {
-    onCompleted: () => {
-      toast.success('Territory updated')
-      navigate(routes.territories())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [updateTerritory, { loading, error }] = useMutation(
+    UPDATE_TERRITORY_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Territory updated')
+        navigate(routes.territories())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input, id) => {
     updateTerritory({ variables: { id, input } })
@@ -54,10 +60,17 @@ export const Success = ({ territory }: CellSuccessProps<EditTerritoryById>) => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Territory {territory.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          Edit Territory {territory.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <TerritoryForm territory={territory} onSave={onSave} error={error} loading={loading} />
+        <TerritoryForm
+          territory={territory}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )

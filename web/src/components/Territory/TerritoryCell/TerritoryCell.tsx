@@ -1,4 +1,5 @@
 import type { FindTerritoryById } from 'types/graphql'
+
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Territory from 'src/components/Territory/Territory'

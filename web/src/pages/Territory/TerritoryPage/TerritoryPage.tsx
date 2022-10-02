@@ -1,4 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
+
 import TerritoryCell from 'src/components/Territory/TerritoryCell'
 
 type TerritoryPageProps = {

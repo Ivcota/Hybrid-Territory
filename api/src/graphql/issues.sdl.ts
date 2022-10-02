@@ -13,7 +13,7 @@ export const schema = gql`
   type Query {
     issues: [Issue!]! @requireAuth
     issue(id: String!): Issue @requireAuth
-    issuesByTerritory (territoryId: String!): [Issue!] @requireAuth
+    issuesByTerritory(territoryId: String!): [Issue!] @requireAuth
   }
 
   input CreateIssueInput {
