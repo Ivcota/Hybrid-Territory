@@ -1,3 +1,4 @@
+import { Loader } from '@mantine/core'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import type { MyTerritories } from 'types/graphql'
@@ -28,8 +29,8 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="mt-10 text-lg text-center animate-pulse">
-    <h3 className="text-lg text-center">Loading...</h3>
+  <div className="flex items-center justify-center mt-8">
+    <Loader />
   </div>
 )
 

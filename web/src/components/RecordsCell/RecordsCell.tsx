@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Table, Tabs, Button } from '@mantine/core'
+import { Table, Tabs, Button, Loader } from '@mantine/core'
 import {
   createColumnHelper,
   useReactTable,
@@ -50,7 +50,11 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div className="flex items-center justify-center mt-8">
+    <Loader />
+  </div>
+)
 
 export const Empty = () => <div>Empty</div>
 

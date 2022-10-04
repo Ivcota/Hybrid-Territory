@@ -1,3 +1,4 @@
+import { Loader } from '@mantine/core'
 import _ from 'lodash'
 import ReactTimeago from 'react-timeago'
 import type {
@@ -37,9 +38,14 @@ export const MUTATION = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
-
-export const Empty = () => <div className="text-center">Empty</div>
+export const Loading = () => (
+  <div className="flex items-center justify-center mt-8">
+    <Loader />
+  </div>
+)
+export const Empty = () => (
+  <div className="text-center dark:text-gray-300">Empty</div>
+)
 
 export const Failure = ({
   error,
@@ -91,7 +97,7 @@ export const Success = ({
   }
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 dark:text-white">
       {_.orderBy(issueTracker, ['createdAt'], ['desc']).map((issue) => {
         return (
           <div
