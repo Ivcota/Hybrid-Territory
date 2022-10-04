@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Modal } from '@mantine/core'
+import { Loader, Modal } from '@mantine/core'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import { MdOutlinePhotoSizeSelectActual } from 'react-icons/md'
@@ -32,8 +32,8 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="mt-5 text-center animate-pulse font-OpenSans text-off-black dark:text-off-white-dark">
-    Loading...
+  <div className="flex items-center justify-center mt-8">
+    <Loader />
   </div>
 )
 

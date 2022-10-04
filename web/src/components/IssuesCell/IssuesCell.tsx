@@ -1,3 +1,4 @@
+import { Loader } from '@mantine/core'
 import _ from 'lodash'
 import ReactTimeago from 'react-timeago'
 import type { DeleteIssueVariables, IssuesQuery } from 'types/graphql'
@@ -39,7 +40,11 @@ export const DELETE_MUTATION = gql`
   }
 `
 
-export const Loading = () => <div className="mt-5">Loading...</div>
+export const Loading = () => (
+  <div className="flex items-center justify-center mt-8">
+    <Loader />
+  </div>
+)
 
 export const Empty = () => <div></div>
 
