@@ -47,10 +47,22 @@ export const userTerritories: QueryResolvers['userTerritories'] = ({
 }) => {
   return db.territory.findMany({ where: { userId } })
 }
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const Territory: TerritoryResolvers = {
   User: (_obj, { root }) =>
     db.territory.findUnique({ where: { id: root.id } }).User(),
+  lastWorkedDate: async (_obj, { root }) => {
+    const date = await db.record.findFirst({
+      where: { territoryId: root.id },
+      orderBy: { checkinDate: 'desc' },
+      select: {
+        checkinDate: true,
+      },
+    })
+
+    return date?.checkinDate
+  },
 }
 
 export const searchTerritories: QueryResolvers['searchTerritories'] = async ({

@@ -11,6 +11,7 @@ export const schema = gql`
     issues: [Issue]!
     Record: [Record]!
     doNotCalls: [DoNotCall]!
+    lastWorkedDate: DateTime
   }
 
   type Query {
