@@ -77,7 +77,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     >
                       My Territories
                     </NavLink>
-                    {currentUser?.roles === 'admin' && (
+                    {currentUser?.roles !== 'pioneer' && (
                       <NavLink
                       className="text-base font-medium font-OpenSans hover:text-blue-300"
                       to={routes.selfCheckout()}

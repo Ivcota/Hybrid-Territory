@@ -53,7 +53,7 @@ const MyTerritoriesPage = () => {
             text="This will send a text message request to the territory servant."
             fn={sendMessageRightNow}
           />
-          {currentUser?.roles === 'admin' && <Link to={routes.selfCheckout()} className="w-full lg:max-w-[300px]">
+          {currentUser?.roles !== 'pioneer' && <Link to={routes.selfCheckout()} className="w-full lg:max-w-[300px]">
             <Button
               variant="custom"
               className="px-10 w-full min-h-[40px] mt-4 font-medium lg:min-h-[48px] bg-success dark:bg-success-dark hover:bg-success/70"
