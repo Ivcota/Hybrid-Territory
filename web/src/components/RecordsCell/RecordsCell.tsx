@@ -1,3 +1,6 @@
+import { useState } from 'react'
+
+import { Table, Tabs, Button } from '@mantine/core'
 import {
   createColumnHelper,
   useReactTable,
@@ -11,8 +14,6 @@ import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useUpdateRecordByIdMutation } from 'src/generated/graphql'
-
-import Button from '../Button/Button'
 
 interface ITableRecord {
   __typename?: 'Record'
@@ -59,6 +60,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 
 export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
   const [updateRecord] = useUpdateRecordByIdMutation()
+  const [viewAll, setViewAll] = useState(false)
 
   const handleToastPromise = async (promise: Promise<unknown>) => {
     await toast.promise(promise, {
@@ -129,16 +131,14 @@ export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
         !info.getValue() ? (
           <Button
             onClick={async () => await resolveRecord(info.row.getValue('id'))}
-            variant="custom"
-            className={`bg-dark-blue active:translate-y-1 `}
+            className={`bg-dark-blue font-Roboto`}
           >
             Resolve
           </Button>
         ) : (
           <Button
             onClick={async () => await unResolveRecord(info.row.getValue('id'))}
-            variant="custom"
-            className="bg-red-600 active:translate-y-1"
+            className="bg-red-600 font-Roboto"
           >
             Unresolve
           </Button>
@@ -146,51 +146,72 @@ export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
     }),
   ]
 
+  const filteredRecords = records.filter((record) => !record.isResolved)
+
   const table = useReactTable({
     columns,
-    data: records,
+    data: viewAll ? records : filteredRecords,
     getCoreRowModel: getCoreRowModel(),
   })
 
   return (
-    <div className="relative flex flex-col items-center justify-center mt-4 overflow-x-auto rounded dark:text-off-white ">
-      <table className="w-full text-sm text-left text-gray-500 dark:text-white">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-dark-grey-dark dark:text-gray-400">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  scope="col"
-                  className="px-6 py-3 text-center"
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr
-              key={row.id}
-              className="bg-white border-b dark:bg-dark-grey-dark dark:border-gray-700"
-            >
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="text-center">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="overflow-x-auto ">
+      <Tabs
+        defaultValue="main"
+        classNames={{
+          tab: 'text-sm font-medium text-gray-500 hover:text-gray-700 dark:text-off-white dark:hover:text-off-white dark:active:text-off-white dark:active:bg-dark-blue dark:hover:bg-dark-blue dark:focus:bg-dark-blue dark:focus:text-off-white font-Roboto',
+        }}
+      >
+        <Tabs.List>
+          <Tabs.Tab onClick={() => setViewAll(false)} value="main">
+            Unresolved
+          </Tabs.Tab>
+          <Tabs.Tab onClick={() => setViewAll(true)} value="all">
+            All
+          </Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="main">{renderTable(table)}</Tabs.Panel>
+        <Tabs.Panel value="all">{renderTable(table)}</Tabs.Panel>
+      </Tabs>
+
       <Toaster />
     </div>
+  )
+}
+function renderTable(table) {
+  return (
+    <Table verticalSpacing="md">
+      <thead>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <tr key={headerGroup.id}>
+            {headerGroup.headers.map((header) => (
+              <th
+                key={header.id}
+                scope="col"
+                className="px-6 py-3 text-center dark:text-white dark:bg-dark-grey-dark"
+              >
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody>
+        {table.getRowModel().rows.map((row) => (
+          <tr key={row.id} className="bg-white border-b dark:bg-dark-grey-dark">
+            {row.getVisibleCells().map((cell) => (
+              <td key={cell.id} className="text-center dark:text-white">
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </Table>
   )
 }
