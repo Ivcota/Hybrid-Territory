@@ -16,6 +16,7 @@ import {
   useUpdateTerritoryMutation,
 } from 'src/generated/graphql'
 
+import placeholderImg from '../../assets/polaroid_placeholder.png'
 import Button from '../Button/Button'
 
 export const QUERY = gql`
@@ -162,7 +163,7 @@ const TerritoryCard = ({
       >
         <img
           className="rounded shadow-md"
-          src={item.imageURL}
+          src={item.imageURL ? item.imageURL : placeholderImg}
           alt="territory"
         />
         {/* parse date */}
