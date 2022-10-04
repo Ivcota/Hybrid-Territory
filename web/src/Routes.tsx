@@ -35,11 +35,13 @@ const Routes = () => {
           <Route path="/deactivated" page={DeactivatedPage} name="deactivated" />
         </Private>
         <Private unauthenticated="home">
-          <Private unauthenticated="deactivated" roles={['user', 'admin']}>
+          <Private unauthenticated="deactivated" roles={['user', 'admin', 'pioneer']}>
             <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
             <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
             <Route path="/user-account" page={UserAccountPage} name="userAccount" />
-            <Route path="/self-checkout" page={SelfCheckoutPage} name="selfCheckout" />
+            <Private unauthenticated='deactivated' roles='admin'>
+              <Route path="/self-checkout" page={SelfCheckoutPage} name="selfCheckout" />
+            </Private>
           </Private>
         </Private>
 
