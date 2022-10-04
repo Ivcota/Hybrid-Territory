@@ -155,7 +155,7 @@ export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
   })
 
   return (
-    <div className="relative flex flex-col items-center justify-center mt-4 overflow-x-auto rounded dark:text-off-white ">
+    <div className="overflow-x-auto ">
       <Tabs
         defaultValue="main"
         classNames={{
