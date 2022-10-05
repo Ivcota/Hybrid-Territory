@@ -39,7 +39,7 @@ const Routes = () => {
             <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
             <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
             <Route path="/user-account" page={UserAccountPage} name="userAccount" />
-            <Private unauthenticated='deactivated' roles={['user', 'admin']}>
+            <Private unauthenticated='myTerritories' roles={['user', 'admin']}>
               <Route path="/self-checkout" page={SelfCheckoutPage} name="selfCheckout" />
             </Private>
           </Private>
