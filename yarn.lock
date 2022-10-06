@@ -3619,15 +3619,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mantine/hooks@npm:^4.2.8":
-  version: 4.2.8
-  resolution: "@mantine/hooks@npm:4.2.8"
-  peerDependencies:
-    react: ">=16.8.0"
-  checksum: a8c958efd59177a731586b1953277a263e8aede69577dfd72d65ebfd821bad07d91d88bceea28d470ac4a6dd64140d090b485545f6f8277879ad5360d6e573b9
-  languageName: node
-  linkType: hard
-
 "@mantine/hooks@npm:^5.5.1":
   version: 5.5.1
   resolution: "@mantine/hooks@npm:5.5.1"
@@ -22477,11 +22468,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@emotion/react": ^11.10.4
-    "@mantine/core": ^5.5.1
-    "@mantine/hooks": ^5.5.1
     "@redwoodjs/core": ^3.0.3
-    aos: ^2.3.4
   languageName: unknown
   linkType: soft
 
@@ -25636,6 +25623,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web@workspace:web"
   dependencies:
+    "@emotion/react": ^11.10.4
     "@graphql-codegen/cli": 2.6.2
     "@graphql-codegen/introspection": 2.1.1
     "@graphql-codegen/named-operations-object": ^2.2.1
@@ -25643,7 +25631,8 @@ __metadata:
     "@graphql-codegen/typescript-operations": 2.4.1
     "@graphql-codegen/typescript-react-apollo": 3.2.15
     "@headlessui/react": ^1.6.6
-    "@mantine/hooks": ^4.2.8
+    "@mantine/core": ^5.5.1
+    "@mantine/hooks": ^5.5.1
     "@redwoodjs/auth": ^3.0.3
     "@redwoodjs/forms": ^3.0.3
     "@redwoodjs/router": ^3.0.3
@@ -25656,6 +25645,7 @@ __metadata:
     "@types/react-dom": 17.0.2
     "@types/react-timeago": ^4.1.3
     "@types/styled-components": ^5.1.25
+    aos: ^2.3.4
     autoprefixer: ^10.4.7
     dayjs: ^1.11.3
     framer-motion: ^6.3.10

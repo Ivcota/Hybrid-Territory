@@ -22,5 +22,4 @@
     "seed": "yarn rw exec seed"
   },
   "packageManager": "yarn@3.2.1"
-
 }
