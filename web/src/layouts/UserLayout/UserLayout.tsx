@@ -79,10 +79,10 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                     </NavLink>
                     {currentUser?.roles !== 'pioneer' && (
                       <NavLink
-                      className="text-base font-medium font-OpenSans hover:text-blue-300"
-                      to={routes.selfCheckout()}
-                      onClick={toggle}
-                      activeClassName="text-sky-blue"
+                        className="text-base font-medium font-OpenSans hover:text-blue-300"
+                        to={routes.selfCheckout()}
+                        onClick={toggle}
+                        activeClassName="text-sky-blue"
                       >
                         Checkout Territory
                       </NavLink>

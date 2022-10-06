@@ -71,7 +71,12 @@ const UserAccountPage = () => {
 
           <hr className="w-4/5 mt-4 place-self-center border-dark-blue dark:border-htd-grey-dark border-1" />
 
-          <p className="mt-3 italic font-light text-gray-500 font-OpenSans">Account Type: <span className='not-italic font-medium capitalize text-off-black dark:text-off-white-dark'>{currentUser?.roles}</span></p>
+          <p className="mt-3 italic font-light text-gray-500 font-OpenSans">
+            Account Type:{' '}
+            <span className="not-italic font-medium capitalize text-off-black dark:text-off-white-dark">
+              {currentUser?.roles}
+            </span>
+          </p>
 
           <label className="mt-3 italic font-light text-gray-500 font-OpenSans">
             First Name
