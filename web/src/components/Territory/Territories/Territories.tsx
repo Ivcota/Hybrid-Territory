@@ -58,7 +58,7 @@ const TerritoriesList = ({ territories }: FindTerritories) => {
       cell: (info) => (
         // use tailwind to style the link
         <Button
-          className="text-white bg-blue-600  dark:bg-blue-500 dark:hover:bg-blue-600 dark:text-white"
+          className="text-white bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-600 dark:text-white"
           onClick={() => window.open(info.getValue(), '_blank')}
         >
           View Sheet
@@ -176,7 +176,7 @@ const TerritoriesList = ({ territories }: FindTerritories) => {
   })
 
   return (
-    <div>
+    <div className="overflow-auto ">
       <Table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
