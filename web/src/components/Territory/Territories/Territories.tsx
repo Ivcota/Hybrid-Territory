@@ -56,7 +56,6 @@ const TerritoriesList = ({ territories }: FindTerritories) => {
     columnHelper.accessor('spreadsheetURL', {
       header: 'Spreadsheet',
       cell: (info) => (
-        // use tailwind to style the link
         <Button
           className="text-white bg-dark-blue dark:text-white"
           onClick={() => window.open(info.getValue(), '_blank')}
@@ -171,7 +170,6 @@ const TerritoriesList = ({ territories }: FindTerritories) => {
   const table = useReactTable({
     columns,
     data: sort(territories),
-
     getCoreRowModel: getCoreRowModel(),
   })
 
