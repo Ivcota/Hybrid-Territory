@@ -1,3 +1,4 @@
+import { Loader } from '@mantine/core'
 import type { FindTerritories } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -11,13 +12,18 @@ export const QUERY = gql`
       id
       name
       spreadsheetURL
+      imageURL
       isCompleted
       userId
     }
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div className="flex justify-center mt-10">
+    <Loader />
+  </div>
+)
 
 export const Empty = () => {
   return (

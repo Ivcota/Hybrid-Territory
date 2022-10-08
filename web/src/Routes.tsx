@@ -10,8 +10,6 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Router, Route, Set, Private } from '@redwoodjs/router'
 
-import TerritoriesLayout from 'src/layouts/TerritoriesLayout'
-
 import BaseLayout from './layouts/BaseLayout/BaseLayout'
 import EntryLayout from './layouts/EntryLayout/EntryLayout'
 import UserLayout from './layouts/UserLayout/UserLayout'
@@ -24,12 +22,10 @@ const Routes = () => {
       <Route path="/landing" page={LandingPage} name="landing" />
       <Set wrap={UserLayout}>
         <Private unauthenticated="home" roles="admin">
-          <Set wrap={TerritoriesLayout}>
-            <Route path="/admin/territories/new" page={TerritoryNewTerritoryPage} name="newTerritory" />
-            <Route path="/admin/territories/{id}/edit" page={TerritoryEditTerritoryPage} name="editTerritory" />
-            <Route path="/admin/territories/{id}" page={TerritoryTerritoryPage} name="territory" />
-            <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
-          </Set>
+          <Route path="/admin/territories/new" page={TerritoryNewTerritoryPage} name="newTerritory" />
+          <Route path="/admin/territories/{id}/edit" page={TerritoryEditTerritoryPage} name="editTerritory" />
+          <Route path="/admin/territories/{id}" page={TerritoryTerritoryPage} name="territory" />
+          <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
         </Private>
         <Private unauthenticated="home">
           <Route path="/deactivated" page={DeactivatedPage} name="deactivated" />
