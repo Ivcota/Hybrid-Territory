@@ -58,7 +58,7 @@ const TerritoriesList = ({ territories }: FindTerritories) => {
       cell: (info) => (
         // use tailwind to style the link
         <Button
-          className="text-white bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-600 dark:text-white"
+          className="text-white bg-dark-blue dark:text-white"
           onClick={() => window.open(info.getValue(), '_blank')}
         >
           View Sheet
