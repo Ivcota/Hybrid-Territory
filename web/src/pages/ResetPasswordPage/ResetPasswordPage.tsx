@@ -16,7 +16,6 @@ const ResetPasswordPage = ({ resetToken }) => {
   const { isAuthenticated, reauthenticate, validateResetToken, resetPassword } =
     useAuth()
   const [enabled, setEnabled] = useState(true)
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
