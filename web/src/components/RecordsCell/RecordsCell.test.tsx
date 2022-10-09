@@ -1,4 +1,4 @@
-import { render, screen } from '@redwoodjs/testing/web'
+import { render } from '@redwoodjs/testing/web'
 
 import { Loading, Empty, Failure, Success } from './RecordsCell'
 import { standard } from './RecordsCell.mock'
@@ -38,5 +38,25 @@ describe('RecordsCell', () => {
     expect(() => {
       render(<Success records={standard().records} />)
     }).not.toThrow()
+  })
+
+  it('shows user name', async () => {
+    // mock testing components should be as easy as passing mocked data into them — that's why it's good to have a wrapper in certain cases
+    const { findAllByText } = render(<Success records={standard().records} />)
+
+    const jamesDoes = await findAllByText('James Doe')
+
+    expect(jamesDoes[0]).toHaveTextContent(/James Doe/)
+    expect(jamesDoes[1]).toHaveTextContent(/James Doe/)
+  })
+
+  it('has resolved states', async () => {
+    const { findAllByText } = render(<Success records={standard().records} />)
+
+    const resolvedRecords = await findAllByText('Unresolved')
+
+    resolvedRecords.map((record) => {
+      expect(record).toHaveTextContent(/unresolved/i)
+    })
   })
 })
