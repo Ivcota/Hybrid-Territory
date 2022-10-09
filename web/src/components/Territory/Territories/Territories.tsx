@@ -1,10 +1,12 @@
-import humanize from 'humanize-string'
-import _ from 'lodash'
+import { Button, Table } from '@mantine/core'
 import {
-  FindTerritories,
-  FindViewTerritoryQuery,
-  Territory,
-} from 'types/graphql'
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
+import _ from 'lodash'
+import { FindTerritories } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
@@ -20,43 +22,13 @@ const DELETE_TERRITORY_MUTATION = gql`
   }
 `
 
-const MAX_STRING_LENGTH = 150
-
-const formatEnum = (values: string | string[] | null | undefined) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values as string)
-    }
-  }
-}
-
-const truncate = (text) => {
-  let output = text
-  if (text && text.length > MAX_STRING_LENGTH) {
-    output = output.substring(0, MAX_STRING_LENGTH) + '...'
-  }
-  return output
-}
-
-const jsonTruncate = (obj) => {
-  return truncate(JSON.stringify(obj, null, 2))
-}
-
-const timeTag = (datetime) => {
-  return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
-      </time>
-    )
-  )
-}
-
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
+interface ITerritory {
+  id: string
+  name: string
+  spreadsheetURL?: string
+  imageURL?: string
+  isCompleted: boolean
+  userId?: string
 }
 
 const TerritoriesList = ({ territories }: FindTerritories) => {
@@ -74,68 +46,164 @@ const TerritoriesList = ({ territories }: FindTerritories) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete territory ' + id + '?')) {
-      deleteTerritory({ variables: { id } })
-    }
+  const columnHelper = createColumnHelper<ITerritory>()
+
+  const columns = [
+    columnHelper.accessor('name', {
+      header: 'Name',
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor('spreadsheetURL', {
+      header: 'Spreadsheet',
+      cell: (info) => (
+        <Button
+          className="text-white bg-dark-blue dark:text-white"
+          onClick={() => window.open(info.getValue(), '_blank')}
+        >
+          View Sheet
+        </Button>
+      ),
+    }),
+    columnHelper.accessor('imageURL', {
+      header: 'Image',
+      cell: (info) => (
+        <img src={info.getValue()} className="w-44" alt="territory" />
+      ),
+    }),
+    columnHelper.accessor('isCompleted', {
+      header: 'Completed',
+      cell: (info) => (
+        <div className="flex items-center justify-center">
+          {info.getValue() ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 text-red-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          )}
+        </div>
+      ),
+    }),
+    columnHelper.accessor('userId', {
+      header: 'User',
+      // display user name in table
+      cell: (info) => (
+        <div className="flex items-center justify-center">
+          {info.getValue()}
+        </div>
+      ),
+    }),
+    columnHelper.accessor('id', {
+      header: 'Options',
+      cell: (info) => (
+        <nav className="rw-table-actions">
+          <Link
+            to={routes.territory({ id: info.getValue() })}
+            title={'Show territory ' + info.getValue() + ' detail'}
+            className="rw-button rw-button-small"
+          >
+            Show
+          </Link>
+          <Link
+            to={routes.editTerritory({ id: info.getValue() })}
+            title={'Edit territory ' + info.getValue()}
+            className="rw-button rw-button-small rw-button-blue"
+          >
+            Edit
+          </Link>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+          <a
+            href="#"
+            title={'Delete territory ' + info.getValue()}
+            className="rw-button rw-button-small rw-button-red"
+            onClick={() => {
+              if (
+                window.confirm(
+                  'Are you sure you want to delete territory ' +
+                    info.getValue() +
+                    '?'
+                )
+              ) {
+                deleteTerritory({ variables: { id: info.getValue() } })
+              }
+            }}
+          >
+            Delete
+          </a>
+        </nav>
+      ),
+    }),
+  ]
+
+  const sort = (territories) => {
+    return _.sortBy(territories, (territory) => {
+      const name = territory.name
+      const number = name.replace('T', '')
+      return parseInt(number)
+    })
   }
 
+  const table = useReactTable({
+    columns,
+    data: sort(territories),
+    getCoreRowModel: getCoreRowModel(),
+  })
+
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
-      <table className="rw-table">
+    <div className="overflow-auto ">
+      <Table>
         <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Spreadsheet url</th>
-            <th>Is completed</th>
-            <th>User id</th>
-            <th>&nbsp;</th>
-          </tr>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} className="text-black dark:text-white">
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
         </thead>
         <tbody>
-          {territories
-            .slice()
-            .sort((a, b) =>
-              a.name.localeCompare(b.name, undefined, { numeric: true })
-            )
-            .map((territory) => (
-              <tr key={territory.id}>
-                <td>{truncate(territory.id)}</td>
-                <td>{truncate(territory.name)}</td>
-                <td>{truncate(territory.spreadsheetURL)}</td>
-                <td>{checkboxInputTag(territory.isCompleted)}</td>
-                <td>{truncate(territory.userId)}</td>
-                <td>
-                  <nav className="rw-table-actions">
-                    <Link
-                      to={routes.territory({ id: territory.id })}
-                      title={'Show territory ' + territory.id + ' detail'}
-                      className="rw-button rw-button-small"
-                    >
-                      Show
-                    </Link>
-                    <Link
-                      to={routes.editTerritory({ id: territory.id })}
-                      title={'Edit territory ' + territory.id}
-                      className="rw-button rw-button-small rw-button-blue"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      type="button"
-                      title={'Delete territory ' + territory.id}
-                      className="rw-button rw-button-small rw-button-red"
-                      onClick={() => onDeleteClick(territory.id)}
-                    >
-                      Delete
-                    </button>
-                  </nav>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className="text-black dark:text-white">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
-              </tr>
-            ))}
+              ))}
+            </tr>
+          ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }

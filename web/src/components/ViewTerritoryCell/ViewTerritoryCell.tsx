@@ -1,5 +1,6 @@
 import { createContext } from 'react'
 
+import { Loader } from '@mantine/core'
 import type {
   FindViewTerritoryQuery,
   FindTerritoryByIdVariables,
@@ -37,7 +38,9 @@ export const QUERY = gql`
 `
 
 export const Loading = () => (
-  <div className="mt-5 text-center animate-pulse">Loading...</div>
+  <div className="flex justify-center mt-10 ">
+    <Loader />
+  </div>
 )
 
 export const Empty = () => <div>Empty</div>
@@ -57,12 +60,14 @@ export const Success = ({
 
   const { currentUser } = useAuth()
 
-  if (territory.userId !== currentUser?.id) {
-    return (
-      <div className="text-error">
-        You&apos;re not authorized to view this territory.
-      </div>
-    )
+  if (!currentUser.roles.includes('admin')) {
+    if (territory.userId !== currentUser?.id) {
+      return (
+        <div className="text-error">
+          You&apos;re not authorized to view this territory.
+        </div>
+      )
+    }
   }
 
   return (
