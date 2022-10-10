@@ -1,9 +1,31 @@
+import { Territory } from 'types/graphql'
+
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
   availableTerritories: [
-    { id: 42, name: 'T1', isCompleted: false },
-    { id: 43, name: 'T2', isCompleted: false },
-    { id: 44, name: 'T3', isCompleted: false },
-    { id: 45, name: 'T4', isCompleted: false },
-  ],
+    {
+      id: 'fefr223f23',
+      name: 'T1',
+      imageURL: 'https://www.google.com',
+      isCompleted: false,
+    },
+    {
+      id: 'fefr223f23',
+      name: 'T3',
+      imageURL: null,
+      isCompleted: false,
+    },
+    {
+      id: 'fefr223f23',
+      name: 'T4',
+      imageURL: 'https://www.google.com',
+      isCompleted: false,
+    },
+    {
+      id: 'fefr223f23',
+      name: 'T5',
+      imageURL: null,
+      isCompleted: false,
+    },
+  ] as Territory[],
 })

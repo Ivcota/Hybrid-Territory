@@ -155,11 +155,16 @@ export const Success = ({ records }: CellSuccessProps<RecordsQuery>) => {
   const table = useReactTable({
     columns,
     data: viewAll ? records : filteredRecords,
+    initialState: {
+      columnVisibility: {
+        id: false,
+      },
+    },
     getCoreRowModel: getCoreRowModel(),
   })
 
   return (
-    <div className="overflow-x-auto ">
+    <div className="mt-4 overflow-x-auto ">
       <Tabs
         defaultValue="main"
         classNames={{
@@ -192,7 +197,7 @@ function renderTable(table) {
               <th
                 key={header.id}
                 scope="col"
-                className="px-6 py-3 text-center dark:text-white dark:bg-dark-grey-dark"
+                className="px-6 py-3 text-center dark:text-white dark:bg-black"
               >
                 {header.isPlaceholder
                   ? null
@@ -207,7 +212,7 @@ function renderTable(table) {
       </thead>
       <tbody>
         {table.getRowModel().rows.map((row) => (
-          <tr key={row.id} className="bg-white border-b dark:bg-dark-grey-dark">
+          <tr key={row.id} className="bg-white border-b dark:bg-black">
             {row.getVisibleCells().map((cell) => (
               <td key={cell.id} className="text-center dark:text-white">
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -1,4 +1,4 @@
-import { render, screen } from '@redwoodjs/testing/web'
+import { render } from '@redwoodjs/testing/web'
 
 import { Loading, Empty, Failure, Success } from './AvailableTerritoriesCell'
 import { standard } from './AvailableTerritoriesCell.mock'
@@ -28,15 +28,21 @@ describe('AvailableTerritoriesCell', () => {
     }).not.toThrow()
   })
 
-  // When you're ready to test the actual output of your component render
-  // you could test that, for example, certain text is present:
-  //
-  // 1. import { screen } from '@redwoodjs/testing/web'
-  // 2. Add test: expect(screen.getByText('Hello, world')).toBeInTheDocument()
-
   it('renders Success successfully', async () => {
     expect(() => {
       render(<Success availableTerritories={standard().availableTerritories} />)
     }).not.toThrow()
+  })
+
+  it('contains tabs', async () => {
+    const { getByText } = render(
+      <Success availableTerritories={standard().availableTerritories} />
+    )
+
+    const allPurposeTab = getByText(/all purpose/i)
+    const letterPhoneTab = getByText(/letter \/ phone only/i)
+
+    expect(allPurposeTab).toBeInTheDocument()
+    expect(letterPhoneTab).toBeInTheDocument()
   })
 })
