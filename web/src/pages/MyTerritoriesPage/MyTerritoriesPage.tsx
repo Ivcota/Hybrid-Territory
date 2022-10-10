@@ -5,6 +5,7 @@ import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 
 import Button from 'src/components/Button/Button'
 import Modal from 'src/components/Modal/Modal'
+import RequestTerritoryButton from 'src/components/RequestTerritoryButton/RequestTerritoryButton'
 import UserTerritoriesCell from 'src/components/UserTerritoriesCell'
 import { useSendMessageMutation } from 'src/generated/graphql'
 
@@ -46,13 +47,16 @@ const MyTerritoriesPage = () => {
           -
         </div>
         <div className="flex flex-col mx-auto lg:flex-row lg:justify-center lg:gap-4 lg:pb-4 lg:w-3/4">
-          <Modal
+          {/* <Modal
             title={!isLoading ? 'Request New Territory' : 'Loading...'}
             className="px-10 py-1 min-h-[40px] w-full mt-4 font-medium text-white transition-all duration-100 rounded-sm lg:min-h-[48px] lg:max-w-[300px] active:bg-teal-blue bg-accent dark:bg-accent-dark hover:bg-accent/70 font-Roboto"
             heading="Send Territory Request?"
             text="This will send a text message request to the territory servant."
             fn={sendMessageRightNow}
-          />
+          /> */}
+
+          <RequestTerritoryButton />
+
           {currentUser?.roles !== 'pioneer' && (
             <Link
               to={routes.selfCheckout()}
