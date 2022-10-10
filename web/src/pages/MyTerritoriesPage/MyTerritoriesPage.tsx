@@ -48,11 +48,7 @@ const MyTerritoriesPage = () => {
           -
         </div>
         <div className="flex flex-col mx-auto lg:flex-row lg:justify-center lg:gap-4 lg:pb-4 lg:w-3/4">
-          <RequestTerritoryButton
-            requestTerritoryHandler={sendMessageRightNow}
-          />
-
-          {currentUser?.roles !== 'pioneer' && (
+        {currentUser?.roles !== 'pioneer' && (
             <Link
               to={routes.selfCheckout()}
               className="w-full lg:max-w-[300px]"
@@ -65,6 +61,10 @@ const MyTerritoriesPage = () => {
               </Button>
             </Link>
           )}
+
+          <RequestTerritoryButton
+            requestTerritoryHandler={sendMessageRightNow}
+          />
         </div>
       </div>
 
