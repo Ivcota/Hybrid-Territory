@@ -34,9 +34,10 @@ const RequestTerritoryButton = ({ requestTerritoryHandler }: Props) => {
             onClick={() => {
               requestTerritoryHandler('Standard Territory')
             }}
+            className='group'
           >
-            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white hover:text-dark-blue hover:dark:text-light-blue'>
-              <IoBag className='text-off-black/75 dark:text-off-white/50' />
+            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white group-hover:text-dark-blue dark:group-hover:text-light-blue group-disabled:text-htd-grey disabled:text-off-black/50'>
+              <IoBag className='text-off-black/75 dark:text-off-white/50 group-hover:text-dark-blue/60 dark:group-hover:text-light-blue/60 group-disabled:text-htd-grey/50' />
               <span>Standard</span>
             </div>
           </Menu.Item>
@@ -44,9 +45,11 @@ const RequestTerritoryButton = ({ requestTerritoryHandler }: Props) => {
             onClick={() => {
               requestTerritoryHandler('Business Territory')
             }}
+            disabled
+            className='group'
           >
-            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white hover:text-dark-blue hover:dark:text-light-blue'>
-              <IoBusiness className='text-off-black/75 dark:text-off-white/50' />
+            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide group-disabled:text-htd-grey disabled:text-off-black/50 font-OpenSans text-off-black dark:text-white hover:dark:text-light-blue'>
+              <IoBusiness className='text-off-black/75 dark:text-off-white/50 group-hover:text-dark-blue/60 dark:group-hover:text-light-blue/60 group-disabled:text-htd-grey/50' />
               <span>Business</span>
             </div>
           </Menu.Item>
@@ -54,9 +57,10 @@ const RequestTerritoryButton = ({ requestTerritoryHandler }: Props) => {
             onClick={() => {
               requestTerritoryHandler('Rural Territory')
             }}
+            className='group'
           >
-            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white hover:text-dark-blue hover:dark:text-light-blue'>
-              <GiMountainRoad className='text-off-black/75 dark:text-off-white/50' />
+            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white group-hover:text-dark-blue dark:group-hover:text-light-blue group-disabled:text-htd-grey disabled:text-off-black/50'>
+              <GiMountainRoad className='text-off-black/75 dark:text-off-white/50 group-hover:text-dark-blue/60 dark:group-hover:text-light-blue/60 group-disabled:text-htd-grey/50' />
               <span>Rural</span>
             </div>
           </Menu.Item>
@@ -64,9 +68,10 @@ const RequestTerritoryButton = ({ requestTerritoryHandler }: Props) => {
             onClick={() => {
               requestTerritoryHandler('Letter Writing Territory')
             }}
+            className='group'
           >
-            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white hover:text-dark-blue hover:dark:text-light-blue'>
-              <BsEnvelopeOpenFill className='text-off-black/75 dark:text-off-white/50' />
+            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white group-hover:text-dark-blue dark:group-hover:text-light-blue group-disabled:text-htd-grey disabled:text-off-black/50'>
+              <BsEnvelopeOpenFill className='text-off-black/75 dark:text-off-white/50 group-hover:text-dark-blue/60 dark:group-hover:text-light-blue/60 group-disabled:text-htd-grey/50' />
               <span>Letter Writing</span>
             </div>
           </Menu.Item>
@@ -74,9 +79,10 @@ const RequestTerritoryButton = ({ requestTerritoryHandler }: Props) => {
             onClick={() => {
               requestTerritoryHandler('Telephone Territory')
             }}
+            className='group'
           >
-            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white hover:text-dark-blue hover:dark:text-light-blue'>
-              <BsTelephoneFill className='text-off-black/75 dark:text-off-white/50' />
+            <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white group-hover:text-dark-blue dark:group-hover:text-light-blue group-disabled:text-htd-grey disabled:text-off-black/50'>
+              <BsTelephoneFill className='text-off-black/75 dark:text-off-white/50 group-hover:text-dark-blue/60 dark:group-hover:text-light-blue/60 group-disabled:text-htd-grey/50' />
               <span>Telephone</span>
             </div>
           </Menu.Item>
