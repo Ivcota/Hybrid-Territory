@@ -57,6 +57,7 @@ const RequestTerritoryButton = ({ requestTerritoryHandler }: Props) => {
             onClick={() => {
               requestTerritoryHandler('Rural Territory')
             }}
+            disabled
             className='group'
           >
             <div className='flex items-center w-full gap-3 text-base font-medium tracking-wide font-OpenSans text-off-black dark:text-white group-hover:text-dark-blue dark:group-hover:text-light-blue group-disabled:text-htd-grey disabled:text-off-black/50'>
