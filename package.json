@@ -21,11 +21,5 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@3.2.1",
-  "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@mantine/core": "^5.5.1",
-    "@mantine/hooks": "^5.5.1",
-    "aos": "^2.3.4"
-  }
+  "packageManager": "yarn@3.2.1"
 }
