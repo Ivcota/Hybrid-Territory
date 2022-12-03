@@ -18,3 +18,5 @@ api/types/graphql.d.ts
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+cypress/videos
+cypress/screenshots
