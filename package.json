@@ -1,5 +1,8 @@
 {
   "private": true,
+  "scripts": {
+    "cypress:open": "cypress open"
+  },
   "workspaces": {
     "packages": [
       "api",
@@ -8,7 +11,9 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/core": "^3.0.3"
+    "@redwoodjs/core": "^3.0.3",
+    "@testing-library/cypress": "^8.0.7",
+    "cypress": "^11.2.0"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
