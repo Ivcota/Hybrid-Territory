@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useMemo } from 'react'
 
 import ReactSelect from 'react-select'
@@ -46,11 +47,13 @@ const AssignTerritoryPage = () => {
     <>
       <MetaTags title="AssignTerritory" description="AssignTerritory page" />
 
-      <h1 className="text-2xl font-black">Assign Territorys </h1>
+      <h1 className="text-2xl font-black dark:text-white">
+        Assign Territorys{' '}
+      </h1>
 
       <div className="flex gap-2 mt-4">
         <div className="flex flex-col gap-1">
-          <label>Card Name</label>
+          <label className="dark:text-white">Card Name</label>
 
           <input
             className="px-1 py-1 transition-all duration-200 bg-gray-100 border border-dotted rounded-sm outline-none focus-within:ring focus-within:ring-blue-400"
@@ -60,7 +63,7 @@ const AssignTerritoryPage = () => {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label>Assign to User</label>
+          <label className="dark:text-white">Assign to User</label>
           <Controller
             control={control}
             name="selectedUserId"
