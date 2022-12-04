@@ -1,6 +1,12 @@
+import { Button, Table } from '@mantine/core'
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
 import dayjs from 'dayjs'
 import _ from 'lodash'
-import DataTable, { TableColumn } from 'react-data-table-component'
 import type {
   AssignTerritoriesQuery,
   AssignTerritory,
@@ -62,6 +68,8 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
+const columnHelper = createColumnHelper<Territory>()
+
 export const Success = ({
   searchTerritories,
 }: CellSuccessProps<AssignTerritoriesQuery>) => {
@@ -77,122 +85,156 @@ export const Success = ({
     refetchQueries: ['RecordsQuery'],
   })
 
-  const columns: TableColumn<Territory>[] = [
-    {
-      name: 'Name',
-      selector: (row) => row.name,
-      width: '8rem',
-    },
-    {
-      name: 'Spreadsheet Link',
-      cell: (row) => (
-        <a className="text-blue-500 underline" href={row.spreadsheetURL}>
-          View Territory
-        </a>
-      ),
-      width: '8rem',
-      sortable: true,
-    },
-    {
-      name: 'Publisher',
-      width: '8rem',
-      cell: ({ User }) => {
-        return <div>{User ? User?.firstName : 'None'}</div>
-      },
+  // TODO: Make this a global helper func
+  const assignTerritoryToUser = async (options: { territoryId: string }) => {
+    await toast.promise(
+      Promise.all([
+        assignTerritory({
+          variables: {
+            id: options.territoryId,
+            input: {
+              userId,
+            },
+          } as AssignTerritoryVariables,
+        }),
+        createRecord({
+          variables: {
+            input: {
+              userId,
+              territoryId: options.territoryId,
+              checkoutDate: dayjs(),
+            },
+          },
+        }),
+      ]),
+      {
+        loading: 'Loading...',
+        error: 'Error...',
+        success: 'Updated',
+      }
+    )
+  }
 
-      sortable: true,
-    },
-    {
-      name: 'Action',
-      width: '20rem',
-      cell: ({ id, User, name }) => {
+  // TODO: Make this a global helper func
+  const unassignTerritory = async (options: {
+    territoryId: string
+    userId: string
+  }) => {
+    await toast.promise(
+      Promise.all([
+        assignTerritory({
+          variables: {
+            id: options.territoryId,
+            input: {
+              isCompleted: false,
+              userId: null,
+            },
+          } as AssignTerritoryVariables,
+        }),
+
+        updateRecordByIds({
+          variables: {
+            territoryId: options.territoryId,
+            userId: options.userId,
+            input: {
+              checkinDate: dayjs(),
+              isResolved: false,
+            },
+          },
+        }),
+      ]),
+      {
+        loading: 'Loading...',
+        error: 'Error...',
+        success: 'Updated',
+      }
+    )
+  }
+
+  const columns = [
+    columnHelper.accessor('name', {
+      header: () => 'Name',
+      cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor('User', {
+      header: () => 'Publisher',
+      cell: (info) =>
+        info.getValue()?.firstName
+          ? `${info.getValue()?.firstName} ${info.getValue()?.lastName}`
+          : '',
+    }),
+    columnHelper.accessor('id', {
+      header: () => 'Actions',
+      cell: (info) => {
         return (
-          <div className="flex gap-3">
-            <button
-              onClick={async () => {
-                await toast.promise(
-                  assignTerritory({
-                    variables: {
-                      id: id,
-                      input: {
-                        userId,
-                      },
-                    } as AssignTerritoryVariables,
-                  }),
-                  {
-                    error: 'Error',
-                    loading: 'Loading...',
-                    success: `${name} has been updated.`,
-                  }
-                )
-
-                await createRecord({
-                  variables: {
-                    input: {
-                      territoryId: id,
-                      userId: userId,
-
-                      checkoutDate: dayjs(),
-                    },
-                  },
-                })
-              }}
-              className="px-3 py-2 text-white bg-green-500 rounded active:bg-green-700 hover:bg-green-400"
+          <>
+            <Button
+              onClick={() =>
+                assignTerritoryToUser({ territoryId: info.getValue() })
+              }
+              className="mr-3 bg-green-600"
             >
-              Assign
-            </button>
-            {User && (
-              <button
-                onClick={async () => {
-                  await toast.promise(
-                    assignTerritory({
-                      variables: {
-                        id,
-                        input: {
-                          isCompleted: false,
-                          userId: null,
-                        },
-                      } as AssignTerritoryVariables,
-                    }),
-                    {
-                      error: 'Error',
-                      loading: 'Loading...',
-                      success: `${name} has been updated.`,
-                    }
-                  )
-
-                  await updateRecordByIds({
-                    variables: {
-                      userId: User.id,
-                      territoryId: id,
-                      input: {
-                        checkinDate: dayjs(),
-                      },
-                    },
-                  })
-                }}
-                className="px-3 py-2 text-white bg-red-500 rounded active:bg-red-700 hover:bg-red-400"
-              >
-                Unassign
-              </button>
-            )}
-          </div>
+              Assign Territory
+            </Button>
+            <Button
+              onClick={() =>
+                unassignTerritory({
+                  territoryId: info.getValue(),
+                  userId: info.row.original.User.id,
+                })
+              }
+              className="bg-red-500"
+            >
+              Unassign Territory
+            </Button>
+          </>
         )
       },
-    },
+    }),
   ]
+
+  const table = useReactTable({
+    columns: columns,
+    data: _.sortBy(searchTerritories, (territory) => {
+      const name = territory.name
+      const number = name.replace('T', '')
+      return parseInt(number)
+    }),
+    getCoreRowModel: getCoreRowModel(),
+  })
 
   return (
     <>
-      <DataTable
-        pagination
-        columns={columns}
-        data={searchTerritories
-          .slice()
-          .sort((a, b) =>
-            a.name.localeCompare(b.name, undefined, { numeric: true })
-          )}
-      />
+      <Table>
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} className="text-black dark:text-white">
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} className="text-black dark:text-white">
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+
       <Toaster />
     </>
   )

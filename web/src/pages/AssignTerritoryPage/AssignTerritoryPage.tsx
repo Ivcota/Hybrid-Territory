@@ -9,6 +9,7 @@ import AssignTerritoriesCell from 'src/components/AssignTerritoriesCell'
 import { useAllUsersSelectQuery } from 'src/generated/graphql'
 import { useUserSelect } from 'src/hooks/useUserSelect'
 
+// TODO: Remove the any type
 interface IForm {
   cardName: string
   firstName: string
