@@ -1,7 +1,24 @@
 {
   "private": true,
   "scripts": {
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write"
+    ],
+    "*.tsx": [
+      "prettier --write"
+    ],
+    "*.js": [
+      "prettier --write"
+    ]
   },
   "workspaces": {
     "packages": [
@@ -13,7 +30,9 @@
   "devDependencies": {
     "@redwoodjs/core": "^3.0.3",
     "@testing-library/cypress": "^8.0.7",
-    "cypress": "^11.2.0"
+    "cypress": "^11.2.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.4"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
