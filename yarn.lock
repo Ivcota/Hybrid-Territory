@@ -4325,6 +4325,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-leaflet/core@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@react-leaflet/core@npm:2.1.0"
+  peerDependencies:
+    leaflet: ^1.9.0
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: d5218c79ab9decd458e1fa8a0ec3757542e3ea4e569afa151a32ef0e9ceb63a13174f3fbc740fe0d514df8b0b3e30d913bfb0b8b661dac13924934d7e430bfc9
+  languageName: node
+  linkType: hard
+
 "@redwoodjs/api-server@npm:3.0.3":
   version: 3.0.3
   resolution: "@redwoodjs/api-server@npm:3.0.3"
@@ -7236,6 +7247,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/geojson@npm:*":
+  version: 7946.0.10
+  resolution: "@types/geojson@npm:7946.0.10"
+  checksum: 4abba554467494c1496a60622c2cb6f8c7f80b0dbb909ff898812a9f67799fd1b254802d7d266361974bd8b0c9ef32a7686183aac83b20c437f6d0eee89cd0a1
+  languageName: node
+  linkType: hard
+
 "@types/glob@npm:*, @types/glob@npm:^7.1.1":
   version: 7.2.0
   resolution: "@types/glob@npm:7.2.0"
@@ -7400,6 +7418,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: ff8f54fc49621210291f815fe5b15d809fd7d032941b3180743440bd507ecdf08b9e844625fa346af568c84bf34114eb378dcdc3e921a08ba1e2a08d7e3c809c
+  languageName: node
+  linkType: hard
+
+"@types/leaflet@npm:^1.9.0":
+  version: 1.9.0
+  resolution: "@types/leaflet@npm:1.9.0"
+  dependencies:
+    "@types/geojson": "*"
+  checksum: bd464a764f02941c917c7be88215f73020640a1feb1fff7a2592bba0e251090e434ffb01ea565e73461a77f6f11ded1ed739f1a3226c3bda88660291222585f1
   languageName: node
   linkType: hard
 
@@ -18199,6 +18226,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"leaflet@npm:^1.9.3":
+  version: 1.9.3
+  resolution: "leaflet@npm:1.9.3"
+  checksum: acca83f9dc6c0a49b06f9e966ff8a2579fa49199e3ba9b80b4423704be9c32ff10f8c843e72f6eda4565850ef82bfc85e8d0ac574b52049e40c1fadada56ef16
+  languageName: node
+  linkType: hard
+
 "leven@npm:^3.1.0":
   version: 3.1.0
   resolution: "leven@npm:3.1.0"
@@ -22219,6 +22253,19 @@ __metadata:
   version: 18.1.0
   resolution: "react-is@npm:18.1.0"
   checksum: 558874e4c3bd9805a9294426e090919ee6901be3ab07f80b997c36b5a01a8d691112802e7438d146f6c82fd6495d8c030f276ef05ec3410057f8740a8d723f8c
+  languageName: node
+  linkType: hard
+
+"react-leaflet@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "react-leaflet@npm:4.2.0"
+  dependencies:
+    "@react-leaflet/core": ^2.1.0
+  peerDependencies:
+    leaflet: ^1.9.0
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 8975882dbcc7653cb43307d4900a62572347f6190c8cdf91b68583a07e498e61c74222eae1b4f4dcd6863f01adb26646f2e5e12afbc83010bc014d1bdb8360b2
   languageName: node
   linkType: hard
 
@@ -26283,6 +26330,7 @@ __metadata:
     "@redwoodjs/web": ^3.0.3
     "@storybook/react": 6.5.9
     "@tanstack/react-table": ^8.5.13
+    "@types/leaflet": ^1.9.0
     "@types/lodash": ^4.14.182
     "@types/prop-types": 15.7.5
     "@types/react": 17.0.2
@@ -26293,6 +26341,7 @@ __metadata:
     autoprefixer: ^10.4.7
     dayjs: ^1.11.3
     framer-motion: ^6.3.10
+    leaflet: ^1.9.3
     lodash: ^4.17.21
     postcss: ^8.4.14
     postcss-loader: ^7.0.0
@@ -26301,6 +26350,7 @@ __metadata:
     react-data-table-component: ^7.5.2
     react-dom: 17.0.2
     react-icons: ^4.4.0
+    react-leaflet: ^4.2.0
     react-select: ^5.3.2
     react-timeago: ^7.1.0
     styled-components: ^5.3.5
