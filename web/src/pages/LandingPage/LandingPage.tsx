@@ -42,14 +42,10 @@ export default function LandingPage() {
                 >
                   <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                     <div className="flex items-center justify-between w-full md:w-auto">
-                      <a href="#">
-                        <span className="sr-only">Your Company</span>
-                        <img
-                          alt="Your Company"
-                          className="w-auto h-8 sm:h-10"
-                          src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=600"
-                        />
-                      </a>
+                      <Link to={routes.landing()}>
+                        <span className="sr-only">Hybrid Territory</span>
+                        <div className="font-black text-blue-500 ">HT</div>
+                      </Link>
                       <div className="flex items-center -mr-2 md:hidden">
                         <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                           <span className="sr-only">Open main menu</span>
