@@ -49,17 +49,17 @@ const SignupPage = () => {
     <>
       <MetaTags title="Signup" />
 
-      <main className="flex flex-col items-center justify-between w-full min-h-screen pt-14 h-max 2xl:pt-24">
+      <main className="flex flex-col items-center justify-between w-full min-h-screen pt-8 h-max 2xl:pt-24">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
-        <div className="w-2/3 max-w-sm">
-          <div className="mx-auto md:w-96 sm:w-8/12">
+        <div className="w-5/6 max-w-sm">
+          <div className="mx-auto md:w-96 ">
             <header className="flex items-center justify-center w-full">
-              <h2 className="my-8 text-2xl font-medium lg:mt-4 font-Roboto text-off-white">
+              <h2 className="my-4 text-2xl font-extrabold lg:mt-4 ">
                 Create An Account!
               </h2>
             </header>
 
-            <div className="p-4 rounded bg-off-white">
+            <div className="p-4 rounded ">
               <Form
                 onSubmit={onSubmit}
                 className="flex flex-col justify-between"
@@ -67,14 +67,14 @@ const SignupPage = () => {
                 <div className="h-24">
                   <Label
                     name="username"
-                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    className="block text-sm font-bold text-gray-700 font-Roboto"
                     errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Email
                   </Label>
                   <TextField
                     name="username"
-                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    className="block w-full px-2 py-3 mt-3 border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     errorClassName="rw-input border-error mt-1 caret-error"
                     ref={usernameRef}
                     validation={{
@@ -92,14 +92,14 @@ const SignupPage = () => {
                 <div className="h-24">
                   <Label
                     name="firstName"
-                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    className="block text-sm font-bold text-gray-700 font-Roboto"
                     errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     First Name
                   </Label>
                   <TextField
                     name="firstName"
-                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    className="block w-full px-2 py-3 mt-3 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     errorClassName="rw-input border-error mt-1 caret-error"
                     validation={{
                       required: {
@@ -116,14 +116,14 @@ const SignupPage = () => {
                 <div className="h-24">
                   <Label
                     name="lastName"
-                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    className="block text-sm font-bold text-gray-700 font-Roboto"
                     errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Last Name
                   </Label>
                   <TextField
                     name="lastName"
-                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    className="block w-full px-2 py-3 mt-3 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                     errorClassName="rw-input border-error mt-1 caret-error"
                     validation={{
                       required: {
@@ -140,14 +140,14 @@ const SignupPage = () => {
                 <div className="h-24">
                   <Label
                     name="phone"
-                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    className="block text-sm font-bold text-gray-700 font-Roboto"
                     errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Phone
                   </Label>
                   <TextField
                     name="phone"
-                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    className="block w-full px-2 py-3 mt-3 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     errorClassName="rw-input border-error mt-1 caret-error"
                     validation={{
                       required: {
@@ -164,14 +164,14 @@ const SignupPage = () => {
                 <div className="h-24">
                   <Label
                     name="password"
-                    className="mt-0 text-sm font-bold text-dark-blue font-OpenSans"
+                    className="block text-sm font-bold text-gray-700 font-Roboto"
                     errorClassName="text-sm font-bold text-error font-OpenSans mt-0"
                   >
                     Password
                   </Label>
                   <PasswordField
                     name="password"
-                    className="mt-1 text-sm rw-input caret-dark-blue font-Roboto text-off-black"
+                    className="block w-full px-2 py-3 mt-3 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     errorClassName="rw-input border-error mt-1 caret-error"
                     autoComplete="current-password"
                     validation={{
@@ -190,12 +190,12 @@ const SignupPage = () => {
                   {loading ? (
                     <Submit
                       disabled
-                      className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto animate-pulse"
+                      className="items-center px-4 py-2 text-base font-medium text-center text-white bg-blue-700 border border-transparent rounded-md shadow-sm w-28 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 animate-pulse"
                     >
                       Loading...
                     </Submit>
                   ) : (
-                    <Submit className="w-full py-2 tracking-wider uppercase rounded bg-dark-blue text-off-white font-Roboto hover:bg-accent">
+                    <Submit className="items-center px-4 py-2 text-base font-medium text-center text-white border border-transparent rounded-md shadow-sm w-28 bg-dark-blue hover:bg-accent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                       Sign Up
                     </Submit>
                   )}
@@ -203,7 +203,7 @@ const SignupPage = () => {
               </Form>
             </div>
           </div>
-          <div className="flex items-center justify-center my-3 text-xs text-off-white font-OpenSans">
+          <div className="flex items-center justify-center my-3 text-xs text-gray-500 font-OpenSans">
             <span>Already have an account?</span>{' '}
             <Link
               to={routes.login()}

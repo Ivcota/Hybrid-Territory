@@ -21,16 +21,16 @@ const Routes = () => {
     <Router>
       <Route path="/landing" page={LandingPage} name="landing" />
       <Set wrap={UserLayout}>
-        <Private unauthenticated="home" roles="admin">
+        <Private unauthenticated="landing" roles="admin">
           <Route path="/admin/territories/new" page={TerritoryNewTerritoryPage} name="newTerritory" />
           <Route path="/admin/territories/{id}/edit" page={TerritoryEditTerritoryPage} name="editTerritory" />
           <Route path="/admin/territories/{id}" page={TerritoryTerritoryPage} name="territory" />
           <Route path="/admin/territories" page={TerritoryTerritoriesPage} name="territories" />
         </Private>
-        <Private unauthenticated="home">
+        <Private unauthenticated="landing">
           <Route path="/deactivated" page={DeactivatedPage} name="deactivated" />
         </Private>
-        <Private unauthenticated="home">
+        <Private unauthenticated="landing">
           <Private unauthenticated="deactivated" roles={['user', 'admin', 'pioneer']}>
             <Route path="/territory/{id}" page={TerritoryPage} name="territory" />
             <Route path="/my-territories" page={MyTerritoriesPage} name="myTerritories" />
@@ -41,7 +41,7 @@ const Routes = () => {
           </Private>
         </Private>
 
-        <Private unauthenticated="home" roles="admin">
+        <Private unauthenticated="landing" roles="admin">
           <Route path="/issue-tracker" page={IssueTrackerPage} name="issueTracker" />
           <Route path="/assign-territory" page={AssignTerritoryPage} name="assignTerritory" />
           <Route path="/records" page={RecordsPage} name="records" />
@@ -51,7 +51,6 @@ const Routes = () => {
         <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       </Set>
       <Set wrap={!isAuthenticated ? BaseLayout : UserLayout}>
-        <Route path="/about" page={AboutPage} name="about" />
         <Route path="/home" page={HomePage} name="home" />
       </Set>
 
@@ -59,6 +58,7 @@ const Routes = () => {
       <Set wrap={EntryLayout}>
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
+        <Route path="/about" page={AboutPage} name="about" />
       </Set>
 
       <Route notfound page={NotFoundPage} />
