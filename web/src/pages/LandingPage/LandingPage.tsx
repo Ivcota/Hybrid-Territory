@@ -90,11 +90,10 @@ export default function LandingPage() {
                   <div className="overflow-hidden bg-white rounded-lg shadow-md ring-1 ring-black ring-opacity-5">
                     <div className="flex items-center justify-between px-5 pt-4">
                       <div>
-                        <img
-                          className="w-auto h-8"
-                          src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=600"
-                          alt=""
-                        />
+                        <Link to={routes.landing()}>
+                          <span className="sr-only">Hybrid Territory</span>
+                          <div className="font-black text-blue-500 ">HT</div>
+                        </Link>
                       </div>
                       <div className="-mr-2">
                         <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
