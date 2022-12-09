@@ -11,6 +11,7 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
     roles: String!
     territories: [Territory]!
+    featureFlags: [FeatureFlag]!
   }
 
   type Query {
