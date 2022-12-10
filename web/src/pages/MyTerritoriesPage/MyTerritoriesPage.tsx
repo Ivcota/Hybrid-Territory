@@ -76,7 +76,7 @@ const MyTerritoriesPage = () => {
         </div>
         <div className="relative flex justify-center">
           <span className="px-2 text-sm text-gray-500 bg-white dark:text-gray-400 dark:bg-off-black">
-            Ecclesiastes 9:10
+            Proverbs 21:5
           </span>
         </div>
       </div>

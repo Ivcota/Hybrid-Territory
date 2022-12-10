@@ -11,8 +11,6 @@ import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 import IssuesCell, { MUTATION } from 'src/components/IssuesCell'
 import ViewTerritoryCell from 'src/components/ViewTerritoryCell'
 
-import Button from '../../components/Button/Button'
-
 interface PageProps {
   id: string
 }
