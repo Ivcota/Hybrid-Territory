@@ -29,7 +29,7 @@ const UserListTerritoryCard = ({
       key={id}
       className={`w-64 px-5 py-6 rounded-lg flex flex-col justify-center items-center shadow-md hover:-translate-y-[1px] transition-all duration-300 bg-gray-100  dark:bg-dark-grey-dark ${
         isCompleted &&
-        ' border border-green-400  dark:border-green-700  -translate-y-2'
+        ' border border-green-400  dark:border-green-700 shadow-lg -translate-y-2'
       } lg:justify-start`}
       id={id}
     >
