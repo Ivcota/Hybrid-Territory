@@ -8,7 +8,7 @@ import { CurrentUser, useAuth } from '@redwoodjs/auth'
 import { NavLink, routes } from '@redwoodjs/router'
 
 import Button from 'src/components/Button/Button'
-import Navbar, { Logo } from 'src/components/Navbar/Navbar'
+import Navbar from 'src/components/Navbar/Navbar'
 import { useToggle } from 'src/hooks/useToggle'
 
 interface LayoutContext {
@@ -63,7 +63,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
                   <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 text-htd-grey dark:text-htd-grey-dark">
                     <NavLink
                       className="text-base font-medium font-OpenSans hover:text-blue-300"
-                      to={routes.home()}
+                      to={routes.landing()}
                       onClick={toggle}
                       activeClassName="text-sky-blue"
                     >

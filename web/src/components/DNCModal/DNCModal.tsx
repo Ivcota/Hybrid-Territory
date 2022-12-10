@@ -46,13 +46,12 @@ const DncModal = () => {
 
   return (
     <>
-      <Button
-        variant="custom"
+      <button
         onClick={openModal}
-        className="mb-4 font-medium border bg-none text-error hover:text-off-white-dark hover:bg-error active:text-error/50 border-error hover:border-error/70 active:border-error/50 font-Roboto dark:text-error-dark dark:border-error-dark/80 dark:hover:text-off-white-dark dark:hover:bg-error-dark"
+        className="inline-flex items-center justify-center px-4 py-2 mt-2 mb-2 text-base font-medium text-red-700 bg-red-100 border border-transparent rounded-md dark:hover:bg-red-600 dark:text-white dark:bg-red-700 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
       >
         Do Not Calls
-      </Button>
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>

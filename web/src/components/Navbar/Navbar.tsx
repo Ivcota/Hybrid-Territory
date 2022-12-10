@@ -11,7 +11,7 @@ import ThemeToggle from '../ThemeToggle/ThemeToggle'
 export const Logo = () => {
   return (
     <div className="text-2xl">
-      <Link to={routes.home()}>
+      <Link to={routes.landing()}>
         <h1 className="text-2xl font-Albert text-off-black dark:text-off-white-dark">
           Hybrid<span className="font-bold">Territory</span>
         </h1>

@@ -72,9 +72,9 @@ export const Success = ({
 
   return (
     <div
-      className={`flex flex-col justify-between px-5 py-4 pt-10 rounded-md shadow-sm w-72 dark:bg-dark-grey-dark lg:w-96  bg-off-white border-2 ${
+      className={`flex flex-col justify-between px-5 py-4 pt-10 rounded-md  w-72 dark:bg-dark-grey-dark lg:w-96  bg-gray-100 shadow-md border-2 ${
         territory.isCompleted
-          ? 'border-success/60 dark:border-success'
+          ? 'border-success/60 dark:border-success '
           : 'border-transparent'
       }`}
       key={territory.id}
@@ -95,17 +95,16 @@ export const Success = ({
       <div className="w-3/4 mx-auto text-transparent border-b border-htd-grey/50 dark:border-htd-grey-dark lg:mb-4">
         -
       </div>
-      <h1 className="mt-3 ml-4 text-xl font-medium font-Roboto text-dark-blue dark:text-light-blue">
+      <h1 className="mt-3 ml-4 text-xl font-medium font-Roboto dark:text-white">
         {territory.name}
       </h1>
-      <p className="ml-4 text-xs italic font-light font-OpenSans sm:text-base dark:text-off-white">
-        Status:{' '}
+      <p className="ml-4 text-xs italic font-light sm:text-base dark:text-off-white">
         {territory.isCompleted ? (
-          <p className="inline text-base not-italic font-normal font-Roboto text-success dark:text-success-dark">
+          <p className="inline text-base not-italic font-normal text-green-700 dark:text-green-400">
             Completed
           </p>
         ) : (
-          <p className="inline text-base not-italic font-normal font-Roboto text-dark-blue dark:text-light-blue">
+          <p className="inline text-base not-italic font-normal text-dark-blue dark:text-light-blue">
             In Progress
           </p>
         )}
@@ -117,7 +116,7 @@ export const Success = ({
         className="flex items-center justify-center"
         rel="noreferrer"
       >
-        <button className="flex items-center mt-6 mb-4 font-medium tracking-wider rounded-sm bg-none font-Roboto text-htd-grey dark:text-htd-grey-dark hover:text-accent dark:hover:text-accent-dark active:text-light-blue lg:mt-12">
+        <button className="inline-flex items-center justify-center w-full px-4 py-2 mt-4 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ">
           View Details
         </button>
       </a>
@@ -130,7 +129,7 @@ export const Success = ({
       </ViewTerritoryCellContext.Provider>
 
       {territory.isCompleted ? (
-        <Button
+        <button
           onClick={async () => {
             UpdateTerritory({
               variables: {
@@ -142,15 +141,14 @@ export const Success = ({
             })
           }}
           disabled={loading ? true : false}
-          variant="custom"
-          className={`tracking-wider text-off-white bg-accent dark:bg-accent-dark rounded-sm hover:bg-accent/70 dark:hover:bg-accent-dark/70 active:bg-accent/70 pt-2 pb-2 ${
+          className={`items-center text-center px-4 py-2 text-base font-medium border border-transparent rounded-md text-white bg-amber-600 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 ${
             loading && 'animate-pulse'
           }`}
         >
           {!loading ? 'Mark as Not Completed' : 'Loading...'}
-        </Button>
+        </button>
       ) : (
-        <Button
+        <button
           disabled={loading ? true : false}
           onClick={async () => {
             UpdateTerritory({
@@ -162,13 +160,12 @@ export const Success = ({
               },
             })
           }}
-          variant="custom"
-          className={`tracking-wider text-white bg-success dark:bg-success-dark rounded-sm hover:bg-success/70 dark:hover:bg-success-dark/70 active:bg-success/50 pt-2 pb-2 ${
+          className={` items-center text-center px-4 py-2 text-base font-medium   border border-transparent rounded-md text-white bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 ${
             loading && 'animate-pulse'
           }`}
         >
           {!loading ? 'Mark as Complete' : 'Loading...'}
-        </Button>
+        </button>
       )}
     </div>
   )
