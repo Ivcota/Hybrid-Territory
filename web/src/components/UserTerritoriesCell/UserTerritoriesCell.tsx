@@ -61,7 +61,7 @@ export const Success = ({
   const now = dayjs()
 
   return (
-    <div className="flex flex-wrap justify-center gap-1 p-2 mt-4 gap-y-8 lg:gap-x-8">
+    <div className="flex flex-wrap justify-center gap-4 p-2 mt-4 gap-y-8 lg:gap-x-8">
       {userTerritories
         .slice()
         .sort((a, b) =>

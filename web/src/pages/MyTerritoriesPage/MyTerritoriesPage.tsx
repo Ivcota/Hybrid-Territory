@@ -1,10 +1,10 @@
+import { ShoppingBagIcon } from '@heroicons/react/24/solid'
+
 import { useAuth } from '@redwoodjs/auth'
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/dist/toast'
 
-import Button from 'src/components/Button/Button'
-import RequestTerritoryButton from 'src/components/RequestTerritoryButton/RequestTerritoryButton'
 import UserTerritoriesCell from 'src/components/UserTerritoriesCell'
 import { useSendMessageMutation } from 'src/generated/graphql'
 
@@ -37,34 +37,47 @@ const MyTerritoriesPage = () => {
       <MetaTags title="MyTerritories" description="MyTerritories page" />
 
       <div className="flex flex-col w-full">
-        <h1 className="text-2xl font-bold font-Roboto text-dark-blue dark:text-sky-blue-dark lg:ml-12">
-          My Territories
-        </h1>
-
-        <p className="mx-auto mt-2 text-sm italic font-light tracking-wide text-center font-OpenSans text-off-black/80 dark:text-off-white-dark/80 lg:w-2/3 lg:mt-4 md:text-lg ">
-          Here are the territories assigned to you.
-        </p>
-        <div className="w-2/3 mx-auto text-transparent border-b border-off-black dark:border-htd-grey-dark lg:mb-4">
-          -
-        </div>
-        <div className="flex flex-col mx-auto lg:flex-row lg:justify-center lg:gap-4 lg:pb-4 lg:w-3/4">
-        {currentUser?.roles !== 'pioneer' && (
-            <Link
-              to={routes.selfCheckout()}
-              className="w-full lg:max-w-[300px]"
-            >
-              <Button
-                variant="custom"
-                className="px-10 w-full min-h-[40px] mt-4 font-medium lg:min-h-[48px] bg-success dark:bg-success-dark hover:bg-success/70"
+        <div className="mt-5 md:flex md:items-center md:justify-between">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-2xl font-bold leading-7 text-gray-900 dark:text-white sm:truncate sm:text-3xl sm:tracking-tight">
+              My Territories
+            </h2>
+          </div>
+          <div className="flex mt-4 md:mt-0 md:ml-4">
+            {currentUser?.roles !== 'pioneer' && (
+              <Link
+                to={routes.selfCheckout()}
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
-                Checkout New Territory
-              </Button>
-            </Link>
-          )}
+                Checkout New Territory{' '}
+                <ShoppingBagIcon
+                  className="w-4 h-4 ml-2 -mr-1"
+                  aria-hidden="true"
+                />
+              </Link>
+            )}
 
-          <RequestTerritoryButton
-            requestTerritoryHandler={sendMessageRightNow}
-          />
+            <button
+              onClick={() => {
+                sendMessageRightNow('Standard Territory')
+              }}
+              type="button"
+              className="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Request New Territory
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative mt-10 mb-5">
+        <div className="absolute inset-0 flex items-center" aria-hidden="true">
+          <div className="w-full border-t border-gray-300" />
+        </div>
+        <div className="relative flex justify-center">
+          <span className="px-2 text-sm text-gray-500 bg-white dark:text-gray-400 dark:bg-off-black">
+            Ecclesiastes 9:10
+          </span>
         </div>
       </div>
 
