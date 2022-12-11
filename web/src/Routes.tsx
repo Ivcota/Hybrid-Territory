@@ -41,14 +41,11 @@ const Routes = () => {
           </Private>
         </Private>
 
-        <Private unauthenticated="landing" roles="admin">
+        <Private unauthenticated="landing">
           <Route path="/issue-tracker" page={IssueTrackerPage} name="issueTracker" />
           <Route path="/assign-territory" page={AssignTerritoryPage} name="assignTerritory" />
           <Route path="/records" page={RecordsPage} name="records" />
         </Private>
-
-        <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
-        <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       </Set>
       <Set wrap={!isAuthenticated ? BaseLayout : UserLayout}>
         <Route path="/home" page={HomePage} name="home" />
@@ -59,6 +56,8 @@ const Routes = () => {
         <Route path="/login" page={LoginPage} name="login" />
         <Route path="/signup" page={SignupPage} name="signup" />
         <Route path="/about" page={AboutPage} name="about" />
+        <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
+        <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
       </Set>
 
       <Route notfound page={NotFoundPage} />
