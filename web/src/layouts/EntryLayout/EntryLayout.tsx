@@ -12,7 +12,7 @@ type EntryLayoutProps = {
 const EntryLayout = ({ children }: EntryLayoutProps) => {
   return (
     <>
-      <div className="">
+      <div>
         <header>
           <Navbar />
         </header>
