@@ -24,7 +24,7 @@ const ForgotPasswordPage = () => {
   const onSubmit = async (data) => {
     setLoading(true)
     const response = await forgotPassword(
-      (data.username as string).toLowerCase()
+      (data.email as string).toLowerCase()
     )
     setLoading(true)
 
@@ -71,14 +71,14 @@ const ForgotPasswordPage = () => {
               <Form onSubmit={onSubmit} className="space-y-6">
                   <div className="text-left">
                     <Label
-                      name="username"
+                      name="email"
                       className="block text-sm font-medium text-gray-700"
                       errorClassName="block text-sm font-medium text-red-600"
                     >
                       Email Address
                     </Label>
                     <TextField
-                      name="username"
+                      name="email"
                       className="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none caret-blue-700 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                       errorClassName="block w-full px-3 py-2 caret-red-500 placeholder-gray-400 border border-rose-300 rounded-md shadow-sm appearance-none focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
                       ref={usernameRef}
@@ -86,7 +86,7 @@ const ForgotPasswordPage = () => {
                         required: true,
                       }}
                     />
-                    <FieldError name="username" className="block text-sm font-medium text-red-600 capitalize" />
+                    <FieldError name="email" className="block text-sm font-medium text-red-600 capitalize" />
                   </div>
                   {loading ? (
                     <Submit
