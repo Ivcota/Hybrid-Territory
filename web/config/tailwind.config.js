@@ -6,6 +6,7 @@ module.exports = {
       Albert: ['Albert Sans', 'sans-serif'],
       Roboto: ['Roboto Slab', 'serif'],
       OpenSans: ['Open Sans', 'sans-serif'],
+      NotoSans: ['Noto Sans', 'sans-serif'],
     },
     extend: {
       colors: {
