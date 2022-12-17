@@ -29,18 +29,34 @@ model User {
 }
 
 model Territory {
-  id             String   @id @default(uuid())
+  id             String  @id @default(uuid())
   name           String
   imageURL       String?
   spreadsheetURL String?
-  isCompleted    Boolean  @default(false)
-  type           String   @default("letter writing") // letter writing, phone, in-person
-  User           User?    @relation(fields: [userId], references: [id])
+  isCompleted    Boolean @default(false)
+  type           String  @default("letter writing") // letter writing, phone, in-person
+  User           User?   @relation(fields: [userId], references: [id])
   userId         String?
-  issues         Issue[]
-  Record         Record[]
+
+  issues      Issue[]
+  Record      Record[]
+  mapFeatures MapFeature[]
 
   DoNotCall DoNotCall[]
+}
+
+model MapFeature {
+  id          String    @id @default(uuid())
+  name        String
+  type        String
+  coordinates String
+  metadata    String?
+  imageURL    String?
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+
+  Territory   Territory? @relation(fields: [territoryId], references: [id])
+  territoryId String?
 }
 
 model DoNotCall {
