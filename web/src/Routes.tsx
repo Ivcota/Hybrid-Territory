@@ -19,6 +19,7 @@ const Routes = () => {
 
   return (
     <Router>
+      <Route path="/sandbox-leaflet" page={SandboxLeafletPage} name="sandboxLeaflet" />
       <Route path="/landing" page={LandingPage} name="landing" />
       <Set wrap={UserLayout}>
         <Private unauthenticated="landing" roles="admin">
